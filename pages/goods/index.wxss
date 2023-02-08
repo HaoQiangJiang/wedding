@@ -1,1 +1,17 @@
-/* pages/customer/index.wxss */
+.goods {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.stepper-slot {
+  margin: 10rpx 0;
+}
+
+.submit-operate {
+  width: calc(100% - 40rpx);
+  position: fixed;
+  box-sizing: border-box;
+  bottom: 20rpx;
+  padding: 20rpx;
+  z-index: 2;
+}

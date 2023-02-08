@@ -13,6 +13,7 @@ Component({
   data: {
     price: 0,
     customer: '',
+    goods:'',
     dateVisible: '',
     dateText: '',
     date: new Date('2021-12-23').getTime(), // 支持时间戳传入

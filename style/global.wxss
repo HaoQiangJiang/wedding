@@ -7,10 +7,11 @@ page {
   font-weight: 400;
   padding: 20rpx;
   box-sizing: border-box;
-  --primary--: #5560f7;
+  --primary--: #1b55de;
   --red--: #fd6b6d;
   --green--: #07cb7c;
-  --yellow--: #ffc31e --text-color-1--: #242823;
+  --yellow--: #ffc31e;
+  --text-color-1--: #242823;
   --text-color-2--: #505462;
   --text-color-3--: #7f818a;
   --text-color-4--: #afb1b8;

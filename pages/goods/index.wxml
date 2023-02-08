@@ -1,8 +1,18 @@
-<t-indexes index-list="{{indexList}}">
-  <block wx:for="{{list}}" wx:key="index">
-    <t-indexes-anchor index="{{item.index}}" />
-    <t-cell-group>
-      <t-cell bind:click="onSelect" data-item="{{name}}" wx:for="{{item.children}}" wx:key="name" wx:for-item="name" title="{{name}}" aria-role="button" />
-    </t-cell-group>
-  </block>
-</t-indexes>
+<view class="goods">
+  <t-indexes index-list="{{indexList}}">
+    <block wx:for="{{list}}" wx:key="index">
+      <t-indexes-anchor index="{{item.index}}" />
+      <t-cell-group>
+        <t-cell data-item="{{goods}}}" wx:for="{{item.children}}" wx:key="goods.name" wx:for-item="goods" description="门店价:{{goods.storePrice}}/{{goods.unit}} 工厂价:{{goods.factoryPrice}}/{{goods.unit}}" title="{{goods.label}}" aria-role="button">
+          <view class="stepper-slot" slot="note">
+            <stepper item="{{goods}}" bind:handleSelectGoods="handleSelectGoods" />
+          </view>
+        </t-cell>
+      </t-cell-group>
+    </block>
+  </t-indexes>
+  <view class="submit-operate">
+    <t-button theme="primary" size="large" block capture-bind:tap="submit">确定</t-button>
+  </view>
+
+</view>

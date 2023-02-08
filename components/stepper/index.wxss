@@ -1,0 +1,32 @@
+.stepper {
+  font-size: 30rpx;
+}
+
+.stepper .mask {
+  position: fixed;
+  width: 100%;
+  content: '';
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+
+.number {
+  z-index: 2;
+  padding: 12rpx;
+  border: 1rpx solid var(--text-color-4--);
+  border-radius: 10rpx;
+  font-size: 28rpx;
+  color: var(--text-color-1--);
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+
+}
+
+.number.active {
+  background-color: var(--green--);
+  border: 1rpx solid #04b36d;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+
+
+}

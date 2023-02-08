@@ -1,12 +1,12 @@
 <view class="record">
   <t-cell-group theme="card">
-    <t-cell title="选择客户" leftIcon="service" hover arrow note="{{customer}}" bind:click="selectCustomer" />
-    <t-cell title="选择商品" leftIcon="service" hover arrow note="坚果" bind:click="selectGoods" />
+    <t-cell title="选择客户" leftIcon="user-add" hover arrow note="{{customer}}" bind:click="selectCustomer" />
+    <t-cell title="选择商品" leftIcon="gift" hover arrow note="{{goods}}" bind:click="selectGoods" />
     <t-cell title="选择日期" leftIcon="internet" hover arrow note="{{dateText}}" data-mode="date" bindtap="showPicker" />
     <t-date-time-picker title="选择日期" visible="{{dateVisible}}" mode="minute" defaultValue="{{date}}" format="YYYY-MM-DD HH:mm" bindchange="onConfirm" bindpick="onColumnChange" bindcancel="hidePicker" start="{{start}}" end="{{end}}" />
   </t-cell-group>
   <view class="record-summary">
-    <text>订单总金额：<text class="price">4004</text></text>
+    <text>订单总金额：<text class="price">6688</text></text>
   </view>
   <view class="record-input">
     <view class='input_box'>
