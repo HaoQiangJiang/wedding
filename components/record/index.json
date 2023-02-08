@@ -1,0 +1,13 @@
+{
+  "component": true,
+  "usingComponents": {
+    "t-grid": "tdesign-miniprogram/grid/grid",
+    "t-grid-item": "tdesign-miniprogram/grid/grid-item",
+    "t-input": "tdesign-miniprogram/input/input",
+    "t-cell": "tdesign-miniprogram/cell/cell",
+    "virtual-keyboard": "/components/virtualKeyboard/index",
+    "t-indexes": "tdesign-miniprogram/indexes/indexes",
+    "t-date-time-picker": "tdesign-miniprogram/date-time-picker/date-time-picker"
+
+  }
+}

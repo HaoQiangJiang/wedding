@@ -1,0 +1,17 @@
+<view>
+  <view class="quick-container">
+    <view class="quick-bill bill" bind:tap="add">
+      <image src='../../assets/iconBill.svg' class="image" />
+      <text class="title">记一笔</text>
+    </view>
+    <view class="quick-bill return-good">
+      <image src='../../assets/iconReturn.svg' class="image" />
+      <text class="title">退货</text>
+    </view>
+
+  </view>
+  <t-popup visible="{{visible}}" prevent-scroll-through="{{true}}" placement="bottom" bind:visible-change="onVisibleChange">
+    <record id="record" />
+  </t-popup>
+
+</view>

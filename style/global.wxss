@@ -1,0 +1,19 @@
+page {
+  height: 100%;
+  font-family: 'Microsoft YaHei', '微软雅黑', 'MicrosoftJhengHei', '华文细黑',
+    Helvetica, Arial, 'sans-serif';
+  font-size: 26rpx;
+  background-color: #f8f8f8;
+  font-weight: 400;
+  padding: 20rpx;
+  box-sizing: border-box;
+  --primary--: #5560f7;
+  --red--: #fd6b6d;
+  --green--: #07cb7c;
+  --yellow--: #ffc31e --text-color-1--: #242823;
+  --text-color-2--: #505462;
+  --text-color-3--: #7f818a;
+  --text-color-4--: #afb1b8;
+  --text-color-5--: #e9eaef;
+  --text-color-6--: #f3f4f7;
+}

@@ -1,0 +1,8 @@
+<t-indexes index-list="{{indexList}}">
+  <block wx:for="{{list}}" wx:key="index">
+    <t-indexes-anchor index="{{item.index}}" />
+    <t-cell-group>
+      <t-cell bind:click="onSelect" data-item="{{name}}" wx:for="{{item.children}}" wx:key="name" wx:for-item="name" title="{{name}}" aria-role="button" />
+    </t-cell-group>
+  </block>
+</t-indexes>

@@ -1,0 +1,62 @@
+.list {
+  padding: 10rpx;
+}
+
+.cell {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0;
+}
+
+.list .cell:not(:last-child) {
+  border-bottom: 0.5rpx solid var(--text-color-5--);
+}
+
+.cell .left {
+  display: flex;
+  flex-direction: row;
+}
+
+.cell .client {
+  margin-right: 20rpx;
+}
+
+.cell .left-title {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.cell .left-title .title {
+  font-size: 30rpx;
+  color: #000;
+  margin-bottom: 4rpx;
+}
+
+.cell .left-title .time {
+  font-size: 24rpx;
+
+  color: var(--text-color-3--);
+}
+
+.cell .right {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.cell .right .money {
+  font-size: 30rpx;
+  color: #000;
+  margin-right: 20rpx;
+}
+
+.cell .right .red {
+  color: var(--red--);
+}
+
+.cell .right .green {
+  color: var(--green--);
+}

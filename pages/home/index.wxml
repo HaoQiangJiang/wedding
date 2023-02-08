@@ -1,0 +1,9 @@
+<view class="home-container">
+  <view class="content">
+    <image-bill id="imageBill" />
+    <home-summary />
+    <card />
+    <card />
+  </view>
+
+</view>

@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "t-button": "tdesign-miniprogram/button/button",
+    "card": "/components/card/index",
+    "home-summary": "/components/homeSummary/index",
+    "image-bill":"/components/imageBill/index"
+  }
+}

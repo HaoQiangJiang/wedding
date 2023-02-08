@@ -1,0 +1,9 @@
+<view class="card">
+  <view class="title">
+    <text class="left">今天周二</text>
+    <text class="right">收入 200， 支出 300</text>
+  </view>
+  <view class="content">
+    <list />
+  </view>
+</view>

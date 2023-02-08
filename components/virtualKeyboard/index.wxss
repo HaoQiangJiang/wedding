@@ -1,0 +1,54 @@
+.virtual-keyboard {
+  display: flex;
+  padding: 10rpx;
+  background-color: var(--text-color-5--);
+
+}
+
+.virtual-keyboard-number {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10rpx;
+}
+
+.virtual-keyboard-operate {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 10rpx;
+}
+
+.submit {
+  height: 300rpx !important;
+  background-color: var(--green--) !important;
+  color: #fff;
+}
+
+.keys {
+  width: 175rpx;
+  height: 90rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  background-color: #fff;
+  font-size: 40rpx;
+  border-radius: 10rpx;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
+}
+
+.keys:active {
+  background-color: var(--text-color-4--);
+
+}
+
+.image {
+  width: 70rpx;
+}
+
+.zero {
+  width: 360rpx;
+}
