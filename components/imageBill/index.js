@@ -12,21 +12,28 @@ Component({
    */
   data: {
     visible: false,
-  
-    
   },
 
   /**
    * Component methods
    */
   methods: {
-    add() {
+    // 提交账单
+    submitBill(){
+      this.setData({
+        visible:false
+      });
+    },
+    // 记一笔
+    addBill() {
       this.setData({
         visible: !this.data.visible
       })
     },
+    closeRecord(){
+
+    },
     onVisibleChange(e) {
-      console.log(e)
       this.setData({
         visible: e.detail.visible,
       });

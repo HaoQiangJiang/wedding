@@ -5,40 +5,41 @@ Page({
    * Page initial data
    */
   data: {
+    externalClasses: ['t-class', 't-class-content', 't-class-column', 't-class-column-item', 't-class-column-item-label', 't-class-footer'],
     indexList: [],
     list: [{
         index: 'A',
         children: [{
-          label: '瓜子',
+          name: 'test',
           value: 'test',
           factoryPrice: 20,
           storePrice: 30,
           unit: 'kg',
           desc: '我是备注'
         }, {
-          label: '瓜子1',
+          name: 'test1',
           value: 'test1',
           factoryPrice: 20,
           storePrice: 30,
           unit: 'kg',
           desc: '我是备注'
         }, {
-          label: '瓜子2',
-          value: 'guazi',
+          name: 'test2',
+          value: 'test2',
           factoryPrice: 20,
           storePrice: 30,
           unit: 'kg',
           desc: '我是备注'
         }, {
-          label: '瓜子2',
-          value: 'guazi',
-          factoryPrice: 20,
-          storePrice: 30,
+          name: 'test3',
+          value: 'test3',
+          factoryPrice: 540,
+          storePrice: 600,
           unit: 'kg',
           desc: '我是备注'
         }, {
-          label: '瓜子2',
-          value: 'guazi',
+          name: 'test4',
+          value: 'test4',
           factoryPrice: 20,
           storePrice: 30,
           unit: 'kg',
@@ -48,108 +49,37 @@ Page({
       {
         index: 'F',
         children: [{
-          label: '花生 1',
-          value: 'guazi',
+          name: 'test5',
+          value: 'test5',
           factoryPrice: 20,
           storePrice: 30,
           unit: 'kg',
           desc: '我是备注1111'
         }, {
-          label: ' 花生 2',
-          value: 'guazi',
-          factoryPrice: 20,
-          storePrice: 30,
-          unit: 'kg',
-          desc: '我是备注'
-        }, {
-          label: ' 花生 3',
-          value: 'guazi',
-          factoryPrice: 20,
-          storePrice: 30,
-          unit: 'kg',
-          desc: '我是备注'
-        }, {
-          label: '瓜子2',
-          value: 'guazi',
-          factoryPrice: 20,
-          storePrice: 30,
-          unit: 'kg',
-          desc: '我是备注'
-        }, {
-          label: '瓜子2',
-          value: 'guazi',
-          factoryPrice: 20,
-          storePrice: 30,
-          unit: 'kg',
-          desc: '我是备注'
-        }, {
-          label: '瓜子2',
-          value: 'guazi',
-          factoryPrice: 20,
-          storePrice: 30,
-          unit: 'kg',
-          desc: '我是备注'
-        }, {
-          label: '瓜子2',
-          value: 'guazi',
-          factoryPrice: 20,
-          storePrice: 30,
-          unit: 'kg',
-          desc: '我是备注'
-        }, {
-          label: '瓜子2',
-          value: 'guazi',
-          factoryPrice: 20,
-          storePrice: 30,
-          unit: 'kg',
-          desc: '我是备注'
-        }, {
-          label: '瓜子2',
-          value: 'guazi',
-          factoryPrice: 20,
-          storePrice: 30,
-          unit: 'kg',
-          desc: '我是备注'
-        }, {
-          label: '瓜子2',
-          value: 'guazi',
-          factoryPrice: 20,
-          storePrice: 30,
-          unit: 'kg',
-          desc: '我是备注'
-        }, {
-          label: '瓜子2',
-          value: 'guazi',
-          factoryPrice: 20,
-          storePrice: 30,
-          unit: 'kg',
-          desc: '我是备注'
-        }, {
-          label: '瓜子2',
-          value: 'guazi',
+          name: 'test6',
+          value: 'test6',
           factoryPrice: 20,
           storePrice: 30,
           unit: 'kg',
           desc: '我是备注'
         }],
       },
-
     ],
-    selectGoods: {
-
-    },
-    buttonProps: {
-      ghost: true,
-      block: true,
-      variant: 'outline'
-    }
+    selectGoods: {},
   },
 
   /**
    * Lifecycle function--Called when page load
    */
-  onLoad(options) {
-
+  onLoad(option) {
+    const eventChannel = this.getOpenerEventChannel()
+    if (!eventChannel) return;
+    eventChannel.on('acceptDataFromOpenerPage', (data) => {
+      console.log(data)
+      this.setData({
+        selectGoods: data.data
+      })
+    })
   },
 
   /**
@@ -161,24 +91,79 @@ Page({
       indexList: data
     });
   },
-  handleSelectGoods(e) {
-    this.setData({
-      selectGoods: {
-        ...this.data.selectGoods,
-        ...e.detail
+  onChangePriceType(e) {
+    const goods = e.target.dataset.item
+    let currentGoods = this.data.selectGoods[goods.value]
+    let isFactoryPrice
+    if (currentGoods) {
+      isFactoryPrice = !currentGoods.isFactoryPrice
+    } else {
+      isFactoryPrice = true
+    }
+    this.replaceGoodsCount({
+      detail: {
+        goods,
+        updateData: {
+          isFactoryPrice
+        }
       }
     })
 
+  },
+  // 增加商品个数
+  replaceGoodsCount(event) {
+    const {
+      goods,
+      updateData
+    } = event.detail
+    // 如果商品未选中,则增加到选中列表
+    const key = goods.value
+    if (!this.data.selectGoods[key]) {
+      const bak = {
+        ...this.data.selectGoods
+      }
+      Object.assign(bak, {
+        [key]: {
+          ...updateData,
+          ...goods,
+        }
+      })
+      this.setData({
+        selectGoods: bak
+      })
+    } else {
+      const selectGoodsBak = {
+        ...this.data.selectGoods[key],
+        ...updateData
+      }
+      this.setData({
+        selectGoods: {
+          ...this.data.selectGoods,
+          [key]: selectGoodsBak
+        }
+      })
+    }
   },
   submit() {
     const pages = getCurrentPages();
     const prevPage = pages[pages.length - 2]; //上一个页面
     // 获取 record 组件
     const recordComponent = prevPage.selectComponent('#imageBill').selectComponent('#record')
+    let orderPrice = 0
+    let selectGoodsText = []
+    Object.values(this.data.selectGoods).forEach(item => {
+      if (item.count && item.count > 0) { // 去掉 count 为 0 和没有 count 的
+        orderPrice += (item.isFactoryPrice ? item.factoryPrice : item.storePrice) * item.count
+        selectGoodsText.push(item.name + '(' + item.count + item.unit + ')')
+      }
+    })
     wx.navigateBack({
       success: () => {
         recordComponent.setData({
-          goods: JSON.stringify(this.data.selectGoods)
+          selectGoodsText: selectGoodsText.join('，'),
+          selectGoods: this.data.selectGoods,
+          orderPrice,
+          price: orderPrice
         })
       }
     })

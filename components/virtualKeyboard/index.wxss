@@ -22,14 +22,14 @@
 }
 
 .submit {
-  height: 300rpx !important;
+  height: 320rpx !important;
   background-color: var(--green--) !important;
   color: #fff;
 }
 
 .keys {
   width: 175rpx;
-  height: 90rpx;
+  height: 100rpx;
   display: flex;
   align-items: center;
   justify-content: center;

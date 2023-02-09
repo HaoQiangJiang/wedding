@@ -19,7 +19,7 @@ Component({
    */
   methods: {
     keyTap(e) {
-      wx.vibrateShort(); // 1、使手机震动15ms
+      wx.vibrateShort(); // 使手机震动15ms
       let keys = e.currentTarget.dataset.keys,
         content = this.data.content,
         len = content.length;
@@ -38,8 +38,12 @@ Component({
           content = content.substr(0, content.length - 1);
           break;
         case '确定':
+          // 确定单独处理
           this.triggerEvent('submitPrice')
-          break;
+          this.setData({
+            content: ''
+          });
+          return;
         default:
           let Index = content.indexOf('.'); //小数点在字符串中的位置
           if (Index == -1 || len - Index != 3) { //这里控制小数点只保留两位

@@ -1,6 +1,6 @@
 <view>
   <view class="quick-container">
-    <view class="quick-bill bill" bind:tap="add">
+    <view class="quick-bill bill" bind:tap="addBill">
       <image src='../../assets/iconBill.svg' class="image" />
       <text class="title">记一笔</text>
     </view>
@@ -8,10 +8,9 @@
       <image src='../../assets/iconReturn.svg' class="image" />
       <text class="title">退货</text>
     </view>
-
   </view>
   <t-popup visible="{{visible}}" prevent-scroll-through="{{true}}" placement="bottom" bind:visible-change="onVisibleChange">
-    <record id="record" />
+    <record id="record" bind:submitBill="submitBill" bind:close="closeRecord" />
   </t-popup>
 
 </view>

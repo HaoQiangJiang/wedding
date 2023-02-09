@@ -1,3 +1,6 @@
+const {
+  formatTime,
+} = require('../../utils/util')
 // components/record/index.js
 Component({
   /**
@@ -6,20 +9,18 @@ Component({
   properties: {
 
   },
-
   /**
    * Component initial data
    */
   data: {
     price: 0,
     customer: '',
-    goods:'',
+    selectGoods: [],
+    selectGoodsText: '',
     dateVisible: '',
-    dateText: '',
-    date: new Date('2021-12-23').getTime(), // 支持时间戳传入
-    // 指定选择区间起始值
-    start: '2000-01-01 00:00:00',
-    end: '2030-09-09 12:12:12',
+    dateText: formatTime(new Date(), 'YYYY-MM-DD HH:mm'),
+    date: new Date().getTime(), // 支持时间戳传入
+    orderPrice: 0,
   },
   pageLifetimes: {},
   /**
@@ -54,6 +55,11 @@ Component({
     selectGoods() {
       wx.navigateTo({
         url: '/pages/goods/index',
+        success: (res) => {
+          res.eventChannel.emit('acceptDataFromOpenerPage', {
+            data: this.data.selectGoods
+          })
+        }
       })
     },
     changePrice(data) {
@@ -62,7 +68,17 @@ Component({
       })
     },
     submitPrice() {
-      console.log('submit')
+      this.triggerEvent('submitBill')
+      // 重置数据防止下次弹出存在旧数据
+      this.setData({
+        customer: '',
+        selectGoods: [],
+        selectGoodsText: '',
+        dateText: formatTime(new Date(), 'YYYY-MM-DD HH:mm'),
+        date: new Date().getTime(),
+        orderPrice: 0,
+        price: 0
+      })
     },
   }
 })

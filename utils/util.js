@@ -9,6 +9,7 @@ const formatTime = (date, template) => dayjs(date).format(template);
  * @param fill 是否填充小数部分 0-不填充 1-填充第一位小数 2-填充两位小数
  */
 function priceFormat(price, fill = 0) {
+  console.log(price)
   if (isNaN(price) || price === null || price === Infinity) {
     return price;
   }
@@ -55,7 +56,9 @@ const get = (source, paths, defaultValue) => {
       .split('.')
       .filter(Boolean);
   }
-  const { length } = paths;
+  const {
+    length
+  } = paths;
   let index = 0;
   while (source != null && index < length) {
     source = source[paths[index++]];
@@ -70,7 +73,10 @@ export const loadSystemWidth = () => {
   }
 
   try {
-    ({ screenWidth: systemWidth, pixelRatio } = wx.getSystemInfoSync());
+    ({
+      screenWidth: systemWidth,
+      pixelRatio
+    } = wx.getSystemInfoSync());
   } catch (e) {
     systemWidth = 0;
   }

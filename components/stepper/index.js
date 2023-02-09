@@ -4,7 +4,8 @@ Component({
    * Component properties
    */
   properties: {
-    item: Object
+    item: Object,
+    value: Number
   },
 
   /**
@@ -12,8 +13,6 @@ Component({
    */
   data: {
     isEdit: false,
-    value: 0,
-    externalClasses: ['r-aa']
   },
 
   /**
@@ -30,14 +29,17 @@ Component({
         isEdit: false
       })
     },
-    hanldeSelectGoods(e) {
+    changeCount(e) {
+      wx.vibrateShort(); // 使手机震动15ms
       const currentValue = e.detail.value
-      this.triggerEvent('handleSelectGoods', {
-        [e.target.dataset.goods.value]: currentValue
-      })
-      this.setData({
-        value: currentValue
-      })
+      console.log(1)
+      const data = {
+        goods: this.properties.item,
+        updateData: {
+          count: currentValue
+        }
+      }
+      this.triggerEvent('replaceGoodsCount', data)
     },
   }
 })

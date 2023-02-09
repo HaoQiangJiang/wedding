@@ -7,6 +7,36 @@
   margin: 10rpx 0;
 }
 
+
+
+.description {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.dropmenu-menu {
+  height: 60rpx !important;
+}
+
+.dropmenu-menu::after {
+  border-bottom: none !important;
+}
+
+.dropmenu-item {
+  color: var(--text-color-2--) !important;
+  padding: 0 !important;
+}
+
+.dropmenu-label {
+  font-size: 26rpx !important;
+}
+
+.dropmenu-icon {
+  font-size: 32rpx !important;
+}
+
+
 .submit-operate {
   width: calc(100% - 40rpx);
   position: fixed;

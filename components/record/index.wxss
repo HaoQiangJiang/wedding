@@ -1,8 +1,12 @@
 .record {
   width: 100vw;
   background: #fff;
-  border-radius: 20rpx;
+  border-radius: 24rpx;
   box-sizing: border-box;
+}
+
+.select-card {
+  padding: 10rpx;
 }
 
 .record-item {
@@ -33,7 +37,7 @@
 }
 
 .record-keybord {
-  height: 420rpx;
+  height: 450rpx;
 }
 
 .input_box {

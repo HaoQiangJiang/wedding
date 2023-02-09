@@ -5,7 +5,7 @@ Page({
    * Page initial data
    */
   data: {
-
+    value: '',
     indexList: [],
     list: [{
         index: 'A',
@@ -98,7 +98,7 @@ Page({
   /**
    * Lifecycle function--Called when page load
    */
-  onLoad(options) {
+  onLoad(option) {
 
   },
 

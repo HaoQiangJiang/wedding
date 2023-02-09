@@ -6,6 +6,6 @@
     "t-cell": "tdesign-miniprogram/cell/cell",
     "stepper": "/components/stepper/index",
     "t-button": "tdesign-miniprogram/button/button",
-    "t-fab": "tdesign-miniprogram/fab/fab"
+    "t-avatar": "tdesign-miniprogram/avatar/avatar"
   }
 }
