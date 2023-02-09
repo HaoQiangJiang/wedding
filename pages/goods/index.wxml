@@ -3,16 +3,15 @@
     <block wx:for="{{list}}" wx:key="index">
       <t-indexes-anchor index="{{item.index}}" />
       <t-cell-group>
-        <t-cell data-item="{{goods}}}" wx:for="{{item.children}}" wx:key="goods.name" wx:for-item="goods" title="{{goods.name}}" aria-role="button">
-          <view slot="image">
-            <t-avatar shape="round" data-item="{{goods}}" bindtap="onChangePriceType">{{selectGoods[goods.value].isFactoryPrice?'工厂价':'门店价'}}</t-avatar>
+        <t-cell wx:for="{{item.children}}" wx:key="goods.name" wx:for-item="goods" title="{{goods.name}}" aria-role="button">
+          <view class="description" slot="description" data-item="{{goods}}" bindtap="onChangePriceType">
+            <text wx:if="{{selectGoods[goods.value].isFactoryPrice}}">工厂价:{{goods.factoryPrice}}/{{goods.unit}}
+            </text>
+            <text wx:else>门店价:{{goods.storePrice}}/{{goods.unit}}</text>
           </view>
-          <view slot="description" class="description">
-            <text wx:if="{{selectGoods[goods.value].isFactoryPrice}}">{{goods.factoryPrice}}/{{goods.unit}} </text>
-            <text wx:else>{{goods.storePrice}}/{{goods.unit}}</text>
-          </view>
+
           <view class="stepper-slot" slot="note">
-            <stepper value="{{selectGoods[goods.value]?selectGoods[goods.value].count:0}}" item="{{goods}}" bind:replaceGoodsCount="replaceGoodsCount" />
+            <stepper value="{{selectGoods[goods.value]?selectGoods[goods.value].count:0}}" item="{{goods}}" isShowMask="{{isShowMask}}" bind:replaceGoodsCount="replaceGoodsCount" bind:showMask="showMask" />
           </view>
         </t-cell>
       </t-cell-group>
@@ -21,5 +20,5 @@
   <view class="submit-operate">
     <t-button theme="primary" size="large" block capture-bind:tap="submit">确定</t-button>
   </view>
-
+  <view wx:if="{{isShowMask}}" class="mask" capture-bind:touchstart="closeMask"></view>
 </view>

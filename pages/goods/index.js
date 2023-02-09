@@ -66,6 +66,7 @@ Page({
       },
     ],
     selectGoods: {},
+    isShowMask: false
   },
 
   /**
@@ -91,8 +92,16 @@ Page({
       indexList: data
     });
   },
+  closeMask() {
+    this.showMask(false)
+  },
+  showMask(status) {
+    this.setData({
+      isShowMask: status
+    })
+  },
   onChangePriceType(e) {
-    const goods = e.target.dataset.item
+    const goods = e.currentTarget.dataset.item
     let currentGoods = this.data.selectGoods[goods.value]
     let isFactoryPrice
     if (currentGoods) {

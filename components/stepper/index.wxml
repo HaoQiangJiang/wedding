@@ -1,5 +1,4 @@
-<view class="stepper" wx:if="{{isEdit}}">
+<view class="stepper" wx:if="{{isEdit && isShowMask}}">
   <t-stepper size="large" custom-style="z-index:2; position:sticky" default-value="{{value}}" max="{{99999}}" class='"goods-stepper"' theme="outline" data-goods="{{item}}" bind:change="changeCount" />
-  <view class="mask" capture-bind:touchstart="close"></view>
 </view>
 <text class='number {{value?"active":""}}' wx:else capture-bind:tap="open">x{{value}}</text>

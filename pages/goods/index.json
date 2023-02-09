@@ -6,6 +6,9 @@
     "t-cell": "tdesign-miniprogram/cell/cell",
     "stepper": "/components/stepper/index",
     "t-button": "tdesign-miniprogram/button/button",
-    "t-avatar": "tdesign-miniprogram/avatar/avatar"
+    "t-icon": "tdesign-miniprogram/icon/icon",
+    "t-badge": "tdesign-miniprogram/badge/badge"
+
+
   }
 }

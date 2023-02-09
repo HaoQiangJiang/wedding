@@ -1,12 +1,3 @@
-.stepper .mask {
-  position: fixed;
-  width: 100%;
-  content: '';
-  height: 100%;
-  left: 0;
-  top: 0;
-  z-index: 1;
-}
 
 .number {
   z-index: 2;
