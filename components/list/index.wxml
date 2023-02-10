@@ -1,14 +1,5 @@
 <view class="list">
-  <view class="cell" wx:for="item in [1,2]">
-    <view class="left">
-      <t-avatar class="client" shape="round" size="70rpx"></t-avatar>
-      <view class="left-title">
-        <text class="title">陈本拯</text>
-        <text class="time">11:30</text>
-      </view>
-    </view>
-    <view class="right">
-      <text class="money red">+76</text>
-    </view>
+  <view class="cell" wx:for="{{list}}" wx:key="id" wx:item="item">
+    <bill-item item="{{item}}" readonly="{{false}}" />
   </view>
 </view>

@@ -1,67 +1,28 @@
-// pages/usercenter/index.js
 Page({
-
-  /**
-   * Page initial data
-   */
   data: {
-
+    userInfo: {
+      avatarUrl: '',
+      nickName: '正在登录...',
+      phoneNumber: '',
+    },
+    currAuthStep: 1,
   },
-
-  /**
-   * Lifecycle function--Called when page load
-   */
-  onLoad(options) {
-
-  },
-
-  /**
-   * Lifecycle function--Called when page is initially rendered
-   */
-  onReady() {
-
-  },
-
-  /**
-   * Lifecycle function--Called when page show
-   */
   onShow() {
     this.getTabBar().init();
-
+    wx.getStorage({
+      key: 'userInfo',
+      success: (res) => {
+        console.log(res)
+        this.setData({
+          userInfo: {
+            avatarUrl: res.data.avatarUrl,
+            nickName: res.data.nickName,
+            phoneNumber: '',
+          },
+          currAuthStep: 3
+        })
+      }
+    })
   },
 
-  /**
-   * Lifecycle function--Called when page hide
-   */
-  onHide() {
-
-  },
-
-  /**
-   * Lifecycle function--Called when page unload
-   */
-  onUnload() {
-
-  },
-
-  /**
-   * Page event handler function--Called when user drop down
-   */
-  onPullDownRefresh() {
-
-  },
-
-  /**
-   * Called when page reach bottom
-   */
-  onReachBottom() {
-
-  },
-
-  /**
-   * Called when user click on the top right corner to share
-   */
-  onShareAppMessage() {
-
-  }
-})
+});

@@ -4,13 +4,13 @@
       <image src='../../assets/iconBill.svg' class="image" />
       <text class="title">记一笔</text>
     </view>
-    <view class="quick-bill return-good">
+    <view class="quick-bill return-good" bind:tap="addReturn">
       <image src='../../assets/iconReturn.svg' class="image" />
       <text class="title">退货</text>
     </view>
   </view>
   <t-popup visible="{{visible}}" prevent-scroll-through="{{true}}" placement="bottom" bind:visible-change="onVisibleChange">
-    <record id="record" bind:submitBill="submitBill" bind:close="closeRecord" />
+    <record id="record" recordType="{{recordType}}" bind:closeBill="closeBill" bind:close="closeRecord" />
   </t-popup>
 
 </view>

@@ -5,9 +5,46 @@
   box-sizing: border-box;
 }
 
-.select-card {
-  padding: 10rpx;
+.close {
+  padding: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
+
+.close .title {
+  font-size: 34rpx;
+}
+
+.top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx;
+}
+
+.top button {
+  font-size: 24rpx;
+  padding: 0 20rpx;
+}
+
+.record-type {
+  display: flex;
+  flex-direction: row;
+  gap: 20rpx;
+  align-items: center;
+}
+
+.record-type button {
+  padding: 0 30rpx;
+}
+
+.record-type button:active {
+  background-color: var(--primary--);
+}
+
+
 
 .record-item {
   width: 23%;
@@ -23,17 +60,23 @@
 }
 
 .record-summary .price {
-  color: var(--red--);
   font-size: 40rpx;
   font-weight: 600;
 }
 
+.price.red {
+  color: var(--red--);
+}
+
+.price.green {
+  color: var(--green--);
+}
+
 .record-input {
-  padding: 20rpx 40rpx;
+  padding: 20rpx 30rpx;
   display: flex;
   align-items: center;
   flex-direction: row;
-  gap: 30rpx;
 }
 
 .record-keybord {
@@ -43,7 +86,7 @@
 .input_box {
   display: flex;
   padding-top: 20rpx;
-  width: 600rpx;
+  width: 100%;
   border-bottom: 1px solid #efefef;
 }
 

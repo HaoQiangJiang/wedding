@@ -1,0 +1,12 @@
+<view class="login">
+  <image src='../../assets/loginBanner.svg' class="image" data-keys="clear" />
+  <text class="title">商户记账</text>
+  <view class="slogan-container">
+    <text class="slogan">记下理想</text>
+    <text class="slogan">温暖生活</text>
+  </view>
+
+  <view class="login-wechat">
+    <t-button theme="primary" block capture-bind:tap="getUserInfo">微信登录</t-button>
+  </view>
+</view>

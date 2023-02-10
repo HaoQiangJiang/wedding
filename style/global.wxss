@@ -1,12 +1,12 @@
 page {
   height: 100%;
-  font-family: 'Microsoft YaHei', '微软雅黑', 'MicrosoftJhengHei', '华文细黑',
-    Helvetica, Arial, 'sans-serif';
+  font-family: 'DingTalk';
   font-size: 26rpx;
   background-color: #f8f8f8;
   font-weight: 400;
   padding: 20rpx;
   box-sizing: border-box;
+  --td-primary-color: #1b55de;
   --primary--: #1b55de;
   --red--: #fd6b6d;
   --green--: #07cb7c;

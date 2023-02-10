@@ -7,7 +7,9 @@
     "t-cell": "tdesign-miniprogram/cell/cell",
     "virtual-keyboard": "/components/virtualKeyboard/index",
     "t-indexes": "tdesign-miniprogram/indexes/indexes",
-    "t-date-time-picker": "tdesign-miniprogram/date-time-picker/date-time-picker"
+    "t-date-time-picker": "tdesign-miniprogram/date-time-picker/date-time-picker",
+    "t-button": "tdesign-miniprogram/button/button",
+    "t-icon": "tdesign-miniprogram/icon/icon"
 
   }
 }

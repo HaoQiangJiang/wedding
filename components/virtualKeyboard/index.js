@@ -3,7 +3,9 @@ Component({
   /**
    * Component properties
    */
-  properties: {},
+  properties: {
+    recordType:String,
+  },
 
   /**
    * Component initial data
@@ -13,7 +15,6 @@ Component({
     KeyboardKeys: [1, 2, 3, 4, 5, 6, 7, 8, 9, '0', '·'],
     operateKeys: ['x', '确定']
   },
-
   /**
    * Component methods
    */

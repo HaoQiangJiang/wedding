@@ -12,6 +12,7 @@ Component({
    */
   data: {
     visible: false,
+    recordType:'record'
   },
 
   /**
@@ -19,18 +20,25 @@ Component({
    */
   methods: {
     // 提交账单
-    submitBill(){
+    closeBill() {
       this.setData({
-        visible:false
+        visible: false
       });
     },
     // 记一笔
     addBill() {
       this.setData({
-        visible: !this.data.visible
+        visible: true,
+        recordType:'record'
       })
     },
-    closeRecord(){
+    addReturn(){
+      this.setData({
+        visible: true,
+        recordType:'returnGoods'
+      })
+    },
+    closeRecord() {
 
     },
     onVisibleChange(e) {

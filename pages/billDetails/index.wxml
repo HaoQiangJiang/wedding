@@ -1,0 +1,30 @@
+<view class="bill-details">
+  <view class="top">
+    <text class="title">账单详情</text>
+    <t-icon name="delete" size="40rpx" data-name="delete" bind:click="openDelete" />
+  </view>
+  <view class="content">
+    <view class="bill">
+      <bill-item item="{{billData}}" readonly="{{true}}" />
+    </view>
+    <view class="goods">
+      <view class="bill-form">
+        <text class="name">蔬菜</text>
+        <view class="details">
+          <t-input label="数量" disabled="{{!isEdit}}" value="100" align="right" />
+          <t-input label="价格类型" disabled="{{!isEdit}}" value="门店价格" align="right" />
+        </view>
+      </view>
+      <view class="bill-form">
+        <text class="name">蔬菜</text>
+        <view class="details">
+          <t-input label="数量" disabled="{{!isEdit}}" value="100" align="right" />
+          <t-input label="价格类型" disabled="{{!isEdit}}" value="门店价格" align="right" />
+        </view>
+      </view>
+    </view>
+    <t-button wx:if="{{!isEdit}}" theme="primary" variant="outline" class="edit-btn" icon="edit-1" size="large" block capture-bind:tap="openEdit">编辑</t-button>
+    <t-button wx:else t-class="save-edit-btn" class="edit-btn" theme="primary" variant="outline" size="large" block capture-bind:tap="closeEdit">保存</t-button>
+  </view>
+  <t-dialog visible="{{deleteVisible}}" content="删除账单后无法恢复,请确定是否删除?" confirm-btn="{{ { content: '删除', variant: 'base', theme: 'danger' } }}" cancel-btn="取消" bind:confirm="submitDelete" bind:cancel="closeDelete" />
+</view>

@@ -1,0 +1,74 @@
+.bill-item {
+  position: relative;
+  width: 650rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.client {
+  margin-right: 20rpx;
+}
+
+.left {
+  display: flex;
+  flex-direction: row;
+}
+
+.left-title {
+  display: flex;
+  flex-direction: column;
+}
+
+.left-title .title {
+  font-size: 32rpx;
+  color: #000;
+}
+
+.left-title .time {
+  font-size: 26rpx;
+
+  color: var(--text-color-3--);
+}
+
+.left .title {
+  font-size: 32rpx;
+  color: #000;
+  margin-bottom: 4rpx;
+}
+
+.left .time {
+  font-size: 26rpx;
+  color: var(--text-color-3--);
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.right .money {
+  font-size: 32rpx;
+  margin-right: 20rpx;
+}
+
+.money.red {
+  color: var(--red--);
+}
+
+
+.money.green {
+  color: var(--green--);
+}
+
+.not-pay {
+  background-color: var(--red--) !important;
+  color: #fff;
+}
+
+.readonly .money {
+  font-size: 46rpx;
+  color: var(--primary--);
+}

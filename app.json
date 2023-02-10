@@ -1,10 +1,12 @@
 {
   "pages": [
-    "pages/usercenter/index",
-    "pages/bill/index",
+    "pages/login/index",
     "pages/home/index",
+    "pages/bill/index",
+    "pages/usercenter/index",
     "pages/customer/index",
-    "pages/goods/index"
+    "pages/goods/index",
+    "pages/billDetails/index"
   ],
   "tabBar": {
     "custom": true,
@@ -31,9 +33,10 @@
   "usingComponents": {},
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#f8f8f8",
     "navigationBarTitleText": "记账",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f8f8f8"
   },
   "sitemapLocation": "sitemap.json",
   "permission": {

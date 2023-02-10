@@ -1,2 +1,1 @@
-<!--pages/usercenter/index.wxml-->
-<text>pages/usercenter/index.wxml</text>
+<t-user-center-card userInfo="{{userInfo}}" isPhoneHide="{{true}}" name-class="custom-name-class" phone-class="custom-phone-class" avatar-class="custome-avatar-class" currAuthStep="{{currAuthStep}}" bind:gotoUserEditPage="gotoUserEditPage" />

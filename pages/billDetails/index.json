@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "t-button": "tdesign-miniprogram/button/button",
+    "t-icon": "tdesign-miniprogram/icon/icon",
+    "t-input": "tdesign-miniprogram/input/input",
+    "bill-item": "/components/billItem/index",
+    "t-dialog": "tdesign-miniprogram/dialog/dialog"
+  }
+}

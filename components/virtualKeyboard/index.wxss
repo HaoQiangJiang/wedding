@@ -23,8 +23,15 @@
 
 .submit {
   height: 320rpx !important;
-  background-color: var(--green--) !important;
   color: #fff;
+}
+
+.submit.red {
+  background-color: var(--red--) !important;
+}
+
+.submit.green {
+  background-color: var(--green--) !important;
 }
 
 .keys {
@@ -47,6 +54,7 @@
 
 .image {
   width: 70rpx;
+  height: 70rpx;
 }
 
 .zero {

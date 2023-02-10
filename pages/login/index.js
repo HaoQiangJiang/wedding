@@ -1,4 +1,4 @@
-// pages/home/index.js
+// pages/login/index.js
 Page({
 
   /**
@@ -14,7 +14,26 @@ Page({
   onLoad(options) {
 
   },
-
+  getUserInfo() {
+    wx.login({
+      success: (data) => {
+        if (data.code) {
+          wx.getUserInfo({
+            success: function (res) {
+              console.log(res)
+              wx.setStorage('userInfo', res.userInfo)
+              wx.switchTab({
+                url: '/pages/home/index',
+              })
+            }
+          })
+        }
+      }
+    })
+    // wx.switchTab({
+    //   url: '/pages/home/index',
+    // })
+  },
   /**
    * Lifecycle function--Called when page is initially rendered
    */
@@ -26,7 +45,7 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow() {
-    this.getTabBar().init();
+
   },
 
   /**
@@ -47,6 +66,7 @@ Page({
    * Page event handler function--Called when user drop down
    */
   onPullDownRefresh() {
+
   },
 
   /**

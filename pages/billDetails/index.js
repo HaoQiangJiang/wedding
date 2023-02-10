@@ -1,20 +1,52 @@
-// pages/home/index.js
+// pages/billDetails/index.js
 Page({
 
   /**
    * Page initial data
    */
   data: {
-
+    billData: {},
+    deleteVisible: false,
+    isEdit: false, // 是否为编辑态
   },
 
-  /**
-   * Lifecycle function--Called when page load
-   */
-  onLoad(options) {
-
+  onLoad(option) {
+    const eventChannel = this.getOpenerEventChannel()
+    if (!eventChannel) return;
+    eventChannel.on('acceptBillData', (data) => {
+      this.setData({
+        billData: data.data
+      })
+    })
   },
 
+  openEdit() {
+    this.setData({
+      isEdit: true
+    })
+  },
+  closeEdit() {
+    this.setData({
+      isEdit: false
+    })
+  },
+  openDelete() {
+    this.setData({
+      deleteVisible: true
+    })
+  },
+  closeDelete() {
+    this.setData({
+      deleteVisible: false
+    })
+  },
+  // 确定删除
+  submitDelete() {
+
+  },
+  edit() {
+
+  },
   /**
    * Lifecycle function--Called when page is initially rendered
    */
@@ -26,7 +58,7 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow() {
-    this.getTabBar().init();
+
   },
 
   /**
@@ -47,6 +79,7 @@ Page({
    * Page event handler function--Called when user drop down
    */
   onPullDownRefresh() {
+
   },
 
   /**
