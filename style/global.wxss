@@ -1,6 +1,6 @@
 page {
   height: 100%;
-  font-family: 'DingTalk';
+  font-family: 'my-font' !important;
   font-size: 26rpx;
   background-color: #f8f8f8;
   font-weight: 400;
@@ -17,4 +17,14 @@ page {
   --text-color-4--: #afb1b8;
   --text-color-5--: #e9eaef;
   --text-color-6--: #f3f4f7;
+}
+
+button {
+  font-family: 'my-font' !important;
+}
+
+
+@font-face {
+  font-family: 'my-font';
+  src: url("https://weixin.linktmd.com/font.woff2")
 }

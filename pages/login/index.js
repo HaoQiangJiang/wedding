@@ -12,7 +12,6 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad(options) {
-
   },
   getUserInfo() {
     wx.login({
