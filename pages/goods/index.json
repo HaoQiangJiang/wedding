@@ -1,11 +1,19 @@
 {
+  "disableScroll": true,
   "usingComponents": {
     "t-indexes": "tdesign-miniprogram/indexes/indexes",
     "t-indexes-anchor": "tdesign-miniprogram/indexes-anchor/indexes-anchor",
     "t-cell-group": "tdesign-miniprogram/cell-group/cell-group",
-    "t-cell": "tdesign-miniprogram/cell/cell",
-    "stepper": "/components/stepper/index",
     "t-button": "tdesign-miniprogram/button/button",
-    "t-icon": "tdesign-miniprogram/icon/icon"
+    "t-icon": "tdesign-miniprogram/icon/icon",
+    "t-search": "tdesign-miniprogram/search/search",
+    "t-popup": "tdesign-miniprogram/popup/popup",
+    "t-input": "tdesign-miniprogram/input/input",
+    "t-toast": "tdesign-miniprogram/toast/toast",
+    "t-swipe-cell": "tdesign-miniprogram/swipe-cell/swipe-cell",
+    "t-dialog": "tdesign-miniprogram/dialog/dialog",
+    "t-pull-down-refresh": "tdesign-miniprogram/pull-down-refresh/pull-down-refresh",
+    "t-cell": "tdesign-miniprogram/cell/cell",
+    "stepper": "/components/stepper/index"
   }
 }

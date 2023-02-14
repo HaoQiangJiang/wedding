@@ -1,9 +1,11 @@
 <view class="card">
   <view class="title">
-    <text class="left">今天周二</text>
-    <text class="right">收入 200, 支出 300</text>
+    <text class="left">{{title}}</text>
+    <text wx:if="{{desc}}" class="right">{{desc}}
+    </text>
+    <slot wx:else name="desc" />
   </view>
   <view class="content">
-    <list />
+    <slot name="content" />
   </view>
 </view>

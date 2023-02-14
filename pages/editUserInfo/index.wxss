@@ -1,0 +1,23 @@
+.edit-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.open-type {
+  background-color: #fff !important;
+  padding: 16px !important;
+}
+
+
+.open-type:not(:last-child) {
+  border-bottom: 1px solid var(--text-color-5--);
+}
+
+
+.t-button__content {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 400;
+}

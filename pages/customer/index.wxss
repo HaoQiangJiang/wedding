@@ -1,1 +1,92 @@
-/* pages/customer/index.wxss */
+Page {
+  padding: 20rpx;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10rpx 20rpx 30rpx 0;
+}
+
+.top .search {
+  width: 620rpx;
+}
+
+.top .title {
+  font-size: 40rpx;
+}
+
+.customer-name {
+  font-size: 36rpx;
+  line-height: 200%;
+}
+
+.block {
+  width: 100vw;
+  height: 500rpx;
+  background: #fff;
+  border-top-left-radius: 16rpx;
+  border-top-right-radius: 16rpx;
+}
+
+.wrapper {
+  margin: 32rpx;
+  display: block;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  flex: 1;
+  text-align: center;
+  font-weight: 600;
+  font-size: 36rpx;
+}
+
+.btn {
+  font-size: 32rpx;
+  padding: 32rpx;
+}
+
+.btn--cancel {
+  color: var(--text-color-3--)
+}
+
+.btn--confirm {
+  color: #0052d9;
+}
+
+.delete-btn {
+  background-color: var(--red--);
+  color: #fff;
+}
+
+.btn-wrapper {
+  display: flex;
+  height: 100%;
+}
+
+
+.edit-btn {
+  background-color: var(--yellow--);
+}
+
+.swipe-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 120rpx;
+  height: 100%;
+  color: white;
+}
+
+.column {
+  flex-direction: column;
+}

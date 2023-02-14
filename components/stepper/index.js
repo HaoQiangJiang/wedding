@@ -6,14 +6,6 @@ Component({
   properties: {
     item: Object,
     value: Number,
-    isShowMask: Boolean
-  },
-  observers: {
-    'isShowMask': function (newVal) {
-      !newVal && this.setData({
-        isEdit: false
-      })
-    }
   },
   /**
    * Component initial data
@@ -30,13 +22,11 @@ Component({
       this.setData({
         isEdit: true
       })
-      this.triggerEvent('showMask', true)
     },
     close() {
       this.setData({
         isEdit: false
       })
-      this.triggerEvent('showMask', false)
     },
     changeCount(e) {
       wx.vibrateShort(); // 使手机震动15ms

@@ -1,5 +1,19 @@
+.home-container {
+  height: 100%;
+  overflow: scroll;
+
+}
+
 .home-container .content {
   display: flex;
   flex-direction: column;
   gap: 20rpx;
+  padding: 20rpx;
+  overflow: scroll;
+  margin-bottom: 180rpx;
+}
+
+
+.fab {
+  bottom: 100rpx;
 }

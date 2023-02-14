@@ -1,0 +1,17 @@
+{
+  "navigationStyle": "custom",
+  "disableScroll": true,
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "t-tabs": "tdesign-miniprogram/tabs/tabs",
+    "t-tab-panel": "tdesign-miniprogram/tab-panel/tab-panel",
+    "home-summary": "/components/homeSummary/index",
+    "ec-canvas": "/ec-canvas/ec-canvas",
+    "t-sticky": "tdesign-miniprogram/sticky/sticky",
+    "t-cell": "tdesign-miniprogram/cell/cell",
+    "t-progress": "tdesign-miniprogram/progress/progress",
+    "t-icon": "tdesign-miniprogram/icon/icon",
+    "t-button": "tdesign-miniprogram/button/button",
+    "t-date-time-picker": "tdesign-miniprogram/date-time-picker/date-time-picker"
+  }
+}

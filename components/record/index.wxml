@@ -10,8 +10,13 @@
     <t-button size="small" bindtap="showPicker">{{dateText}}</t-button>
   </view>
   <t-cell-group theme="card" class="select-card">
-    <t-cell title="选择客户" leftIcon="user-add" hover arrow note="{{customer}}" bind:click="selectCustomer" />
-    <t-cell title="选择商品" leftIcon="gift" hover arrow note="{{selectGoodsText}}" bind:click="selectGoods" />
+    <t-cell title="选择客户" leftIcon="user-add" hover arrow note="{{customer.name}}" bind:click="selectCustomer" />
+    <t-cell title="选择商品" leftIcon="gift" hover arrow bind:click="selectGoods">
+      <view class="goods-note" slot="note">
+        <text>{{selectGoodsText}}</text>
+      </view>
+    </t-cell>
+
     <t-date-time-picker title="选择日期" visible="{{dateVisible}}" mode="minute" defaultValue="{{date}}" format="YYYY-MM-DD HH:mm" bindchange="onConfirm" bindpick="onColumnChange" bindcancel="hidePicker" />
   </t-cell-group>
   <view class="record-summary">

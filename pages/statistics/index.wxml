@@ -1,0 +1,41 @@
+<view class="statistics">
+  <t-sticky>
+    <view class="navigation">
+      <text class="title">统计</text>
+      <view class="top-statistics">
+        <view class="left">
+          <text class="label">总收入</text>
+          <text>93274</text>
+        </view>
+        <view class="right">
+          <t-button size="small" ghost icon="app" style="color:#fff;font-size:34rpx" bindtap="showCalendar" variant="text">{{month}}</t-button>
+        </view>
+      </view>
+    </view>
+  </t-sticky>
+  <view class="container">
+    <view class="item">
+      <text class="title">客户构成</text>
+      <view class="content">
+        <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ecCustomer }}"></ec-canvas>
+      </view>
+    </view>
+    <view class="item">
+      <text class="title">商品构成</text>
+      <view class="content customer">
+        <ec-canvas id="mychart-dom-bar1" canvas-id="mychart-bar-1" ec="{{ ecGoods }}"></ec-canvas>
+      </view>
+    </view>
+    <view class="item">
+      <text class="title">商品销售排行榜</text>
+      <view wx:for="{{goodsRank}}" wx:key="id" wx:item="item" class="goods-rank">
+        <view class="goods-rank-top">
+          <text class="title">{{item.name}}</text>
+        </view>
+        <t-progress percentage="{{item.value}}" variant="plain" />
+      </view>
+    </view>
+  </view>
+
+</view>
+<t-date-time-picker title="选择日期" visible="{{visible}}" mode="month" value="{{month}}" format="YYYY-MM" bindchange="confirmCalendar" bindcancel="closeCalendar" />

@@ -1,12 +1,23 @@
 <view class="home-container">
-  <view class="content">
-    <image-bill id="imageBill" />
+  <t-sticky>
+    <view class="navigation">
+      <text class="title">记账本</text>
+    </view>
     <home-summary />
-    <card />
-    <card />
-    <card />
-    <card />
-    <card />
+  </t-sticky>
+  <view class="content">
+    <card title="今天周二" desc="收入 200, 支出 300">
+      <list slot="content" bind:addBill="addBill" />
+    </card>
+    <card title="今天周一" desc="收入 2320, 支出 3200">
+      <list slot="content" />
+    </card>
+    <card title="今天周一" desc="收入 2320, 支出 3200">
+      <list slot="content" />
+    </card>
   </view>
-
+  <t-popup visible="{{visible}}" prevent-scroll-through="{{true}}" placement="bottom" bind:visible-change="onVisibleChange">
+    <record id="record" bind:closeBill="closeBill" bind:close="closeRecord" />
+  </t-popup>
+  <t-fab style="right:20rpx;bottom: 250rpx;" icon="edit-1" bind:click="addBill" text="记一笔" />
 </view>

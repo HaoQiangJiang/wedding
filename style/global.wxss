@@ -4,7 +4,6 @@ page {
   font-size: 26rpx;
   background-color: #f8f8f8;
   font-weight: 400;
-  padding: 20rpx;
   box-sizing: border-box;
   --td-primary-color: #1b55de;
   --primary--: #1b55de;
@@ -19,12 +18,28 @@ page {
   --text-color-6--: #f3f4f7;
 }
 
+.t-icon-base:active {
+  background-color: var(--text-color-6--) !important;
+}
+
 button {
   font-family: 'my-font' !important;
 }
 
-
-@font-face {
-  font-family: 'my-font';
-  src: url("https://weixin.linktmd.com/font.woff2")
+.navigation {
+  background-color: var(--primary--);
+  padding-top: 50rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
+.navigation .title {
+  font-size: 40rpx;
+  color: #fff;
+  margin-top: 60rpx;
+  margin-bottom: 40rpx;
+}
+
+
+

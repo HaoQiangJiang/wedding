@@ -6,8 +6,8 @@ Page({
    */
   data: {
     billData: {},
-    deleteVisible: false,
-    isEdit: false, // 是否为编辑态
+    deleteVisible:false,
+    visible: false,
   },
 
   onLoad(option) {
@@ -19,17 +19,24 @@ Page({
       })
     })
   },
+  // 提交账单
+  closeBill() {
+    this.setData({
+      visible: false
+    });
+  },
+  // 记一笔
+  addBill() {
+    this.setData({
+      visible: true,
+    })
+  },
+  onVisibleChange(e) {
+    this.setData({
+      visible: e.detail.visible,
+    });
+  },
 
-  openEdit() {
-    this.setData({
-      isEdit: true
-    })
-  },
-  closeEdit() {
-    this.setData({
-      isEdit: false
-    })
-  },
   openDelete() {
     this.setData({
       deleteVisible: true
@@ -42,9 +49,6 @@ Page({
   },
   // 确定删除
   submitDelete() {
-
-  },
-  edit() {
 
   },
   /**

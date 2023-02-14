@@ -1,3 +1,10 @@
 {
-  "usingComponents": {}
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "t-sticky": "tdesign-miniprogram/sticky/sticky",
+    "card": "/components/card/index",
+    "list": "/components/list/index",
+    "t-tabs": "tdesign-miniprogram/tabs/tabs",
+    "t-tab-panel": "tdesign-miniprogram/tab-panel/tab-panel"
+  }
 }

@@ -1,6 +1,14 @@
+Page {
+  padding: 20rpx;
+}
+
 .bill-details {
   overflow: hidden;
   height: 100vh;
+}
+
+.bill:active {
+  background-color: var(--text-color-6--);
 }
 
 .top {
@@ -48,7 +56,6 @@
   font-weight: 500;
 }
 
-.bill-form .details {}
 
 .edit-btn {
   width: calc(100% - 40rpx);
@@ -58,4 +65,8 @@
   padding: 20rpx;
   z-index: 2;
 
+}
+
+.t-input__control--disabled {
+  color: #000 !important;
 }

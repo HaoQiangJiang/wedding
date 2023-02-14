@@ -1,12 +1,12 @@
-<view class='bill-item {{readonly?"readonly":""}}' capture-bind:tap="openDetails">
+<view class='bill-item {{bigPrice?"big-price":""}}' capture-bind:tap="openDetails">
   <view class="left">
-    <t-avatar class="client" t-class-image='{{!item.isPay?"not-pay":""}}' shape="round" size="70rpx">{{item.isPay?'已付':'待付'}}</t-avatar>
+    <t-avatar wx:if="{{!isHiddenAvatar}}" class="client" t-class-image='{{!item.isPay?"not-pay":""}}' shape="round" size="70rpx">{{item.isPay?'已付':'待付'}}</t-avatar>
     <view class="left-title">
       <text class="title">{{item.customer}}</text>
       <text class="time">{{item.time}}</text>
     </view>
   </view>
   <view class="right">
-    <text class='money {{item.price>0?"":"green"}}'>{{item.price}}元</text>
+    <text class='money'>{{item.price}}元</text>
   </view>
 </view>

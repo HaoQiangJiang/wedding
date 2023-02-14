@@ -1,4 +1,3 @@
-<!--components/summary/index.wxml-->
 <view class="home-summary">
   <view class="item">
     <text class="title">￥8.000</text>
@@ -12,4 +11,5 @@
     <text class="title">￥33</text>
     <text>今日退货</text>
   </view>
+
 </view>

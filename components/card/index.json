@@ -1,6 +1,5 @@
 {
   "component": true,
   "usingComponents": {
-    "list": "/components/list/index"
   }
 }

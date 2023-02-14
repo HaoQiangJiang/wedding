@@ -1,22 +1,19 @@
+const {
+  logout
+} = require('../../utils/login')
 Page({
   data: {
-    userInfo: {
-      avatarUrl: '',
-      nickName: '正在登录...',
-      phoneNumber: '',
-    },
-    currAuthStep: 1,
+    userInfo: {},
   },
   onShow() {
     this.getTabBar().init();
     wx.getStorage({
       key: 'userInfo',
       success: (res) => {
-        console.log(res)
         this.setData({
           userInfo: {
-            avatarUrl: res.data.avatarUrl,
-            nickName: res.data.nickName,
+            avatarUrl: res.data.avatar_url,
+            nickName: res.data.name,
             phoneNumber: '',
           },
           currAuthStep: 3
@@ -24,5 +21,15 @@ Page({
       }
     })
   },
+  logoutFn() {
+    logout()
+  },
+  navigate(e) {
+    const url = e.currentTarget.dataset.key
+    wx.navigateTo({
+      url,
+    })
+
+  }
 
 });

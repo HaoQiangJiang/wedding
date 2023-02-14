@@ -1,1 +1,33 @@
-/* pages/bill/index.wxss */
+.money-statistics {
+  padding: 50rpx;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 60rpx;
+}
+
+.money-statistics .total {
+  width: 100% !important;
+  font-size: 36rpx !important;
+}
+
+.money-statistics .left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+  font-size: 34rpx;
+  width: 40%;
+}
+
+.money-statistics .left .label {
+  opacity: 0.7;
+  font-size: 28rpx;
+  margin-bottom: 10rpx;
+}
+
+.list {
+  padding: 0 30rpx;
+}

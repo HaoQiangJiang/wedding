@@ -1,121 +1,174 @@
 // pages/customer/index.js
+const {
+  addCustomer,
+  queryAllCustomer,
+  deleteCustomer,
+  editCustomer
+} = require('../../api/index')
+const {
+  searchKeyInString,
+  formateDataToIndexList,
+} = require('../../utils/util')
+import Toast from 'tdesign-miniprogram/toast/index';
+
 Page({
 
   /**
    * Page initial data
    */
   data: {
+    mode: 'manage', // 模式 manage  selsct
     value: '',
-    indexList: [],
-    list: [{
-        index: 'A',
-        children: ['阿坝', '阿拉善', '阿里', '安康', '安庆', '鞍山', '安顺', '安阳', '澳门'],
-      },
-      {
-        index: 'B',
-        children: [
-          '北京',
-          '白银',
-          '保定',
-          '宝鸡',
-          '保山',
-          '包头',
-          '巴中',
-          '北海',
-          '蚌埠',
-          '本溪',
-          '毕节',
-          '滨州',
-          '百色',
-          '亳州',
-        ],
-      },
-      {
-        index: 'C',
-        children: [
-          '重庆',
-          '成都',
-          '长沙',
-          '长春',
-          '沧州',
-          '常德',
-          '昌都',
-          '长治',
-          '常州',
-          '巢湖',
-          '潮州',
-          '承德',
-          '郴州',
-          '赤峰',
-          '池州',
-          '崇左',
-          '楚雄',
-          '滁州',
-          '朝阳',
-        ],
-      },
-      {
-        index: 'D',
-        children: [
-          '大连',
-          '东莞',
-          '大理',
-          '丹东',
-          '大庆',
-          '大同',
-          '大兴安岭',
-          '德宏',
-          '德阳',
-          '德州',
-          '定西',
-          '迪庆',
-          '东营',
-        ],
-      },
-      {
-        index: 'E',
-        children: ['鄂尔多斯', '恩施', '鄂州'],
-      },
-      {
-        index: 'F',
-        children: ['福州', '防城港', '佛山', '抚顺', '抚州', '阜新', '阜阳'],
-      },
-      {
-        index: 'G',
-        children: ['广州', '桂林', '贵阳', '甘南', '赣州', '甘孜', '广安', '广元', '贵港', '果洛'],
-      },
-      {
-        index: 'J',
-        children: ['揭阳', '吉林', '晋江', '吉安', '胶州', '嘉兴', '济南', '鸡西', '荆州', '江门', '基隆'],
-      },
-      {
-        index: 'K',
-        children: ['昆明', '开封', '康定', '喀什'],
-      },
-    ],
+    indexList: [], // a-z 序号
+    customerList: [], // 格式化之后的数据,按照 a-z 划分
+    originCustomerList: [], // 原始接口数据
+    addCustomerMap: [{
+      label: '名称',
+      value: 'name'
+    }, {
+      label: '电话',
+      value: 'phone'
+    }],
+    addCustomerVisible: false,
+    addCustomerData: {
+      name: '',
+      phone: ''
+    }, // 新增客户的数据
+    searchKey: '', // 搜索的客户名
+    deleteVisible: false,
+    operateCustomer: {}, // 操作的用户
+    isEdit: false, // 是否为编辑用户
+    refresh: false, // 下拉刷新
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad(option) {
-
+    this.setData({
+      mode: decodeURIComponent(option?.mode || 'manage')
+    })
+    this.getAllCustomer()
   },
 
   /**
    * Lifecycle function--Called when page is initially rendered
    */
-  onReady() {
-    const data = this.data.list.map((item) => item.index)
+  onReady() {},
+  async onPullDownRefresh() {
+    await this.getAllCustomer(false)
+    setTimeout(() => {
+      this.setData({
+        searchKey: '',
+        refresh: false
+      })
+    }, 500);
+  },
+
+  async getAllCustomer(isShowLoading = true) {
+    isShowLoading && wx.showLoading({
+      title: '正在加载...',
+    })
+    const {
+      data
+    } = await queryAllCustomer()
+    const formateData = formateDataToIndexList(data.data)
     this.setData({
-      indexList: data
+      originCustomerList: data.data,
+      customerList: formateData,
+      indexList: formateData.map(item => item.index)
+    })
+    wx.hideLoading()
+  },
+  clearSearch() {
+    this.handleSearch({
+      detail: {
+        value: ''
+      }
+    })
+  },
+  // 搜索输入框输入
+  handleSearch(e) {
+    const searchData = this.data.originCustomerList.filter(item => {
+      return searchKeyInString(item.name, e.detail.value)
+    })
+    const formateData = formateDataToIndexList(searchData)
+    this.setData({
+      searchKey: e.detail.value,
+      customerList: formateData,
+      indexList: formateData.map(item => item.index)
+    })
+  },
+  // 新增客户输入
+  changeCustomer(e) {
+    const value = e.detail.value
+    const key = e.currentTarget.dataset.key
+    this.setData({
+      addCustomerData: {
+        ...this.data.addCustomerData,
+        [key]: value
+      }
+    })
+  },
+  // 确定新增客户
+  async submitAddCustomer() {
+    const IsEmpty = Object.entries(this.data.addCustomerData).some(([key, value]) => {
+      if (key === 'phone') return false
+      return !value
+    })
+    if (IsEmpty) {
+      Toast({
+        context: this,
+        selector: '#t-toast',
+        message: '请检查信息是否填写完整',
+      });
+      return;
+    }
+    let data
+    if (this.data.addCustomerData.id) {
+      // 编辑用户
+      data = await editCustomer(this.data.addCustomerData)
+    } else {
+      // 新增用户
+      data = await addCustomer(this.data.addCustomerData)
+    }
+
+    if (data.data.code === 200) {
+      this.closeAddCustomer()
+      this.getAllCustomer()
+    }
+  },
+  openAddCustomer() {
+    this.setData({
+      addCustomerData: {
+        name: '',
+        phone: ''
+      },
+      addCustomerVisible: true
+    })
+  },
+  onVisibleChange(e) {
+    this.setData({
+      addCustomerVisible: e.detail.visible,
     });
   },
+  closeAddCustomer() {
+    this.setData({
+      addCustomerVisible: false
+    })
+  },
   onSelect(e) {
+    if (this.data.mode === 'manage') {
+      // 管理模式的点击事件
+      wx.navigateTo({
+        url: '/pages/customerEdit/index',
+      })
+      return
+    }
     const pages = getCurrentPages();
     const prevPage = pages[pages.length - 2]; //上一个页面
     // 获取 record 组件
-    const recordComponent = prevPage.selectComponent('#imageBill').selectComponent('#record')
+    const recordComponent = prevPage.selectComponent('#record')
     wx.navigateBack({
       data: e.target.dataset.item,
       success: () => {
@@ -123,6 +176,37 @@ Page({
           customer: e.target.dataset.item
         })
       }
+    })
+  },
+  // 确定删除
+  async submitDelete() {
+    const id = this.data.operateCustomer.id
+    const {
+      data
+    } = await deleteCustomer(id)
+    if (data.code === 200) {
+      this.closeDelete()
+      this.getAllCustomer()
+    }
+  },
+  openDelete(e) {
+    const operateCustomer = e.currentTarget.dataset.item
+    this.setData({
+      deleteVisible: true,
+      operateCustomer
+    })
+  },
+  closeDelete() {
+    this.setData({
+      deleteVisible: false
+    })
+  },
+  onEdit(e) {
+    const data = e.currentTarget.dataset.item
+    console.log(data)
+    this.setData({
+      addCustomerVisible: true,
+      addCustomerData: data
     })
   },
   /**
@@ -146,12 +230,7 @@ Page({
 
   },
 
-  /**
-   * Page event handler function--Called when user drop down
-   */
-  onPullDownRefresh() {
 
-  },
 
   /**
    * Called when page reach bottom

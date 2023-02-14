@@ -5,7 +5,12 @@ Component({
    */
   properties: {
     item: Object,
-    readonly: Boolean
+    bigPrice: Boolean,
+    url: String,
+    isHiddenAvatar: {
+      type: Boolean,
+      value: false
+    },
   },
 
   /**
@@ -20,10 +25,9 @@ Component({
    */
   methods: {
     openDetails() {
-      // 只读不执行点击
-      if (this.properties.readonly) return;
+      console.log(this.properties.url)
       wx.navigateTo({
-        url: '/pages/billDetails/index',
+        url: this.properties.url,
         success: (res) => {
           res.eventChannel.emit('acceptBillData', {
             data: this.properties.item
@@ -33,5 +37,5 @@ Component({
 
     }
   },
-  
+
 })

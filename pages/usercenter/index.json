@@ -1,8 +1,9 @@
 {
-  "navigationBarTitleText": "个人中心",
   "navigationStyle": "custom",
+  "disableScroll": false,
   "usingComponents": {
-    "t-user-center-card": "./components/user-center-card/index"
-  },
-  "enablePullDownRefresh": true
+    "t-user-center-card": "./components/user-center-card/index",
+    "t-avatar": "tdesign-miniprogram/avatar/avatar",
+    "t-cell": "tdesign-miniprogram/cell/cell"
+  }
 }

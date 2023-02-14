@@ -1,4 +1,7 @@
 // pages/login/index.js
+const {
+  login,
+} = require('../../utils/login.js')
 Page({
 
   /**
@@ -12,26 +15,26 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad(options) {
-  },
-  getUserInfo() {
-    wx.login({
-      success: (data) => {
-        if (data.code) {
-          wx.getUserInfo({
-            success: function (res) {
-              console.log(res)
-              wx.setStorage('userInfo', res.userInfo)
-              wx.switchTab({
-                url: '/pages/home/index',
-              })
-            }
+    // 获取 userInfo, 如果存在则直接跳到首页
+    wx.getStorage({
+      key: 'userInfo',
+      success: (userInfo) => {
+        if (userInfo.data.id) {
+          wx.switchTab({
+            url: '/pages/home/index',
           })
         }
       }
     })
-    // wx.switchTab({
-    //   url: '/pages/home/index',
-    // })
+
+  },
+  getUserInfo() {
+    login(this.loginFail)
+  },
+  loginFail() {
+    wx.showToast({
+      title: '登录失败,请重试',
+    })
   },
   /**
    * Lifecycle function--Called when page is initially rendered

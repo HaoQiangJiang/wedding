@@ -1,2 +1,45 @@
-<!--pages/bill/index.wxml-->
-<text>pages/bill/index.wxml</text>
+<view class="bill">
+  <t-sticky>
+    <view class="navigation">
+      <view class="money-statistics">
+        <view class="total left">
+          <text class="label">总金额(元/年)</text>
+          <text>93274</text>
+        </view>
+        <view class="left">
+          <text class="label">昨日收益(元/天)</text>
+          <text>93274</text>
+        </view>
+        <view class="left">
+          <text class="label">今日收益(元/天)</text>
+          <text>93274</text>
+        </view>
+        <view class="left">
+          <text class="label">当前年度收益(元/年)</text>
+          <text>93274</text>
+        </view>
+        <view class="left">
+          <text class="label">月度收益(元/月)</text>
+          <text>93274</text>
+        </view>
+      </view>
+    </view>
+  </t-sticky>
+  <view>
+    <card title="交易记录">
+      <view slot="desc" capture-bind:tap="openFilter">高级筛选</view>
+      <view slot="content">
+        <t-tabs defaultValue="{{payStatus}}" bind:change="onTabsChange">
+          <t-tab-panel label="待付款" value="1" />
+          <t-tab-panel label="已付款" value="2" />
+          <t-tab-panel label="已退货" value="3" />
+        </t-tabs>
+        <view class="list">
+          <list isHiddenAvatar="{{true}}" />
+        </view>
+      </view>
+    </card>
+  </view>
+
+
+</view>

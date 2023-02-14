@@ -4,6 +4,8 @@
     "t-icon": "tdesign-miniprogram/icon/icon",
     "t-input": "tdesign-miniprogram/input/input",
     "bill-item": "/components/billItem/index",
-    "t-dialog": "tdesign-miniprogram/dialog/dialog"
+    "t-dialog": "tdesign-miniprogram/dialog/dialog",
+    "t-popup": "tdesign-miniprogram/popup/popup",
+    "record": "/components/record/index"
   }
 }

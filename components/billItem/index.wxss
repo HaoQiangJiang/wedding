@@ -7,6 +7,7 @@
   align-items: center;
 }
 
+
 .client {
   margin-right: 20rpx;
 }
@@ -54,21 +55,12 @@
   margin-right: 20rpx;
 }
 
-.money.red {
-  color: var(--red--);
-}
-
-
-.money.green {
-  color: var(--green--);
-}
-
 .not-pay {
   background-color: var(--red--) !important;
-  color: #fff;
+  color: #fff !important;
 }
 
-.readonly .money {
+.big-price .money {
   font-size: 46rpx;
   color: var(--primary--);
 }

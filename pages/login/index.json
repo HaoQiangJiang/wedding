@@ -1,4 +1,7 @@
 {
+  "navigationBarBackgroundColor": "#f8f8f8",
+  "backgroundColor": "#f8f8f8",
+  "backgroundTextStyle": "light",
   "usingComponents": {
     "t-button": "tdesign-miniprogram/button/button"
   }

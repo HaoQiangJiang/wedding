@@ -6,9 +6,7 @@ Component({
   /**
    * Component properties
    */
-  properties: {
-    recordType: String,
-  },
+  properties: {},
 
   /**
    * Component initial data
@@ -29,7 +27,7 @@ Component({
       label: '退货',
       value: 'returnGoods'
     }],
-    // recordType: 'record',
+    recordType: 'record',
   },
   pageLifetimes: {},
   /**
@@ -64,12 +62,12 @@ Component({
 
     selectCustomer() {
       wx.navigateTo({
-        url: '/pages/customer/index',
+        url: '/pages/customer/index?mode=select',
       })
     },
     selectGoods() {
       wx.navigateTo({
-        url: '/pages/goods/index',
+        url: '/pages/goods/index?mode=select',
         success: (res) => {
           res.eventChannel.emit('acceptDataFromOpenerPage', {
             data: this.data.selectGoods
@@ -100,7 +98,6 @@ Component({
     },
     submitPrice() {
       this.closeBill()
-
     },
   }
 })

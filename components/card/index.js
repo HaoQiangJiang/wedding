@@ -1,10 +1,11 @@
 // components/Card/index.js
 Component({
-  /**
-   * Component properties
-   */
+  options: {
+    multipleSlots: true
+  },
   properties: {
-
+    title: String,
+    desc: String,
   },
 
   /**

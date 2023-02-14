@@ -4,7 +4,7 @@ Component({
    * Component properties
    */
   properties: {
-
+    isHiddenAvatar: Boolean
   },
 
   /**
@@ -29,13 +29,34 @@ Component({
       time: '2023-02-10 10:15',
       isPay: false,
       price: 166
-    }]
+    }],
+    deleteVisible: false,
   },
 
   /**
    * Component methods
    */
   methods: {
-    
+    onEdit(e) {
+      this.triggerEvent('addBill', {
+        setData: e.currentTarget.dataset.item
+      })
+    },
+    onDelete() {
+
+    },
+    submitDelete() {
+
+    },
+    openDelete() {
+      this.setData({
+        deleteVisible: true
+      })
+    },
+    closeDelete() {
+      this.setData({
+        deleteVisible: false
+      })
+    }
   }
 })

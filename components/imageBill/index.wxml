@@ -9,8 +9,5 @@
       <text class="title">退货</text>
     </view>
   </view>
-  <t-popup visible="{{visible}}" prevent-scroll-through="{{true}}" placement="bottom" bind:visible-change="onVisibleChange">
-    <record id="record" recordType="{{recordType}}" bind:closeBill="closeBill" bind:close="closeRecord" />
-  </t-popup>
 
 </view>

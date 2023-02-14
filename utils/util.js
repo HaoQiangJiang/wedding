@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import cnchar from 'cnchar';
 
 const formatTime = (date, template) => dayjs(date).format(template);
 
@@ -127,6 +128,43 @@ const phoneRegCheck = (phone) => {
   const phoneRegExp = new RegExp(innerPhoneReg);
   return phoneRegExp.test(phone);
 };
+// 将数据格式化为 按照 a-z 划分的数据
+const formateDataToIndexList = (data) => {
+  const obj = {}
+  data.forEach(item => {
+    if (!item.name[0]) {
+      return
+    }
+    const index = item.name[0].spell()[0].toUpperCase()
+    if (!obj[index]) {
+      obj[index] = []
+    }
+    obj[index].push(item)
+  })
+  const result = []
+  for (let key in obj) {
+    result.push({
+      index: key,
+      children: obj[key]
+    })
+  }
+  return result.sort((a, b) => {
+    if (a.index < b.index) {
+      return -1;
+    }
+    if (a.index > b.index) {
+      return 1;
+    }
+    return 0;
+  })
+}
+
+// 根据首字母拼音或者包含字符查找
+const searchKeyInString = (text, keyword) => {
+  if (!text || !keyword) return true
+  return text.spell()[0].toLocaleLowerCase().includes(keyword.toLocaleLowerCase()) ||
+    text.includes(keyword)
+}
 
 module.exports = {
   formatTime,
@@ -136,4 +174,6 @@ module.exports = {
   rpx2px,
   phoneEncryption,
   phoneRegCheck,
+  formateDataToIndexList,
+  searchKeyInString
 };

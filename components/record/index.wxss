@@ -27,6 +27,12 @@
 .top button {
   font-size: 24rpx;
   padding: 0 20rpx;
+  margin: 0;
+}
+
+.goods-note {
+  width: 400rpx;
+  text-align: right;
 }
 
 .record-type {

@@ -1,3 +1,7 @@
+Page {
+  padding: 20rpx;
+}
+
 .login {
   display: flex;
   align-items: center;
