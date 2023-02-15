@@ -166,6 +166,31 @@ const searchKeyInString = (text, keyword) => {
     text.includes(keyword)
 }
 
+// 将数组按照时间分类
+const formatArrayByKey = (list, key) => {
+  const result = [];
+  const map = new Map();
+  for (const item of list) {
+    const uniqueKey = item[key].split(' ')[0]
+    if (!map.has(uniqueKey)) {
+      map.set(uniqueKey, true); // set any value to Map
+      result.push({
+        date: uniqueKey,
+        totalPrice: item.real_amount,
+        list: [item]
+      });
+    } else {
+      for (const it of result) {
+        if (it.date === uniqueKey) {
+          it.totalPrice += item.real_amount;
+          it.list.push(item);
+          break;
+        }
+      }
+    }
+  }
+  return result;
+}
 module.exports = {
   formatTime,
   priceFormat,
@@ -175,5 +200,6 @@ module.exports = {
   phoneEncryption,
   phoneRegCheck,
   formateDataToIndexList,
-  searchKeyInString
+  searchKeyInString,
+  formatArrayByKey
 };

@@ -1,7 +1,11 @@
 const {
   formatTime,
 } = require('../../utils/util')
-// components/record/index.js
+const {
+  createBill,
+} = require('../../api/index')
+import Toast from 'tdesign-miniprogram/toast/index';
+
 Component({
   /**
    * Component properties
@@ -17,7 +21,7 @@ Component({
     selectGoods: [],
     selectGoodsText: '',
     dateVisible: '',
-    dateText: formatTime(new Date(), 'YYYY-MM-DD HH:mm'),
+    dateText: formatTime(new Date(), 'YYYY-MM-DD HH:mm:ss'),
     date: new Date().getTime(), // 支持时间戳传入
     orderPrice: 0,
     recordTypeMap: [{
@@ -65,7 +69,7 @@ Component({
         url: '/pages/customer/index?mode=select',
       })
     },
-    selectGoods() {
+    handleSelectGoods() {
       wx.navigateTo({
         url: '/pages/goods/index?mode=select',
         success: (res) => {
@@ -77,27 +81,48 @@ Component({
     },
     changePrice(data) {
       this.setData({
-        price: data.detail
+        price: Number(data.detail)
       })
     },
     closeBill() {
       this.triggerEvent('closeBill')
-      wx.nextTick(() => {
-        // 重置数据防止下次弹出存在旧数据
-        this.setData({
-          customer: '',
-          selectGoods: [],
-          selectGoodsText: '',
-          dateText: formatTime(new Date(), 'YYYY-MM-DD HH:mm'),
-          date: new Date().getTime(),
-          orderPrice: 0,
-          price: 0
-        })
-      })
-
     },
-    submitPrice() {
+    toastShow(message) {
+      Toast({
+        context: this,
+        selector: '#t-toast',
+        message
+      })
+    },
+    async submitPrice() {
+      // 提交账单
+      const selectGoodsValues = Object.values(this.data.selectGoods)
+      const products = selectGoodsValues.map(item => {
+        return {
+          id: item.id,
+          number: item.count,
+          price: item.isFactoryPrice ? item.factory_price : item.store_price
+        }
+      })
+      const params = {
+        "client_id": this.data.customer.id,
+        "amount": this.data.orderPrice,
+        "real_amount": this.data.recordType === 'record' ? this.data.price : -this.data.price,
+        "pay_status": this.data.price !== 0,
+        "create_at": this.data.dateText,
+        "remark": "",
+        products
+      }
+      if (!params.client_id) {
+        return this.toastShow("请选择客户")
+      }
+      if (params.products.length === 0) {
+        return this.toastShow("请选择商品")
+      }
+      await createBill(params)
+      this.triggerEvent('refreshBill')
       this.closeBill()
+      // 刷新订单数
     },
   }
 })

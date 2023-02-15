@@ -1,5 +1,5 @@
 const {
-  getAllBills
+  queryBillAmount
 } = require('../../api/index')
 Page({
 
@@ -9,25 +9,38 @@ Page({
   data: {
     billId: '',
     payStatus: 1, // 0 未付款 1 已付款 2 已退货
-    filter: {
-      searchKey: '',
-      startTime: '',
-      endTime: '',
-      page: 1,
-      size: 100,
-      payStatus: "0"
-    }
+    monthBillAmount: 0, // 月收益
+    todayBillAmount: 0, // 今日收益
+    totalBillAmount: 0, // 总收益
+    yearBillAmount: 0, // 年收益
+    yesterdayBillAmount: 0, // 昨日收益
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad(options) {
-    this.queryAllBills()
+    this.initData()
   },
-  async queryAllBills() {
-    const data = await getAllBills(this.filter)
+  async initData() {
+    const {
+      data
+    } = await queryBillAmount()
     console.log(data)
+    const {
+      monthBillAmount,
+      todayBillAmount,
+      totalBillAmount,
+      yearBillAmount,
+      yesterdayBillAmount
+    } = data.data
+    this.setData({
+      monthBillAmount,
+      todayBillAmount,
+      totalBillAmount,
+      yearBillAmount,
+      yesterdayBillAmount,
+    })
   },
   openFilter() {
 

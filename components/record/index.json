@@ -9,6 +9,7 @@
     "t-indexes": "tdesign-miniprogram/indexes/indexes",
     "t-date-time-picker": "tdesign-miniprogram/date-time-picker/date-time-picker",
     "t-button": "tdesign-miniprogram/button/button",
+    "t-toast": "tdesign-miniprogram/toast/toast",
     "t-icon": "tdesign-miniprogram/icon/icon"
   }
 }

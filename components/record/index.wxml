@@ -1,7 +1,7 @@
 <view class="record">
   <view class="close">
     <text class="title">{{recordType==='record'?'创建账单':'创建退货单'}}</text>
-    <t-icon class="close-icon" name="close" size="48rpx" bind:click="closeBill" />
+    <t-icon class="close-icon" name="close" size="50rpx" bind:click="closeBill" />
   </view>
   <view class="top">
     <view class="record-type">
@@ -11,13 +11,13 @@
   </view>
   <t-cell-group theme="card" class="select-card">
     <t-cell title="选择客户" leftIcon="user-add" hover arrow note="{{customer.name}}" bind:click="selectCustomer" />
-    <t-cell title="选择商品" leftIcon="gift" hover arrow bind:click="selectGoods">
+    <t-cell title="选择商品" leftIcon="gift" hover arrow bind:click="handleSelectGoods">
       <view class="goods-note" slot="note">
         <text>{{selectGoodsText}}</text>
       </view>
     </t-cell>
 
-    <t-date-time-picker title="选择日期" visible="{{dateVisible}}" mode="minute" defaultValue="{{date}}" format="YYYY-MM-DD HH:mm" bindchange="onConfirm" bindpick="onColumnChange" bindcancel="hidePicker" />
+    <t-date-time-picker title="选择日期" visible="{{dateVisible}}" mode="minute" defaultValue="{{date}}" format="YYYY-MM-DD HH:mm:ss" bindchange="onConfirm" bindpick="onColumnChange" bindcancel="hidePicker" />
   </t-cell-group>
   <view class="record-summary">
     <text>订单总金额：<text class='price {{recordType=="record"?"red":"green"}}'>{{orderPrice}}</text></text>
@@ -30,6 +30,7 @@
     </view>
   </view>
   <view class="record-keybord">
-    <virtual-keyboard recordType="{{recordType}}" bind:changePrice="changePrice" bind:submitPrice="submitPrice" />
+    <virtual-keyboard id="virtualKeyboard" recordType="{{recordType}}" bind:changePrice="changePrice" bind:submitPrice="submitPrice" />
   </view>
 </view>
+<t-toast id="t-toast" />

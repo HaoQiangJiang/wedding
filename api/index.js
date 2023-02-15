@@ -153,3 +153,53 @@ export async function deleteGoods(id) {
     method: 'delete',
   })
 }
+
+// 创建账单
+export async function createBill(data) {
+  return await request({
+    url: baseUrl + '/bill/create',
+    method: 'post',
+    data,
+  })
+}
+
+// 查询所有账单
+export async function queryAllBill(data) {
+  return await request({
+    url: baseUrl + '/bill/findAllBills',
+    method: 'post',
+    data,
+  })
+}
+
+// 删除账单
+export async function deleteBill(id) {
+  return await request({
+    url: baseUrl + '/bill/delete/' + id,
+    method: 'delete',
+  })
+}
+
+// 查询今日昨日销量销售额订单数
+export async function queryBillAmountAndCount() {
+  return await request({
+    url: baseUrl + '/bill/getBillAmountAndCount',
+    method: 'get',
+  })
+}
+
+// 查询年度收益统计情况
+export async function queryBillAmount() {
+  return await request({
+    url: baseUrl + '/bill/getBillAmount',
+    method: 'get',
+  })
+}
+
+// 与客户的年度收益统计情况
+export async function queryBillAmountByClientId(id) {
+  return await request({
+    url: baseUrl + '/bill/getBillAmountByClientId/' + id,
+    method: 'get',
+  })
+}

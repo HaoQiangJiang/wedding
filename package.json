@@ -10,11 +10,6 @@
   },
   "author": "",
   "license": "ISC",
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged && npm run check"
-    }
-  },
   "lint-staged": {
     "*.{js, ts}": "eslint --cache --fix",
     "*.{js,ts,css,less}": "prettier --write"

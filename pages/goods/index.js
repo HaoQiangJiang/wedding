@@ -106,7 +106,6 @@ Page({
   },
   onEdit(e) {
     const data = e.currentTarget.dataset.item
-    console.log(data)
     this.setData({
       addGoodsVisible: true,
       addGoodsData: data
@@ -163,8 +162,21 @@ Page({
     }
     let data
     if (this.data.addGoodsData.id) {
-      // 编辑用户
       data = await editGoods(this.data.addGoodsData)
+      // 修改了商品,选择列表也要修改
+      const selectGoodsBak = {
+        ...this.data.selectGoods
+      }
+      if (selectGoodsBak[this.data.addGoodsData.id]) {
+        console.log(selectGoodsBak, this.data.addGoodsData)
+        selectGoodsBak[this.data.addGoodsData.id] = {
+          ...selectGoodsBak[this.data.addGoodsData.id],
+          ...this.data.addGoodsData
+        }
+        this.setData({
+          selectGoods: selectGoodsBak
+        })
+      }
     } else {
       // 新增用户
       data = await addGoods(this.data.addGoodsData)

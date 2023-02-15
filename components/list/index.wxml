@@ -9,7 +9,7 @@
           <t-icon class="padding-bottom" name="edit" size="32rpx"></t-icon>
           编辑
         </view>
-        <view class="btn delete-btn column" bind:tap="openDelete">
+        <view class="btn delete-btn column" data-item="{{item}}" bind:tap="openDelete">
           <t-icon class="padding-bottom" name="delete" size="32rpx"></t-icon>
           删除
         </view>

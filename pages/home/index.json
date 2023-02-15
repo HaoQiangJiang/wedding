@@ -7,11 +7,11 @@
     "t-button": "tdesign-miniprogram/button/button",
     "t-fab": "tdesign-miniprogram/fab/fab",
     "card": "/components/card/index",
-    "home-summary": "/components/homeSummary/index",
     "image-bill": "/components/imageBill/index",
     "t-popup": "tdesign-miniprogram/popup/popup",
     "record": "/components/record/index",
     "t-sticky": "tdesign-miniprogram/sticky/sticky",
-    "list": "/components/list/index"
+    "list": "/components/list/index",
+    "t-pull-down-refresh": "tdesign-miniprogram/pull-down-refresh/pull-down-refresh"
   }
 }

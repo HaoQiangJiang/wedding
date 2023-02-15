@@ -1,12 +1,12 @@
 <view class='bill-item {{bigPrice?"big-price":""}}' capture-bind:tap="openDetails">
   <view class="left">
-    <t-avatar wx:if="{{!isHiddenAvatar}}" class="client" t-class-image='{{!item.isPay?"not-pay":""}}' shape="round" size="70rpx">{{item.isPay?'已付':'待付'}}</t-avatar>
+    <t-avatar wx:if="{{!isHiddenAvatar}}" class="client" t-class-image='{{!item.pay_status?"not-pay":""}}' shape="round" size="70rpx">{{item.pay_status?'已付':'待付'}}</t-avatar>
     <view class="left-title">
-      <text class="title">{{item.customer}}</text>
-      <text class="time">{{item.time}}</text>
+      <text class="title">{{item.client.name}}</text>
+      <text class="time">{{item.created_at}}</text>
     </view>
   </view>
   <view class="right">
-    <text class='money'>{{item.price}}元</text>
+    <text class='money'>{{item.real_amount}}元</text>
   </view>
 </view>

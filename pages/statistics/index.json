@@ -5,7 +5,6 @@
   "usingComponents": {
     "t-tabs": "tdesign-miniprogram/tabs/tabs",
     "t-tab-panel": "tdesign-miniprogram/tab-panel/tab-panel",
-    "home-summary": "/components/homeSummary/index",
     "ec-canvas": "/ec-canvas/ec-canvas",
     "t-sticky": "tdesign-miniprogram/sticky/sticky",
     "t-cell": "tdesign-miniprogram/cell/cell",

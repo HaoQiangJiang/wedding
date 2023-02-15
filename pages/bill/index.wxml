@@ -4,23 +4,23 @@
       <view class="money-statistics">
         <view class="total left">
           <text class="label">总金额(元/年)</text>
-          <text>93274</text>
+          <text>￥{{totalBillAmount}}</text>
         </view>
         <view class="left">
           <text class="label">昨日收益(元/天)</text>
-          <text>93274</text>
+          <text>￥{{yesterdayBillAmount}}</text>
         </view>
         <view class="left">
           <text class="label">今日收益(元/天)</text>
-          <text>93274</text>
+          <text>￥{{totalBillAmount}}</text>
         </view>
         <view class="left">
           <text class="label">当前年度收益(元/年)</text>
-          <text>93274</text>
+          <text>￥{{yearBillAmount}}</text>
         </view>
         <view class="left">
           <text class="label">月度收益(元/月)</text>
-          <text>93274</text>
+          <text>￥{{monthBillAmount}}</text>
         </view>
       </view>
     </view>

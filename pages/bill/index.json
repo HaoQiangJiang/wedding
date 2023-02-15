@@ -1,5 +1,6 @@
 {
   "navigationStyle": "custom",
+  "disableScroll": true,
   "usingComponents": {
     "t-sticky": "tdesign-miniprogram/sticky/sticky",
     "card": "/components/card/index",

@@ -170,7 +170,6 @@ Page({
     // 获取 record 组件
     const recordComponent = prevPage.selectComponent('#record')
     wx.navigateBack({
-      data: e.target.dataset.item,
       success: () => {
         recordComponent.setData({
           customer: e.target.dataset.item

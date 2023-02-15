@@ -8,20 +8,14 @@
       <bill-item item="{{billData}}" bigPrice="{{true}}" url="/pages/contacts/index" />
     </view>
     <view class="goods">
-      <view class="bill-form">
-        <text class="name">蔬菜</text>
+      <view class="bill-form" wx:for="{{billData.products}}" wx:item="item" wx:key="id">
+        <text class="name">{{item.product.name}}</text>
         <view class="details">
-          <t-input label="数量" disabled="{{true}}" value="100" align="right" />
-          <t-input label="价格类型" disabled="{{true}}" value="门店价格" align="right" />
+          <t-input label="数量" disabled="{{true}}" value="{{item.number}}" align="right" />
+          <t-input label="价格" disabled="{{true}}" value="{{item.price}}" align="right" />
         </view>
       </view>
-      <view class="bill-form">
-        <text class="name">蔬菜</text>
-        <view class="details">
-          <t-input label="数量" disabled="{{true}}" value="100" align="right" />
-          <t-input label="价格类型" disabled="{{true}}" value="门店价格" align="right" />
-        </view>
-      </view>
+
     </view>
     <view class="edit-btn">
       <t-button theme="primary" class="edit-btn" icon="edit-1" size="large" block capture-bind:tap="addBill">编辑</t-button>

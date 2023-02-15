@@ -1,4 +1,7 @@
-// pages/billDetails/index.js
+const {
+  deleteBill
+} = require("../../api/index");
+
 Page({
 
   /**
@@ -6,7 +9,7 @@ Page({
    */
   data: {
     billData: {},
-    deleteVisible:false,
+    deleteVisible: false,
     visible: false,
   },
 
@@ -48,8 +51,15 @@ Page({
     })
   },
   // 确定删除
-  submitDelete() {
-
+  async submitDelete() {
+    await deleteBill(this.data.billData.id)
+    const pages = getCurrentPages();
+    const prevPage = pages[pages.length - 2]; //上一个页面
+    wx.navigateBack({
+      success: () => {
+        prevPage.init()
+      }
+    })
   },
   /**
    * Lifecycle function--Called when page is initially rendered
