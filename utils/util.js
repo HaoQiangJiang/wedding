@@ -176,19 +176,41 @@ const formatArrayByKey = (list, key) => {
       map.set(uniqueKey, true); // set any value to Map
       result.push({
         date: uniqueKey,
-        totalPrice: item.real_amount,
         list: [item]
       });
     } else {
       for (const it of result) {
         if (it.date === uniqueKey) {
-          it.totalPrice += item.real_amount;
           it.list.push(item);
           break;
         }
       }
     }
   }
+  return result;
+}
+/* 
+给两个数组, 
+a: [{date: '2020-01-01', list: [1]},{date: '2020-01-02', list: [2]}]
+b: [{date: '2020-01-02', list: [3]},{date: '2020-01-3', list: [4]}]
+合并成一个数组, date 相同的合并到一起
+c: [{date: '2020-01-01', list: [1]},{date: '2020-01-02', list: [2,3]},{date: '2020-01-3', list: [4]}]
+*/
+const mergeArrayByKey = (a, b) => {
+  let map = new Map();
+  let result = [];
+  a.concat(b).forEach(item => {
+    if (!map.has(item.date)) {
+      map.set(item.date, true);
+      result.push(item);
+    } else {
+      result.forEach(v => {
+        if (v.date === item.date) {
+          v.list = v.list.concat(item.list);
+        }
+      });
+    }
+  });
   return result;
 }
 module.exports = {
@@ -201,5 +223,6 @@ module.exports = {
   phoneRegCheck,
   formateDataToIndexList,
   searchKeyInString,
-  formatArrayByKey
+  formatArrayByKey,
+  mergeArrayByKey
 };

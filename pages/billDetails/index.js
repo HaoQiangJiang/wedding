@@ -52,14 +52,13 @@ Page({
   },
   // 确定删除
   async submitDelete() {
-    await deleteBill(this.data.billData.id)
     const pages = getCurrentPages();
     const prevPage = pages[pages.length - 2]; //上一个页面
-    wx.navigateBack({
-      success: () => {
-        prevPage.init()
-      }
+    await deleteBill(this.data.billData.id)
+    prevPage.setData({
+      isRefresh: true
     })
+    wx.navigateBack()
   },
   /**
    * Lifecycle function--Called when page is initially rendered

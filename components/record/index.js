@@ -108,7 +108,7 @@ Component({
         "client_id": this.data.customer.id,
         "amount": this.data.orderPrice,
         "real_amount": this.data.recordType === 'record' ? this.data.price : -this.data.price,
-        "pay_status": this.data.price !== 0,
+        "pay_status": this.data.recordType === 'record' ? (this.data.price ? 1 : 0) : 2,
         "create_at": this.data.dateText,
         "remark": "",
         products

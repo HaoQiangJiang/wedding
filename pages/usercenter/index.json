@@ -1,6 +1,6 @@
 {
   "navigationStyle": "custom",
-  "disableScroll": false,
+  "disableScroll": true,
   "usingComponents": {
     "t-user-center-card": "./components/user-center-card/index",
     "t-avatar": "tdesign-miniprogram/avatar/avatar",

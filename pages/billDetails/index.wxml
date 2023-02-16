@@ -8,7 +8,7 @@
       <bill-item item="{{billData}}" bigPrice="{{true}}" url="/pages/contacts/index" />
     </view>
     <view class="goods">
-      <view class="bill-form" wx:for="{{billData.products}}" wx:item="item" wx:key="id">
+      <view class="bill-form" wx:for="{{billData.products}}" wx:key="id">
         <text class="name">{{item.product.name}}</text>
         <view class="details">
           <t-input label="数量" disabled="{{true}}" value="{{item.number}}" align="right" />

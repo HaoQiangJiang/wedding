@@ -6,6 +6,7 @@
     "card": "/components/card/index",
     "list": "/components/list/index",
     "t-tabs": "tdesign-miniprogram/tabs/tabs",
-    "t-tab-panel": "tdesign-miniprogram/tab-panel/tab-panel"
+    "t-tab-panel": "tdesign-miniprogram/tab-panel/tab-panel",
+    "t-pull-down-refresh": "tdesign-miniprogram/pull-down-refresh/pull-down-refresh"
   }
 }

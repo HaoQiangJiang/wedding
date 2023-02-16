@@ -16,7 +16,7 @@
     <t-cell title="我的客户" hover arrow data-key="/pages/customer/index?mode=manage" capture-bind:tap="navigate" />
     <t-cell title="我的商品" hover arrow data-key="/pages/goods/index" capture-bind:tap="navigate" />
     <t-cell title="帮助中心" hover arrow data-key="help" capture-bind:tap="navigate" />
-    <t-cell title="分享" hover arrow data-key="share" capture-bind:tap="navigate" />
+    <t-cell title="授权通知" hover arrow data-key="share" capture-bind:tap="acceptNotice" />
     <t-cell title="退出登录" arrow hover bindtap="logoutFn" />
   </t-cell-group>
 </view>

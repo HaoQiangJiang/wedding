@@ -21,6 +21,22 @@ Page({
       }
     })
   },
+  acceptNotice() {
+    wx.requestSubscribeMessage({
+      tmplIds: [
+        "JHT5ozDk1RGZcgkW8QmJV2GEbih53tSvAnYJWwm8sjg"
+      ],
+      success: (res) => {
+        console.log(res)
+        wx.showToast({
+          title: '授权成功',
+        })
+      },
+      fail: (error) => {
+        console.log(error)
+      },
+    })
+  },
   logoutFn() {
     logout()
   },

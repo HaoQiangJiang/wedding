@@ -1,115 +1,239 @@
 import * as echarts from '../../ec-canvas/echarts';
 import dayjs from 'dayjs';
-
+const {
+  queryStatistics,
+} = require('../../api/index')
 const {
   formatTime,
 } = require('../../utils/util')
-const colors = ['#1b55de', '#4272e2', '#5680e4', '#698ee6', '#7d9de8', '#90abeb']
+const colors = ['#5560f7', '#747df8', '#838bf9', '#939afa', '#a2a8fb', '#b2b7fb', ]
 
-function initChart(canvas, width, height, dpr) {
-  const chart = echarts.init(canvas, null, {
-    width: width,
-    height: height,
-    devicePixelRatio: dpr // new
-  });
-  canvas.setChart(chart);
-
-  var option = {
-    color: colors,
-    series: [{
-      label: {
-        normal: {
-          fontSize: 10
-        }
-      },
-      type: 'pie',
-      center: ['50%', '50%'],
-      radius: ['40%', '80%'],
-      data: [{
-        value: 55,
-        name: '陈本拯'
-      }, {
-        value: 20,
-        name: '陈本拯 1'
-      }, {
-        value: 10,
-        name: '陈本拯 3'
-      }, {
-        value: 20,
-        name: '陈本拯 2'
-      }, {
-        value: 38,
-        name: '陈本拯 6'
-      }]
-    }]
-  };
-
-  chart.setOption(option);
-  return chart;
-}
-
-function initGoodsChart(canvas, width, height, dpr) {
-  const chart = echarts.init(canvas, null, {
-    width: width,
-    height: height,
-    devicePixelRatio: dpr // new
-  });
-  canvas.setChart(chart);
-
-  var option = {
-    color: colors,
-    xAxis: {
-      type: 'category',
-      data: ['坚果', '花生', '矿泉水', '奶茶', '茶叶', '苹果', '草莓']
-    },
-    yAxis: {
-      type: 'value'
-    },
-    series: [{
-      data: [120, 200, 150, 80, 70, 110, 130],
-      type: 'bar',
-      barWidth: 15, //柱图宽度
-    }]
-  };
-
-  chart.setOption(option);
-  return chart;
-}
 Page({
-  onShareAppMessage: function (res) {
+  data: {
+    isRefresh: true,
+    ec: {
+      lazyLoad: true
+    },
+    chartsMap: [{
+      label: '客户消费排行',
+      id: 'ecClientAmount',
+      height: '400rpx',
+      isExtra: true,
+    }, {
+      label: '商品销量/盈利排行榜',
+      id: 'ecProductSalesRank',
+      height: '600rpx',
+    }, {
+      label: '月盈利趋势',
+      id: 'ecProfitTrend',
+      height: '600rpx',
+    }],
+    visible: false,
+    date: formatTime(new Date(), 'YYYY-MM'),
+    totalIncome: 0,
+    extraChart: {},
+  },
+  onLoad() {},
+  onReady() {},
+  onShow() {
+    this.getTabBar().init();
+    if (!this.data.isRefresh) return
+    this.data.chartsMap.forEach(item => {
+      this[item.id] = this.selectComponent(`#${item.id}`);
+    })
+    this.init()
+    this.setData({
+      isRefresh: false
+    })
+  },
+
+  drawClientAmountRanking(data) {
+    this.ecClientAmount.init((canvas, width, height, dpr) => {
+      // 获取组件的 canvas、width、height 后的回调函数
+      // 在这里初始化图表
+      const chart = echarts.init(canvas, null, {
+        width: width,
+        height: height,
+        devicePixelRatio: dpr // new
+      });
+      const seriesData = data.map(item => {
+        return {
+          name: item.client.name,
+          value: item.real_amount
+        }
+      })
+      const option = {
+        color: colors,
+        series: [{
+          label: {
+            normal: {
+              fontSize: 10
+            }
+          },
+          type: 'pie',
+          center: ['50%', '50%'],
+          radius: ['50%', '90%'],
+          data: seriesData,
+        }]
+      };
+      chart.setOption(option);
+      // 将图表实例绑定到 this 上，可以在其他成员函数（如 dispose）中访问
+      this.ecClientAmountChart = chart;
+      return chart;
+    });
+  },
+  drawProductSalesRanking(data, data1) {
+    this.ecProductSalesRank.init((canvas, width, height, dpr) => {
+      // 获取组件的 canvas、width、height 后的回调函数
+      // 在这里初始化图表
+      const chart = echarts.init(canvas, null, {
+        width: width,
+        height: height,
+        devicePixelRatio: dpr // new
+      });
+      const xAxisData = []
+      const seriesData = []
+      const seriesData1 = []
+      data.forEach(item => {
+        xAxisData.push(item.product.name)
+        seriesData.push(item.sales)
+      })
+      data1.forEach(item => {
+        seriesData1.push(item.profit)
+      })
+      const option = {
+        color: ['#fd6b6d', '#5560f7', ],
+        xAxis: {
+          type: 'category',
+          data: xAxisData.reverse(),
+        },
+        yAxis: {
+          type: 'value'
+        },
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'line',
+          }
+        },
+        series: [{
+          name: '利润',
+          data: seriesData1.reverse(),
+          type: 'line',
+          smooth: true,
+          areaStyle: {},
+        }, {
+          name: '销量',
+          data: seriesData.reverse(),
+          type: 'line',
+          smooth: true,
+          areaStyle: {},
+        }, ]
+      };
+      chart.setOption(option);
+      // 将图表实例绑定到 this 上，可以在其他成员函数（如 dispose）中访问
+      this.ecProductSalesRankChart = chart;
+      return chart;
+    });
+  },
+  drawProfitTrend(data) {
+    this.ecProfitTrend.init((canvas, width, height, dpr) => {
+      // 获取组件的 canvas、width、height 后的回调函数
+      // 在这里初始化图表
+      const chart = echarts.init(canvas, null, {
+        width: width,
+        height: height,
+        devicePixelRatio: dpr // new
+      });
+      const xAxisData = []
+      const orderCountData = []
+      data.forEach(item => {
+        xAxisData.push(item.date.split('T')[0])
+        orderCountData.push(item.profit)
+      })
+      const option = {
+        color: colors,
+        grid: {
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true
+        },
+        xAxis: {
+          type: 'category',
+          data: xAxisData.reverse(),
+        },
+        yAxis: {
+          type: 'value'
+        },
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'line',
+          }
+        },
+        series: [{
+          data: orderCountData.reverse(),
+          type: 'bar',
+          barWidth: 15, //柱图宽度
+        }]
+      };
+      chart.setOption(option);
+      // 将图表实例绑定到 this 上，可以在其他成员函数（如 dispose）中访问
+      this.ecProfitTrendChart = chart;
+      return chart;
+    });
+  },
+  formateExtraData(data, nameKey, valueKey, unit = '') {
+    let total = 0
+    const result = data.map(item => {
+      total += item[valueKey]
+      return {
+        name: item[nameKey].name,
+        value: item[valueKey],
+        unit
+      }
+    })
     return {
-      title: 'ECharts 可以在微信小程序中使用啦！',
-      path: '/pages/index/index',
-      success: function () {},
-      fail: function () {}
+      data: result,
+      total
     }
   },
-  data: {
-    ecCustomer: {
-      disableTouch: true,
-      onInit: initChart
-    },
-    ecGoods: {
-      disableTouch: true,
-      onInit: initGoodsChart
-    },
-    visible: false,
-    month: formatTime(new Date(), 'YYYY-MM'),
-    totalRank: 0,
-    goodsRank: []
-
+  async init() {
+    wx.showLoading({
+      title: '加载中',
+    })
+    const [year, month] = this.data.date.split('-')
+    const {
+      data
+    } = await queryStatistics(year, month)
+    const {
+      clientAmountRanking,
+      productProfitRanking,
+      productSalesRanking,
+      profitTrend,
+      totalIncome
+    } = data
+    this.drawClientAmountRanking(clientAmountRanking)
+    this.drawProductSalesRanking(productSalesRanking, productProfitRanking)
+    this.drawProfitTrend(profitTrend)
+    const extraChartData = {}
+    // 组装额外的列表图表数据
+    const clientAmountExtraData = this.formateExtraData(clientAmountRanking, 'client', 'real_amount', '¥')
+    extraChartData['ecClientAmount'] = clientAmountExtraData
+    const productProfitExtraData = this.formateExtraData(productProfitRanking, 'product', 'profit', '¥')
+    extraChartData['ecProductSalesRank'] = productProfitExtraData
+    this.setData({
+      totalIncome,
+      extraChart: extraChartData
+    })
+    wx.hideLoading()
   },
-
-  /**
-   * Lifecycle function--Called when page load
-   */
-  onLoad(options) {
-    this.initGoodsRankData()
-    console.log(dayjs().subtract(1, 'year').valueOf())
-    console.log(new Date(2023, 1, 1).getTime())
-
-  },
-  confirmCalendar() {
+  confirmCalendar(e) {
+    this.setData({
+      date: e.detail.value
+    })
+    this.init()
     this.closeCalendar()
   },
   showCalendar() {
@@ -121,40 +245,6 @@ Page({
     this.setData({
       visible: false
     })
-  },
-  initGoodsRankData() {
-    setTimeout(() => {
-      this.setData({
-        totalRank: 200,
-        goodsRank: [{
-          id: 1,
-          name: "坚果",
-          value: 100,
-        }, {
-          id: 2,
-          name: "蔬菜",
-          value: 70,
-        }, {
-          id: 1,
-          name: " 矿泉水",
-          value: 30,
-        }]
-      })
-    }, 100);
-
-  },
-  /**
-   * Lifecycle function--Called when page is initially rendered
-   */
-  onReady() {
-
-  },
-
-  /**
-   * Lifecycle function--Called when page show
-   */
-  onShow() {
-    this.getTabBar().init();
   },
 
   /**
@@ -168,6 +258,13 @@ Page({
    * Lifecycle function--Called when page unload
    */
   onUnload() {
+    this.data.chartsMap.forEach(item => {
+      if (this[item.id + 'Chart']) {
+        this[item.id + 'Chart'].dispose()
+      }
+    })
+
+
 
   },
 
@@ -175,7 +272,7 @@ Page({
    * Page event handler function--Called when user drop down
    */
   onPullDownRefresh() {
-
+    this.init()
   },
 
   /**

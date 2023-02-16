@@ -35,9 +35,11 @@ Component({
 
     async submitDelete() {
       await deleteBill(this.data.operateData.id)
-      this.closeDelete()
       // 刷新订单数
-      this.triggerEvent('refreshBill')
+      this.triggerEvent('deleteCallBack', {
+        data: this.data.operateData
+      })
+      this.closeDelete()
     },
     openDelete(e) {
       const data = e.currentTarget.dataset.item

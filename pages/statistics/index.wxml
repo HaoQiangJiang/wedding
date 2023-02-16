@@ -5,37 +5,39 @@
       <view class="top-statistics">
         <view class="left">
           <text class="label">总收入</text>
-          <text>93274</text>
+          <text>{{totalIncome}}</text>
         </view>
         <view class="right">
-          <t-button size="small" ghost icon="app" style="color:#fff;font-size:34rpx" bindtap="showCalendar" variant="text">{{month}}</t-button>
+          <t-button size="small" ghost icon="app" style="color:#fff;font-size:34rpx" bindtap="showCalendar" variant="text">{{date}}</t-button>
         </view>
       </view>
     </view>
   </t-sticky>
+  <t-pull-down-refresh t-class="content-pull-down" bind:refresh="onPullDownRefresh" value="{{refresh}}" loadingTexts="{{['下拉刷新', '松手刷新', '正在刷新', '刷新完成']}}" >
   <view class="container">
-    <view class="item">
-      <text class="title">客户构成</text>
-      <view class="content">
-        <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ecCustomer }}"></ec-canvas>
+    <view class="item" wx:for="{{chartsMap}}" wx:key="id">
+      <text class="title">{{item.label}}</text>
+      <view class="content" style="height: {{item.height}};">
+        <ec-canvas id="{{item.id}}" canvas-id="{{item.id}}" ec="{{ ec }}"></ec-canvas>
       </view>
-    </view>
-    <view class="item">
-      <text class="title">商品构成</text>
-      <view class="content customer">
-        <ec-canvas id="mychart-dom-bar1" canvas-id="mychart-bar-1" ec="{{ ecGoods }}"></ec-canvas>
-      </view>
-    </view>
-    <view class="item">
-      <text class="title">商品销售排行榜</text>
-      <view wx:for="{{goodsRank}}" wx:key="id" wx:item="item" class="goods-rank">
-        <view class="goods-rank-top">
-          <text class="title">{{item.name}}</text>
+      <view wx:if="{{extraChart[item.id]}}">
+        <view wx:for="{{extraChart[item.id].data}}" wx:key="name" wx:for-item="extra" class="goods-rank">
+          <text class="name">{{extra.name}}</text>
+          <t-progress label="{{extra.unit}} {{extra.value}}" color="#5560f7" track-color="#f8f8f8" percentage="{{extra.value/extraChart[item.id].total*100}}" variant="plain" />
+          <t-icon class="icon" name="chevron-right" size="32rpx" color="#7f818a" />
         </view>
-        <t-progress percentage="{{item.value}}" variant="plain" />
       </view>
     </view>
   </view>
+  </t-pull-down-refresh>
 
 </view>
-<t-date-time-picker title="选择日期" visible="{{visible}}" mode="month" value="{{month}}" format="YYYY-MM" bindchange="confirmCalendar" bindcancel="closeCalendar" />
+<t-date-time-picker title="选择日期" visible="{{visible}}" mode="month" defaultValue="{{date}}" format="YYYY-MM" bindchange="confirmCalendar" bindcancel="closeCalendar" />
+
+<wxs module="fn">
+  module.exports = {
+    round: function (str) {
+      return Math.round(str)
+    },
+  }
+</wxs>

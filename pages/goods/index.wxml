@@ -59,7 +59,7 @@
       <view class="btn btn--confirm" aria-role="button" capture-bind:tap="submitAddGoods">确定</view>
     </view>
     <view>
-      <t-input wx:for="{{addGoodsMap}}" type="{{['store_price','factory_price'].includes(item.value) ? 'number':'text'}}" wx:item="item" wx:key="value" label="{{item.label}}" value="{{addGoodsData[item.value]}}" placeholder="请输入{{item.label}}" data-key="{{item.value}}" bind:change="changeGoodsInput"></t-input>
+      <t-input wx:for="{{addGoodsMap}}" type="{{['store_price','factory_price'].includes(item.value) ? 'number':'text'}}"  wx:key="value" label="{{item.label}}" value="{{addGoodsData[item.value]}}" placeholder="请输入{{item.label}}" data-key="{{item.value}}" bind:change="changeGoodsInput"></t-input>
     </view>
   </view>
 </t-popup>

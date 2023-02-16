@@ -3,7 +3,8 @@ const {
   login,
 } = require('../../utils/login.js')
 const {
-  formatArrayByKey
+  formatArrayByKey,
+  mergeArrayByKey
 } = require('../../utils/util')
 const {
   queryAllBill,
@@ -15,12 +16,13 @@ Page({
    * Page initial data
    */
   data: {
+    isRefresh: true, // onShow 是否刷新
     visible: false,
     recordVisible: false,
     refresh: false,
     allBill: [], // 所有账单信息
     page: 1,
-    size: 20,
+    size: 10,
     total: 0,
     noMore: false, // 没要更多了
     todayBillAmount: 0, // 今日销售额
@@ -33,21 +35,15 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad(options) {
-    wx.getStorage({
-      key: 'token',
-      success: (res) => {
-        if (!res.data) {
-          // 没有 token 登录
-          login(this.backLoginPage)
-        } else {
-          this.init()
-        }
-      }
-    })
+
   },
-  init() {
-    this.initAllBill()
-    this.initBillAmountAndCount()
+  async init() {
+    wx.showLoading({
+      title: '加载中',
+    })
+    await this.initAllBill()
+    await this.initBillAmountAndCount()
+    wx.hideLoading()
   },
   async initBillAmountAndCount() {
     const {
@@ -76,6 +72,7 @@ Page({
       data
     } = await queryAllBill(params)
     const result = formatArrayByKey(data.data.list, 'created_at')
+    console.log(this.data.allBill, result)
     if (this.data.page === 1) {
       // 首页全部替换数据
       this.setData({
@@ -84,7 +81,7 @@ Page({
       })
     } else {
       this.setData({
-        allBill: [...this.data.allBill, ...result],
+        allBill: mergeArrayByKey(this.data.allBill, result),
         total: data.data.total
       })
     }
@@ -92,18 +89,29 @@ Page({
   },
   async onPullDownRefresh() {
     // 下拉刷新的时候还原 page
-    console.log('refreshBill')
     this.setData({
       page: 1,
       noMore: false
     })
     await this.initAllBill()
     await this.initBillAmountAndCount()
-    setTimeout(() => {
-      this.setData({
-        'refresh': false
-      });
-    }, 500);
+    this.setData({
+      'refresh': false
+    });
+  },
+  deleteItem(e) {
+    // 删除 item
+    const operateData = e.detail.data
+    const index = this.data.allBill.findIndex(item => item.date === operateData.created_at.split(' ')[0])
+    const operateList = this.data.allBill[index]
+    if (!operateList) return
+    operateList.list = operateList.list.filter(item => item.id !== operateData.id)
+    if (operateList.list.length === 0) {
+      this.data.allBill.splice(index, 1)
+    }
+    this.setData({
+      allBill: this.data.allBill
+    })
   },
   async onScrollTolower() {
     const {
@@ -127,7 +135,7 @@ Page({
 
   backLoginPage() {
     wx.redirectTo({
-      url: '/pages/login/index.js',
+      url: '/pages/login/index',
     })
   },
   /**
@@ -142,6 +150,21 @@ Page({
    */
   onShow() {
     this.getTabBar().init();
+    if (!this.data.isRefresh) return
+    wx.getStorage({
+      key: 'token',
+      success: (res) => {
+        if (!res.data) {
+          // 没有 token 登录
+          login(this.backLoginPage)
+        } else {
+          this.init()
+        }
+      }
+    })
+    this.setData({
+      isRefresh: false
+    })
   },
   // 提交账单
   closeBill() {

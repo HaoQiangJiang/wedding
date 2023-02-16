@@ -5,15 +5,15 @@ page {
   background-color: #f8f8f8;
   font-weight: 400;
   box-sizing: border-box;
-  --td-primary-color: #1b55de;
-  --primary--: #1b55de;
+  --td-primary-color: #5560f7;
+  --primary--: #5560f7;
   --red--: #fd6b6d;
   --green--: #07cb7c;
   --yellow--: #ffc31e;
   --text-color-1--: #242823;
   --text-color-2--: #505462;
   --text-color-3--: #7f818a;
-  --text-color-4--: #afb1b8;
+  --text-color-4--: #202124;
   --text-color-5--: #e9eaef;
   --text-color-6--: #f3f4f7;
 }
@@ -40,6 +40,3 @@ button {
   margin-top: 60rpx;
   margin-bottom: 40rpx;
 }
-
-
-

@@ -21,7 +21,7 @@ const request = (params) => {
         resolve(result);
       },
       fail: (err) => {
-        reject(err);
+        resolve(err);
       },
       complete: () => {
         reqTime--;
@@ -200,6 +200,14 @@ export async function queryBillAmount() {
 export async function queryBillAmountByClientId(id) {
   return await request({
     url: baseUrl + '/bill/getBillAmountByClientId/' + id,
+    method: 'get',
+  })
+}
+
+// 统计接口statistics/getStatistics
+export async function queryStatistics(year, month) {
+  return await request({
+    url: baseUrl + `/statistics/getStatistics?year=${year}&month=${month}`,
     method: 'get',
   })
 }

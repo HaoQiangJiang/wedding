@@ -60,14 +60,11 @@
   height: 400rpx;
 }
 
-.container .customer {
-  height: 600rpx;
-}
-
 .goods-rank {
   display: flex;
-  flex-direction: column;
-  padding: 20rpx;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 30rpx 20rpx;
 }
 
 .goods-rank:active {
@@ -75,12 +72,12 @@
   border-radius: 20rpx;
 }
 
-.goods-rank-top {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+.t-progress {
+  width: 500rpx;
 }
 
-.goods-rank-top .title {
-  font-size: 24rpx;
+.goods-rank .name {
+  width: 100rpx;
+  color: var(--text-color-2--);
+  font-size: 32rpx;
 }

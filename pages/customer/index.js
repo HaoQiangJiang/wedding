@@ -57,12 +57,10 @@ Page({
   onReady() {},
   async onPullDownRefresh() {
     await this.getAllCustomer(false)
-    setTimeout(() => {
-      this.setData({
-        searchKey: '',
-        refresh: false
-      })
-    }, 500);
+    this.setData({
+      searchKey: '',
+      refresh: false
+    })
   },
 
   async getAllCustomer(isShowLoading = true) {

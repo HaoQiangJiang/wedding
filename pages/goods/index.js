@@ -325,12 +325,10 @@ Page({
    */
   async onPullDownRefresh() {
     await this.getAllGoods(false)
-    setTimeout(() => {
-      this.setData({
-        searchKey: '',
-        refresh: false
-      })
-    }, 500);
+    this.setData({
+      searchKey: '',
+      refresh: false
+    })
   },
 
   /**

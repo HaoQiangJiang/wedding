@@ -25,21 +25,21 @@
       </view>
     </view>
   </t-sticky>
-  <view>
-    <card title="交易记录">
-      <view slot="desc" capture-bind:tap="openFilter">高级筛选</view>
-      <view slot="content">
-        <t-tabs defaultValue="{{payStatus}}" bind:change="onTabsChange">
-          <t-tab-panel label="待付款" value="1" />
-          <t-tab-panel label="已付款" value="2" />
-          <t-tab-panel label="已退货" value="3" />
-        </t-tabs>
-        <view class="list">
-          <list isHiddenAvatar="{{true}}" />
+  <t-pull-down-refresh t-class="content-pull-down" bind:refresh="onPullDownRefresh" value="{{refresh}}" loadingTexts="{{['下拉刷新', '松手刷新', '正在刷新', '刷新完成']}}" bind:scrolltolower="onScrollTolower">
+    <view class="list">
+      <card title="交易记录">
+        <view slot="desc" capture-bind:tap="openFilter">高级筛选</view>
+        <view slot="content">
+          <t-tabs defaultValue="{{payStatus}}" bind:change="onTabsChange">
+            <t-tab-panel label="待付款" value="0" />
+            <t-tab-panel label="已付款" value="1" />
+            <t-tab-panel label="已退货" value="2" />
+          </t-tabs>
+          <view class="list">
+            <list isHiddenAvatar="{{true}}" list="{{recordList}}" bind:deleteCallBack="deleteItem" bind:refreshBill="init" />
+          </view>
         </view>
-      </view>
-    </card>
-  </view>
-
-
+      </card>
+    </view>
+  </t-pull-down-refresh>
 </view>

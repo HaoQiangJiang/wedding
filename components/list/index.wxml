@@ -18,3 +18,4 @@
   </view>
 </view>
 <t-dialog visible="{{deleteVisible}}" content="删除账单后无法恢复,请确定是否删除?" confirm-btn="{{ { content: '删除', variant: 'base', theme: 'danger' } }}" cancel-btn="取消" bind:confirm="submitDelete" bind:cancel="closeDelete" />
+

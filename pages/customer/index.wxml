@@ -40,7 +40,7 @@
       <view class="btn btn--confirm" aria-role="button" capture-bind:tap="submitAddCustomer">确定</view>
     </view>
     <view>
-      <t-input wx:for="{{addCustomerMap}}" type="{{item.value ==='phone'?'number':'text'}}" wx:item="item" wx:key="value" label="{{item.label}}" value="{{addCustomerData[item.value]}}" placeholder="请输入{{item.label}}" data-key="{{item.value}}" bind:change="changeCustomer"></t-input>
+      <t-input wx:for="{{addCustomerMap}}" type="{{item.value ==='phone'?'number':'text'}}"  wx:key="value" label="{{item.label}}" value="{{addCustomerData[item.value]}}" placeholder="请输入{{item.label}}" data-key="{{item.value}}" bind:change="changeCustomer"></t-input>
     </view>
   </view>
 </t-popup>

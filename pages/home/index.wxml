@@ -16,8 +16,8 @@
   </t-sticky>
   <t-pull-down-refresh t-class="content-pull-down" bind:refresh="onPullDownRefresh" value="{{refresh}}" loadingTexts="{{['下拉刷新', '松手刷新', '正在刷新', '刷新完成']}}" bind:scrolltolower="onScrollTolower">
     <view class="content">
-      <card wx:for="{{allBill}}" wx:key="index" wx:item="item" title="{{item.date}}" desc="收入 {{item.totalPrice}}, 账单数 {{item.list.length}}">
-        <list slot="content" bind:addBill="addBill" bind:refreshBill="onPullDownRefresh" list="{{item.list}}" />
+      <card wx:for="{{allBill}}" wx:key="index" title="{{item.date}}" desc="收入 {{fn.calcTotla(item.list)}}, 账单数 {{item.list.length}}">
+        <list slot="content" bind:addBill="addBill" bind:deleteCallBack="deleteItem" list="{{item.list}}" />
       </card>
     </view>
 
@@ -31,3 +31,14 @@
   </t-popup>
   <t-fab style="right:20rpx;bottom: 250rpx;" icon="edit-1" bind:click="addBill" text="记一笔" />
 </view>
+<wxs module="fn">
+  module.exports = {
+    calcTotla: function (arr) {
+      var total = 0
+      arr.forEach(function (item) {
+        total += item.real_amount
+      });
+      return total
+    },
+  }
+</wxs>
