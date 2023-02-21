@@ -1,0 +1,5 @@
+.pay-config {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+}

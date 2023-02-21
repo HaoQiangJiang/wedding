@@ -1,15 +1,15 @@
 Page {
-  padding: 20rpx;
-  height: 100%;
-  overflow-y: scroll;
+  --td-cell-title-font-size: 36rpx;
 }
 
 .top {
+  background-color: #fff;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin: 10rpx 20rpx 30rpx 0;
+  border-radius: 20rpx;
+  padding: 20rpx;
 }
 
 .top .search {
@@ -23,6 +23,12 @@ Page {
 .goods {
   box-sizing: border-box;
   width: 100%;
+  padding: 20rpx;
+}
+
+.goods-indexes {
+  height: auto !important;
+  margin-bottom: 150rpx;
 }
 
 .stepper-slot {
@@ -34,7 +40,8 @@ Page {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 20rpx;
+  gap: 30rpx;
+  margin-top: 14rpx;
 }
 
 .description .active {
@@ -43,14 +50,10 @@ Page {
 }
 
 .description text {
-  z-index: 2;
   background-color: var(--text-color-5--);
   border-radius: 10rpx;
-  padding: 2rpx 10rpx;
-  opacity: 0.7;
-  margin-left: -10rpx;
+  padding: 10rpx;
 }
-
 
 
 .dropmenu-menu {
@@ -76,51 +79,12 @@ Page {
 
 
 .submit-operate {
-  width: calc(100% - 40rpx);
+  width: 100%;
   position: fixed;
   box-sizing: border-box;
   bottom: 20rpx;
   padding: 20rpx;
   z-index: 2;
-}
-
-
-.block {
-  width: 100vw;
-  height: 660rpx;
-  background: #fff;
-  border-top-left-radius: 16rpx;
-  border-top-right-radius: 16rpx;
-}
-
-.wrapper {
-  margin: 32rpx;
-  display: block;
-}
-
-.header {
-  display: flex;
-  align-items: center;
-}
-
-.title {
-  flex: 1;
-  text-align: center;
-  font-weight: 600;
-  font-size: 36rpx;
-}
-
-.btn {
-  font-size: 32rpx;
-  padding: 32rpx;
-}
-
-.btn--cancel {
-  color: var(--text-color-3--)
-}
-
-.btn--confirm {
-  color: #0052d9;
 }
 
 .delete-btn {

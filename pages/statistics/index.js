@@ -10,7 +10,6 @@ const colors = ['#5560f7', '#747df8', '#838bf9', '#939afa', '#a2a8fb', '#b2b7fb'
 
 Page({
   data: {
-    isRefresh: true,
     ec: {
       lazyLoad: true
     },
@@ -33,18 +32,17 @@ Page({
     totalIncome: 0,
     extraChart: {},
   },
-  onLoad() {},
-  onReady() {},
-  onShow() {
-    this.getTabBar().init();
-    if (!this.data.isRefresh) return
+  onLoad() {
     this.data.chartsMap.forEach(item => {
       this[item.id] = this.selectComponent(`#${item.id}`);
     })
     this.init()
-    this.setData({
-      isRefresh: false
-    })
+  },
+  onReady() {},
+  onShow() {
+    this.getTabBar().init();
+
+
   },
 
   drawClientAmountRanking(data) {
@@ -190,6 +188,7 @@ Page({
       total += item[valueKey]
       return {
         name: item[nameKey].name,
+        data: item[nameKey],
         value: item[valueKey],
         unit
       }
@@ -246,7 +245,26 @@ Page({
       visible: false
     })
   },
+  openDetails(e) {
+    const {
+      item,
+      id
+    } = e.currentTarget.dataset
+    if (id === 'ecClientAmount') {
+      wx.navigateTo({
+        url: '/pages/contacts/index',
+        success: (res) => {
+          res.eventChannel.emit('acceptBillData', {
+            data: {
+              client: item.data,
+              date: this.data.date
+            }
+          })
+        }
+      })
+    }
 
+  },
   /**
    * Lifecycle function--Called when page hide
    */
@@ -271,8 +289,9 @@ Page({
   /**
    * Page event handler function--Called when user drop down
    */
-  onPullDownRefresh() {
-    this.init()
+  async onPullDownRefresh() {
+    await this.init()
+    wx.stopPullDownRefresh()
   },
 
   /**

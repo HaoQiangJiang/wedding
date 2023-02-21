@@ -1,6 +1,5 @@
 {
-  "navigationStyle": "custom",
-  "disableScroll": true,
+  "navigationBarTitleText": "统计",
   "enablePullDownRefresh": true,
   "usingComponents": {
     "t-tabs": "tdesign-miniprogram/tabs/tabs",
@@ -11,7 +10,6 @@
     "t-progress": "tdesign-miniprogram/progress/progress",
     "t-icon": "tdesign-miniprogram/icon/icon",
     "t-button": "tdesign-miniprogram/button/button",
-    "t-date-time-picker": "tdesign-miniprogram/date-time-picker/date-time-picker",
-    "t-pull-down-refresh": "tdesign-miniprogram/pull-down-refresh/pull-down-refresh"
+    "t-date-time-picker": "tdesign-miniprogram/date-time-picker/date-time-picker"
   }
 }

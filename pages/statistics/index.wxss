@@ -1,9 +1,3 @@
-.statistics {
-  overflow: scroll;
-  height: 100%;
-}
-
-
 .top-statistics {
   width: 100%;
   padding: 20rpx 10rpx 20rpx 40rpx;
@@ -13,6 +7,7 @@
   justify-content: space-between;
   box-sizing: border-box;
   color: #fff;
+  background-color: var(--primary--);
 
 }
 
@@ -38,8 +33,6 @@
 
 .container {
   padding: 20rpx;
-  margin-bottom: 180rpx;
-
 }
 
 .container .item {

@@ -1,10 +1,6 @@
 Page {
-  padding: 20rpx;
-}
-
-.bill-details {
-  overflow: hidden;
-  height: 100vh;
+  height: 100%;
+  overflow-y: scroll;
 }
 
 .bill:active {
@@ -16,7 +12,7 @@ Page {
   align-items: center;
   justify-content: space-between;
   background-color: #f8f8f8;
-  padding: 50rpx 20rpx;
+  padding: 50rpx;
 }
 
 .top .title {
@@ -27,44 +23,24 @@ Page {
   background-color: #fff;
   display: flex;
   flex-direction: column;
-  border-radius: 20rpx;
+  border-radius: 30rpx;
   box-shadow: 0px -1px 5px rgba(0, 0, 0, 0.02);
-  height: 90vh;
+  height: 100%;
+  margin-bottom: 40rpx;
+  /* padding-bottom: 200rpx; */
 }
 
 .bill {
   border-bottom: 1px dashed var(--text-color-5--);
   padding: 60rpx 30rpx;
-
 }
-
-.goods {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.bill-form {
-  display: flex;
-  flex-direction: column;
-  padding: 20rpx;
-  background-color: #fff;
-}
-
-.bill-form .name {
-  font-size: 34rpx;
-  font-weight: 500;
-}
-
 
 .edit-btn {
-  width: calc(100% - 40rpx);
-  position: fixed;
+  position: relative;
   box-sizing: border-box;
-  bottom: 20rpx;
   padding: 20rpx;
   z-index: 2;
-
+  margin-bottom: 10rpx;
 }
 
 .t-input__control--disabled {

@@ -28,9 +28,6 @@ Page({
       ],
       success: (res) => {
         console.log(res)
-        wx.showToast({
-          title: '授权成功',
-        })
       },
       fail: (error) => {
         console.log(error)
@@ -45,7 +42,11 @@ Page({
     wx.navigateTo({
       url,
     })
-
+  },
+  navigatePay() {
+    wx.navigateTo({
+      url: '/pages/payConfig/index'
+    })
   }
 
 });

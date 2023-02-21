@@ -3,6 +3,7 @@ const {
 } = require('../../utils/util')
 const {
   createBill,
+  updateBill
 } = require('../../api/index')
 import Toast from 'tdesign-miniprogram/toast/index';
 
@@ -17,12 +18,11 @@ Component({
    */
   data: {
     price: 0,
+    editBillId: '', // 修改订单的 id, 也作为是否是修改订单的依据
     customer: '',
-    selectGoods: [],
-    selectGoodsText: '',
+    selectGoods: {},
     dateVisible: '',
-    dateText: formatTime(new Date(), 'YYYY-MM-DD HH:mm:ss'),
-    date: new Date().getTime(), // 支持时间戳传入
+    billDate: formatTime(new Date(), 'YYYY-MM-DD HH:mm:ss'),
     orderPrice: 0,
     recordTypeMap: [{
       label: '记账',
@@ -33,7 +33,14 @@ Component({
     }],
     recordType: 'record',
   },
-  pageLifetimes: {},
+  lifetimes: {
+    attached() {
+      // 组件挂载重新设置时间
+      this.setData({
+        billDate: formatTime(new Date(), 'YYYY-MM-DD HH:mm:ss'),
+      })
+    }
+  },
   /**
    * Component methods
    */
@@ -59,7 +66,7 @@ Component({
         value
       } = e?.detail;
       this.setData({
-        dateText: value,
+        billDate: value,
       });
       this.hidePicker();
     },
@@ -67,11 +74,25 @@ Component({
     selectCustomer() {
       wx.navigateTo({
         url: '/pages/customer/index?mode=select',
+        events: {
+          selectCallBack: (data) => {
+            this.setData({
+              customer: data
+            })
+          }
+        }
       })
     },
     handleSelectGoods() {
       wx.navigateTo({
         url: '/pages/goods/index?mode=select',
+        events: {
+          selectCallBack: (data) => {
+            this.setData({
+              ...data
+            })
+          }
+        },
         success: (res) => {
           res.eventChannel.emit('acceptDataFromOpenerPage', {
             data: this.data.selectGoods
@@ -109,7 +130,7 @@ Component({
         "amount": this.data.orderPrice,
         "real_amount": this.data.recordType === 'record' ? this.data.price : -this.data.price,
         "pay_status": this.data.recordType === 'record' ? (this.data.price ? 1 : 0) : 2,
-        "create_at": this.data.dateText,
+        "create_at": this.data.billDate,
         "remark": "",
         products
       }
@@ -119,7 +140,7 @@ Component({
       if (params.products.length === 0) {
         return this.toastShow("请选择商品")
       }
-      await createBill(params)
+      this.data.editBillId === '' ? await createBill(params) : await updateBill(this.data.editBillId, params)
       this.triggerEvent('refreshBill')
       this.closeBill()
       // 刷新订单数

@@ -1,65 +1,63 @@
 <view class="top">
   <t-search class="search" placeholder="搜素" shape="round" value="{{searchKey}}" bind:change="handleSearch" bind:clear="clearSearch" />
-  <t-icon name="add-circle" size="20" capture-bind:tap="openAddGoods" />
+  <t-button theme="primary" icon="add-circle" variant="text" capture-bind:tap="openAddGoods" />
 </view>
 <view>
   <view class="goods">
-    <t-pull-down-refresh bind:refresh="onPullDownRefresh" value="{{refresh}}" loadingTexts="{{['下拉刷新', '松手刷新', '正在刷新', '刷新完成']}}">
-      <view wx:if="{{goodsList.length>0}}">
-        <t-indexes index-list="{{indexList}}">
-          <block wx:for="{{goodsList}}" wx:key="index">
-            <t-indexes-anchor index="{{item.index}}" sticky="{{false}}" />
-            <t-cell-group>
-              <view wx:for="{{item.children}}" wx:key="goods.name" wx:for-item="goods">
-                <t-swipe-cell>
-                  <view>
-                    <t-cell title="{{goods.name}}">
-                      <view wx:if="{{mode==='select'}}" class="description" slot="description" data-item="{{goods}}" bindtap="onChangePriceType">
-                        <text class="{{selectGoods[goods.id].isFactoryPrice?'active':''}}">工厂价:{{goods.factory_price}}/{{goods.unit}}
-                        </text>
-                        <text class="{{!selectGoods[goods.id].isFactoryPrice?'active':''}}">门店价:{{goods.store_price}}/{{goods.unit}}</text>
-                      </view>
-                      <view wx:else class="description" slot="description">
-                        <text>工厂价:{{goods.factory_price}}/{{goods.unit}};门店价:{{goods.store_price}}/{{goods.unit}}
-                        </text>
-                      </view>
-                      <view class="stepper-slot" slot="note" wx:if="{{mode==='select'}}" style="z-index:2">
-                        <stepper value="{{selectGoods[goods.id]?selectGoods[goods.id].count:0}}" item="{{goods}}" bind:replaceGoodsCount="replaceGoodsCount"  />
-                      </view>
-                    </t-cell>
-                  </view>
-                  <view slot="right" class="btn-wrapper">
-                    <view class="swipe-btn edit-btn column" data-item="{{goods}}" bind:tap="onEdit">
-                      <t-icon class="padding-bottom" name="edit" size="32rpx"></t-icon>
-                      编辑
+    <view wx:if="{{goodsList.length>0 && indexList.length>0 }}">
+      <t-indexes t-class="goods-indexes" index-list="{{indexList}}" sticky="{{false}}">
+        <block wx:for="{{goodsList}}" wx:key="index">
+          <t-indexes-anchor index="{{item.index}}" />
+          <t-cell-group>
+            <view wx:for="{{item.children}}" wx:key="goods.name" wx:for-item="goods">
+              <t-swipe-cell>
+                <view>
+                  <t-cell title="{{goods.name}}">
+                    <view wx:if="{{mode==='select'}}" class="description" slot="description" data-item="{{goods}}" bindtap="onChangePriceType">
+                      <text class="{{selectGoods[goods.id].isFactoryPrice?'active':''}}">工厂价:{{goods.factory_price}}/{{goods.unit}}
+                      </text>
+                      <text class="{{!selectGoods[goods.id].isFactoryPrice?'active':''}}">门店价:{{goods.store_price}}/{{goods.unit}}</text>
                     </view>
-                    <view class="swipe-btn delete-btn column" data-item="{{goods}}" bind:tap="openDelete">
-                      <t-icon class="padding-bottom" name="delete" size="32rpx"></t-icon>
-                      删除
+                    <view wx:else class="description" slot="description">
+                      <text>工厂价:{{goods.factory_price}}/{{goods.unit}};门店价:{{goods.store_price}}/{{goods.unit}}
+                      </text>
                     </view>
+                    <view class="stepper-slot" slot="note" wx:if="{{mode==='select'}}" style="z-index:2">
+                      <stepper value="{{selectGoods[goods.id]?selectGoods[goods.id].count:0}}" item="{{goods}}" bind:replaceGoodsCount="replaceGoodsCount" />
+                    </view>
+                  </t-cell>
+                </view>
+                <view slot="right" class="btn-wrapper">
+                  <view class="swipe-btn edit-btn column" data-item="{{goods}}" bind:tap="onEdit">
+                    <t-icon class="padding-bottom" name="edit" size="32rpx"></t-icon>
+                    编辑
                   </view>
-                </t-swipe-cell>
-              </view>
-            </t-cell-group>
-          </block>
-        </t-indexes>
-      </view>
-      <t-empty wx:else description="暂无数据" />
-    </t-pull-down-refresh>
+                  <view class="swipe-btn delete-btn column" data-item="{{goods}}" bind:tap="openDelete">
+                    <t-icon class="padding-bottom" name="delete" size="32rpx"></t-icon>
+                    删除
+                  </view>
+                </view>
+              </t-swipe-cell>
+            </view>
+          </t-cell-group>
+        </block>
+      </t-indexes>
+    </view>
+    <t-empty wx:else description="暂无数据" />
   </view>
   <view class="submit-operate" wx:if="{{mode==='select'}}">
     <t-button theme="primary" size="large" block capture-bind:tap="submit">确定</t-button>
   </view>
 </view>
 <t-popup visible="{{addGoodsVisible}}" prevent-scroll-through="{{true}}" placement="bottom" bind:visible-change="onVisibleChange">
-  <view class="block">
+  <view class="popup-block">
     <view class="header">
       <view class="btn btn--cancel" aria-role="button" capture-bind:tap="closeAddGoods">取消</view>
       <view class="title">新增商品</view>
       <view class="btn btn--confirm" aria-role="button" capture-bind:tap="submitAddGoods">确定</view>
     </view>
     <view>
-      <t-input wx:for="{{addGoodsMap}}" type="{{['store_price','factory_price'].includes(item.value) ? 'number':'text'}}"  wx:key="value" label="{{item.label}}" value="{{addGoodsData[item.value]}}" placeholder="请输入{{item.label}}" data-key="{{item.value}}" bind:change="changeGoodsInput"></t-input>
+      <t-input wx:for="{{addGoodsMap}}" cursor-spacing="{{300}}" wx:key="value" type="{{item.value==='factory_price' || item.value === 'store_price'? 'number':'text'}}" label="{{item.label}}" suffix="{{item.value==='factory_price' || item.value === 'store_price'? '元':''}}" align="right" value="{{addGoodsData[item.value]}}" placeholder="请输入{{item.label}}" data-key="{{item.value}}" bind:change="changeGoodsInput"></t-input>
     </view>
   </view>
 </t-popup>

@@ -6,6 +6,10 @@ Component({
   properties: {
     title: String,
     desc: String,
+    isRadius: {
+      type: Boolean,
+      value: true
+    }
   },
 
   /**

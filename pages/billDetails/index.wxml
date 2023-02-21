@@ -7,23 +7,14 @@
     <view class="bill">
       <bill-item item="{{billData}}" bigPrice="{{true}}" url="/pages/contacts/index" />
     </view>
-    <view class="goods">
-      <view class="bill-form" wx:for="{{billData.products}}" wx:key="id">
-        <text class="name">{{item.product.name}}</text>
-        <view class="details">
-          <t-input label="数量" disabled="{{true}}" value="{{item.number}}" align="right" />
-          <t-input label="价格" disabled="{{true}}" value="{{item.price}}" align="right" />
-        </view>
-      </view>
-
-    </view>
+    <bill-details products="{{billData.products}}" />
     <view class="edit-btn">
       <t-button theme="primary" class="edit-btn" icon="edit-1" size="large" block capture-bind:tap="addBill">编辑</t-button>
     </view>
   </view>
   <t-dialog visible="{{deleteVisible}}" content="删除账单后无法恢复,请确定是否删除?" confirm-btn="{{ { content: '删除', variant: 'base', theme: 'danger' } }}" cancel-btn="取消" bind:confirm="submitDelete" bind:cancel="closeDelete" />
 
-  <t-popup visible="{{visible}}" prevent-scroll-through="{{true}}" placement="bottom" bind:visible-change="onVisibleChange">
-    <record id="record" bind:closeBill="closeBill" bind:close="closeRecord" />
+  <t-popup visible="{{visible}}" placement="bottom" bind:visible-change="onVisibleChange">
+    <record id="record" wx:if="{{isShowRecord}}" bind:closeBill="closeBill" bind:refreshBill="refreshBill" />
   </t-popup>
 </view>

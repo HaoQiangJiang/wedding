@@ -12,15 +12,11 @@ import Toast from 'tdesign-miniprogram/toast/index';
 const defaultGoods = {
   name: '',
   unit: '',
-  store_price: 0,
-  factory_price: 0,
+  store_price: '',
+  factory_price: '',
   remark: ''
 }
 Page({
-
-  /**
-   * Page initial data
-   */
   data: {
     mode: 'manage',
     indexList: [],
@@ -48,7 +44,6 @@ Page({
     addGoodsData: defaultGoods,
     deleteVisible: false,
     operateGoods: {},
-    refresh: false,
   },
 
   /**
@@ -59,10 +54,10 @@ Page({
       mode: decodeURIComponent(option?.mode || 'manage')
     })
     this.getAllGoods()
+    // 接受传入的参数
     const eventChannel = this.getOpenerEventChannel()
     if (!eventChannel) return;
     eventChannel.on('acceptDataFromOpenerPage', (data) => {
-      console.log(data)
       this.setData({
         selectGoods: data.data
       })
@@ -111,14 +106,13 @@ Page({
       addGoodsData: data
     })
   },
-  async getAllGoods(isShowLoading) {
-    isShowLoading && wx.showLoading({
+  async getAllGoods() {
+    wx.showLoading({
       title: '正在加载...',
     })
     const {
       data
     } = await queryAllGoods()
-    console.log(data)
     const {
       list
     } = data.data
@@ -192,7 +186,9 @@ Page({
     const key = e.currentTarget.dataset.key
     if (['factory_price', 'store_price'].includes(key)) {
       // 转为 number 类型
-      value = Number(value)
+      if (value !== '') {
+        value = Number(value)
+      }
     }
     this.setData({
       addGoodsData: {
@@ -215,7 +211,6 @@ Page({
       return searchKeyInString(item.name, e.detail.value)
     })
     const formateData = formateDataToIndexList(searchData)
-    console.log(searchData, formateData, this.data.originGoodsList)
     this.setData({
       searchKey: e.detail.value,
       goodsList: formateData,
@@ -276,28 +271,19 @@ Page({
     }
   },
   submit() {
-    const pages = getCurrentPages();
-    const prevPage = pages[pages.length - 2]; //上一个页面
-    // 获取 record 组件
-    const recordComponent = prevPage.selectComponent('#record')
     let orderPrice = 0
-    let selectGoodsText = []
     Object.values(this.data.selectGoods).forEach(item => {
       if (item.count && item.count > 0) { // 去掉 count 为 0 和没有 count 的
         orderPrice += (item.isFactoryPrice ? item.factory_price : item.store_price) * item.count
-        selectGoodsText.push(item.name + '(' + (item.isFactoryPrice ? item.factory_price : item.store_price) + item.unit + ')' + '*' + item.count + item.unit)
       }
     })
-    wx.navigateBack({
-      success: () => {
-        recordComponent.setData({
-          selectGoodsText: selectGoodsText.join('\n'),
-          selectGoods: this.data.selectGoods,
-          orderPrice,
-          price: orderPrice
-        })
-      }
+    const eventChannel = this.getOpenerEventChannel()
+    eventChannel.emit('selectCallBack', {
+      selectGoods: this.data.selectGoods,
+      orderPrice,
+      price: orderPrice
     })
+    wx.navigateBack()
   },
   /**
    * Lifecycle function--Called when page show
@@ -324,11 +310,11 @@ Page({
    * Page event handler function--Called when user drop down
    */
   async onPullDownRefresh() {
-    await this.getAllGoods(false)
+    await this.getAllGoods()
     this.setData({
       searchKey: '',
-      refresh: false
     })
+    wx.stopPullDownRefresh()
   },
 
   /**

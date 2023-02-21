@@ -1,45 +1,55 @@
 <view class="bill">
-  <t-sticky>
-    <view class="navigation">
-      <view class="money-statistics">
-        <view class="total left">
-          <text class="label">总金额(元/年)</text>
-          <text>￥{{totalBillAmount}}</text>
-        </view>
-        <view class="left">
-          <text class="label">昨日收益(元/天)</text>
-          <text>￥{{yesterdayBillAmount}}</text>
-        </view>
-        <view class="left">
-          <text class="label">今日收益(元/天)</text>
-          <text>￥{{totalBillAmount}}</text>
-        </view>
-        <view class="left">
-          <text class="label">当前年度收益(元/年)</text>
-          <text>￥{{yearBillAmount}}</text>
-        </view>
-        <view class="left">
-          <text class="label">月度收益(元/月)</text>
-          <text>￥{{monthBillAmount}}</text>
+  <view class="money-statistics">
+    <view class="total left">
+      <text class="label">总金额(元/年)</text>
+      <text>￥{{totalBillAmount}}</text>
+    </view>
+    <view class="left">
+      <text class="label">昨日收益(元/天)</text>
+      <text>￥{{yesterdayBillAmount}}</text>
+    </view>
+    <view class="left">
+      <text class="label">今日收益(元/天)</text>
+      <text>￥{{totalBillAmount}}</text>
+    </view>
+    <view class="left">
+      <text class="label">当前年度收益(元/年)</text>
+      <text>￥{{yearBillAmount}}</text>
+    </view>
+    <view class="left">
+      <text class="label">月度收益(元/月)</text>
+      <text>￥{{monthBillAmount}}</text>
+    </view>
+  </view>
+  <view class="list">
+    <card title="交易记录" isRadius="{{false}}">
+      <view slot="desc" capture-bind:tap="openFilter" class="filtet-btn">高级筛选</view>
+      <view slot="content">
+        <t-tabs defaultValue="{{payStatus}}" bind:change="onTabsChange">
+          <t-tab-panel label="待付款" value="0" />
+          <t-tab-panel label="已付款" value="1" />
+          <t-tab-panel label="已退货" value="2" />
+        </t-tabs>
+        <view class="list">
+          <list isHiddenAvatar="{{true}}" list="{{recordList}}" bind:deleteCallBack="deleteItem" bind:refreshBill="init" />
         </view>
       </view>
-    </view>
-  </t-sticky>
-  <t-pull-down-refresh t-class="content-pull-down" bind:refresh="onPullDownRefresh" value="{{refresh}}" loadingTexts="{{['下拉刷新', '松手刷新', '正在刷新', '刷新完成']}}" bind:scrolltolower="onScrollTolower">
-    <view class="list">
-      <card title="交易记录">
-        <view slot="desc" capture-bind:tap="openFilter">高级筛选</view>
-        <view slot="content">
-          <t-tabs defaultValue="{{payStatus}}" bind:change="onTabsChange">
-            <t-tab-panel label="待付款" value="0" />
-            <t-tab-panel label="已付款" value="1" />
-            <t-tab-panel label="已退货" value="2" />
-          </t-tabs>
-          <view class="list">
-            <list isHiddenAvatar="{{true}}" list="{{recordList}}" bind:deleteCallBack="deleteItem" bind:refreshBill="init" />
-          </view>
-        </view>
-      </card>
-    </view>
-  </t-pull-down-refresh>
+    </card>
+    <view class="blank"></view>
+  </view>
 </view>
+<t-popup visible="{{filterVisible}}" placement="bottom" bind:visible-change="filterVisibleChange">
+  <view class="popup-block">
+    <view class="header">
+      <view class="btn btn--cancel" aria-role="button" capture-bind:tap="closeFilter">取消</view>
+      <view class="title">筛选</view>
+      <view class="btn btn--confirm" aria-role="button" capture-bind:tap="submitFilter">确定</view>
+    </view>
+    <view>
+      <t-input value="" placeholder="输入关键字筛选" bind:change="changeSearchKey"></t-input>
+      <t-cell title="客户" hover arrow note="{{filters.customer.name}}" bind:click="selectCustomer" />
+      <t-cell title="选择日期" hover note="{{filters.startTime}} - {{filters.endTime}}" arrow bindtap="openDatePicker" />
+    </view>
+  </view>
+</t-popup>
+<t-calendar visible="{{dateVisible}}" min-date="{{minDate}}" type="range" defaultValue="{{defaultValue}}" bind:confirm="handleDateConfirm" bind:close="closeDatePicker" />

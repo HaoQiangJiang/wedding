@@ -1,46 +1,44 @@
 <view class="top">
   <t-search class="search" placeholder="搜素" shape="round" value="{{searchKey}}" bind:change="handleSearch" bind:clear="clearSearch" />
-  <t-icon name="user-add" size="20" capture-bind:tap="openAddCustomer" />
+  <t-button theme="primary" icon="user-add" variant="text" capture-bind:tap="openAddCustomer" />
 </view>
-<t-pull-down-refresh bind:refresh="onPullDownRefresh" value="{{refresh}}" loadingTexts="{{['下拉刷新', '松手刷新', '正在刷新', '刷新完成']}}">
-  <view wx:if="{{customerList.length>0}}">
-    <t-indexes indexList="{{indexList}}" sticky="{{false}}">
-      <block wx:for="{{customerList}}" wx:key="index">
-        <t-indexes-anchor index="{{item.index}}" />
-        <t-cell-group>
-          <view wx:for="{{item.children}}" wx:key="id" wx:for-item="customer">
-            <t-swipe-cell>
-              <t-cell data-item="{{customer}}" bind:click="onSelect" aria-role="button" hover size="large">
-                <text class="customer-name" slot="title">{{customer.name}}</text>
-              </t-cell>
-              <view slot="right" class="btn-wrapper">
-                <view class="swipe-btn edit-btn column" data-item="{{customer}}" bind:tap="onEdit">
-                  <t-icon class="padding-bottom" name="edit" size="32rpx"></t-icon>
-                  编辑
-                </view>
-                <view class="swipe-btn delete-btn column" data-item="{{customer}}" bind:tap="openDelete">
-                  <t-icon class="padding-bottom" name="delete" size="32rpx"></t-icon>
-                  删除
-                </view>
+<view wx:if="{{customerList.length>0}}" class="content">
+  <t-indexes indexList="{{indexList}}" sticky="{{false}}">
+    <block wx:for="{{customerList}}" wx:key="index">
+      <t-indexes-anchor index="{{item.index}}" />
+      <t-cell-group>
+        <view wx:for="{{item.children}}" wx:key="id" wx:for-item="customer">
+          <t-swipe-cell>
+            <t-cell data-item="{{customer}}" bind:click="onSelect" aria-role="button" hover size="large">
+              <text class="customer-name" slot="title">{{customer.name}}</text>
+            </t-cell>
+            <view slot="right" class="btn-wrapper">
+              <view class="swipe-btn edit-btn column" data-item="{{customer}}" bind:tap="onEdit">
+                <t-icon class="padding-bottom" name="edit" size="32rpx"></t-icon>
+                编辑
               </view>
-            </t-swipe-cell>
-          </view>
-        </t-cell-group>
-      </block>
-    </t-indexes>
-  </view>
-  <t-empty wx:else description="暂无数据" />
-</t-pull-down-refresh>
+              <view class="swipe-btn delete-btn column" data-item="{{customer}}" bind:tap="openDelete">
+                <t-icon class="padding-bottom" name="delete" size="32rpx"></t-icon>
+                删除
+              </view>
+            </view>
+          </t-swipe-cell>
+        </view>
+      </t-cell-group>
+    </block>
+  </t-indexes>
+</view>
+<t-empty wx:else description="暂无数据" />
 
 <t-popup visible="{{addCustomerVisible}}" prevent-scroll-through="{{true}}" placement="bottom" bind:visible-change="onVisibleChange">
-  <view class="block">
+  <view class="popup-block">
     <view class="header">
       <view class="btn btn--cancel" aria-role="button" capture-bind:tap="closeAddCustomer">取消</view>
       <view class="title">{{ addCustomerData.id?'编辑客户': '新增客户'}}</view>
       <view class="btn btn--confirm" aria-role="button" capture-bind:tap="submitAddCustomer">确定</view>
     </view>
     <view>
-      <t-input wx:for="{{addCustomerMap}}" type="{{item.value ==='phone'?'number':'text'}}"  wx:key="value" label="{{item.label}}" value="{{addCustomerData[item.value]}}" placeholder="请输入{{item.label}}" data-key="{{item.value}}" bind:change="changeCustomer"></t-input>
+      <t-input wx:for="{{addCustomerMap}}" cursor-spacing="{{300}}" type="{{item.value ==='phone'?'number':'text'}}" wx:key="value" label="{{item.label}}" align="right" value="{{addCustomerData[item.value]}}" placeholder="请输入{{item.label}}" data-key="{{item.value}}" bind:change="changeCustomer"></t-input>
     </view>
   </view>
 </t-popup>

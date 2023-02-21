@@ -1,0 +1,11 @@
+<view class="bill-details">
+  <view class="top">
+    <text class="title">账单详情</text>
+  </view>
+  <view class="content">
+    <view class="bill">
+      <bill-item item="{{billData}}" bigPrice="{{true}}" />
+    </view>
+    <bill-details products="{{billData.products}}" />
+  </view>
+</view>

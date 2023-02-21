@@ -1,5 +1,5 @@
 {
-  "disableScroll": true,
+  "enablePullDownRefresh": true,
   "usingComponents": {
     "t-indexes": "tdesign-miniprogram/indexes/indexes",
     "t-indexes-anchor": "tdesign-miniprogram/indexes-anchor/indexes-anchor",
@@ -8,11 +8,12 @@
     "t-search": "tdesign-miniprogram/search/search",
     "t-icon": "tdesign-miniprogram/icon/icon",
     "t-popup": "tdesign-miniprogram/popup/popup",
+    "t-button": "tdesign-miniprogram/button/button",
     "t-input": "tdesign-miniprogram/input/input",
     "t-empty": "tdesign-miniprogram/empty/empty",
     "t-toast": "tdesign-miniprogram/toast/toast",
+    "t-sticky": "tdesign-miniprogram/sticky/sticky",
     "t-swipe-cell": "tdesign-miniprogram/swipe-cell/swipe-cell",
-    "t-dialog": "tdesign-miniprogram/dialog/dialog",
-    "t-pull-down-refresh": "tdesign-miniprogram/pull-down-refresh/pull-down-refresh"
+    "t-dialog": "tdesign-miniprogram/dialog/dialog"
   }
 }

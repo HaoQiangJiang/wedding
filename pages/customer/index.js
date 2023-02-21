@@ -38,7 +38,6 @@ Page({
     deleteVisible: false,
     operateCustomer: {}, // 操作的用户
     isEdit: false, // 是否为编辑用户
-    refresh: false, // 下拉刷新
   },
 
   /**
@@ -56,15 +55,15 @@ Page({
    */
   onReady() {},
   async onPullDownRefresh() {
-    await this.getAllCustomer(false)
+    await this.getAllCustomer()
+    wx.stopPullDownRefresh()
     this.setData({
       searchKey: '',
-      refresh: false
     })
   },
 
-  async getAllCustomer(isShowLoading = true) {
-    isShowLoading && wx.showLoading({
+  async getAllCustomer() {
+    wx.showLoading({
       title: '正在加载...',
     })
     const {
@@ -163,17 +162,9 @@ Page({
       })
       return
     }
-    const pages = getCurrentPages();
-    const prevPage = pages[pages.length - 2]; //上一个页面
-    // 获取 record 组件
-    const recordComponent = prevPage.selectComponent('#record')
-    wx.navigateBack({
-      success: () => {
-        recordComponent.setData({
-          customer: e.target.dataset.item
-        })
-      }
-    })
+    const eventChannel = this.getOpenerEventChannel()
+    eventChannel.emit('selectCallBack', e.target.dataset.item)
+    wx.navigateBack()
   },
   // 确定删除
   async submitDelete() {

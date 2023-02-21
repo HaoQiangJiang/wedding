@@ -4,19 +4,15 @@ const {
 } = require('../../utils/login.js')
 const {
   formatArrayByKey,
-  mergeArrayByKey
+  mergeArrayByKey,
+  formateBillDetailsToEditBill
 } = require('../../utils/util')
 const {
   queryAllBill,
   queryBillAmountAndCount
 } = require('../../api/index')
 Page({
-
-  /**
-   * Page initial data
-   */
   data: {
-    isRefresh: true, // onShow 是否刷新
     visible: false,
     recordVisible: false,
     refresh: false,
@@ -29,14 +25,13 @@ Page({
     todayBillCount: 0, // 今日订单数
     yesterdayBillAmount: 0, // 昨日销售额
     yesterdayBillCount: 0, // 昨日订单数
+    isShowRecord: true, // 是否显示记录组件
   },
 
   /**
    * Lifecycle function--Called when page load
    */
-  onLoad(options) {
 
-  },
   async init() {
     wx.showLoading({
       title: '加载中',
@@ -72,7 +67,6 @@ Page({
       data
     } = await queryAllBill(params)
     const result = formatArrayByKey(data.data.list, 'created_at')
-    console.log(this.data.allBill, result)
     if (this.data.page === 1) {
       // 首页全部替换数据
       this.setData({
@@ -93,27 +87,10 @@ Page({
       page: 1,
       noMore: false
     })
-    await this.initAllBill()
-    await this.initBillAmountAndCount()
-    this.setData({
-      'refresh': false
-    });
+    await this.init()
+    wx.stopPullDownRefresh()
   },
-  deleteItem(e) {
-    // 删除 item
-    const operateData = e.detail.data
-    const index = this.data.allBill.findIndex(item => item.date === operateData.created_at.split(' ')[0])
-    const operateList = this.data.allBill[index]
-    if (!operateList) return
-    operateList.list = operateList.list.filter(item => item.id !== operateData.id)
-    if (operateList.list.length === 0) {
-      this.data.allBill.splice(index, 1)
-    }
-    this.setData({
-      allBill: this.data.allBill
-    })
-  },
-  async onScrollTolower() {
+  async onReachBottom() {
     const {
       total,
       size,
@@ -127,43 +104,51 @@ Page({
       return
     }
     this.setData({
-      page: page + 1
+      page: page + 1,
     })
     this.initAllBill()
-
+  },
+  onPageScroll(e) {
+    if (e.scrollTop <= 0) {
+      this.setData({
+        isFixed: false
+      })
+    } else {
+      this.setData({
+        isFixed: true,
+      })
+    }
+  },
+  // 删除 item
+  deleteItem(e) {
+    const operateData = e.detail.data
+    const index = this.data.allBill.findIndex(item => item.date === operateData.created_at.split(' ')[0])
+    const operateList = this.data.allBill[index]
+    if (!operateList) return
+    operateList.list = operateList.list.filter(item => item.id !== operateData.id)
+    if (operateList.list.length === 0) {
+      this.data.allBill.splice(index, 1)
+    }
+    this.setData({
+      allBill: this.data.allBill
+    })
+  },
+  // 更新 item
+  updateItem(e) {
+    const operateData = e.detail.data
+    const index = this.data.allBill.findIndex(item => item.date === operateData.created_at.split(' ')[0])
+    const operateList = this.data.allBill[index]
+    if (!operateList) return
+    const listIndex = operateList.list.findIndex(item => item.id === operateData.id)
+    operateList.list.splice(listIndex, 1, operateData)
+    this.setData({
+      allBill: this.data.allBill
+    })
   },
 
   backLoginPage() {
     wx.redirectTo({
       url: '/pages/login/index',
-    })
-  },
-  /**
-   * Lifecycle function--Called when page is initially rendered
-   */
-  onReady() {
-
-  },
-
-  /**
-   * Lifecycle function--Called when page show
-   */
-  onShow() {
-    this.getTabBar().init();
-    if (!this.data.isRefresh) return
-    wx.getStorage({
-      key: 'token',
-      success: (res) => {
-        if (!res.data) {
-          // 没有 token 登录
-          login(this.backLoginPage)
-        } else {
-          this.init()
-        }
-      }
-    })
-    this.setData({
-      isRefresh: false
     })
   },
   // 提交账单
@@ -174,13 +159,9 @@ Page({
   },
   setRecord(data) {
     const recordComponent = this.selectComponent('#record')
-    console.log(recordComponent, data)
-    recordComponent.setData({
-      selectGoodsText: data.selectGoodsText || '',
-      selectGoods: data.selectGoods || [],
-      orderPrice: data.orderPrice || 0,
-      price: data.price || 0
-    })
+    recordComponent.setData(
+      formateBillDetailsToEditBill(data)
+    )
   },
   // 记一笔
   addBill(event) {
@@ -195,17 +176,43 @@ Page({
         this.setRecord(setData)
       }
     })
-
-
-
-
   },
-  closeRecord() {},
   onVisibleChange(e) {
     this.setData({
       visible: e.detail.visible,
     });
+    // 解决组件不重新渲染导致内容还在的问题
+    setTimeout(() => {
+      this.setData({
+        isShowRecord: false
+      })
+    }, 240);
+    setTimeout(() => {
+      this.setData({
+        isShowRecord: true
+      })
+    }, 241)
   },
+  onLoad(options) {
+    wx.getStorage({
+      key: 'token',
+      success: (res) => {
+        if (!res.data) {
+          // 没有 token 登录
+          login(this.backLoginPage)
+        } else {
+          this.init()
+        }
+      }
+    })
+  },
+
+  onReady() {},
+
+  onShow() {
+    this.getTabBar().init();
+  },
+
   /**
    * Lifecycle function--Called when page hide
    */
@@ -220,13 +227,6 @@ Page({
 
   },
 
-
-  /**
-   * Called when page reach bottom
-   */
-  onReachBottom() {
-
-  },
 
   /**
    * Called when user click on the top right corner to share

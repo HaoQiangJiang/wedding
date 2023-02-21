@@ -1,8 +1,18 @@
+.stepper {
+  height: 66rpx;
+  font-size: 34rpx;
+  display: flex;
+  align-items: center;
+}
+
+.t-stepper__icon--large {
+  height: 70rpx !important;
+}
+
 .number {
-  z-index: 2;
-  padding: 12rpx 16rpx;
+  padding: 10rpx 20rpx;
   border: 1rpx solid var(--text-color-4--);
   border-radius: 10rpx;
-  font-size: 26rpx;
+  font-size: 30rpx;
   color: var(--text-color-1--);
 }

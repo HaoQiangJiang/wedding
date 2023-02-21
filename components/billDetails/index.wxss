@@ -1,0 +1,34 @@
+.goods {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 100%;
+}
+
+
+
+.bill-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20rpx 30rpx;
+  background-color: #fff;
+}
+
+.bill-form .top {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.bill-form .top .name {
+  font-size: 36rpx;
+}
+
+.bill-form .number {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  color: var(--text-color-3--);
+  font-size: 32rpx;
+}

@@ -1,1 +1,55 @@
-/* pages/contacts/index.wxss */
+.top {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #f8f8f8;
+  padding: 50rpx;
+}
+
+.top .title {
+  font-size: 50rpx;
+}
+
+.top .time {
+  font-size: 28rpx;
+  color: var(--text-color-3--);
+  line-height: 200%;
+}
+
+.top .total-price {
+  font-size: 50rpx;
+  color: var(--primary--);
+  position: absolute;
+  right: 30rpx;
+  top: 80rpx;
+}
+
+
+.contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+  padding: 10rpx;
+  margin-bottom: 20rpx;
+  background-color: #fff;
+}
+
+
+.bill-title {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-between;
+  padding: 20rpx 30rpx 0rpx 30rpx;
+}
+
+.bill-title .real-amount {
+  font-size: 36rpx;
+  color: var(--primary--);
+  font-weight: 500;
+}
+
+.contacts .bill-title .time {
+  color: var(--text-color-3--);
+  font-size: 30rpx;
+}

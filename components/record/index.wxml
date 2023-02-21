@@ -1,23 +1,23 @@
 <view class="record">
   <view class="close">
-    <text class="title">{{recordType==='record'?'创建账单':'创建退货单'}}</text>
+    <text class="title">{{fn.getTitle(recordType,editBillId)}}</text>
     <t-icon class="close-icon" name="close" size="50rpx" bind:click="closeBill" />
   </view>
   <view class="top">
     <view class="record-type">
       <t-button wx:for="{{recordTypeMap}}" wx:key="value" size="small" theme="{{item.value===recordType?'primary':'default'}}" data-item="{{item}}" capture-bind:tap="changeRecordType">{{item.label}}</t-button>
     </view>
-    <t-button size="small" bindtap="showPicker">{{dateText}}</t-button>
+    <t-button size="small" bindtap="showPicker">{{billDate}}</t-button>
   </view>
   <t-cell-group theme="card" class="select-card">
     <t-cell title="选择客户" leftIcon="user-add" hover arrow note="{{customer.name}}" bind:click="selectCustomer" />
     <t-cell title="选择商品" leftIcon="gift" hover arrow bind:click="handleSelectGoods">
       <view class="goods-note" slot="note">
-        <text>{{selectGoodsText}}</text>
+        <text>{{fn.formateSelecteGoods(selectGoods)}}</text>
       </view>
     </t-cell>
 
-    <t-date-time-picker title="选择日期" visible="{{dateVisible}}" mode="minute" defaultValue="{{date}}" format="YYYY-MM-DD HH:mm:ss" bindchange="onConfirm" bindpick="onColumnChange" bindcancel="hidePicker" />
+    <t-date-time-picker title="选择日期" visible="{{dateVisible}}" mode="minute" defaultValue="{{billDate}}" format="YYYY-MM-DD HH:mm:ss" bindchange="onConfirm" bindpick="onColumnChange" bindcancel="hidePicker" />
   </t-cell-group>
   <view class="record-summary">
     <text>订单总金额：<text class='price {{recordType=="record"?"red":"green"}}'>{{orderPrice}}</text></text>
@@ -34,3 +34,40 @@
   </view>
 </view>
 <t-toast id="t-toast" />
+<wxs module="fn">
+  function each(obj, cb) {
+    var str = JSON.stringify(obj)
+    var reg = getRegExp('"(\w|-|_)+":', 'g')
+    var matchArr = str.match(reg)
+    if (matchArr) {
+      for (var i = 0; i < matchArr.length; i++) {
+        var objKey = matchArr[i]
+        objKey = objKey.substring(1)
+        objKey = objKey.replace('":', '')
+        cb && cb(objKey, obj[objKey])
+      }
+    }
+  }
+  module.exports = {
+    formateSelecteGoods: function (selectGoods) {
+      var selectGoodsText = [];
+      each(selectGoods, function (key, item) {
+        if (item && item.count && item.count > 0) { // 去掉 count 为 0 和没有 count 的
+          var price = 0
+          if (item.isFactoryPrice) {
+            price = item.factory_price
+          } else {
+            price = item.store_price
+          }
+          selectGoodsText.push(item.name + '(' + price + '/' + item.unit + ')' + '*' + item.count)
+        }
+      })
+      return selectGoodsText.join('\n')
+    },
+    getTitle: function (recordType, editBillId) {
+      var firstWord = editBillId === '' ? '创建' : '修改'
+      var endWord = recordType === 'record' ? '账单' : '退货单'
+      return firstWord + endWord
+    }
+  }
+</wxs>

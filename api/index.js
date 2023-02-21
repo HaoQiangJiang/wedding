@@ -163,6 +163,16 @@ export async function createBill(data) {
   })
 }
 
+// 修改账单
+export async function updateBill(id, data) {
+  console.log(data)
+  return await request({
+    url: baseUrl + '/bill/update/' + id,
+    method: 'put',
+    data,
+  })
+}
+
 // 查询所有账单
 export async function queryAllBill(data) {
   return await request({
@@ -172,6 +182,13 @@ export async function queryAllBill(data) {
   })
 }
 
+// 根据 id 查询订单
+export async function queryBillById(id) {
+  return await request({
+    url: baseUrl + '/bill/findOne/' + id,
+    method: 'get',
+  })
+}
 // 删除账单
 export async function deleteBill(id) {
   return await request({
@@ -208,6 +225,14 @@ export async function queryBillAmountByClientId(id) {
 export async function queryStatistics(year, month) {
   return await request({
     url: baseUrl + `/statistics/getStatistics?year=${year}&month=${month}`,
+    method: 'get',
+  })
+}
+
+// 获取分享账单详情
+export async function getShareBillDetails(id) {
+  return await request({
+    url: baseUrl + `/public/getBillingDetails?id=${id}`,
     method: 'get',
   })
 }

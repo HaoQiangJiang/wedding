@@ -1,9 +1,9 @@
 .bill {
-  height: 100%;
-  overflow-y: scroll;
+  height: 100vh;
 }
 
 .money-statistics {
+  box-sizing: border-box;
   padding: 50rpx;
   width: 100%;
   display: flex;
@@ -11,6 +11,7 @@
   justify-content: space-around;
   flex-wrap: wrap;
   gap: 60rpx;
+  background-color: var(--primary--);
 }
 
 .money-statistics .total {
@@ -33,11 +34,15 @@
   margin-bottom: 10rpx;
 }
 
-.content-pull-down {
-  height: 55% !important;
+.list {
+  min-height: 600rpx;
 }
 
-.list {
-  padding: 20rpx;
-  box-sizing: border-box;
+.filtet-btn {
+  font-size: 30rpx;
+  border: 14rpx solid transparent;
+}
+
+.popup-block {
+  height: 500rpx;
 }

@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "收款码编辑",
+  "usingComponents": {
+    "t-cell": "tdesign-miniprogram/cell/cell",
+    "t-input": "tdesign-miniprogram/input/input",
+    "t-upload": "tdesign-miniprogram/upload/upload",
+    "pay-priview": "/components/payPriview/index"
+  }
+}

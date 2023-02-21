@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "bill-details": "/components/billDetails/index",
+    "bill-item": "/components/billItem/index"
+  }
+}

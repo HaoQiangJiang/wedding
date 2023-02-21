@@ -213,6 +213,26 @@ const mergeArrayByKey = (a, b) => {
   });
   return result;
 }
+
+// 将订单里的信息拼接未修改订单的信息
+const formateBillDetailsToEditBill = (data) => {
+  const selectGoods = {}
+  data.products.forEach(item => {
+    selectGoods[item.product_id] = {
+      ...item.product,
+      isFactoryPrice: item.price === item.product.factory_price,
+      count: item.number
+    }
+  })
+  return {
+    selectGoods: selectGoods || [],
+    customer: data.client,
+    editBillId: data.id,
+    recordType: data.real_amount >= 0 ? 'record' : 'returnGoods',
+    orderPrice: data.amount || 0,
+    price: Math.abs(data.real_amount) || 0,
+  }
+}
 module.exports = {
   formatTime,
   priceFormat,
@@ -224,5 +244,6 @@ module.exports = {
   formateDataToIndexList,
   searchKeyInString,
   formatArrayByKey,
-  mergeArrayByKey
+  mergeArrayByKey,
+  formateBillDetailsToEditBill
 };

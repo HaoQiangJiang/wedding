@@ -1,0 +1,10 @@
+<view class="pay-config">
+  <t-input label="提示文案" placeholder="用于分享账单展示在收款码上方" type="nickname" align="right" bind:change="changeName" />
+  <t-cell title="上传收款码" hover>
+    <view class="image" slot="note">
+      <t-upload mediaType="{{['image']}}" grid-config="{{gridConfig}}" max="{{1}}" files="{{fileList}}" bind:add="handleAdd" bind:remove="handleRemove">
+      </t-upload>
+    </view>
+  </t-cell>
+
+</view>

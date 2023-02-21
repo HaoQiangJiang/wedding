@@ -1,7 +1,10 @@
 const {
-  deleteBill
+  deleteBill,
+  queryBillById
 } = require("../../api/index");
-
+const {
+  formateBillDetailsToEditBill
+} = require('../../utils/util')
 Page({
 
   /**
@@ -11,17 +14,31 @@ Page({
     billData: {},
     deleteVisible: false,
     visible: false,
-  },
+    isShowRecord: true,
 
-  onLoad(option) {
-    const eventChannel = this.getOpenerEventChannel()
-    if (!eventChannel) return;
-    eventChannel.on('acceptBillData', (data) => {
-      this.setData({
-        billData: data.data
-      })
+  },
+  // 刷新订单
+  async refreshBill() {
+    wx.showLoading({
+      title: '修改中',
+    })
+    const {
+      data
+    } = await queryBillById(this.data.billData.id)
+    this.setData({
+      billData: data.data
+    })
+    wx.hideLoading()
+    const pages = getCurrentPages();
+    const prevPage = pages[pages.length - 2]; //上一个页面
+    // await deleteBill(this.data.billData.id)
+    prevPage.updateItem({
+      detail: {
+        data: this.data.billData
+      }
     })
   },
+
   // 提交账单
   closeBill() {
     this.setData({
@@ -33,11 +50,28 @@ Page({
     this.setData({
       visible: true,
     })
+    this.setRecord(this.data.billData)
+
+  },
+  setRecord(data) {
+    const recordComponent = this.selectComponent('#record')
+    recordComponent.setData(formateBillDetailsToEditBill(data))
   },
   onVisibleChange(e) {
     this.setData({
       visible: e.detail.visible,
     });
+    // 解决组件不重新渲染导致内容还在的问题
+    setTimeout(() => {
+      this.setData({
+        isShowRecord: false
+      })
+    }, 240);
+    setTimeout(() => {
+      this.setData({
+        isShowRecord: true
+      })
+    }, 241)
   },
 
   openDelete() {
@@ -55,10 +89,22 @@ Page({
     const pages = getCurrentPages();
     const prevPage = pages[pages.length - 2]; //上一个页面
     await deleteBill(this.data.billData.id)
-    prevPage.setData({
-      isRefresh: true
+    prevPage.deleteItem({
+      detail: {
+        data: this.data.billData
+      }
     })
     wx.navigateBack()
+  },
+
+  onLoad(option) {
+    const eventChannel = this.getOpenerEventChannel()
+    if (!eventChannel) return;
+    eventChannel.on('acceptBillData', (data) => {
+      this.setData({
+        billData: data.data
+      })
+    })
   },
   /**
    * Lifecycle function--Called when page is initially rendered
@@ -106,6 +152,16 @@ Page({
    * Called when user click on the top right corner to share
    */
   onShareAppMessage() {
+    return {
+      title: '您有一份新账单请注意查收',
+      path: '/pages/share/index?id=' + this.data.billData.id,
+      success: function (res) {
+        // 转发成功
+        wx.showToast({
+          title: 'title',
+        })
+      },
+    }
 
   }
 })

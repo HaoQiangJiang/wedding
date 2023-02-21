@@ -1,20 +1,30 @@
-// pages/customerEdit/index.js
+const {
+  getShareBillDetails
+} = require('../../api/index')
 Page({
 
   /**
    * Page initial data
    */
   data: {
-
+    billData: {},
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad(options) {
-
+    this.init(options.id)
   },
 
+  async init(id) {
+    const {
+      data
+    } = await getShareBillDetails(id)
+    this.setData({
+      billData: data.data
+    })
+  },
   /**
    * Lifecycle function--Called when page is initially rendered
    */

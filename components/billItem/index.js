@@ -25,7 +25,6 @@ Component({
    */
   methods: {
     openDetails() {
-      console.log(this.properties.url)
       wx.navigateTo({
         url: this.properties.url,
         success: (res) => {
@@ -34,7 +33,6 @@ Component({
           })
         }
       })
-
     }
   },
 

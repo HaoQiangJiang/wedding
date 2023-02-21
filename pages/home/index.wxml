@@ -1,44 +1,35 @@
-<view class="home-container">
-  <t-sticky>
-    <view class="navigation">
-      <text class="title">记账本</text>
-    </view>
-    <view class="home-summary">
-      <view class="item">
-        <text class="title">￥{{todayBillAmount}}</text>
-        <text>今日销售额</text>
-      </view>
-      <view class="item">
-        <text class="title"> {{todayBillCount}}</text>
-        <text>今日账单数</text>
-      </view>
-    </view>
-  </t-sticky>
-  <t-pull-down-refresh t-class="content-pull-down" bind:refresh="onPullDownRefresh" value="{{refresh}}" loadingTexts="{{['下拉刷新', '松手刷新', '正在刷新', '刷新完成']}}" bind:scrolltolower="onScrollTolower">
-    <view class="content">
-      <card wx:for="{{allBill}}" wx:key="index" title="{{item.date}}" desc="收入 {{fn.calcTotla(item.list)}}, 账单数 {{item.list.length}}">
-        <list slot="content" bind:addBill="addBill" bind:deleteCallBack="deleteItem" list="{{item.list}}" />
-      </card>
-    </view>
-
-    <view class="no-more" wx:if="{{noMore}}">
-      <text>我是有底线的</text>
-    </view>
-  </t-pull-down-refresh>
-  <t-popup visible="{{visible}}" placement="bottom" bind:visible-change="onVisibleChange">
-    <record wx:if="{{visible}}" id="record" bind:closeBill="closeBill" bind:close="closeRecord" bind:refreshBill="onPullDownRefresh" />
-    <view hidden="{{visible}}" class="blank-record"></view>
-  </t-popup>
-  <t-fab style="right:20rpx;bottom: 250rpx;" icon="edit-1" bind:click="addBill" text="记一笔" />
+<view class="home-summary">
+  <view class="item">
+    <text class="price">￥{{todayBillAmount}}</text>
+    <text>今日销售额</text>
+  </view>
+  <view class="item">
+    <text class="price"> {{todayBillCount}}</text>
+    <text>今日账单数</text>
+  </view>
 </view>
+
+<view class="content">
+  <card wx:for="{{allBill}}" wx:key="index" title="{{item.date}}" desc="收入 {{fn.calcTotal(item.list)}}, 账单数 {{item.list.length}}">
+    <list slot="content" bind:addBill="addBill" bind:deleteCallBack="deleteItem" list="{{item.list}}" />
+  </card>
+</view>
+
+<view class="no-more" wx:if="{{noMore}}">
+  <text>我是有底线的</text>
+</view>
+<t-popup visible="{{visible}}" placement="bottom" bind:visible-change="onVisibleChange">
+  <record id="record" wx:if="{{isShowRecord}}" bind:closeBill="closeBill" bind:refreshBill="onPullDownRefresh" />
+</t-popup>
+<t-fab style="right:20rpx;bottom: 250rpx;" icon="edit-1" bind:click="addBill" text="记一笔" />
 <wxs module="fn">
   module.exports = {
-    calcTotla: function (arr) {
+    calcTotal: function (arr) {
       var total = 0
       arr.forEach(function (item) {
         total += item.real_amount
       });
       return total
-    },
+    }
   }
 </wxs>

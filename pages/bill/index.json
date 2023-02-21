@@ -1,12 +1,18 @@
 {
-  "navigationStyle": "custom",
-  "disableScroll": true,
+  "navigationBarTitleText": "账单",
+  "enablePullDownRefresh": true,
+  "onReachBottomDistance": 100,
   "usingComponents": {
-    "t-sticky": "tdesign-miniprogram/sticky/sticky",
     "card": "/components/card/index",
     "list": "/components/list/index",
     "t-tabs": "tdesign-miniprogram/tabs/tabs",
     "t-tab-panel": "tdesign-miniprogram/tab-panel/tab-panel",
-    "t-pull-down-refresh": "tdesign-miniprogram/pull-down-refresh/pull-down-refresh"
+    "t-popup": "tdesign-miniprogram/popup/popup",
+    "t-input": "tdesign-miniprogram/input/input",
+    "t-cell": "tdesign-miniprogram/cell/cell",
+    "t-sticky": "tdesign-miniprogram/sticky/sticky",
+    "t-button": "tdesign-miniprogram/button/button",
+    "t-icon": "tdesign-miniprogram/icon/icon",
+    "t-calendar": "tdesign-miniprogram/calendar/calendar"
   }
 }

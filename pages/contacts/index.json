@@ -1,3 +1,7 @@
 {
-  "usingComponents": {}
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "bill-details": "/components/billDetails/index",
+    "t-calendar": "tdesign-miniprogram/calendar/calendar"
+  }
 }

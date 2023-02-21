@@ -1,2 +1,21 @@
-<!--pages/contacts/index.wxml-->
-<text>pages/contacts/index.wxml</text>
+<view class="top">
+  <text class="title">{{client.name}}的账单</text>
+  <text class="time" capture-bind:tap="openDatePicker"> {{startTime? startTime +'~'+ endTime : '点击选择时间' }}</text>
+  <text class="total-price">{{totalPrice}}元</text>
+</view>
+<view class="container">
+  <viw class="left">
+    <view wx:for="{{list}}" wx:key="{{id}}" class="contacts" data-item="{{item}}" capture-bind:tap="openDetails">
+      <view class="bill-title">
+        <text class="time">{{item.created_at}}</text>
+        <text class="real-amount">{{item.real_amount}}元</text>
+      </view>
+      <bill-details products="{{item.products}}" />
+    </view>
+  </viw>
+</view>
+
+<view class="no-more" wx:if="{{noMore}}">
+  <text>我是有底线的</text>
+</view>
+<t-calendar visible="{{dateVisible}}" min-date="{{minDate}}" type="range" defaultValue="{{defaultValue}}" bind:confirm="handleDateConfirm" bind:close="closeDatePicker" />
