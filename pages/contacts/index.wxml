@@ -17,7 +17,7 @@
           <view class="bill-title" slot="header">
             <text class="time">{{fn.formateTime(item.created_at)}}</text>
             <text class="real-amount {{item.real_amount>0?'red':'green'}}">{{item.real_amount}}元</text>
-            <text class="total">累计{{fn.total(item.real_amount)}}</text>
+            <text class="total">累计{{item.accumulate}}</text>
           </view>
           <view data-item="{{item}}" capture-bind:tap="openDetails">
             <bill-details products="{{item.products}}" />
@@ -34,16 +34,11 @@
 </view>
 <t-calendar visible="{{dateVisible}}" min-date="{{minDate}}" type="range" defaultValue="{{defaultValue}}" bind:confirm="handleDateConfirm" bind:close="closeDatePicker" />
 <wxs module="fn">
-  var total = 0
   module.exports = {
     formateTime: function (time) {
       if (!time) return ''
       var yearMonthDay = time.split(' ')[0].split('-')
       return yearMonthDay[1] + '月' + yearMonthDay[2] + '日'
-    },
-    total: function (count) {
-      total += count
-      return total
     }
   }
 </wxs>

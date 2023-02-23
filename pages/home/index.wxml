@@ -13,11 +13,12 @@
   <card wx:for="{{allBill}}" wx:key="index" title="{{item.date}}" desc="收入 {{fn.calcTotal(item.list)}}, 账单数 {{item.list.length}}">
     <list slot="content" bind:addBill="addBill" bind:deleteCallBack="deleteItem" list="{{item.list}}" />
   </card>
+  <view class="no-more" wx:if="{{noMore}}">
+    <text>我是有底线的</text>
+  </view>
 </view>
 
-<view class="no-more" wx:if="{{noMore}}">
-  <text>我是有底线的</text>
-</view>
+
 <t-popup visible="{{visible}}" placement="bottom" bind:visible-change="onVisibleChange">
   <record id="record" wx:if="{{isShowRecord}}" bind:closeBill="closeBill" bind:refreshBill="onPullDownRefresh" />
 </t-popup>

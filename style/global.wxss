@@ -73,4 +73,5 @@ button {
   align-items: center;
   justify-content: center;
   color: var(--text-color-4--);
+  padding: 20rpx 0;
 }

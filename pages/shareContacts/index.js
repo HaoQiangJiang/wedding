@@ -39,6 +39,7 @@ Page({
     let totalPrice = 0
     data.data.list.forEach(item => {
       totalPrice += item.real_amount
+      item.accumulate = totalPrice
     })
     wx.setNavigationBarTitle({
       title: data.data.list[0].client.name + '的账单'
@@ -87,7 +88,7 @@ Page({
    * Page event handler function--Called when user drop down
    */
   onPullDownRefresh() {},
-
+  
   /**
    * Called when page reach bottom
    */

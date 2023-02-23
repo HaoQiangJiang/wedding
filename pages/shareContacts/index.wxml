@@ -9,7 +9,7 @@
           <view class="bill-title" slot="header">
             <text class="time">{{fn.formateTime(item.created_at)}}日账单</text>
             <text class="real-amount {{item.real_amount>0?'red':'green'}}">{{item.real_amount}}元</text>
-            <text class="total">累计{{fn.total(item.real_amount)}}</text>
+            <text class="total">累计{{item.accumulate}}</text>
           </view>
           <view data-item="{{item}}" capture-bind:tap="openDetails">
             <bill-details products="{{item.products}}" />
@@ -31,9 +31,5 @@
       var yearMonthDay = time.split(' ')[0].split('-')
       return yearMonthDay[1] + '月' + yearMonthDay[2] + '日'
     },
-    total: function (count) {
-      total += count
-      return total
-    }
   }
 </wxs>

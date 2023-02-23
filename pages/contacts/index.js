@@ -73,32 +73,22 @@ Page({
     const {
       list
     } = data.data
-
-
+    let result = []
     if (this.data.page === 1) {
-      let totalPrice = 0
-      list.forEach(item => {
-        totalPrice += item.real_amount
-      })
-      // 首页全部替换数据
-      this.setData({
-        list: data.data.list,
-        total: data.data.total,
-        totalPrice
-      })
+      result = data.data.list
     } else {
-      const mergeList = [...this.data.list, ...data.data.list]
-      let totalPrice = 0
-      mergeList.forEach(item => {
-        totalPrice += item.real_amount
-      })
-      this.setData({
-        list: mergeList,
-        total: data.data.total,
-        totalPrice
-      })
+      result = [...this.data.list, ...data.data.list]
     }
-
+    let totalPrice = 0
+    result.forEach(item => {
+      totalPrice += item.real_amount
+      item.accumulate = totalPrice
+    })
+    this.setData({
+      list: result,
+      total: data.data.total,
+      totalPrice
+    })
     wx.hideLoading()
   },
   openDetails(e) {

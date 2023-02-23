@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 20rpx;
-  padding: 20rpx 20rpx 160rpx 20rpx;
+  padding: 20rpx;
 }
 
 .fab {
@@ -40,4 +40,10 @@
 
 .home-summary .item .label {
   opacity: 0.7;
+}
+
+.no-more {
+  height: 200rpx;
+  align-items: flex-start;
+
 }

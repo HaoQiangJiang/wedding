@@ -2,7 +2,15 @@ import dayjs from 'dayjs';
 import cnchar from 'cnchar';
 
 const formatTime = (date, template) => dayjs(date).format(template);
-
+const diffTime = (time) => {
+  // 获取当前时间
+  var now = dayjs();
+  // 获取指定时间
+  var target = dayjs(time);
+  // 计算时间差
+  var diff = target.diff(now, 'day');
+  return Math.abs(diff)
+}
 /**
  * 格式化价格数额为字符串
  * 可对小数部分进行填充，默认不填充
@@ -235,6 +243,7 @@ const formateBillDetailsToEditBill = (data) => {
 }
 module.exports = {
   formatTime,
+  diffTime,
   priceFormat,
   cosThumb,
   get,

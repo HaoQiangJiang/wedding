@@ -48,25 +48,26 @@
 
 }
 
-.bill-title .real-amount {
-  font-size: 32rpx;
-  font-weight: 500;
-  color: var(--text-color-2--);
-  text-align: left;
-  flex: 1.5;
 
-}
 
 .bill-title .time {
   color: var(--text-color-3--);
   font-size: 30rpx;
+  flex: 1.5;
+}
+
+.bill-title .real-amount {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: var(--text-color-2--);
+  text-align: right;
   flex: 2;
 }
 
 .bill-title .total {
   font-size: 32rpx;
   color: var(--red--);
-  text-align: left;
-  flex: 1;
+  text-align: right;
+  flex: 2;
   font-weight: 500;
 }
