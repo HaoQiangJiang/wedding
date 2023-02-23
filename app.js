@@ -19,7 +19,7 @@ App({
         data.isOverShare = true
         view.onShareAppMessage = () => { //重写分享配置
           return {
-            title: '记下理想, 温暖生活——商户记账',
+            title: '记下理想, 温暖生活——灵犀记账助手',
             path: "/pages/home/index", //若无path 默认跳转分享页
             imageUrl: 'https://weixin.linktmd.com/public/Share.png' //若无imageUrl 截图当前页面
           }

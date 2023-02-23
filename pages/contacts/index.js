@@ -6,10 +6,6 @@ const {
 } = require('../../utils/util')
 import dayjs from 'dayjs';
 Page({
-
-  /**
-   * Page initial data
-   */
   data: {
     isOverShare: true,
     page: 1,
@@ -24,6 +20,7 @@ Page({
     dateVisible: false,
     minDate: dayjs().subtract(1, 'year').valueOf(),
     defaultValue: [dayjs().subtract(1, 'month').valueOf(), new Date().getTime()],
+    activeValues: [],
   },
   onLoad(options) {
     // 接受上一页传来的客户 id
@@ -49,6 +46,11 @@ Page({
       this.init()
     })
   },
+  handleChange(e) {
+    this.setData({
+      activeValues: e.detail.value,
+    });
+  },
   back() {
     wx.navigateBack()
   },
@@ -70,9 +72,6 @@ Page({
     const {
       data
     } = await queryAllBill(params)
-    const {
-      list
-    } = data.data
     let result = []
     if (this.data.page === 1) {
       result = data.data.list
@@ -127,16 +126,28 @@ Page({
     // 删除 item
     const operateData = e.detail.data
     this.data.list = this.data.list.filter(item => item.id !== operateData.id)
+    let totalPrice = 0
+    this.data.list.forEach(item => {
+      totalPrice += item.real_amount
+      item.accumulate = totalPrice
+    })
     this.setData({
-      list: this.data.list
+      list: this.data.list,
+      totalPrice
     })
   },
   updateItem(e) {
     const operateData = e.detail.data
     const listIndex = this.data.list.findIndex(item => item.id === operateData.id)
     this.data.list.splice(listIndex, 1, operateData)
+    let totalPrice = 0
+    this.data.list.forEach(item => {
+      totalPrice += item.real_amount
+      item.accumulate = totalPrice
+    })
     this.setData({
-      list: this.data.list
+      list: this.data.list,
+      totalPrice
     })
   },
   /**

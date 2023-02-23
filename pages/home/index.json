@@ -1,6 +1,6 @@
 {
   "enablePullDownRefresh": true,
-  "navigationBarTitleText": "记账本",
+  "navigationBarTitleText": "灵犀记账",
   "onReachBottomDistance": 50,
   "usingComponents": {
     "t-button": "tdesign-miniprogram/button/button",

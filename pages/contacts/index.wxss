@@ -33,10 +33,14 @@
 }
 
 .contacts {
-  padding: 20rpx;
+  width: 100%;
   background-color: #fff;
+  box-sizing: content-box;
 }
 
+.t-collapse-panel {
+  padding: 20rpx;
+}
 
 .bill-title {
   width: 100%;
@@ -45,7 +49,6 @@
   align-items: center;
   justify-content: space-between;
   text-align: left;
-
 }
 
 

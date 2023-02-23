@@ -1,6 +1,6 @@
 <view class="login">
   <image src='../../assets/loginBanner.svg' class="image" data-keys="clear" />
-  <text class="title">商户记账</text>
+  <text class="title">灵犀记账</text>
   <view class="slogan-container">
     <text class="slogan">记下理想</text>
     <text class="slogan">温暖生活</text>

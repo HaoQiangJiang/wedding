@@ -13,14 +13,17 @@ Page({
     cid: '',
     startTime: '',
     endTime: '',
-    user:{}
+    user: {},
+    activeValues: []
   },
 
   onLoad(options) {
-    // 接受上一页传来的客户 id
-    console.log(options)
-
     this.init(options)
+  },
+  handleChange(e) {
+    this.setData({
+      activeValues: e.detail.value,
+    });
   },
   async init(params) {
     // 根据客户查询所有账单
@@ -52,7 +55,7 @@ Page({
       cid,
       startTime,
       endTime,
-      user:data.data.user
+      user: data.data.user
     })
     wx.hideLoading()
   },
@@ -88,7 +91,7 @@ Page({
    * Page event handler function--Called when user drop down
    */
   onPullDownRefresh() {},
-  
+
   /**
    * Called when page reach bottom
    */
