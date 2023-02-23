@@ -21,7 +21,7 @@
 </view>
 <view class="pay">
   <text class="title">{{user.tagline ||"这是我的收款码，欢迎扫码支付"}} </text>
-  <t-image class="image" mode="heightFix" src="https://weixin.linktmd.com/{{user.qr_code}}" />
+  <t-image class="image" show-menu-by-longpress="{{true}}" mode="heightFix" src="https://weixin.linktmd.com/{{user.qr_code}}" />
 </view>
 <wxs module="fn">
   var total = 0
