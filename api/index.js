@@ -1,11 +1,12 @@
 /** 获取个人中心信息 */
 const baseUrl = 'https://weixin.linktmd.com/api'
 var reqTime = 0; //记录请求次数
+const header = {
+  "content-type": "application/json",
+  "X-Requested-With": 'XMLHttpRequest'
+};
+
 const request = (params) => {
-  var header = {
-    "Content-Type": "application/json",
-    "X-Requested-With": 'XMLHttpRequest'
-  };
   let token = wx.getStorageSync("token");
   if (token) {
     header["Authorization"] = `Bearer ${token}`;
@@ -18,7 +19,14 @@ const request = (params) => {
       ...params,
       header,
       success: (result) => {
-        resolve(result);
+        if (result.data.code === 401) {
+          // 跳转登录页
+          wx.navigateTo({
+            url: '/pages/login/index'
+          })
+        } else {
+          resolve(result);
+        }
       },
       fail: (err) => {
         resolve(err);
@@ -182,6 +190,14 @@ export async function queryAllBill(data) {
   })
 }
 
+// 查询分享的账单
+export async function getShareBill(uid, cid, startTime, endTime) {
+  return await request({
+    url: baseUrl + `/public/getBillingByTime?cid=${cid}&uid=${uid}&startTime=${startTime}&endTime=${endTime}`,
+    method: 'get',
+  })
+}
+
 // 根据 id 查询订单
 export async function queryBillById(id) {
   return await request({
@@ -234,5 +250,32 @@ export async function getShareBillDetails(id) {
   return await request({
     url: baseUrl + `/public/getBillingDetails?id=${id}`,
     method: 'get',
+  })
+}
+
+// 用户上传标语
+export async function uploadTagline(data) {
+  return await request({
+    url: baseUrl + `/user/uploadTagline`,
+    method: 'post',
+    data
+  })
+}
+// 上传用户二维码
+export async function uploadQRCode(file) {
+  header['content-type'] = 'multipart/form-data'
+  return new Promise(resolve => {
+    wx.uploadFile({
+      url: baseUrl + `/user/uploadQRCode`,
+      header,
+      filePath: file.url,
+      name: 'file',
+      success: () => {
+        resolve(true)
+      },
+      fail: () => {
+        resolve(false)
+      }
+    })
   })
 }

@@ -11,6 +11,7 @@ Page({
    * Page initial data
    */
   data: {
+    isOverShare: true,
     billData: {},
     deleteVisible: false,
     visible: false,
@@ -155,13 +156,6 @@ Page({
     return {
       title: '您有一份新账单请注意查收',
       path: '/pages/share/index?id=' + this.data.billData.id,
-      success: function (res) {
-        // 转发成功
-        wx.showToast({
-          title: 'title',
-        })
-      },
     }
-
   }
 })

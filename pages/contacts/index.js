@@ -11,6 +11,7 @@ Page({
    * Page initial data
    */
   data: {
+    isOverShare: true,
     page: 1,
     size: 10,
     total: 0,
@@ -18,32 +19,38 @@ Page({
     list: [],
     totalPrice: 0,
     noMore: false,
-    startTime: '',
-    endTime: '',
+    startTime: dayjs().subtract(1, 'month').format('YYYY-MM-DD'),
+    endTime: formatTime(new Date(), 'YYYY-MM-DD'),
     dateVisible: false,
     minDate: dayjs().subtract(1, 'year').valueOf(),
     defaultValue: [dayjs().subtract(1, 'month').valueOf(), new Date().getTime()],
   },
-
   onLoad(options) {
     // 接受上一页传来的客户 id
     const eventChannel = this.getOpenerEventChannel()
     if (!eventChannel) return;
     eventChannel.on('acceptBillData', (data) => {
-      console.log(data)
+      wx.setNavigationBarTitle({
+        title: data.data.client.name + '的账单'
+      })
+      const submitData = {
+        client: data.data.client,
+      }
       let startTime = '',
         endTime = ''
       if (data.data.date) {
         startTime = data.data.date + '-01'
         endTime = dayjs(data.data.date).add(1, 'month').format('YYYY-MM-DD')
+        submitData.startTime = startTime
+        submitData.endTime = endTime
       }
-      this.setData({
-        client: data.data.client,
-        startTime,
-        endTime,
-      })
+      this.setData(submitData)
+
       this.init()
     })
+  },
+  back() {
+    wx.navigateBack()
   },
   async init() {
     // 根据客户查询所有账单
@@ -210,8 +217,7 @@ Page({
   onShareAppMessage() {
     return {
       title: this.data.client.name + '的账单请查收',
-      path: '/pages/share/index?id='
+      path: `/pages/shareContacts/index?uid=${this.data.client.user_id}&cid=${this.data.client.id}&startTime=${this.data.startTime}&endTime=${this.data.endTime}`,
     }
-
   }
 })

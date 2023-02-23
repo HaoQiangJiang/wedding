@@ -1,21 +1,13 @@
 <view class="top">
   <text class="total-price">总计 {{totalPrice}} 元</text>
-  <view class="top-time" capture-bind:tap="openDatePicker">
-    <text class="time">
-      {{startTime }}
-    </text>
-    <text class="time">
-      {{endTime }}
-    </text>
-  </view>
 </view>
 <view class="container">
-  <viw class="left">
+  <view class="left">
     <view wx:for="{{list}}" wx:key="{{id}}" class="contacts">
       <t-collapse>
         <t-collapse-panel>
           <view class="bill-title" slot="header">
-            <text class="time">{{fn.formateTime(item.created_at)}}</text>
+            <text class="time">{{fn.formateTime(item.created_at)}}日账单</text>
             <text class="real-amount {{item.real_amount>0?'red':'green'}}">{{item.real_amount}}元</text>
             <text class="total">累计{{fn.total(item.real_amount)}}</text>
           </view>
@@ -25,14 +17,12 @@
         </t-collapse-panel>
       </t-collapse>
     </view>
-  </viw>
-
+  </view>
 </view>
-
-<view class="no-more" wx:if="{{noMore}}">
-  <text>我是有底线的</text>
+<view class="pay">
+  <text class="title">{{user.tagline ||"这是我的收款码，欢迎扫码支付"}} </text>
+  <t-image class="image" mode="heightFix" src="https://weixin.linktmd.com/{{user.qr_code}}" />
 </view>
-<t-calendar visible="{{dateVisible}}" min-date="{{minDate}}" type="range" defaultValue="{{defaultValue}}" bind:confirm="handleDateConfirm" bind:close="closeDatePicker" />
 <wxs module="fn">
   var total = 0
   module.exports = {

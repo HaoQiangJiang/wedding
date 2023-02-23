@@ -28,8 +28,13 @@ Page({
     })
 
   },
-  getUserInfo() {
-    login(this.loginFail)
+  async getUserInfo() {
+    const res = await login(this.loginFail)
+    if (res) {
+      wx.switchTab({
+        url: '/pages/home/index',
+      })
+    }
   },
   loginFail() {
     wx.showToast({

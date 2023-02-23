@@ -10,6 +10,7 @@
     "pages/editUserInfo/index",
     "pages/payConfig/index",
     "pages/contacts/index",
+    "pages/shareContacts/index",
     "pages/bill/index",
     "pages/share/index"
   ],

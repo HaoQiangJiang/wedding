@@ -2,9 +2,10 @@
   <view class="bill-form" wx:for="{{products}}" wx:key="id">
     <view class="top">
       <text class="name">{{item.product.name}}</text>
+      <text class="desc">x{{item.number}}({{item.price}}元/{{item.product.unit}})</text>
     </view>
     <view class="number">
-      <text>{{item.number}}x{{item.price}}(元/{{item.product.unit}})</text>
+      <text>{{item.price*item.number}}元</text>
     </view>
   </view>
 </view>

@@ -3,9 +3,8 @@
   "navigationBarTitleText": "账单",
   "usingComponents": {
     "bill-details": "/components/billDetails/index",
-    "t-calendar": "tdesign-miniprogram/calendar/calendar",
-    "t-icon": "tdesign-miniprogram/icon/icon",
     "t-collapse": "tdesign-miniprogram/collapse/collapse",
+    "t-image": "tdesign-miniprogram/image/image",
     "t-collapse-panel": "tdesign-miniprogram/collapse-panel/collapse-panel"
   }
 }

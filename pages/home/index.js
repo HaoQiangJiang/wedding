@@ -194,15 +194,24 @@ Page({
     }, 241)
   },
   onLoad(options) {
+    const retryLogin = async () => {
+      const result = await login(this.backLoginPage)
+      if (result) {
+        this.init()
+      }
+    }
     wx.getStorage({
       key: 'token',
       success: (res) => {
         if (!res.data) {
           // 没有 token 登录
-          login(this.backLoginPage)
+          retryLogin()
         } else {
           this.init()
         }
+      },
+      fail: () => {
+        retryLogin()
       }
     })
   },
