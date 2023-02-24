@@ -149,7 +149,7 @@ Page({
     let totalPrice = 0
     const resultReverse = JSON.parse(JSON.stringify(this.data.list)).reverse()
     const resultLegnth = this.data.list.length - 1
-    resultReverse.forEach(item => {
+    resultReverse.forEach((item, index) => {
       totalPrice += item.real_amount
       const noReverseIndex = resultLegnth - index
       this.data.list[noReverseIndex].accumulate = totalPrice
