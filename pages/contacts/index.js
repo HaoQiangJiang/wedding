@@ -79,9 +79,12 @@ Page({
       result = [...this.data.list, ...data.data.list]
     }
     let totalPrice = 0
-    result.forEach(item => {
+    const resultReverse = JSON.parse(JSON.stringify(result)).reverse()
+    const resultLegnth = result.length - 1
+    resultReverse.forEach((item, index) => {
       totalPrice += item.real_amount
-      item.accumulate = totalPrice
+      const noReverseIndex = resultLegnth - index
+      result[noReverseIndex].accumulate = totalPrice
     })
     this.setData({
       list: result,
@@ -127,9 +130,12 @@ Page({
     const operateData = e.detail.data
     this.data.list = this.data.list.filter(item => item.id !== operateData.id)
     let totalPrice = 0
-    this.data.list.forEach(item => {
+    const resultReverse = JSON.parse(JSON.stringify(this.data.list)).reverse()
+    const resultLegnth = this.data.list.length - 1
+    resultReverse.forEach((item, index) => {
       totalPrice += item.real_amount
-      item.accumulate = totalPrice
+      const noReverseIndex = resultLegnth - index
+      this.data.list[noReverseIndex].accumulate = totalPrice
     })
     this.setData({
       list: this.data.list,
@@ -141,9 +147,12 @@ Page({
     const listIndex = this.data.list.findIndex(item => item.id === operateData.id)
     this.data.list.splice(listIndex, 1, operateData)
     let totalPrice = 0
-    this.data.list.forEach(item => {
+    const resultReverse = JSON.parse(JSON.stringify(this.data.list)).reverse()
+    const resultLegnth = this.data.list.length - 1
+    resultReverse.forEach(item => {
       totalPrice += item.real_amount
-      item.accumulate = totalPrice
+      const noReverseIndex = resultLegnth - index
+      this.data.list[noReverseIndex].accumulate = totalPrice
     })
     this.setData({
       list: this.data.list,

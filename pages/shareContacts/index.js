@@ -40,9 +40,12 @@ Page({
       data
     } = await getShareBill(uid, cid, startTime, endTime)
     let totalPrice = 0
-    data.data.list.forEach(item => {
+    const resultReverse = JSON.parse(JSON.stringify(data.data.list)).reverse()
+    const resultLegnth = data.data.list.length - 1
+    resultReverse.forEach((item, index) => {
       totalPrice += item.real_amount
-      item.accumulate = totalPrice
+      const noReverseIndex = resultLegnth - index
+      data.data.list[noReverseIndex].accumulate = totalPrice
     })
     wx.setNavigationBarTitle({
       title: data.data.list[0].client.name + '的账单'

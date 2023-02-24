@@ -158,7 +158,14 @@ Page({
     if (this.data.mode === 'manage') {
       // 管理模式的点击事件
       wx.navigateTo({
-        url: '/pages/customerEdit/index',
+        url: '/pages/contacts/index',
+        success: (res) => {
+          res.eventChannel.emit('acceptBillData', {
+            data: {
+              client: e.target.dataset.item
+            }
+          })
+        }
       })
       return
     }
