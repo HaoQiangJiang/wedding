@@ -105,9 +105,17 @@ Page({
     })
   },
   handleDateConfirm(e) {
+    console.log(e)
     const times = e.detail.value;
     const startTime = formatTime(times[0], 'YYYY-MM-DD')
-    const endTime = formatTime(times[1], 'YYYY-MM-DD')
+    let endTime = ''
+    if (times.length === 1) {
+      // 只选择了一个日期
+      endTime = startTime
+    } else {
+      // 选择了两个如期
+      endTime = formatTime(times[1], 'YYYY-MM-DD')
+    }
     this.setData({
       startTime,
       endTime,

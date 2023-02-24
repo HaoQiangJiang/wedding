@@ -33,10 +33,10 @@ Page({
       value: 'unit'
     }, {
       label: '工厂价',
-      value: 'store_price'
+      value: 'factory_price'
     }, {
       label: '门店价',
-      value: 'factory_price'
+      value: 'store_price'
     }, {
       label: '备注',
       value: 'remark'

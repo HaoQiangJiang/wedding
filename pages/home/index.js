@@ -26,6 +26,7 @@ Page({
     yesterdayBillAmount: 0, // 昨日销售额
     yesterdayBillCount: 0, // 昨日订单数
     isShowRecord: true, // 是否显示记录组件
+    firstLoad: false,
   },
 
   /**
@@ -219,9 +220,9 @@ Page({
   onReady() {},
 
   onShow() {
+    this.firstLoad = true;
     this.getTabBar().init();
   },
-
   /**
    * Lifecycle function--Called when page hide
    */

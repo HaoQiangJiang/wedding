@@ -13,6 +13,12 @@ Component({
       wx.switchTab({
         url: this.data.list[event.detail.value].url.startsWith('/') ?
           this.data.list[event.detail.value].url : `/${this.data.list[event.detail.value].url}`,
+        success: () => {
+          // 切换 tabbar 刷新页面
+          var page = getCurrentPages().pop();
+          if (page == undefined || page == null) return;
+          page.onLoad();
+        }
       });
     },
 

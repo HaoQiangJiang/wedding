@@ -15,7 +15,6 @@ App({
       // 若想给个别页面做特殊处理 可以给特殊页面加isOverShare为true 就不会重写了
       const data = view.data
       if (!data.isOverShare) {
-        console.log(1111)
         data.isOverShare = true
         view.onShareAppMessage = () => { //重写分享配置
           return {
