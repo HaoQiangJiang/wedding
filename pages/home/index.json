@@ -6,7 +6,6 @@
     "t-button": "tdesign-miniprogram/button/button",
     "t-fab": "tdesign-miniprogram/fab/fab",
     "card": "/components/card/index",
-    "image-bill": "/components/imageBill/index",
     "t-popup": "tdesign-miniprogram/popup/popup",
     "t-sticky": "tdesign-miniprogram/sticky/sticky",
     "record": "/components/record/index",
