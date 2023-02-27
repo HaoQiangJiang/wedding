@@ -236,7 +236,7 @@ const formateBillDetailsToEditBill = (data) => {
     selectGoods: selectGoods || [],
     customer: data.client,
     editBillId: data.id,
-    recordType: data.real_amount >= 0 ? 'record' : 'returnGoods',
+    recordType: data.pay_status,
     orderPrice: data.amount || 0,
     price: Math.abs(data.real_amount) || 0,
   }

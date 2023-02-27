@@ -4,7 +4,7 @@ Component({
    * Component properties
    */
   properties: {
-    recordType:String,
+    recordType:Number,
   },
 
   /**

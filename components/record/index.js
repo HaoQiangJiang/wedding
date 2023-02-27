@@ -26,12 +26,15 @@ Component({
     orderPrice: 0,
     recordTypeMap: [{
       label: '记账',
-      value: 'record'
+      value: 1
+    }, {
+      label: '待付款',
+      value: 0
     }, {
       label: '退货',
-      value: 'returnGoods'
+      value: 2
     }],
-    recordType: 'record',
+    recordType: 1,
   },
   lifetimes: {
     attached() {
@@ -48,7 +51,7 @@ Component({
     changeRecordType(e) {
       const item = e.currentTarget.dataset.item
       this.setData({
-        recordType: item.value
+        recordType: Number( item.value)
       })
     },
     showPicker(e) {
@@ -132,8 +135,8 @@ Component({
       const params = {
         "client_id": this.data.customer.id,
         "amount": this.data.orderPrice,
-        "real_amount": this.data.recordType === 'record' ? this.data.price : -this.data.price,
-        "pay_status": this.data.recordType === 'record' ? (this.data.price ? 1 : 0) : 2,
+        "real_amount": [0,1].includes(this.data.recordType)  ? this.data.price : -this.data.price,
+        "pay_status": this.data.recordType,
         "create_at": this.data.billDate,
         "remark": "",
         products

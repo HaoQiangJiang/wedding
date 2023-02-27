@@ -31,7 +31,7 @@
           <t-tab-panel label="已退货" value="2" />
         </t-tabs>
         <view class="list">
-          <list isHiddenAvatar="{{true}}" list="{{recordList}}" bind:deleteCallBack="deleteItem" bind:refreshBill="init" />
+          <list isHiddenAvatar="{{true}}" isHiddenEdit="{{true}}" list="{{recordList}}" bind:deleteCallBack="deleteItem" bind:refreshBill="init" />
         </view>
       </view>
     </card>

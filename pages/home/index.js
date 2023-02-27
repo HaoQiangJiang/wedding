@@ -157,6 +157,17 @@ Page({
     this.setData({
       visible: false
     });
+    // 解决组件不重新渲染导致内容还在的问题
+    setTimeout(() => {
+      this.setData({
+        isShowRecord: false
+      })
+    }, 240);
+    setTimeout(() => {
+      this.setData({
+        isShowRecord: true
+      })
+    }, 241)
   },
   setRecord(data) {
     const recordComponent = this.selectComponent('#record')

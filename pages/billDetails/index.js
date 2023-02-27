@@ -62,17 +62,6 @@ Page({
     this.setData({
       visible: e.detail.visible,
     });
-    // 解决组件不重新渲染导致内容还在的问题
-    setTimeout(() => {
-      this.setData({
-        isShowRecord: false
-      })
-    }, 240);
-    setTimeout(() => {
-      this.setData({
-        isShowRecord: true
-      })
-    }, 241)
   },
 
   openDelete() {

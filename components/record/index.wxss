@@ -78,6 +78,10 @@
   color: var(--green--);
 }
 
+.price.blue {
+  color: var(--primary--);
+}
+
 .record-input {
   padding: 20rpx 30rpx;
   display: flex;

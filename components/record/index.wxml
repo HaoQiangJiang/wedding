@@ -20,7 +20,7 @@
     <t-date-time-picker title="选择日期" visible="{{dateVisible}}" mode="minute" defaultValue="{{billDate}}" format="YYYY-MM-DD HH:mm:ss" bindchange="onConfirm" bindpick="onColumnChange" bindcancel="hidePicker" />
   </t-cell-group>
   <view class="record-summary">
-    <text>订单总金额：<text class='price {{recordType=="record"?"red":"green"}}'>{{orderPrice}}</text></text>
+    <text>订单总金额：<text class='price {{recordType===1?"red":(recordType===0?"blue":"green")}}'>{{orderPrice}}</text></text>
   </view>
   <view class="record-input">
     <view class='input_box'>
@@ -66,7 +66,7 @@
     },
     getTitle: function (recordType, editBillId) {
       var firstWord = editBillId === '' ? '创建' : '修改'
-      var endWord = recordType === 'record' ? '账单' : '退货单'
+      var endWord = recordType === 1 ? '账单' : (recordType === 0 ? '待付款' : '退货单')
       return firstWord + endWord
     }
   }

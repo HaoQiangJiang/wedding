@@ -34,12 +34,20 @@
   background-color: var(--green--) !important;
 }
 
+.submit.blue {
+  background-color: var(--primary--) !important;
+}
+
 .submit.red:active {
   background-color: #eb595b !important;
 }
 
 .submit.green:active {
   background-color: #08af6c !important;
+}
+
+.submit.blue:active {
+  background-color: #3b45df !important;
 }
 
 .keys {

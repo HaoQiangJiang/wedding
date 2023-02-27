@@ -34,8 +34,17 @@ Page {
   height: 400rpx;
 }
 
+.btn-wrapper {
+  display: flex;
+  height: 100%;
+}
+
 .edit-btn {
   background-color: var(--yellow--);
+}
+
+.delete-btn {
+  background-color: var(--red--);
 }
 
 .swipe-btn {

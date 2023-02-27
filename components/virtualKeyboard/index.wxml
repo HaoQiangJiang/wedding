@@ -6,7 +6,7 @@
     <view class="keys">
       <image src='../../assets/keyboardDelete.svg' class="image" data-keys="clear" catchtap='keyTap' />
     </view>
-    <text class='keys submit {{recordType==="record"?"red":"green"}}' data-keys="确定" catchtap='keyTap'>确定</text>
+    <text class='keys submit {{recordType===1?"red":(recordType===0?"blue":"green")}}' data-keys="确定" catchtap='keyTap'>确定</text>
 
   </view>
 </view>

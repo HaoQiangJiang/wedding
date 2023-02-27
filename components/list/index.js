@@ -9,6 +9,7 @@ Component({
   properties: {
     isHiddenAvatar: Boolean,
     list: Array,
+    isHiddenEdit:Boolean
   },
 
   /**
