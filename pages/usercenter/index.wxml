@@ -20,3 +20,4 @@
     <t-cell title="退出登录" arrow hover bindtap="logoutFn" />
   </t-cell-group>
 </view>
+<t-dialog id="t-dialog" />

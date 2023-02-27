@@ -7,11 +7,13 @@ const {
 const {
   getUserInfo
 } = require('../../api/index')
+import Dialog from 'tdesign-miniprogram/dialog/index';
+
 Page({
   data: {
     userInfo: {},
     createDay: 0,
-    count:0
+    count: 0
   },
   onShow() {
     this.getTabBar().init();
@@ -29,7 +31,7 @@ Page({
           nickName: userInfo.name,
           phoneNumber: '',
         },
-        count:userInfo.count,
+        count: userInfo.count,
         createDay: diffTime(userInfo.created_at)
       })
     }
@@ -48,7 +50,19 @@ Page({
     })
   },
   logoutFn() {
-    logout()
+    const dialogConfig = {
+      context: this,
+      title: '退出登录',
+      content: '确定退出登录吗?',
+      confirmBtn: '确定',
+      cancelBtn: '取消',
+    };
+
+    Dialog.confirm(dialogConfig)
+      .then(() => logout())
+      .catch(() => console.log('点击了取消'))
+      .finally(() => Dialog.close());
+
   },
   navigate(e) {
     const url = e.currentTarget.dataset.key

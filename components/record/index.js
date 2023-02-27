@@ -25,16 +25,16 @@ Component({
     billDate: formatTime(new Date(), 'YYYY-MM-DD HH:mm:ss'),
     orderPrice: 0,
     recordTypeMap: [{
-      label: '记账',
+      label: '已付',
       value: 1
     }, {
-      label: '待付款',
+      label: '未付',
       value: 0
     }, {
-      label: '退货',
+      label: '退款',
       value: 2
     }],
-    recordType: 1,
+    recordType: 0,
   },
   lifetimes: {
     attached() {
@@ -50,8 +50,9 @@ Component({
   methods: {
     changeRecordType(e) {
       const item = e.currentTarget.dataset.item
+      console.log(item.value)
       this.setData({
-        recordType: Number( item.value)
+        recordType: item.value
       })
     },
     showPicker(e) {
@@ -135,7 +136,7 @@ Component({
       const params = {
         "client_id": this.data.customer.id,
         "amount": this.data.orderPrice,
-        "real_amount": [0,1].includes(this.data.recordType)  ? this.data.price : -this.data.price,
+        "real_amount": [0, 1].includes(this.data.recordType) ? this.data.price : -this.data.price,
         "pay_status": this.data.recordType,
         "create_at": this.data.billDate,
         "remark": "",

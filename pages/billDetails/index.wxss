@@ -1,6 +1,8 @@
 Page {
   height: 100%;
   overflow-y: scroll;
+  --td-button-default-outline-color: var(--green--);
+  --td-button-default-outline-border-color: var(--green--);
 }
 
 .bill:active {
@@ -38,9 +40,11 @@ Page {
 .edit-btn {
   position: relative;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
   padding: 20rpx;
-  z-index: 2;
   margin-bottom: 10rpx;
+  gap: 30rpx;
 }
 
 .t-input__control--disabled {

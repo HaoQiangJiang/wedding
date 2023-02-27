@@ -1,10 +1,13 @@
 const {
   deleteBill,
-  queryBillById
+  queryBillById,
+  updateBill
 } = require("../../api/index");
 const {
   formateBillDetailsToEditBill
 } = require('../../utils/util')
+import Dialog from 'tdesign-miniprogram/dialog/index';
+
 Page({
 
   /**
@@ -45,6 +48,12 @@ Page({
     this.setData({
       visible: false
     });
+  },
+  // 转为已付
+  async transformPay() {
+    this.data.billData.pay_status = 1
+    await updateBill(this.data.billData.id, this.data.billData)
+    this.refreshBill()
   },
   // 记一笔
   addBill() {
