@@ -1,25 +1,22 @@
 const {
   deleteBill,
   queryBillById,
-  updateBill
+  updateBillStatus,
+  singleRepayment
 } = require("../../api/index");
 const {
   formateBillDetailsToEditBill
 } = require('../../utils/util')
-import Dialog from 'tdesign-miniprogram/dialog/index';
 
 Page({
-
-  /**
-   * Page initial data
-   */
   data: {
     isOverShare: true,
     billData: {},
     deleteVisible: false,
     visible: false,
     isShowRecord: true,
-
+    repayVisible: false,
+    maxRepay: 0,
   },
   // 刷新订单
   async refreshBill() {
@@ -30,7 +27,8 @@ Page({
       data
     } = await queryBillById(this.data.billData.id)
     this.setData({
-      billData: data.data
+      billData: data.data,
+      maxRepay: data.data.real_amount - data.data.paid_amount
     })
     wx.hideLoading()
     const pages = getCurrentPages();
@@ -48,12 +46,6 @@ Page({
     this.setData({
       visible: false
     });
-  },
-  // 转为已付
-  async transformPay() {
-    this.data.billData.pay_status = 1
-    await updateBill(this.data.billData.id, this.data.billData)
-    this.refreshBill()
   },
   // 记一笔
   addBill() {
@@ -83,6 +75,35 @@ Page({
       deleteVisible: false
     })
   },
+  closeRepay() {
+    this.setData({
+      repayVisible: false,
+    })
+  },
+  openRepay() {
+    this.setData({
+      repayVisible: true,
+    })
+  },
+  async submitRepay(e) {
+    const {
+      isAllPay,
+      partPay
+    } = e.detail
+    if (isAllPay) {
+      this.data.billData.pay_status = 1
+      await updateBillStatus(this.data.billData.id, {
+        pay_status: this.data.billData.pay_status
+      })
+    } else {
+      const params = {
+        "bill_id": this.data.billData.id,
+        "repayment_amount": Number(partPay)
+      }
+      await singleRepayment(params)
+    }
+    this.refreshBill()
+  },
   // 确定删除
   async submitDelete() {
     const pages = getCurrentPages();
@@ -101,7 +122,8 @@ Page({
     if (!eventChannel) return;
     eventChannel.on('acceptBillData', (data) => {
       this.setData({
-        billData: data.data
+        billData: data.data,
+        maxRepay: data.data.real_amount - data.data.paid_amount
       })
     })
   },

@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/home/index",
+    "pages/customerBill/index",
     "pages/login/index",
     "pages/statistics/index",
     "pages/usercenter/index",
@@ -12,7 +13,8 @@
     "pages/contacts/index",
     "pages/shareContacts/index",
     "pages/bill/index",
-    "pages/share/index"
+    "pages/share/index",
+    "pages/recycle/index"
   ],
   "tabBar": {
     "custom": true,

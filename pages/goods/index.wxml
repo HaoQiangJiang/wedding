@@ -9,21 +9,20 @@
         <block wx:for="{{goodsList}}" wx:key="index">
           <t-indexes-anchor index="{{item.index}}" />
           <t-cell-group>
-            <view wx:for="{{item.children}}" wx:key="goods.name" wx:for-item="goods">
+            <view wx:for="{{item.children}}" wx:key="id" wx:for-item="goods">
               <t-swipe-cell>
                 <view>
                   <t-cell title="{{goods.name}}">
-                    <view wx:if="{{mode==='select'}}" class="description" slot="description" data-item="{{goods}}" bindtap="onChangePriceType">
-                      <text class="{{selectGoods[goods.id].isFactoryPrice?'active':''}}">工厂价:{{goods.factory_price}}/{{goods.unit}}
-                      </text>
-                      <text class="{{!selectGoods[goods.id].isFactoryPrice?'active':''}}">门店价:{{goods.store_price}}/{{goods.unit}}</text>
+                    <view wx:if="{{mode==='select'}}" class="description" slot="description" data-item="{{goods}}">
+                      <t-tag icon="edit-1" variant="outline" data-id="{{goods.id}}" bind:click="openPrice">{{goods[goods.priceType]}}/{{goods.unit}}</t-tag>
+
                     </view>
                     <view wx:else class="description" slot="description">
                       <text>工厂价:{{goods.factory_price}}/{{goods.unit}};门店价:{{goods.store_price}}/{{goods.unit}}
                       </text>
                     </view>
-                    <view class="stepper-slot" slot="note" wx:if="{{mode==='select'}}" style="z-index:2">
-                      <stepper value="{{selectGoods[goods.id]?selectGoods[goods.id].count:0}}" item="{{goods}}" bind:replaceGoodsCount="replaceGoodsCount" />
+                    <view class="stepper-slot" slot="note" wx:if="{{mode==='select'}}">
+                      <stepper value="{{goods.count}}" uuid="{{goods.id}}" bind:changeGoodsCount="changeGoodsCount" />
                     </view>
                   </t-cell>
                 </view>
@@ -32,7 +31,7 @@
                     <t-icon class="padding-bottom" name="edit" size="32rpx"></t-icon>
                     编辑
                   </view>
-                  <view class="swipe-btn delete-btn column" data-item="{{goods}}" bind:tap="openDelete">
+                  <view class="swipe-btn delete-btn column" data-id="{{goods.id}}" bind:tap="openDelete">
                     <t-icon class="padding-bottom" name="delete" size="32rpx"></t-icon>
                     删除
                   </view>
@@ -57,9 +56,22 @@
       <view class="btn btn--confirm" aria-role="button" capture-bind:tap="submitAddGoods">确定</view>
     </view>
     <view>
-      <t-input wx:for="{{addGoodsMap}}" cursor-spacing="{{300}}" wx:key="value" type="{{item.value==='factory_price' || item.value === 'store_price'? 'number':'text'}}" label="{{item.label}}" suffix="{{item.value==='factory_price' || item.value === 'store_price'? '元':''}}" align="right" value="{{addGoodsData[item.value]}}" placeholder="请输入{{item.label}}" data-key="{{item.value}}" bind:change="changeGoodsInput"></t-input>
+      <t-input wx:for="{{addGoodsMap}}" confirm-hold="{{index!==addCustomerMap.length-1}}" focus="{{index===focusIndex}}" confirm-hold="{{true}}" confirm-type="next" wx:key="value" type="{{item.value==='factory_price' || item.value === 'store_price'? 'digit':'text'}}" label="{{item.label}}" suffix="{{item.value==='factory_price' || item.value === 'store_price'? '元':''}}" align="right" value="{{addGoodsData[item.value]}}" placeholder="请输入{{item.label}}" data-index="{{index}}" data-key="{{item.value}}" bind:change="changeGoodsInput" bind:enter="enter"></t-input>
     </view>
   </view>
 </t-popup>
 <t-toast id="t-toast" />
 <t-dialog visible="{{deleteVisible}}" content="删除后无法恢复,确定删除该商品吗?" confirm-btn="{{ { content: '删除', variant: 'base', theme: 'danger' } }}" cancel-btn="取消" bind:confirm="submitDelete" bind:cancel="closeDelete" />
+<t-dialog visible="{{priceVisible}}" confirm-btn="确定" bind:confirm="submitPrice" bind:cancel="closePrice">
+  <t-radio-group slot="content" t-class="horizontal-box" value="{{operateGoods.priceType}}" bind:change="onChangePriceType">
+    <view wx:for="{{priceMap}}" wx:key="index" class="card {{operateGoods.priceType === item.value ? 'card--active' : ''}} {{item.value=='customPrice'?'custom':''}}">
+      <t-icon name="check" t-class="card__icon" />
+      <t-radio value="{{item.value}}" label="{{item.name}}({{operateGoods[item.value]}}/{{operateGoods.unit}})" icon="none" borderless>
+        <view slot="content" wx:if="{{item.value==='customPrice'}}" class="content-custom">
+          <t-input label="金额" t-class-tips="tips" tips="{{priceError?'请输入正确金额':''}}" borderless="{{true}}" placeholder="0.00" suffix="元" align="right" type="digit" value="{{operateGoods.customPrice}}" bind:change="changePartPay" bind:enter="submitRepay" />
+        </view>
+      </t-radio>
+
+    </view>
+  </t-radio-group>
+</t-dialog>

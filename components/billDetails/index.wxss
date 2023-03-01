@@ -21,7 +21,7 @@
 }
 
 .bill-form .top .name {
-  font-size: 36rpx;
+  font-size: 34rpx;
 }
 
 .bill-form .top .desc {
@@ -33,6 +33,6 @@
   display: flex;
   align-items: center;
   flex-direction: row;
-  color: var(--text-color-3--);
-  font-size: 32rpx;
+  color: var(--primary--);
+  font-size: 36rpx;
 }

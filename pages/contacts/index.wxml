@@ -26,11 +26,6 @@
       </t-collapse-panel>
     </t-collapse>
   </viw>
-
-</view>
-
-<view class="no-more" wx:if="{{noMore}}">
-  <text>我是有底线的</text>
 </view>
 <t-calendar visible="{{dateVisible}}" min-date="{{minDate}}" type="range" defaultValue="{{defaultValue}}" bind:confirm="handleDateConfirm" bind:close="closeDatePicker" />
 <wxs module="fn">

@@ -38,7 +38,7 @@
       <view class="btn btn--confirm" aria-role="button" capture-bind:tap="submitAddCustomer">确定</view>
     </view>
     <view>
-      <t-input wx:for="{{addCustomerMap}}" cursor-spacing="{{300}}" type="{{item.value ==='phone'?'number':'text'}}" wx:key="value" label="{{item.label}}" align="right" value="{{addCustomerData[item.value]}}" placeholder="请输入{{item.label}}" data-key="{{item.value}}" bind:change="changeCustomer"></t-input>
+      <t-input wx:for="{{addCustomerMap}}" confirm-hold="{{index!==addCustomerMap.length-1}}" focus="{{index===focusIndex}}" type="{{item.value ==='phone'?'number':'text'}}" wx:key="value" label="{{item.label}}" align="right" value="{{addCustomerData[item.value]}}" placeholder="请输入{{item.label}}" data-key="{{item.value}}" data-index="{{index}}" bind:change="changeCustomer" bind:enter="enter"></t-input>
     </view>
   </view>
 </t-popup>

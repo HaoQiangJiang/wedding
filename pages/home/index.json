@@ -10,6 +10,7 @@
     "t-sticky": "tdesign-miniprogram/sticky/sticky",
     "record": "/components/record/index",
     "list": "/components/list/index",
-    "t-pull-down-refresh": "tdesign-miniprogram/pull-down-refresh/pull-down-refresh"
+    "t-cell-group": "tdesign-miniprogram/cell-group/cell-group",
+    "t-cell": "tdesign-miniprogram/cell/cell"
   }
 }

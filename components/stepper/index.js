@@ -4,7 +4,7 @@ Component({
    * Component properties
    */
   properties: {
-    item: Object,
+    uuid: String,
     value: Number,
   },
   /**
@@ -30,14 +30,10 @@ Component({
     },
     changeCount(e) {
       wx.vibrateShort(); // 使手机震动15ms
-      const currentValue = e.detail.value
-      const data = {
-        goods: this.properties.item,
-        updateData: {
-          count: currentValue
-        }
-      }
-      this.triggerEvent('replaceGoodsCount', data)
+      this.triggerEvent('changeGoodsCount', {
+        uuid: this.properties.uuid,
+        value: e.detail.value
+      })
     },
   }
 })

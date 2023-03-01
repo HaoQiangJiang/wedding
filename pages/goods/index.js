@@ -7,6 +7,8 @@ const {
 const {
   searchKeyInString,
   formateDataToIndexList,
+  ObjectReflection,
+  isNumber
 } = require('../../utils/util')
 import Toast from 'tdesign-miniprogram/toast/index';
 const defaultGoods = {
@@ -22,7 +24,7 @@ Page({
     indexList: [],
     goodsList: [],
     originGoodsList: [],
-    selectGoods: {},
+    propsGoods: [], // 外部传入的商品
     searchKey: '',
     addGoodsVisible: false,
     addGoodsMap: [{
@@ -44,6 +46,19 @@ Page({
     addGoodsData: defaultGoods,
     deleteVisible: false,
     operateGoods: {},
+    focusIndex: -1,
+    priceVisible: false,
+    priceMap: [{
+      name: '门店价',
+      value: 'store_price'
+    }, {
+      name: '工厂价',
+      value: 'factory_price'
+    }, {
+      name: '自定义',
+      value: 'customPrice'
+    }],
+    priceError: false,
   },
 
   /**
@@ -59,15 +74,11 @@ Page({
     if (!eventChannel) return;
     eventChannel.on('acceptDataFromOpenerPage', (data) => {
       this.setData({
-        selectGoods: data.data
+        propsGoods: data.data
       })
     })
   },
 
-  /**
-   * Lifecycle function--Called when page is initially rendered
-   */
-  onReady() {},
   // 确定删除
   async submitDelete() {
     const id = this.data.operateGoods.id
@@ -75,20 +86,13 @@ Page({
       data
     } = await deleteGoods(id)
     if (data.code === 200) {
-      // 如果 selectGoods 里面有也要删除
-      const selectGoodsBak = {
-        ...this.data.selectGoods
-      }
-      delete selectGoodsBak[this.data.operateGoods.id]
-      this.setData({
-        selectGoods: selectGoodsBak
-      })
       this.closeDelete()
       this.getAllGoods()
     }
   },
   openDelete(e) {
-    const operateGoods = e.currentTarget.dataset.item
+    const id = e.currentTarget.dataset.id
+    const operateGoods = this.data.originGoodsList.find(item => item.id === id)
     this.setData({
       deleteVisible: true,
       operateGoods
@@ -101,28 +105,66 @@ Page({
   },
   onEdit(e) {
     const data = e.currentTarget.dataset.item
+    console.log(ObjectReflection(defaultGoods, data))
     this.setData({
       addGoodsVisible: true,
-      addGoodsData: data
+      addGoodsData: {
+        id: data.id,
+        ...ObjectReflection(defaultGoods, data)
+      }
     })
   },
+  getSelectGoods() {
+    return this.data.originGoodsList.filter(item => item.count > 0)
+  },
+  replaceProperty(list, id) {
+    if (list.length === 0) return null
+    const item = list.find(v => v.id === id)
+    if (!item) return null
+    return {
+      priceType: item.priceType,
+      customPrice: item.customPrice,
+      count: item.count
+    }
+  },
   async getAllGoods() {
+    // 调用前先保存选中的商品
+    const tempSelectGoods = this.getSelectGoods()
     wx.showLoading({
       title: '正在加载...',
     })
     const {
       data
     } = await queryAllGoods()
+    wx.hideLoading()
     const {
       list
     } = data.data
+    list.forEach(item => {
+      // 外部带过来的数据
+      item.priceType = 'store_price' // 选择的价格类型
+      item.customPrice = 0 // 自定义价格
+      item.count = 0 // 选择的数量
+      console.log()
+      const propGood = this.replaceProperty(this.data.propsGoods, item.id)
+      if (propGood) {
+        item.priceType = propGood.priceType
+        item.count = propGood.count
+        item.customPrice = propGood.customPrice
+      }
+      const tempGood = this.replaceProperty(tempSelectGoods, item.id)
+      if (tempGood) {
+        item.priceType = tempGood.priceType
+        item.count = tempGood.count
+        item.customPrice = tempGood.customPrice
+      }
+    })
     const formateData = formateDataToIndexList(list)
     this.setData({
       originGoodsList: list,
       goodsList: formateData,
       indexList: formateData.map(item => item.index)
     })
-    wx.hideLoading()
   },
   openAddGoods() {
     this.setData({
@@ -142,35 +184,28 @@ Page({
   },
   // 确定新增商品
   async submitAddGoods() {
+    console.log(this.data.addGoodsData)
     const IsEmpty = Object.entries(this.data.addGoodsData).some(([key, value]) => {
       if (key === 'remark') return false // remark 不检查
-      return !value
+      return value === ''
     })
     if (IsEmpty) {
       Toast({
         context: this,
         selector: '#t-toast',
-        message: '请检查信息是否填写完整',
+        message: '请检查信息是否完整',
       });
       return;
+    }
+    if (this.data.priceError) {
+      return wx.showToast({
+        title: '请检查金额是否正确',
+        icon: 'none'
+      })
     }
     let data
     if (this.data.addGoodsData.id) {
       data = await editGoods(this.data.addGoodsData)
-      // 修改了商品,选择列表也要修改
-      const selectGoodsBak = {
-        ...this.data.selectGoods
-      }
-      if (selectGoodsBak[this.data.addGoodsData.id]) {
-        console.log(selectGoodsBak, this.data.addGoodsData)
-        selectGoodsBak[this.data.addGoodsData.id] = {
-          ...selectGoodsBak[this.data.addGoodsData.id],
-          ...this.data.addGoodsData
-        }
-        this.setData({
-          selectGoods: selectGoodsBak
-        })
-      }
     } else {
       // 新增用户
       data = await addGoods(this.data.addGoodsData)
@@ -185,9 +220,11 @@ Page({
     let value = e.detail.value
     const key = e.currentTarget.dataset.key
     if (['factory_price', 'store_price'].includes(key)) {
-      // 转为 number 类型
-      if (value !== '') {
-        value = Number(value)
+      const result = isNumber(value);
+      if (this.data.priceError === result) {
+        return this.setData({
+          priceError: !result,
+        });
       }
     }
     this.setData({
@@ -195,6 +232,14 @@ Page({
         ...this.data.addGoodsData,
         [key]: value
       }
+    })
+  },
+  // 回车
+  enter(e) {
+    console.log(e)
+    const index = e.currentTarget.dataset.index
+    this.setData({
+      focusIndex: index + 1
     })
   },
 
@@ -218,72 +263,74 @@ Page({
     })
   },
   onChangePriceType(e) {
-    const goods = e.currentTarget.dataset.item
-    let currentGoods = this.data.selectGoods[goods.id]
-    let isFactoryPrice
-    if (currentGoods) {
-      isFactoryPrice = !currentGoods.isFactoryPrice
-    } else {
-      isFactoryPrice = true
-    }
-    this.replaceGoodsCount({
-      detail: {
-        goods,
-        updateData: {
-          isFactoryPrice
-        }
-      }
+    this.data.operateGoods.priceType = e.detail.value
+    this.setData({
+      operateGoods: this.data.operateGoods,
+      goodsList: this.data.goodsList // 更新下这个数据 让 ui 刷新
     })
+    console.log(this)
+  },
 
-  },
-  // 增加商品个数
-  replaceGoodsCount(event) {
-    const {
-      goods,
-      updateData
-    } = event.detail
-    // 如果商品未选中,则增加到选中列表
-    const key = goods.id
-    if (!this.data.selectGoods[key]) {
-      const bak = {
-        ...this.data.selectGoods
-      }
-      Object.assign(bak, {
-        [key]: {
-          ...updateData,
-          ...goods,
-        }
-      })
-      this.setData({
-        selectGoods: bak
-      })
-    } else {
-      const selectGoodsBak = {
-        ...this.data.selectGoods[key],
-        ...updateData
-      }
-      this.setData({
-        selectGoods: {
-          ...this.data.selectGoods,
-          [key]: selectGoodsBak
-        }
-      })
-    }
-  },
   submit() {
+    // 找出 count 不等于 0 的, 则是为选择的商品
+    const result = this.data.originGoodsList.filter(item => item.count > 0)
+    console.log(result)
     let orderPrice = 0
-    Object.values(this.data.selectGoods).forEach(item => {
-      if (item.count && item.count > 0) { // 去掉 count 为 0 和没有 count 的
-        orderPrice += (item.isFactoryPrice ? item.factory_price : item.store_price) * item.count
-      }
+    result.forEach(item => {
+      orderPrice += (item[item.priceType]) * item.count
     })
     const eventChannel = this.getOpenerEventChannel()
     eventChannel.emit('selectCallBack', {
-      selectGoods: this.data.selectGoods,
+      selectGoods: result,
       orderPrice,
       price: orderPrice
     })
     wx.navigateBack()
+  },
+
+  closePrice() {
+    this.setData({
+      priceVisible: false
+    })
+  },
+  openPrice(e) {
+    const id = e.currentTarget.dataset.id
+    const operateGoods = this.data.originGoodsList.find(item => item.id === id)
+    this.setData({
+      operateGoods,
+      priceVisible: true
+    })
+  },
+  changePartPay(e) {
+    // 修改自定义金额
+    const {
+      value
+    } = e.detail
+    const result = isNumber(value);
+    if (this.data.priceError === result) {
+      return this.setData({
+        priceError: !result,
+      });
+    }
+    this.data.operateGoods.customPrice = Number(e.detail.value)
+    this.setData({
+      operateGoods: this.data.operateGoods,
+      goodsList: this.data.goodsList
+    })
+  },
+  changeGoodsCount(e) {
+    const {
+      uuid,
+      value
+    } = e.detail
+    const operateGoods = this.data.originGoodsList.find(item => item.id === uuid)
+    operateGoods.count = value
+    this.setData({
+      operateGoods
+    })
+  },
+  submitPrice() {
+    this.closePrice()
   },
   /**
    * Lifecycle function--Called when page show

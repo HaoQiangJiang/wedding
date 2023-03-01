@@ -3,9 +3,12 @@
     "t-button": "tdesign-miniprogram/button/button",
     "t-icon": "tdesign-miniprogram/icon/icon",
     "t-dialog": "tdesign-miniprogram/dialog/dialog",
+    "t-input": "tdesign-miniprogram/input/input",
     "t-popup": "tdesign-miniprogram/popup/popup",
     "record": "/components/record/index",
     "bill-details": "/components/billDetails/index",
-    "bill-item": "/components/billItem/index"
+    "bill-item": "/components/billItem/index",
+    "repay-dialog":"/components/repayDialog/index"
+
   }
 }

@@ -1,4 +1,4 @@
 <view wx:if="{{isEdit}}">
-  <t-stepper size="large" t-class="stepper" t-class-minus="stepper" t-class-plus="stepper" default-value="{{value}}" max="{{99999}}" theme="outline" data-goods="{{item}}" bind:change="changeCount" />
+  <t-stepper size="large" t-class="stepper" t-class-minus="stepper" t-class-plus="stepper" default-value="{{value}}" max="{{99999}}" theme="outline" bind:change="changeCount" />
 </view>
 <text class='number' wx:else capture-bind:tap="open">x{{value}}</text>

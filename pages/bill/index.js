@@ -16,9 +16,6 @@ Page({
     totalBillAmount: 0, // 总收益
     yearBillAmount: 0, // 年收益
     yesterdayBillAmount: 0, // 昨日收益
-    page: 1,
-    size: 7,
-    total: 0,
     recordList: [], // 交易记录
     filterVisible: false,
     dateVisible: false,
@@ -62,8 +59,6 @@ Page({
   },
   async initRecord() {
     const params = {
-      "page": this.data.page,
-      "size": this.data.size,
       "searchKey": this.data.filters.searchKey,
       "startTime": this.data.filters.startTime,
       "clientId": this.data.filters.customer.id,
@@ -73,24 +68,15 @@ Page({
     const {
       data
     } = await queryAllBill(params)
-    if (this.data.page === 1) {
-      // 首页全部替换数据
-      this.setData({
-        recordList: data.data.list,
-        total: data.data.total
-      })
-    } else {
-      this.setData({
-        recordList: [...this.data.recordList, ...data.data.list],
-        total: data.data.total
-      })
-    }
-
+    // 首页全部替换数据
+    this.setData({
+      recordList: data.data.list,
+    })
   },
   deleteItem(e) {
     // 删除 item
     const operateData = e.detail.data
-    this.data.recordList = this.data.recordList.filter(item => item.id !== operateData.id)
+    this.data.recordList = this.data.recordList.filters(item => item.id !== operateData.id)
     this.setData({
       recordList: this.data.recordList
     })
@@ -109,8 +95,6 @@ Page({
     })
     this.setData({
       payStatus: Number(e.detail.value),
-      page: 1,
-
     })
     await this.initRecord()
     wx.hideLoading()
@@ -150,8 +134,19 @@ Page({
   },
   closeFilter() {
     this.setData({
-      filterVisible: false
+      filterVisible: false,
     })
+  },
+  canncelFilter() {
+    this.setData({
+      filters: {
+        searchKey: '',
+        customer: {},
+        startTime: '',
+        endTime: ''
+      }
+    })
+    this.submitFilter()
   },
   filterVisibleChange(e) {
     const visible = e.detail.visible
@@ -222,34 +217,11 @@ Page({
    * Page event handler function--Called when user drop down
    */
   async onPullDownRefresh() {
-    // 下拉刷新的时候还原 page
-    this.setData({
-      page: 1,
-      noMore: false
-    })
     await this.init()
     wx.stopPullDownRefresh()
   },
 
-  async onReachBottom() {
-    const {
-      total,
-      size,
-      page
-    } = this.data
-    if (Math.ceil(total / size) <= page) {
-      // 没要更多了
-      this.setData({
-        noMore: true,
-      })
-      return
-    }
-    this.setData({
-      page: page + 1
-    })
-    this.initRecord()
-
-  },
+  async onReachBottom() {},
 
   /**
    * Called when user click on the top right corner to share

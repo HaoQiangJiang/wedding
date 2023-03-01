@@ -3,8 +3,21 @@ import updateManager from './common/updateManager';
 App({
   onLaunch: function () {
     this.onShareAppMessage()
+    wx.getSystemInfo({
+      success: function (res) {
+            if (res.platform === 'ios') {
+          // iOS 系统
+        } else if (res.platform === 'android') {
+          // Android 使用 dark
+          wx.setBackgroundTextStyle({
+            textStyle: 'dark'
+          })
+        } 
+      }
+    })
   },
   onShow: function () {
+
     updateManager();
   },
   onShareAppMessage() {

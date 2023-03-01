@@ -20,7 +20,7 @@ Component({
     price: 0,
     editBillId: '', // 修改订单的 id, 也作为是否是修改订单的依据
     customer: '',
-    selectGoods: {},
+    selectGoods: [],
     dateVisible: '',
     billDate: formatTime(new Date(), 'YYYY-MM-DD HH:mm:ss'),
     orderPrice: 0,
@@ -50,7 +50,6 @@ Component({
   methods: {
     changeRecordType(e) {
       const item = e.currentTarget.dataset.item
-      console.log(item.value)
       this.setData({
         recordType: item.value
       })
@@ -125,12 +124,12 @@ Component({
         mask: true
       })
       // 提交账单
-      const selectGoodsValues = Object.values(this.data.selectGoods)
-      const products = selectGoodsValues.map(item => {
+      const products = this.data.selectGoods.map(item => {
         return {
           id: item.id,
           number: item.count,
-          price: item.isFactoryPrice ? item.factory_price : item.store_price
+          price: item[item.priceType],
+          priceType: item.priceType
         }
       })
       const params = {
@@ -143,9 +142,11 @@ Component({
         products
       }
       if (!params.client_id) {
+        wx.hideLoading()
         return this.toastShow("请选择客户")
       }
       if (params.products.length === 0) {
+        wx.hideLoading()
         return this.toastShow("请选择商品")
       }
       this.data.editBillId === '' ? await createBill(params) : await updateBill(this.data.editBillId, params)

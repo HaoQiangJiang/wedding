@@ -126,6 +126,8 @@ export async function queryAllGoods() {
 }
 // 新增商品
 export async function addGoods(data) {
+  data.factory_price = Number(data.factory_price)
+  data.store_price = Number(data.store_price)
   return await request({
     url: baseUrl + '/product/create',
     method: 'post',
@@ -149,8 +151,8 @@ export async function editGoods(data) {
       name,
       unit,
       remark,
-      store_price,
-      factory_price,
+      store_price: Number(store_price),
+      factory_price: Number(factory_price),
     }
   })
 }
@@ -180,7 +182,38 @@ export async function updateBill(id, data) {
     data,
   })
 }
-
+// 修改订单状态
+export async function updateBillStatus(id, data) {
+  return await request({
+    url: baseUrl + '/bill/updateStatus?id=' + id,
+    method: 'put',
+    data,
+  })
+}
+// 单账单还款
+export async function singleRepayment(data) {
+  return await request({
+    url: baseUrl + '/bill/singleRepayment',
+    method: 'post',
+    data,
+  })
+}
+// 多账单还款
+export async function multiRepayment(data) {
+  return await request({
+    url: baseUrl + '/bill/multiRepayment',
+    method: 'post',
+    data,
+  })
+}
+// 查询未支付金额
+export async function getUnPayMoney(data) {
+  return await request({
+    url: baseUrl + '/bill/findAllUnpaidBills',
+    method: 'post',
+    data,
+  })
+}
 // 查询所有账单
 export async function queryAllBill(data) {
   return await request({
@@ -277,5 +310,28 @@ export async function uploadQRCode(file) {
         resolve(false)
       }
     })
+  })
+}
+
+// 回收站查询所有
+export async function getAllRecycleBill(data) {
+  return await request({
+    url: baseUrl + `/billRecycle/findAllBills`,
+    method: 'post',
+    data
+  })
+}
+// 删除回收站 
+export async function deleteRecycleBill(id) {
+  return await request({
+    url: baseUrl + `/billRecycle/delete/${id}`,
+    method: 'delete',
+  })
+}
+// 恢复回收站
+export async function recoverRecycleBill(id) {
+  return await request({
+    url: baseUrl + `/billRecycle/recover?id=${id}`,
+    method: 'post',
   })
 }

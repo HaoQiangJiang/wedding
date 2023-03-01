@@ -10,12 +10,14 @@
 </view>
 
 <view class="content">
-  <card wx:for="{{allBill}}" wx:key="index" title="{{item.date}}" desc="收入 {{fn.calcTotal(item.list)}}, 账单数 {{item.list.length}}">
-    <list slot="content" bind:addBill="addBill" bind:deleteCallBack="deleteItem" list="{{item.list}}" />
-  </card>
-  <view class="no-more" wx:if="{{noMore}}">
-    <text>我是有底线的</text>
-  </view>
+  <t-cell-group>
+    <t-cell wx:for="{{allCustomer}}" data-item="{{item}}" bind:click="onSelect" aria-role="button" hover size="large">
+      <text slot="title">{{item.name}}</text>
+      <text slot="description">已付:{{item.bill_count - item.unpaid_count}}单 未付:{{item.unpaid_count}}单 </text>
+      <text slot="note" class="note">合计:{{item.total}}元</text>
+    </t-cell>
+  </t-cell-group>
+  <view class="blank" />
 </view>
 
 

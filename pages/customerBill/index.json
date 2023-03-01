@@ -1,0 +1,11 @@
+{
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "card": "/components/card/index",
+    "t-fab": "tdesign-miniprogram/fab/fab",
+    "list": "/components/list/index",
+    "t-empty": "tdesign-miniprogram/empty/empty",
+    "t-radio-group": "tdesign-miniprogram/radio-group/radio-group",
+    "repay-dialog":"/components/repayDialog/index"
+  }
+}

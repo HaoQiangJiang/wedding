@@ -38,6 +38,7 @@ Page({
     deleteVisible: false,
     operateCustomer: {}, // 操作的用户
     isEdit: false, // 是否为编辑用户
+    focusIndex: -1
   },
 
   /**
@@ -109,15 +110,16 @@ Page({
   },
   // 确定新增客户
   async submitAddCustomer() {
+    console.log(this.data.addCustomerData)
     const IsEmpty = Object.entries(this.data.addCustomerData).some(([key, value]) => {
       if (key === 'phone') return false
-      return !value
+      return value === ''
     })
     if (IsEmpty) {
       Toast({
         context: this,
         selector: '#t-toast',
-        message: '请检查信息是否填写完整',
+        message: '请检查信息是否完整',
       });
       return;
     }
@@ -198,10 +200,16 @@ Page({
   },
   onEdit(e) {
     const data = e.currentTarget.dataset.item
-    console.log(data)
     this.setData({
       addCustomerVisible: true,
       addCustomerData: data
+    })
+  },
+  // 回车
+  enter(e) {
+    const index = e.currentTarget.dataset.index
+    this.setData({
+      focusIndex: index + 1
     })
   },
   /**

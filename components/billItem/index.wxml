@@ -7,6 +7,9 @@
     </view>
   </view>
   <view class="right">
-    <text class='money'>{{item.real_amount}}元</text>
+    <t-badge wx:if="{{item.pay_status === 0 && item.paid_amount && item.paid_amount !==item.real_amount}}" count="付{{item.paid_amount}}" offset="{{ [8, -6] }}" shape="bubble">
+      <text class='money'>{{item.real_amount}}元</text>
+    </t-badge>
+    <text wx:else class='money'>{{item.real_amount}}元</text>
   </view>
 </view>

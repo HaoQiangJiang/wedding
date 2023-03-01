@@ -1,7 +1,10 @@
 <view class="bill-details">
   <view class="top">
     <text class="title">账单详情</text>
-    <t-icon name="delete" size="40rpx" data-name="delete" bind:click="openDelete" />
+    <view class="operate">
+      <t-icon name="edit" size="40rpx" data-name="edit" bind:click="addBill" />
+      <t-icon name="delete" size="40rpx" data-name="delete" bind:click="openDelete" />
+    </view>
   </view>
   <view class="content">
     <view class="bill">
@@ -9,8 +12,8 @@
     </view>
     <bill-details products="{{billData.products}}" />
     <view class="edit-btn">
-      <t-button wx:if="{{billData.pay_status === 0}}" theme="default" variant="outline" size="large" icon="check-circle" block capture-bind:tap="transformPay">已支付</t-button>
-      <t-button theme="primary" variant="outline" size="large" icon="edit-1" block capture-bind:tap="addBill">编辑</t-button>
+      <t-button wx:if="{{billData.pay_status === 0}}" theme="default" variant="outline" size="large" icon="check-circle" block capture-bind:tap="openRepay">还款</t-button>
+
     </view>
   </view>
   <t-dialog visible="{{deleteVisible}}" content="删除账单后无法恢复,请确定是否删除?" confirm-btn="{{ { content: '删除', variant: 'base', theme: 'danger' } }}" cancel-btn="取消" bind:confirm="submitDelete" bind:cancel="closeDelete" />
@@ -19,3 +22,4 @@
     <record id="record" wx:if="{{isShowRecord}}" bind:closeBill="closeBill" bind:refreshBill="refreshBill" />
   </t-popup>
 </view>
+<repay-dialog type="single" maxValue="{{maxRepay}}" visible="{{repayVisible}}" bind:cancel="closeRepay" bind:confirm="submitRepay" />

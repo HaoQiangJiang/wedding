@@ -8,9 +8,6 @@ import dayjs from 'dayjs';
 Page({
   data: {
     isOverShare: true,
-    page: 1,
-    size: 10,
-    total: 0,
     client: '',
     list: [],
     totalPrice: 0,
@@ -60,8 +57,6 @@ Page({
       title: '加载中',
     })
     const params = {
-      "page": this.data.page,
-      "size": this.data.size,
       "clientId": this.data.client.id,
       "payStatus": -1,
     }
@@ -72,12 +67,7 @@ Page({
     const {
       data
     } = await queryAllBill(params)
-    let result = []
-    if (this.data.page === 1) {
-      result = data.data.list
-    } else {
-      result = [...this.data.list, ...data.data.list]
-    }
+    let result = data.data.list
     let totalPrice = 0
     const resultReverse = JSON.parse(JSON.stringify(result)).reverse()
     const resultLegnth = result.length - 1
@@ -88,7 +78,6 @@ Page({
     })
     this.setData({
       list: result,
-      total: data.data.total,
       totalPrice
     })
     wx.hideLoading()
@@ -119,7 +108,6 @@ Page({
     this.setData({
       startTime,
       endTime,
-      page: 1
     })
     this.init()
   },
@@ -198,12 +186,8 @@ Page({
   /**
    * Page event handler function--Called when user drop down
    */
-  onPullDownRefresh() {
-    this.setData({
-      page: 1,
-      noMore: false
-    })
-    this.init()
+  async onPullDownRefresh() {
+    await this.init()
     wx.stopPullDownRefresh()
   },
 
@@ -211,22 +195,7 @@ Page({
    * Called when page reach bottom
    */
   onReachBottom() {
-    const {
-      total,
-      size,
-      page
-    } = this.data
-    if (Math.ceil(total / size) <= page) {
-      // 没要更多了
-      this.setData({
-        noMore: true,
-      })
-      return
-    }
-    this.setData({
-      page: page + 1,
-    })
-    this.init()
+
   },
 
   /**

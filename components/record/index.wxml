@@ -35,33 +35,14 @@
 </view>
 <t-toast id="t-toast" />
 <wxs module="fn">
-  function each(obj, cb) {
-    var str = JSON.stringify(obj)
-    var reg = getRegExp('"(\w|-|_)+":', 'g')
-    var matchArr = str.match(reg)
-    if (matchArr) {
-      for (var i = 0; i < matchArr.length; i++) {
-        var objKey = matchArr[i]
-        objKey = objKey.substring(1)
-        objKey = objKey.replace('":', '')
-        cb && cb(objKey, obj[objKey])
-      }
-    }
-  }
   module.exports = {
     formateSelecteGoods: function (selectGoods) {
       var selectGoodsText = [];
-      each(selectGoods, function (key, item) {
-        if (item && item.count && item.count > 0) { // 去掉 count 为 0 和没有 count 的
-          var price = 0
-          if (item.isFactoryPrice) {
-            price = item.factory_price
-          } else {
-            price = item.store_price
-          }
-          selectGoodsText.push(item.name + '(' + price + '/' + item.unit + ')' + '*' + item.count)
-        }
-      })
+      for (var i = 0; i < selectGoods.length; i++) {
+        var item = selectGoods[i]
+        var price = item[item.priceType]
+        selectGoodsText.push(item.name + '(' + price + '/' + item.unit + ')' + '*' + item.count)
+      }
       return selectGoodsText.join('\n')
     },
     getTitle: function (recordType, editBillId) {

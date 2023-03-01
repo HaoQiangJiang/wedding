@@ -2,7 +2,6 @@
   "component": true,
   "usingComponents": {
     "bill-item": "/components/billItem/index",
-    "t-swipe-cell": "tdesign-miniprogram/swipe-cell/swipe-cell",
     "t-icon": "tdesign-miniprogram/icon/icon",
     "t-dialog": "tdesign-miniprogram/dialog/dialog"
   }

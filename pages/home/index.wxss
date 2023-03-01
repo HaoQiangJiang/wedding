@@ -9,8 +9,6 @@
   bottom: 100rpx;
 }
 
-
-
 .home-summary {
   display: flex;
   flex-direction: row;
@@ -42,8 +40,10 @@
   opacity: 0.7;
 }
 
-.no-more {
-  height: 200rpx;
-  align-items: flex-start;
+.blank {
+  height: 150rpx;
+}
 
+.content .note {
+  color: var(--primary--);
 }

@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 import cnchar from 'cnchar';
 
 const formatTime = (date, template) => dayjs(date).format(template);
+const isNumber = (value) => /^\d+(\.\d+)?$/.test(value);
 const diffTime = (time) => {
   // 获取当前时间
   var now = dayjs();
@@ -224,14 +225,22 @@ const mergeArrayByKey = (a, b) => {
 
 // 将订单里的信息拼接未修改订单的信息
 const formateBillDetailsToEditBill = (data) => {
-  const selectGoods = {}
-  data.products.forEach(item => {
-    selectGoods[item.product_id] = {
+  const selectGoods = data.products.map(item => {
+    let priceType = 'customPrice'
+    if (item.price === item.product.factory_price) {
+      priceType = 'factory_price'
+    } else if (item.price === item.product.store_price) {
+      priceType = 'store_price'
+    }
+    return {
       ...item.product,
-      isFactoryPrice: item.price === item.product.factory_price,
+      priceType,
+      customPrice: item.price,
       count: item.number
     }
+
   })
+  console.log(selectGoods)
   return {
     selectGoods: selectGoods || [],
     customer: data.client,
@@ -240,6 +249,18 @@ const formateBillDetailsToEditBill = (data) => {
     orderPrice: data.amount || 0,
     price: Math.abs(data.real_amount) || 0,
   }
+}
+// 对象反射
+function ObjectReflection(obj1, obj2) {
+  let result = Object.keys(obj1).reduce((acc, key) => {
+    if (obj2[key] !== undefined) {
+      acc[key] = obj2[key];
+    } else {
+      acc[key] = obj1[key];
+    }
+    return acc;
+  }, {});
+  return result
 }
 module.exports = {
   formatTime,
@@ -254,5 +275,7 @@ module.exports = {
   searchKeyInString,
   formatArrayByKey,
   mergeArrayByKey,
-  formateBillDetailsToEditBill
+  formateBillDetailsToEditBill,
+  isNumber,
+  ObjectReflection
 };

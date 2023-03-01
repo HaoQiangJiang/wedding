@@ -1,0 +1,26 @@
+<view class="content" wx:if="{{allBill.length>0}}">
+  <card wx:for="{{allBill}}" wx:key="index" title="{{item.date}}" wx:for-item="item">
+    <view class="list" slot="content">
+      <view wx:for="{{item.list}}" wx:key="id" wx:for-item="listItem">
+        <t-swipe-cell>
+          <view class="cell">
+            <bill-item item="{{listItem}}" />
+          </view>
+          <view slot="right" class="btn-wrapper">
+            <view class="btn edit-btn column" data-item="{{listItem}}" bind:tap="onRestore">
+              <t-icon class="padding-bottom" name="edit" size="32rpx"></t-icon>
+              还原
+            </view>
+            <view class="btn delete-btn column" data-item="{{listItem}}" bind:tap="onOpenDelete">
+              <t-icon class="padding-bottom" name="delete" size="32rpx"></t-icon>
+              删除
+            </view>
+          </view>
+        </t-swipe-cell>
+      </view>
+    </view>
+
+  </card>
+</view>
+<t-empty wx:else description="暂无内容" />
+<t-dialog id="t-dialog" />

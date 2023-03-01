@@ -1,0 +1,10 @@
+/* components/repayDialog/index.wxss */
+.box {
+  display: flex;
+  background-color: #fff;
+  gap: 20rpx;
+}
+
+.tips {
+  text-align: right !important;
+}

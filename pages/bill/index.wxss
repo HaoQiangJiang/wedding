@@ -44,5 +44,5 @@
 }
 
 .popup-block {
-  height: 500rpx;
+  height: 400rpx;
 }

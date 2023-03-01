@@ -55,6 +55,10 @@
   margin-right: 20rpx;
 }
 
+.right .payed {
+  color: var(--red--);
+}
+
 .not-pay {
   background-color: var(--red--) !important;
   color: #fff !important;
