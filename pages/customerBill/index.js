@@ -31,6 +31,7 @@ Page({
       data
     } = await queryAllBill(params)
     const result = formatArrayByKey(data.data.list, 'created_at')
+    console.log(result)
     this.setData({
       allBill: result,
     })
