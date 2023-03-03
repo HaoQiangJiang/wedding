@@ -31,8 +31,20 @@
           <t-tab-panel label="已退货" value="2" />
         </t-tabs>
         <view class="list">
-          <list isHiddenAvatar="{{true}}" list="{{recordList}}" bind:deleteCallBack="deleteItem" bind:refreshBill="init" />
+          <t-collapse value="{{activeValues}}" bind:change="handleChangeCollapse">
+            <t-collapse-panel wx:for="{{recordList}}" wx:key="{{date}}" value="{{index}}">
+              <view class="contacts" slot="header">
+                <view class="bill-title">
+                  <text class="time">{{item.list[0].client.name}}的账单</text>
+                </view>
+              </view>
+              <view data-item="{{item}}">
+                <list isHiddenAvatar="{{true}}" list="{{item.list}}" bind:deleteCallBack="deleteItem" bind:refreshBill="init" />
+              </view>
+            </t-collapse-panel>
+          </t-collapse>
         </view>
+
       </view>
     </card>
     <view class="blank"></view>

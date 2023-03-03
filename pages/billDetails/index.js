@@ -1,3 +1,4 @@
+const Decimal = require("decimal.js");
 const {
   deleteBill,
   queryBillById,
@@ -17,6 +18,7 @@ Page({
     isShowRecord: true,
     repayVisible: false,
     maxRepay: 0,
+    isRefresh: false,
   },
   // 刷新订单
   async refreshBill() {
@@ -28,17 +30,10 @@ Page({
     } = await queryBillById(this.data.billData.id)
     this.setData({
       billData: data.data,
-      maxRepay: data.data.real_amount - data.data.paid_amount
+      maxRepay: new Decimal(data.data.real_amount).sub(data.data.paid_amount).toNumber(),
     })
     wx.hideLoading()
-    const pages = getCurrentPages();
-    const prevPage = pages[pages.length - 2]; //上一个页面
-    // await deleteBill(this.data.billData.id)
-    prevPage.updateItem({
-      detail: {
-        data: this.data.billData
-      }
-    })
+    this.setPrevPageRefresh()
   },
 
   // 提交账单
@@ -88,32 +83,36 @@ Page({
   async submitRepay(e) {
     const {
       isAllPay,
-      partPay
+      partPay,
+      remark
     } = e.detail
     if (isAllPay) {
       this.data.billData.pay_status = 1
       await updateBillStatus(this.data.billData.id, {
-        pay_status: this.data.billData.pay_status
+        pay_status: this.data.billData.pay_status,
+        remark
       })
     } else {
       const params = {
         "bill_id": this.data.billData.id,
-        "repayment_amount": Number(partPay)
+        "repayment_amount": Number(partPay),
+        remark
       }
       await singleRepayment(params)
     }
     this.refreshBill()
   },
-  // 确定删除
-  async submitDelete() {
+  setPrevPageRefresh() {
     const pages = getCurrentPages();
     const prevPage = pages[pages.length - 2]; //上一个页面
-    await deleteBill(this.data.billData.id)
-    prevPage.deleteItem({
-      detail: {
-        data: this.data.billData
-      }
+    prevPage.setData({
+      isRefresh: true
     })
+  },
+  // 确定删除
+  async submitDelete() {
+    await deleteBill(this.data.billData.id)
+    this.setPrevPageRefresh()
     wx.navigateBack()
   },
 
@@ -123,22 +122,24 @@ Page({
     eventChannel.on('acceptBillData', (data) => {
       this.setData({
         billData: data.data,
-        maxRepay: data.data.real_amount - data.data.paid_amount
+        maxRepay: new Decimal(data.data.real_amount).sub(data.data.paid_amount).toNumber(),
       })
     })
   },
-  /**
-   * Lifecycle function--Called when page is initially rendered
-   */
-  onReady() {
-
+  setPrevPageRefresh() {
+    const pages = getCurrentPages();
+    const prevPage = pages[pages.length - 2]; //上一个页面
+    prevPage.setData({
+      isRefresh: true
+    })
   },
-
-  /**
-   * Lifecycle function--Called when page show
-   */
   onShow() {
-
+    if (this.data.isRefresh) {
+      this.setData({
+        isRefresh: false
+      })
+      this.refreshBill()
+    }
   },
 
   /**

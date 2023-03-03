@@ -10,7 +10,7 @@ Page({
   data: {
     visible: false,
     recordVisible: false,
-    refresh: false,
+    isRefresh: false,
     allBill: [], // 所有账单信息
     clientId: '', // 当前用户的 id
     repayVisible: false,
@@ -55,32 +55,6 @@ Page({
     await this.init()
     wx.stopPullDownRefresh()
   },
-  // 删除 item
-  deleteItem(e) {
-    const operateData = e.detail.data
-    const index = this.data.allBill.findIndex(item => item.date === operateData.created_at.split(' ')[0])
-    const operateList = this.data.allBill[index]
-    if (!operateList) return
-    operateList.list = operateList.list.filter(item => item.id !== operateData.id)
-    if (operateList.list.length === 0) {
-      this.data.allBill.splice(index, 1)
-    }
-    this.setData({
-      allBill: this.data.allBill
-    })
-  },
-  // 更新 item
-  updateItem(e) {
-    const operateData = e.detail.data
-    const index = this.data.allBill.findIndex(item => item.date === operateData.created_at.split(' ')[0])
-    const operateList = this.data.allBill[index]
-    if (!operateList) return
-    const listIndex = operateList.list.findIndex(item => item.id === operateData.id)
-    operateList.list.splice(listIndex, 1, operateData)
-    this.setData({
-      allBill: this.data.allBill
-    })
-  },
   closeRepay() {
     this.setData({
       repayVisible: false,
@@ -93,14 +67,17 @@ Page({
   },
   async submitRepay(e) {
     const {
-      partPay
+      partPay,
+      remark,
     } = e.detail
     const params = {
       "client_id": this.data.clientId,
-      "repayment_amount": Number(partPay)
+      "repayment_amount": Number(partPay),
+      remark,
     }
     await multiRepayment(params)
     this.init()
+    this.setPrevPageRefresh()
   },
 
   onLoad(options) {
@@ -114,10 +91,24 @@ Page({
     })
     this.init()
   },
-
+  setPrevPageRefresh() {
+    const pages = getCurrentPages();
+    const prevPage = pages[pages.length - 2]; //上一个页面
+    prevPage.setData({
+      isRefresh: true
+    })
+  },
   onReady() {},
 
-  onShow() {},
+  onShow() {
+    if (this.data.isRefresh) {
+      this.init()
+      this.setData({
+        isRefresh: false
+      })
+      this.setPrevPageRefresh()
+    }
+  },
   /**
    * Lifecycle function--Called when page hide
    */

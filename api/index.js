@@ -29,6 +29,11 @@ const request = (params) => {
         }
       },
       fail: (err) => {
+        wx.showToast({
+          title: '网络连接失败',
+          icon: 'error'
+        })
+        wx.hideLoading()
         resolve(err);
       },
       complete: () => {

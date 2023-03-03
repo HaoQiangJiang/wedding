@@ -119,10 +119,6 @@ Component({
       })
     },
     async submitPrice() {
-      wx.showLoading({
-        title: '加载中',
-        mask: true
-      })
       // 提交账单
       const products = this.data.selectGoods.map(item => {
         return {
@@ -142,13 +138,15 @@ Component({
         products
       }
       if (!params.client_id) {
-        wx.hideLoading()
         return this.toastShow("请选择客户")
       }
       if (params.products.length === 0) {
-        wx.hideLoading()
         return this.toastShow("请选择商品")
       }
+      wx.showLoading({
+        title: '加载中',
+        mask: true
+      })
       this.data.editBillId === '' ? await createBill(params) : await updateBill(this.data.editBillId, params)
       this.triggerEvent('refreshBill')
       this.closeBill()

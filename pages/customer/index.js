@@ -70,6 +70,7 @@ Page({
     const {
       data
     } = await queryAllCustomer()
+    if (!data.data) return wx.hideLoading()
     const formateData = formateDataToIndexList(data.data)
     this.setData({
       originCustomerList: data.data,
@@ -208,6 +209,11 @@ Page({
   // 回车
   enter(e) {
     const index = e.currentTarget.dataset.index
+    console.log(index)
+    if (index === this.data.addCustomerMap.length - 1) {
+      // 完成了
+      this.submitAddCustomer()
+    }
     this.setData({
       focusIndex: index + 1
     })

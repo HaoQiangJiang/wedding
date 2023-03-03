@@ -20,7 +20,7 @@
             <text class="total">累计{{item.accumulate}}</text>
           </view>
         </view>
-        <view data-item="{{item}}" capture-bind:tap="openDetails">
+        <view data-item="{{item}}">
           <bill-details products="{{item.products}}" />
         </view>
       </t-collapse-panel>

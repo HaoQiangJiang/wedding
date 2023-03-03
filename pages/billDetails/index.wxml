@@ -13,8 +13,14 @@
     <bill-details products="{{billData.products}}" />
     <view class="edit-btn">
       <t-button wx:if="{{billData.pay_status === 0}}" theme="default" variant="outline" size="large" icon="check-circle" block capture-bind:tap="openRepay">还款</t-button>
-
     </view>
+    <view class="pay-records" wx:if="{{billData.pay_records.length>0}}">
+      <text class="title">支付记录</text>
+      <t-steps layout="vertical" readonly theme="dot" current=" {{billData.pay_records.length}}">
+        <t-step-item wx:for="{{billData.pay_records}}" wx:key="index" title="支付{{item.amount}}元" content="{{item.created_at}} {{item.remark&&'('+item.remark+')'}}" />
+      </t-steps>
+    </view>
+
   </view>
   <t-dialog visible="{{deleteVisible}}" content="删除账单后无法恢复,请确定是否删除?" confirm-btn="{{ { content: '删除', variant: 'base', theme: 'danger' } }}" cancel-btn="取消" bind:confirm="submitDelete" bind:cancel="closeDelete" />
 

@@ -4,7 +4,9 @@ const {
 const {
   formatTime
 } = require('../../utils/util')
+const Decimal = require('decimal.js');
 import dayjs from 'dayjs';
+
 Page({
   data: {
     isOverShare: true,
@@ -18,6 +20,7 @@ Page({
     minDate: dayjs().subtract(1, 'year').valueOf(),
     defaultValue: [dayjs().subtract(1, 'month').valueOf(), new Date().getTime()],
     activeValues: [],
+    isRefresh: false,
   },
   onLoad(options) {
     // 接受上一页传来的客户 id
@@ -72,7 +75,7 @@ Page({
     const resultReverse = JSON.parse(JSON.stringify(result)).reverse()
     const resultLegnth = result.length - 1
     resultReverse.forEach((item, index) => {
-      totalPrice += item.real_amount
+      totalPrice = new Decimal(item.real_amount).add(totalPrice).toNumber()
       const noReverseIndex = resultLegnth - index
       result[noReverseIndex].accumulate = totalPrice
     })
@@ -81,17 +84,6 @@ Page({
       totalPrice
     })
     wx.hideLoading()
-  },
-  openDetails(e) {
-    const item = e.currentTarget.dataset.item
-    wx.navigateTo({
-      url: '/pages/billDetails/index',
-      success: (res) => {
-        res.eventChannel.emit('acceptBillData', {
-          data: item
-        })
-      }
-    })
   },
   handleDateConfirm(e) {
     console.log(e)
@@ -121,38 +113,11 @@ Page({
       dateVisible: true
     })
   },
-  deleteItem(e) {
-    // 删除 item
-    const operateData = e.detail.data
-    this.data.list = this.data.list.filter(item => item.id !== operateData.id)
-    let totalPrice = 0
-    const resultReverse = JSON.parse(JSON.stringify(this.data.list)).reverse()
-    const resultLegnth = this.data.list.length - 1
-    resultReverse.forEach((item, index) => {
-      totalPrice += item.real_amount
-      const noReverseIndex = resultLegnth - index
-      this.data.list[noReverseIndex].accumulate = totalPrice
-    })
-    this.setData({
-      list: this.data.list,
-      totalPrice
-    })
-  },
-  updateItem(e) {
-    const operateData = e.detail.data
-    const listIndex = this.data.list.findIndex(item => item.id === operateData.id)
-    this.data.list.splice(listIndex, 1, operateData)
-    let totalPrice = 0
-    const resultReverse = JSON.parse(JSON.stringify(this.data.list)).reverse()
-    const resultLegnth = this.data.list.length - 1
-    resultReverse.forEach((item, index) => {
-      totalPrice += item.real_amount
-      const noReverseIndex = resultLegnth - index
-      this.data.list[noReverseIndex].accumulate = totalPrice
-    })
-    this.setData({
-      list: this.data.list,
-      totalPrice
+  setPrevPageRefresh() {
+    const pages = getCurrentPages();
+    const prevPage = pages[pages.length - 2]; //上一个页面
+    prevPage.setData({
+      isRefresh: true
     })
   },
   /**
@@ -166,7 +131,13 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow() {
-
+    if (this.data.isRefresh) {
+      this.init()
+      this.setData({
+        isRefresh: false
+      })
+      this.setPrevPageRefresh()
+    }
   },
 
   /**

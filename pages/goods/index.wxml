@@ -1,10 +1,10 @@
 <view class="top">
-  <t-search class="search" placeholder="搜素" shape="round" value="{{searchKey}}" bind:change="handleSearch" bind:clear="clearSearch" />
+  <t-search class="search" placeholder="搜索" shape="round" value="{{searchKey}}" bind:change="handleSearch" bind:clear="clearSearch" />
   <t-button theme="primary" icon="add-circle" variant="text" capture-bind:tap="openAddGoods" />
 </view>
 <view>
   <view class="goods">
-    <view wx:if="{{goodsList.length>0 && indexList.length>0 }}">
+    <view wx:if="{{goodsList.length>0}}">
       <t-indexes t-class="goods-indexes" index-list="{{indexList}}" sticky="{{false}}">
         <block wx:for="{{goodsList}}" wx:key="index">
           <t-indexes-anchor index="{{item.index}}" />
@@ -42,7 +42,7 @@
         </block>
       </t-indexes>
     </view>
-    <t-empty wx:else description="暂无数据" />
+    <t-empty wx:else description="暂无数据, 点击右上角创建商品" />
   </view>
   <view class="submit-operate" wx:if="{{mode==='select'}}">
     <t-button theme="primary" size="large" block capture-bind:tap="submit">确定</t-button>
@@ -68,7 +68,7 @@
       <t-icon name="check" t-class="card__icon" />
       <t-radio value="{{item.value}}" label="{{item.name}}({{operateGoods[item.value]}}/{{operateGoods.unit}})" icon="none" borderless>
         <view slot="content" wx:if="{{item.value==='customPrice'}}" class="content-custom">
-          <t-input label="金额" t-class-tips="tips" tips="{{priceError?'请输入正确金额':''}}" borderless="{{true}}" placeholder="0.00" suffix="元" align="right" type="digit" value="{{operateGoods.customPrice}}" bind:change="changePartPay" bind:enter="submitRepay" />
+          <t-input label="金额" t-class-tips="tips" tips="{{priceError?'请输入正确金额':''}}" borderless="{{true}}" placeholder="0.00" suffix="元" align="right" type="digit" value="{{operateGoods.customPrice}}" bind:change="changePartPay" confirm-type="{{index<priceMap.length?'next':'done'}}" bind:enter="enter" />
         </view>
       </t-radio>
 

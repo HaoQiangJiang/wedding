@@ -1,0 +1,7 @@
+<view class="pay-config">
+  <t-input wx:for="{{formMap}}" wx:key="value" label="{{item.label}}" focus="{{index===focusIndex}}" cursor="{{data[item.value].length}}" value="{{data[item.value]}}" placeholder="用于定时推送月度账单" align="right" data-item="{{item.value}}" data-index="{{index}}" confirm-type="{{index<formMap.length-1?'next':'done'}}" bind:change="changeData" bind:enter="enter" />
+  <!-- <t-input label="钉钉access_token" cursor="{{access_token.length}}" value="{{access_token}}" placeholder="用于定时推送月度账单" align="right" bind:change="changeAccessToken" />
+  <t-input label="钉钉secret" cursor="{{secret.length}}" value="{{secret}}" placeholder="用于定时推送月度账单" align="right" bind:change="changeSecret" /> -->
+
+
+</view>

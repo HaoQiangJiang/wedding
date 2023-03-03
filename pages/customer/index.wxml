@@ -1,5 +1,5 @@
 <view class="top">
-  <t-search class="search" placeholder="搜素" shape="round" value="{{searchKey}}" bind:change="handleSearch" bind:clear="clearSearch" />
+  <t-search class="search" placeholder="搜索" shape="round" value="{{searchKey}}" bind:change="handleSearch" bind:clear="clearSearch" />
   <t-button theme="primary" icon="user-add" variant="text" capture-bind:tap="openAddCustomer" />
 </view>
 <view wx:if="{{customerList.length>0}}" class="content">
@@ -28,7 +28,7 @@
     </block>
   </t-indexes>
 </view>
-<t-empty wx:else description="暂无数据" />
+<t-empty wx:else description="暂无数据, 点击右上角创建客户" />
 
 <t-popup visible="{{addCustomerVisible}}" prevent-scroll-through="{{true}}" placement="bottom" bind:visible-change="onVisibleChange">
   <view class="popup-block">
@@ -38,7 +38,7 @@
       <view class="btn btn--confirm" aria-role="button" capture-bind:tap="submitAddCustomer">确定</view>
     </view>
     <view>
-      <t-input wx:for="{{addCustomerMap}}" confirm-hold="{{index!==addCustomerMap.length-1}}" focus="{{index===focusIndex}}" type="{{item.value ==='phone'?'number':'text'}}" wx:key="value" label="{{item.label}}" align="right" value="{{addCustomerData[item.value]}}" placeholder="请输入{{item.label}}" data-key="{{item.value}}" data-index="{{index}}" bind:change="changeCustomer" bind:enter="enter"></t-input>
+      <t-input wx:for="{{addCustomerMap}}" confirm-hold="{{index!==addCustomerMap.length-1}}" focus="{{index===focusIndex}}" type="{{item.value ==='phone'?'number':'text'}}" wx:key="value" label="{{item.label}}" align="right" value="{{addCustomerData[item.value]}}" placeholder="请输入{{item.label}}" data-key="{{item.value}}" data-index="{{index}}" confirm-type="{{index<addCustomerMap.length?'next':'done'}}" bind:change="changeCustomer" bind:enter="enter"></t-input>
     </view>
   </view>
 </t-popup>

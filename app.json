@@ -14,7 +14,8 @@
     "pages/shareContacts/index",
     "pages/bill/index",
     "pages/share/index",
-    "pages/recycle/index"
+    "pages/recycle/index",
+    "pages/contactConfig/index"
   ],
   "tabBar": {
     "custom": true,

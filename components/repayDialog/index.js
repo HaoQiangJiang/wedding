@@ -20,6 +20,7 @@ Component({
     partPay: '', // 部分款金额
     priceError: false,
     maxValueError: false,
+    remark: '', // 支付备注
   },
 
   /**
@@ -41,7 +42,8 @@ Component({
       }
       this.triggerEvent('confirm', {
         isAllPay: this.properties.type === 'multi' ? false : this.data.isAllPay,
-        partPay: this.data.partPay
+        partPay: this.data.partPay,
+        remark: this.data.remark
       })
       this.closeRepay()
     },
@@ -61,29 +63,33 @@ Component({
       });
     },
     changePartPay(e) {
-      const {
+      let {
         value
       } = e.detail
-      const {
-        priceError,
-        maxValueError
-      } = this.data;
       const result = isNumber(e.detail.value);
-      if (priceError === result) {
+      if (!result) {
         return this.setData({
           priceError: !result,
         });
       }
       // 超出最大还款金额,提示
       const isCorrect = value <= this.properties.maxValue
-      if (maxValueError === isCorrect) {
+      if (!isCorrect) {
         return this.setData({
-          maxValueError: !isCorrect,
+          maxValueError: true,
+          partPay: value
         });
       }
       this.setData({
+        priceError: false,
+        maxValueError: false,
         partPay: value
       })
     },
+    changeRemark(e) {
+      this.setData({
+        remark: e.detail.value
+      })
+    }
   }
 })

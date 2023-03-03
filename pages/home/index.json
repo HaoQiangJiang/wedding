@@ -9,6 +9,7 @@
     "t-popup": "tdesign-miniprogram/popup/popup",
     "t-sticky": "tdesign-miniprogram/sticky/sticky",
     "record": "/components/record/index",
+    "t-empty": "tdesign-miniprogram/empty/empty",
     "list": "/components/list/index",
     "t-cell-group": "tdesign-miniprogram/cell-group/cell-group",
     "t-cell": "tdesign-miniprogram/cell/cell"

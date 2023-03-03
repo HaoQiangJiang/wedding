@@ -3,6 +3,9 @@ const {
   uploadQRCode,
   getUserInfo
 } = require('../../api/index')
+const {
+  debounce
+} = require('../../utils/util')
 Page({
   data: {
     tagline: '',
@@ -22,21 +25,25 @@ Page({
       const userInfo = resInfo.data.data
       // 将获取的用户信息保存
       wx.setStorageSync('userInfo', userInfo)
+      const fileList = []
+      if (userInfo.qr_code) {
+        fileList.push({
+          url: 'https://weixin.linktmd.com/' + userInfo.qr_code
+        })
+      }
       this.setData({
         tagline: userInfo.tagline,
-        fileList: [{
-          url: 'https://weixin.linktmd.com/' + userInfo.qr_code
-        }]
+        fileList
       })
     }
   },
-  async changTagline(e) {
+  changTagline: debounce(async function (e) {
     const value = e.detail.value
     const res = await uploadTagline({
       tagline: value
     })
 
-  },
+  }, 1000),
   handleAdd(e) {
     const {
       fileList

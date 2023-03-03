@@ -1,11 +1,8 @@
 const {
   getShareBill,
 } = require('../../api/index')
+const Decimal = require('decimal.js');
 Page({
-
-  /**
-   * Page initial data
-   */
   data: {
     list: [],
     totalPrice: 0,
@@ -43,7 +40,7 @@ Page({
     const resultReverse = JSON.parse(JSON.stringify(data.data.list)).reverse()
     const resultLegnth = data.data.list.length - 1
     resultReverse.forEach((item, index) => {
-      totalPrice += item.real_amount
+      totalPrice = new Decimal(item.real_amount).add(totalPrice).toNumber()
       const noReverseIndex = resultLegnth - index
       data.data.list[noReverseIndex].accumulate = totalPrice
     })

@@ -1,3 +1,5 @@
+const Decimal = require('decimal.js');
+
 const {
   addGoods,
   queryAllGoods,
@@ -143,7 +145,7 @@ Page({
     list.forEach(item => {
       // 外部带过来的数据
       item.priceType = 'store_price' // 选择的价格类型
-      item.customPrice = 0 // 自定义价格
+      item.customPrice = '' // 自定义价格
       item.count = 0 // 选择的数量
       console.log()
       const propGood = this.replaceProperty(this.data.propsGoods, item.id)
@@ -221,13 +223,15 @@ Page({
     const key = e.currentTarget.dataset.key
     if (['factory_price', 'store_price'].includes(key)) {
       const result = isNumber(value);
-      if (this.data.priceError === result) {
+      if (!result) {
         return this.setData({
-          priceError: !result,
+          priceError: true,
         });
       }
+      value = value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3'); //只能输入两个小数
     }
     this.setData({
+      priceError: false,
       addGoodsData: {
         ...this.data.addGoodsData,
         [key]: value
@@ -236,8 +240,11 @@ Page({
   },
   // 回车
   enter(e) {
-    console.log(e)
     const index = e.currentTarget.dataset.index
+    if (index === this.data.addGoodsMap.length - 1) {
+      // 完成了
+      this.submitAddGoods()
+    }
     this.setData({
       focusIndex: index + 1
     })
@@ -265,6 +272,7 @@ Page({
   onChangePriceType(e) {
     this.data.operateGoods.priceType = e.detail.value
     this.setData({
+      priceError: false,
       operateGoods: this.data.operateGoods,
       goodsList: this.data.goodsList // 更新下这个数据 让 ui 刷新
     })
@@ -277,7 +285,7 @@ Page({
     console.log(result)
     let orderPrice = 0
     result.forEach(item => {
-      orderPrice += (item[item.priceType]) * item.count
+      orderPrice += new Decimal(item[item.priceType]).mul(item.count).toNumber()
     })
     const eventChannel = this.getOpenerEventChannel()
     eventChannel.emit('selectCallBack', {
@@ -303,17 +311,19 @@ Page({
   },
   changePartPay(e) {
     // 修改自定义金额
-    const {
+    let {
       value
     } = e.detail
     const result = isNumber(value);
-    if (this.data.priceError === result) {
+    if (!result) {
       return this.setData({
-        priceError: !result,
+        priceError: true
       });
     }
-    this.data.operateGoods.customPrice = Number(e.detail.value)
+    value = value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3'); //只能输入两个小数
+    this.data.operateGoods.customPrice = Number(value)
     this.setData({
+      priceError: false,
       operateGoods: this.data.operateGoods,
       goodsList: this.data.goodsList
     })

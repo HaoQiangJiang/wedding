@@ -5,7 +5,8 @@ const {
   queryAllBill
 } = require('../../api/index')
 const {
-  formatTime
+  formatTime,
+  formatArrayByKey
 } = require('../../utils/util')
 Page({
   data: {
@@ -26,8 +27,9 @@ Page({
       customer: {},
       startTime: '',
       endTime: ''
-    }
-
+    },
+    isRefresh: false,
+    activeValues: ''
   },
 
   async init() {
@@ -68,26 +70,17 @@ Page({
     const {
       data
     } = await queryAllBill(params)
+    const result = formatArrayByKey(data.data.list, 'client_id')
+    console.log(result)
     // 首页全部替换数据
     this.setData({
-      recordList: data.data.list,
+      recordList: result
     })
   },
-  deleteItem(e) {
-    // 删除 item
-    const operateData = e.detail.data
-    this.data.recordList = this.data.recordList.filters(item => item.id !== operateData.id)
+  handleChangeCollapse(e) {
     this.setData({
-      recordList: this.data.recordList
-    })
-  },
-  updateItem(e) {
-    const operateData = e.detail.data
-    const listIndex = this.data.recordList.findIndex(item => item.id === operateData.id)
-    this.data.recordList.splice(listIndex, 1, operateData)
-    this.setData({
-      recordList: this.data.recordList
-    })
+      activeValues: e.detail.value,
+    });
   },
   async onTabsChange(e) {
     wx.showLoading({
@@ -197,6 +190,13 @@ Page({
    */
   onShow() {
     this.getTabBar().init();
+    if (this.data.isRefresh) {
+      // 需要刷新
+      this.init()
+      this.setData({
+        isRefresh: false
+      })
+    }
   },
 
   /**

@@ -38,82 +38,6 @@ function priceFormat(price, fill = 0) {
   }
   return priceFormatValue;
 }
-
-/**
- * 获取cdn裁剪后链接
- *
- * @param {string} url 基础链接
- * @param {number} width 宽度，单位px
- * @param {number} [height] 可选，高度，不填时与width同值
- */
-const cosThumb = (url, width, height = width) => {
-  if (url.indexOf('?') > -1) {
-    return url;
-  }
-
-  if (url.indexOf('http://') === 0) {
-    url = url.replace('http://', 'https://');
-  }
-
-  return `${url}?imageMogr2/thumbnail/${~~width}x${~~height}`;
-};
-
-const get = (source, paths, defaultValue) => {
-  if (typeof paths === 'string') {
-    paths = paths
-      .replace(/\[/g, '.')
-      .replace(/\]/g, '')
-      .split('.')
-      .filter(Boolean);
-  }
-  const {
-    length
-  } = paths;
-  let index = 0;
-  while (source != null && index < length) {
-    source = source[paths[index++]];
-  }
-  return source === undefined || index === 0 ? defaultValue : source;
-};
-let systemWidth = 0;
-/** 获取系统宽度，为了减少启动消耗所以在函数里边做初始化 */
-export const loadSystemWidth = () => {
-  if (systemWidth) {
-    return systemWidth;
-  }
-
-  try {
-    ({
-      screenWidth: systemWidth,
-      pixelRatio
-    } = wx.getSystemInfoSync());
-  } catch (e) {
-    systemWidth = 0;
-  }
-  return systemWidth;
-};
-
-/**
- * 转换rpx为px
- *
- * @description
- * 什么时候用？
- * - 布局(width: 172rpx)已经写好, 某些组件只接受px作为style或者prop指定
- *
- */
-const rpx2px = (rpx, round = false) => {
-  loadSystemWidth();
-
-  // px / systemWidth = rpx / 750
-  const result = (rpx * systemWidth) / 750;
-
-  if (round) {
-    return Math.floor(result);
-  }
-
-  return result;
-};
-
 /**
  * 手机号码*加密函数
  * @param {string} phone 电话号
@@ -262,13 +186,21 @@ function ObjectReflection(obj1, obj2) {
   }, {});
   return result
 }
+const debounce = function (func, wait) {
+  let timer;
+  return function () {
+    let context = this; // 注意 this 指向
+    let args = arguments; // arguments中存着e
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(() => {
+      func.apply(this, args)
+    }, wait)
+  }
+}
 module.exports = {
   formatTime,
   diffTime,
   priceFormat,
-  cosThumb,
-  get,
-  rpx2px,
   phoneEncryption,
   phoneRegCheck,
   formateDataToIndexList,
@@ -277,5 +209,6 @@ module.exports = {
   mergeArrayByKey,
   formateBillDetailsToEditBill,
   isNumber,
-  ObjectReflection
+  ObjectReflection,
+  debounce
 };

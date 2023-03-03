@@ -1,10 +1,21 @@
 /* components/repayDialog/index.wxss */
 .box {
   display: flex;
+  align-items: center;
   background-color: #fff;
   gap: 20rpx;
 }
 
 .tips {
   text-align: right !important;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+}
+
+.max-value {
+  font-size: 28rpx;
+  color: var(--text-color-3--);
 }

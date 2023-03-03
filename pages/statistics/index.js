@@ -31,6 +31,7 @@ Page({
     date: formatTime(new Date(), 'YYYY-MM'),
     totalIncome: 0,
     extraChart: {},
+    isRefresh: false
   },
   onLoad() {
     this.data.chartsMap.forEach(item => {
@@ -41,7 +42,12 @@ Page({
   onReady() {},
   onShow() {
     this.getTabBar().init();
-
+    if (this.data.isRefresh) {
+      this.setData({
+        isRefresh: false
+      })
+      this.init()
+    }
 
   },
 

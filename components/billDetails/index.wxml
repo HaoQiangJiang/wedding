@@ -5,7 +5,14 @@
       <text class="desc">x{{item.number}}({{item.price}}元/{{item.product.unit}})</text>
     </view>
     <view class="number">
-      <text>{{item.price*item.number}}元</text>
+      <text>{{fn.getPrice(item.price,item.number)}}元</text>
     </view>
   </view>
 </view>
+<wxs module="fn">
+  module.exports = {
+    getPrice: function (price, count) {
+      return parseFloat((price * count).toFixed(3))
+    }
+  }
+</wxs>

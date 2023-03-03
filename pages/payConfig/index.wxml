@@ -1,5 +1,5 @@
 <view class="pay-config">
-  <t-input label="提示文案" value="{{tagline}}" placeholder="用于分享账单展示在收款码上方" type="nickname" align="right" bind:change="changTagline" />
+  <t-input label="提示文案" cursor="{{tagline.length}}" value="{{tagline}}" placeholder="用于分享账单展示在收款码上方" align="right" bind:change="changTagline" />
   <t-cell title="上传收款码" hover>
     <view class="image" slot="note">
       <t-upload mediaType="{{['image']}}" grid-config="{{gridConfig}}" max="{{1}}" files="{{fileList}}" bind:add="handleAdd" bind:remove="handleRemove">

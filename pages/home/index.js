@@ -3,9 +3,6 @@ const {
   login,
 } = require('../../utils/login.js')
 const {
-  formateBillDetailsToEditBill
-} = require('../../utils/util')
-const {
   queryBillAmountAndCount,
   queryAllCustomer
 } = require('../../api/index')
@@ -19,6 +16,7 @@ Page({
     yesterdayBillAmount: 0, // 昨日销售额
     yesterdayBillCount: 0, // 昨日订单数
     isShowRecord: true, // 是否显示记录组件
+    isRefresh: false, // 是的需要刷新
   },
 
   /**
@@ -54,6 +52,8 @@ Page({
     const {
       data
     } = await queryAllCustomer()
+    console.log(data)
+    if (!data.data) return
     this.setData({
       allCustomer: data.data,
     })
@@ -142,6 +142,13 @@ Page({
 
   onShow() {
     this.getTabBar().init();
+    if (this.data.isRefresh) {
+      // 需要刷新
+      this.init()
+      this.setData({
+        isRefresh: false
+      })
+    }
   },
   /**
    * Lifecycle function--Called when page hide

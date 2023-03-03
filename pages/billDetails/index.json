@@ -8,7 +8,9 @@
     "record": "/components/record/index",
     "bill-details": "/components/billDetails/index",
     "bill-item": "/components/billItem/index",
-    "repay-dialog":"/components/repayDialog/index"
+    "repay-dialog":"/components/repayDialog/index",
+    "t-steps": "tdesign-miniprogram/steps/steps",
+    "t-step-item": "tdesign-miniprogram/step-item/step-item"
 
   }
 }

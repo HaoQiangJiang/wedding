@@ -10,13 +10,14 @@
 </view>
 
 <view class="content">
-  <t-cell-group>
+  <t-cell-group wx:if="{{allCustomer.length>0}}">
     <t-cell wx:for="{{allCustomer}}" data-item="{{item}}" bind:click="onSelect" aria-role="button" hover size="large">
       <text slot="title">{{item.name}}</text>
-      <text slot="description">已付:{{item.bill_count - item.unpaid_count}}单 未付:{{item.unpaid_count}}单 </text>
+      <text slot="description">已付:{{item.paid_count}}单 未付:{{item.unpaid_count}}单 退货:{{item.return_count}}单 </text>
       <text slot="note" class="note">合计:{{item.total}}元</text>
     </t-cell>
   </t-cell-group>
+  <t-empty wx:else description="暂无数据, 去个人中心创建客户吧!" />
   <view class="blank" />
 </view>
 
