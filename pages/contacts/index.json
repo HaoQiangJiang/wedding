@@ -5,6 +5,7 @@
     "bill-details": "/components/billDetails/index",
     "t-calendar": "tdesign-miniprogram/calendar/calendar",
     "t-icon": "tdesign-miniprogram/icon/icon",
+    "t-empty": "tdesign-miniprogram/empty/empty",
     "t-collapse": "tdesign-miniprogram/collapse/collapse",
     "t-collapse-panel": "tdesign-miniprogram/collapse-panel/collapse-panel"
   }

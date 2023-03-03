@@ -1,7 +1,7 @@
 <view class="top">
   <text class="total-price">总计 {{totalPrice}} 元</text>
 </view>
-<view class="container">
+<view class="container" wx:if="{{list.length>0}}">
   <view class="left">
     <t-collapse value="{{activeValues}}" bind:change="handleChange">
       <t-collapse-panel wx:for="{{list}}" wx:key="{{id}}" value="{{index}}" t-class-header="collaspe-title">
@@ -13,12 +13,14 @@
           </view>
         </view>
         <view data-item="{{item}}" capture-bind:tap="openDetails">
-          <bill-details products="{{item.products}}" payRecords="{{billData.pay_records}}" />
+          <bill-details products="{{item.products}}" payRecords="{{item.pay_records}}" />
         </view>
       </t-collapse-panel>
     </t-collapse>
   </view>
 </view>
+<t-empty wx:else description="暂无未付账单" />
+
 <view class="pay">
   <text class="title">{{user.tagline ||"这是我的收款码，欢迎扫码支付"}} </text>
   <t-image class="image" show-menu-by-longpress="{{true}}" mode="heightFix" src="https://weixin.linktmd.com/{{user.qr_code}}" />

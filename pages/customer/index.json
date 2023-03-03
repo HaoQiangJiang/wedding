@@ -13,7 +13,6 @@
     "t-input": "tdesign-miniprogram/input/input",
     "t-empty": "tdesign-miniprogram/empty/empty",
     "t-toast": "tdesign-miniprogram/toast/toast",
-    "t-sticky": "tdesign-miniprogram/sticky/sticky",
     "t-swipe-cell": "tdesign-miniprogram/swipe-cell/swipe-cell",
     "t-dialog": "tdesign-miniprogram/dialog/dialog"
   }

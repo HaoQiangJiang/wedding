@@ -1,7 +1,6 @@
 {
   "component": true,
   "usingComponents": {
-    "t-input": "tdesign-miniprogram/input/input",
     "t-button": "tdesign-miniprogram/button/button",
     "t-dialog": "tdesign-miniprogram/dialog/dialog",
     "t-steps": "tdesign-miniprogram/steps/steps",

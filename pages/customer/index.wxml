@@ -3,7 +3,7 @@
   <t-button theme="primary" icon="user-add" variant="text" capture-bind:tap="openAddCustomer" />
 </view>
 <view wx:if="{{customerList.length>0}}" class="content">
-  <t-indexes indexList="{{indexList}}" sticky="{{false}}">
+  <t-indexes t-class="customer-indexes" indexList="{{indexList}}" sticky="{{false}}">
     <block wx:for="{{customerList}}" wx:key="index">
       <t-indexes-anchor index="{{item.index}}" />
       <t-cell-group>

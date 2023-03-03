@@ -53,7 +53,8 @@ Component({
       setTimeout(() => {
         this.setData({
           isAllPay: true,
-          partPay: ''
+          partPay: '',
+          remark: ''
         })
       }, 250)
     },

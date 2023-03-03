@@ -25,6 +25,10 @@ Page {
   padding: 20rpx;
 }
 
+.customer-indexes {
+  height: auto !important;
+}
+
 .customer-name {
   font-size: 36rpx;
   line-height: 200%;

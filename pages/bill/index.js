@@ -23,7 +23,6 @@ Page({
     minDate: dayjs().subtract(1, 'year').valueOf(),
     defaultValue: [new Date().getTime(), dayjs().add(1, 'day').valueOf()],
     filters: {
-      searchKey: '',
       customer: {},
       startTime: '',
       endTime: ''
@@ -61,7 +60,6 @@ Page({
   },
   async initRecord() {
     const params = {
-      "searchKey": this.data.filters.searchKey,
       "startTime": this.data.filters.startTime,
       "clientId": this.data.filters.customer.id,
       "endTime": this.data.filters.endTime,
@@ -133,7 +131,6 @@ Page({
   canncelFilter() {
     this.setData({
       filters: {
-        searchKey: '',
         customer: {},
         startTime: '',
         endTime: ''
@@ -159,14 +156,6 @@ Page({
             }
           })
         }
-      }
-    })
-  },
-  changeSearchKey(e) {
-    this.setData({
-      filters: {
-        ...this.data.filters,
-        searchKey: e.detail.value
       }
     })
   },

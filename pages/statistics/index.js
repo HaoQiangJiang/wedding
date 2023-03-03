@@ -1,5 +1,4 @@
 import * as echarts from '../../ec-canvas/echarts';
-import dayjs from 'dayjs';
 const {
   queryStatistics,
 } = require('../../api/index')

@@ -14,7 +14,7 @@
       arr.forEach(function (item) {
         total += item.real_amount
       });
-      return total
+      return parseFloat(total.toFixed(2))
     }
   }
 </wxs>

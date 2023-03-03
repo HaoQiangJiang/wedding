@@ -18,7 +18,6 @@
     </t-cell>
   </t-cell-group>
   <t-empty wx:else description="暂无数据, 去个人中心创建客户吧!" />
-  <view class="blank" />
 </view>
 
 

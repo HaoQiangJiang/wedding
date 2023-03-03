@@ -3,7 +3,6 @@
   "enablePullDownRefresh": true,
   "usingComponents": {
     "card": "/components/card/index",
-    "list": "/components/list/index",
     "t-empty": "tdesign-miniprogram/empty/empty",
     "bill-item": "/components/billItem/index",
     "t-dialog": "tdesign-miniprogram/dialog/dialog",

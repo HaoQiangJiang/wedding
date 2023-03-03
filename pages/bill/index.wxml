@@ -58,7 +58,6 @@
       <view class="btn btn--confirm" aria-role="button" capture-bind:tap="submitFilter">确定</view>
     </view>
     <view>
-      <!-- <t-input value="" placeholder="输入关键字筛选" bind:change="changeSearchKey"></t-input> -->
       <t-cell title="客户" hover arrow note="{{filters.customer.name}}" bind:click="selectCustomer" />
       <t-cell title="选择日期" hover note="{{filters.startTime}} - {{filters.endTime}}" arrow bindtap="openDatePicker" />
     </view>

@@ -3,6 +3,7 @@ Page {
   overflow-y: scroll;
   --td-button-default-outline-color: var(--green--);
   --td-button-default-outline-border-color: var(--green--);
+  background-color: #fff;
 }
 
 .bill:active {

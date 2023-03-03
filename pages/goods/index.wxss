@@ -28,7 +28,6 @@ Page {
 
 .goods-indexes {
   height: auto !important;
-  margin-bottom: 150rpx;
 }
 
 .stepper-slot {

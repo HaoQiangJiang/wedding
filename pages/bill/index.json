@@ -11,11 +11,8 @@
     "t-empty": "tdesign-miniprogram/empty/empty",
     "t-input": "tdesign-miniprogram/input/input",
     "t-cell": "tdesign-miniprogram/cell/cell",
-    "t-sticky": "tdesign-miniprogram/sticky/sticky",
-    "t-button": "tdesign-miniprogram/button/button",
     "t-icon": "tdesign-miniprogram/icon/icon",
     "t-calendar": "tdesign-miniprogram/calendar/calendar",
-    "bill-details": "/components/billDetails/index",
     "t-collapse": "tdesign-miniprogram/collapse/collapse",
     "t-collapse-panel": "tdesign-miniprogram/collapse-panel/collapse-panel"
   }

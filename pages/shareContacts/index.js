@@ -44,8 +44,9 @@ Page({
       const noReverseIndex = resultLegnth - index
       data.data.list[noReverseIndex].accumulate = totalPrice
     })
+
     wx.setNavigationBarTitle({
-      title: data.data.list[0].client.name + '的账单'
+      title: data.data.user.name + '的账单'
     })
     // 首页全部替换数据
     this.setData({
