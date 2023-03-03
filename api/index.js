@@ -1,5 +1,5 @@
 /** 获取个人中心信息 */
-const baseUrl = 'https://0e09-59-174-52-69.ap.ngrok.io/api'
+const baseUrl = 'https://weixin.linktmd.com/api'
 var reqTime = 0; //记录请求次数
 const header = {
   "content-type": "application/json",
