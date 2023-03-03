@@ -36,3 +36,11 @@
   color: var(--primary--);
   font-size: 36rpx;
 }
+
+.pay-record-btn {
+  float: right;
+}
+
+.pay-records {
+  overflow-y: auto;
+}

@@ -61,7 +61,7 @@ Page({
     })
     const params = {
       "clientId": this.data.client.id,
-      "payStatus": -1,
+      "payStatus": 0,
     }
     if (this.data.startTime && this.data.endTime) {
       params.startTime = this.data.startTime

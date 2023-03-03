@@ -13,7 +13,7 @@
           </view>
         </view>
         <view data-item="{{item}}" capture-bind:tap="openDetails">
-          <bill-details products="{{item.products}}" />
+          <bill-details products="{{item.products}}" payRecords="{{billData.pay_records}}" />
         </view>
       </t-collapse-panel>
     </t-collapse>

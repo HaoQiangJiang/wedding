@@ -10,15 +10,9 @@
     <view class="bill">
       <bill-item item="{{billData}}" bigPrice="{{true}}" url="/pages/contacts/index" />
     </view>
-    <bill-details products="{{billData.products}}" />
+    <bill-details products="{{billData.products}}" payRecords="{{billData.pay_records}}" />
     <view class="edit-btn">
       <t-button wx:if="{{billData.pay_status === 0}}" theme="default" variant="outline" size="large" icon="check-circle" block capture-bind:tap="openRepay">还款</t-button>
-    </view>
-    <view class="pay-records" wx:if="{{billData.pay_records.length>0}}">
-      <text class="title">支付记录</text>
-      <t-steps layout="vertical" readonly theme="dot" current=" {{billData.pay_records.length}}">
-        <t-step-item wx:for="{{billData.pay_records}}" wx:key="index" title="支付{{item.amount}}元" content="{{item.created_at}} {{item.remark&&'('+item.remark+')'}}" />
-      </t-steps>
     </view>
 
   </view>

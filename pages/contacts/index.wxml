@@ -21,7 +21,7 @@
           </view>
         </view>
         <view data-item="{{item}}">
-          <bill-details products="{{item.products}}" />
+          <bill-details products="{{item.products}}" payRecords="{{item.pay_records}}"/>
         </view>
       </t-collapse-panel>
     </t-collapse>

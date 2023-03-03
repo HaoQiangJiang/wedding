@@ -6,6 +6,6 @@
     <view class="bill">
       <bill-item item="{{billData}}" bigPrice="{{true}}" />
     </view>
-    <bill-details products="{{billData.products}}" />
+    <bill-details products="{{billData.products}}" payRecords="{{billData.pay_records}}" />
   </view>
 </view>

@@ -58,15 +58,6 @@ Page {
   color: #000 !important;
 }
 
-.pay-records {
-  padding: 20rpx;
-}
-
-.pay-records .title {
-  font-size: 32rpx;
-  padding: 10rpx;
-}
-
 .t-steps {
   margin-top: 20rpx;
 }
