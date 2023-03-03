@@ -11,10 +11,10 @@ Page({
       label: '邮箱',
       value: 'email',
     }, {
-      label: '钉钉 AccessToken',
+      label: '钉钉Token',
       value: 'access_token',
     }, {
-      label: '钉钉 secret',
+      label: '钉钉Secret',
       value: 'secret',
     }],
     data: {
