@@ -257,18 +257,9 @@ Page({
     } = e.currentTarget.dataset
     if (id === 'ecClientAmount') {
       wx.navigateTo({
-        url: '/pages/contacts/index',
-        success: (res) => {
-          res.eventChannel.emit('acceptBillData', {
-            data: {
-              client: item.data,
-              date: this.data.date
-            }
-          })
-        }
+        url: '/pages/customerBill/index?id=' + item.data.id + '&name=' + item.name,
       })
     }
-
   },
   /**
    * Lifecycle function--Called when page hide

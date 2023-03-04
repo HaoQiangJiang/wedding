@@ -88,6 +88,9 @@ Page({
       payStatus: Number(e.detail.value),
     })
     await this.initRecord()
+    this.setData({
+      activeValues: ''
+    })
     wx.hideLoading()
   },
   openDatePicker() {
