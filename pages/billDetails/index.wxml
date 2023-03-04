@@ -2,7 +2,7 @@
   <view class="top">
     <text class="title">账单详情</text>
     <view class="operate">
-      <t-icon name="edit" size="40rpx" data-name="edit" bind:click="addBill" />
+      <t-icon name="edit" size="40rpx" data-name="edit" color="{{billData.pay_records.length>0&&'#7f818a'}}" bind:click="addBill" />
       <t-icon name="delete" size="40rpx" data-name="delete" bind:click="openDelete" />
     </view>
   </view>

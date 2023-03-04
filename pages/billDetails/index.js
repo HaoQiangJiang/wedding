@@ -44,6 +44,12 @@ Page({
   },
   // 记一笔
   addBill() {
+    if (this.data.billData.pay_records.length > 0) {
+      return wx.showToast({
+        title: '已存在支付记录,不再支持编辑账单',
+        icon: 'none'
+      })
+    }
     this.setData({
       visible: true,
     })
