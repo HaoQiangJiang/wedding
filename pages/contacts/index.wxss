@@ -7,6 +7,10 @@
   padding: 50rpx;
 }
 
+.top .top-price {
+  max-width: 450rpx;
+}
+
 .top-time {
   display: flex;
   align-items: center;

@@ -1,5 +1,5 @@
 <view class="top">
-  <view>
+  <view class="top-price">
     <text class="total-price">总计 {{totalPrice}} 元</text>
     <text class="total-paid"> (已付{{ totalPaid}} 元)</text>
   </view>
