@@ -1,18 +1,18 @@
+import Toast from 'tdesign-miniprogram/toast/index';
+
 // pages/customer/index.js
 const {
   addCustomer,
   queryAllCustomer,
   deleteCustomer,
-  editCustomer
-} = require('../../api/index')
+  editCustomer,
+} = require('../../api/index');
 const {
   searchKeyInString,
   formateDataToIndexList,
-} = require('../../utils/util')
-import Toast from 'tdesign-miniprogram/toast/index';
+} = require('../../utils/util');
 
 Page({
-
   /**
    * Page initial data
    */
@@ -22,23 +22,26 @@ Page({
     indexList: [], // a-z 序号
     customerList: [], // 格式化之后的数据,按照 a-z 划分
     originCustomerList: [], // 原始接口数据
-    addCustomerMap: [{
-      label: '名称',
-      value: 'name'
-    }, {
-      label: '电话',
-      value: 'phone'
-    }],
+    addCustomerMap: [
+      {
+        label: '名称',
+        value: 'name',
+      },
+      {
+        label: '电话',
+        value: 'phone',
+      },
+    ],
     addCustomerVisible: false,
     addCustomerData: {
       name: '',
-      phone: ''
+      phone: '',
     }, // 新增客户的数据
     searchKey: '', // 搜索的客户名
     deleteVisible: false,
     operateCustomer: {}, // 操作的用户
     isEdit: false, // 是否为编辑用户
-    focusIndex: -1
+    focusIndex: -1,
   },
 
   /**
@@ -46,9 +49,9 @@ Page({
    */
   onLoad(option) {
     this.setData({
-      mode: decodeURIComponent(option?.mode || 'manage')
-    })
-    this.getAllCustomer()
+      mode: decodeURIComponent(option?.mode || 'manage'),
+    });
+    this.getAllCustomer();
   },
 
   /**
@@ -56,66 +59,66 @@ Page({
    */
   onReady() {},
   async onPullDownRefresh() {
-    await this.getAllCustomer()
-    wx.stopPullDownRefresh()
+    await this.getAllCustomer();
+    wx.stopPullDownRefresh();
     this.setData({
       searchKey: '',
-    })
+    });
   },
 
   async getAllCustomer() {
     wx.showLoading({
       title: '正在加载...',
-    })
-    const {
-      data
-    } = await queryAllCustomer()
-    if (!data.data) return wx.hideLoading()
-    const formateData = formateDataToIndexList(data.data)
+    });
+    const { data } = await queryAllCustomer();
+    if (!data.data) return wx.hideLoading();
+    const formateData = formateDataToIndexList(data.data);
     this.setData({
       originCustomerList: data.data,
       customerList: formateData,
-      indexList: formateData.map(item => item.index)
-    })
-    wx.hideLoading()
+      indexList: formateData.map((item) => item.index),
+    });
+    wx.hideLoading();
   },
   clearSearch() {
     this.handleSearch({
       detail: {
-        value: ''
-      }
-    })
+        value: '',
+      },
+    });
   },
   // 搜索输入框输入
   handleSearch(e) {
-    const searchData = this.data.originCustomerList.filter(item => {
-      return searchKeyInString(item.name, e.detail.value)
-    })
-    const formateData = formateDataToIndexList(searchData)
+    const searchData = this.data.originCustomerList.filter((item) => {
+      return searchKeyInString(item.name, e.detail.value);
+    });
+    const formateData = formateDataToIndexList(searchData);
     this.setData({
       searchKey: e.detail.value,
       customerList: formateData,
-      indexList: formateData.map(item => item.index)
-    })
+      indexList: formateData.map((item) => item.index),
+    });
   },
   // 新增客户输入
   changeCustomer(e) {
-    const value = e.detail.value
-    const key = e.currentTarget.dataset.key
+    const { value } = e.detail;
+    const { key } = e.currentTarget.dataset;
     this.setData({
       addCustomerData: {
         ...this.data.addCustomerData,
-        [key]: value
-      }
-    })
+        [key]: value,
+      },
+    });
   },
   // 确定新增客户
   async submitAddCustomer() {
-    console.log(this.data.addCustomerData)
-    const IsEmpty = Object.entries(this.data.addCustomerData).some(([key, value]) => {
-      if (key === 'phone') return false
-      return value === ''
-    })
+    console.log(this.data.addCustomerData);
+    const IsEmpty = Object.entries(this.data.addCustomerData).some(
+      ([key, value]) => {
+        if (key === 'phone') return false;
+        return value === '';
+      },
+    );
     if (IsEmpty) {
       Toast({
         context: this,
@@ -124,28 +127,28 @@ Page({
       });
       return;
     }
-    let data
+    let data;
     if (this.data.addCustomerData.id) {
       // 编辑用户
-      data = await editCustomer(this.data.addCustomerData)
+      data = await editCustomer(this.data.addCustomerData);
     } else {
       // 新增用户
-      data = await addCustomer(this.data.addCustomerData)
+      data = await addCustomer(this.data.addCustomerData);
     }
 
     if (data.data.code === 200) {
-      this.closeAddCustomer()
-      this.getAllCustomer()
+      this.closeAddCustomer();
+      this.getAllCustomer();
     }
   },
   openAddCustomer() {
     this.setData({
       addCustomerData: {
         name: '',
-        phone: ''
+        phone: '',
       },
-      addCustomerVisible: true
-    })
+      addCustomerVisible: true,
+    });
   },
   onVisibleChange(e) {
     this.setData({
@@ -154,8 +157,8 @@ Page({
   },
   closeAddCustomer() {
     this.setData({
-      addCustomerVisible: false
-    })
+      addCustomerVisible: false,
+    });
   },
   onSelect(e) {
     if (this.data.mode === 'manage') {
@@ -165,93 +168,90 @@ Page({
         success: (res) => {
           res.eventChannel.emit('acceptBillData', {
             data: {
-              client: e.target.dataset.item
-            }
-          })
-        }
-      })
-      return
+              client: e.target.dataset.item,
+            },
+          });
+        },
+      });
+      return;
     }
-    const eventChannel = this.getOpenerEventChannel()
-    eventChannel.emit('selectCallBack', e.target.dataset.item)
-    wx.navigateBack()
+    const eventChannel = this.getOpenerEventChannel();
+    eventChannel.emit('selectCallBack', e.target.dataset.item);
+    wx.navigateBack();
   },
   // 确定删除
   async submitDelete() {
-    const id = this.data.operateCustomer.id
-    const {
-      data
-    } = await deleteCustomer(id)
+    const { id } = this.data.operateCustomer;
+    if (
+      this.data.operateCustomer.bills &&
+      this.data.operateCustomer.bills.length > 0
+    ) {
+      Toast({
+        context: this,
+        selector: '#t-toast',
+        message: '该客户有账单，无法删除',
+      });
+      return;
+    }
+    const { data } = await deleteCustomer(id);
     if (data.code === 200) {
-      this.closeDelete()
-      this.getAllCustomer()
+      this.closeDelete();
+      this.getAllCustomer();
     }
   },
   openDelete(e) {
-    const operateCustomer = e.currentTarget.dataset.item
+    const operateCustomer = e.currentTarget.dataset.item;
     this.setData({
       deleteVisible: true,
-      operateCustomer
-    })
+      operateCustomer,
+    });
   },
   closeDelete() {
     this.setData({
-      deleteVisible: false
-    })
+      deleteVisible: false,
+    });
   },
   onEdit(e) {
-    const data = e.currentTarget.dataset.item
+    const data = e.currentTarget.dataset.item;
     this.setData({
       addCustomerVisible: true,
-      addCustomerData: data
-    })
+      addCustomerData: data,
+    });
   },
   // 回车
   enter(e) {
-    const index = e.currentTarget.dataset.index
-    console.log(index)
+    const { index } = e.currentTarget.dataset;
+    console.log(index);
     if (index === this.data.addCustomerMap.length - 1) {
       // 完成了
-      this.submitAddCustomer()
+      this.submitAddCustomer();
     }
     this.setData({
-      focusIndex: index + 1
-    })
+      focusIndex: index + 1,
+    });
   },
   /**
    * Lifecycle function--Called when page show
    */
-  onShow() {
-
-  },
+  onShow() {},
 
   /**
    * Lifecycle function--Called when page hide
    */
-  onHide() {
-
-  },
+  onHide() {},
 
   /**
    * Lifecycle function--Called when page unload
    */
-  onUnload() {
-
-  },
-
-
+  onUnload() {},
 
   /**
    * Called when page reach bottom
    */
-  onReachBottom() {
-
-  },
+  onReachBottom() {},
 
   /**
    * Called when user click on the top right corner to share
    */
-  onShareAppMessage() {
-
-  }
-})
+  onShareAppMessage() {},
+});
