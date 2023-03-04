@@ -1,8 +1,5 @@
 // pages/home/index.js
 const {
-  login,
-} = require('../../utils/login.js')
-const {
   queryBillAmountAndCount,
   queryAllCustomer
 } = require('../../api/index')
@@ -70,12 +67,6 @@ Page({
     wx.stopPullDownRefresh()
   },
   async onReachBottom() {},
-
-  backLoginPage() {
-    wx.redirectTo({
-      url: '/pages/login/index',
-    })
-  },
   // 提交账单
   closeBill() {
     this.setData({
@@ -116,26 +107,7 @@ Page({
     }, 241)
   },
   onLoad(options) {
-    const retryLogin = async () => {
-      const result = await login(this.backLoginPage)
-      if (result) {
-        this.init()
-      }
-    }
-    wx.getStorage({
-      key: 'token',
-      success: (res) => {
-        if (!res.data) {
-          // 没有 token 登录
-          retryLogin()
-        } else {
-          this.init()
-        }
-      },
-      fail: () => {
-        retryLogin()
-      }
-    })
+    this.init()
   },
 
   onReady() {},

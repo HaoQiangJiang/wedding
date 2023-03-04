@@ -5,7 +5,7 @@
   </view>
   <view class="top">
     <view class="record-type">
-      <t-button wx:for="{{recordTypeMap}}" wx:key="value" size="small" theme="{{item.value===recordType?'primary':'default'}}" data-item="{{item}}" capture-bind:tap="changeRecordType">{{item.label}}</t-button>
+      <t-button wx:for="{{recordTypeMap}}" disabled="{{isEdit}}" wx:key="value" size="small" theme="{{item.value===recordType?'primary':'default'}}" data-item="{{item}}" capture-bind:tap="changeRecordType">{{item.label}}</t-button>
     </view>
     <t-button size="small" bindtap="showPicker">{{billDate}}</t-button>
   </view>

@@ -60,7 +60,9 @@ Component({
     },
     changePayStatus(e) {
       this.setData({
-        isAllPay: e.detail.value
+        isAllPay: e.detail.value,
+        priceError: false,
+        maxValueError: false,
       });
     },
     changePartPay(e) {

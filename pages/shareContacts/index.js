@@ -6,6 +6,7 @@ Page({
   data: {
     list: [],
     totalPrice: 0,
+    totalPaid: 0,
     uid: '',
     cid: '',
     startTime: '',
@@ -37,10 +38,12 @@ Page({
       data
     } = await getShareBill(uid, cid, startTime, endTime)
     let totalPrice = 0
+    let totalPaid = 0
     const resultReverse = JSON.parse(JSON.stringify(data.data.list)).reverse()
     const resultLegnth = data.data.list.length - 1
     resultReverse.forEach((item, index) => {
       totalPrice = new Decimal(item.real_amount).add(totalPrice).toNumber()
+      totalPaid = new Decimal(item.paid_amount).add(totalPaid).toNumber()
       const noReverseIndex = resultLegnth - index
       data.data.list[noReverseIndex].accumulate = totalPrice
     })
@@ -58,6 +61,7 @@ Page({
     this.setData({
       list: data.data.list,
       totalPrice,
+      totalPaid,
       uid,
       cid,
       startTime,

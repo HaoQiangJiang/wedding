@@ -32,6 +32,11 @@
   top: 80rpx;
 }
 
+.top .total-paid {
+  font-size: 32rpx;
+  color: var(--red--);
+}
+
 .contacts {
   width: 100%;
   background-color: #fff;

@@ -1,5 +1,8 @@
 <view class="top">
-  <text class="total-price">总计 {{totalPrice}} 元</text>
+  <view>
+    <text class="total-price">总计 {{totalPrice}} 元</text>
+    <text class="total-paid"> (已付{{ totalPaid}} 元)</text>
+  </view>
   <view class="top-time" capture-bind:tap="openDatePicker">
     <text class="time">
       {{startTime }}
@@ -16,12 +19,14 @@
         <view class="contacts" slot="header">
           <view class="bill-title">
             <text class="time">{{fn.formateTime(item.created_at)}}</text>
-            <text class="real-amount {{item.real_amount>0?'red':'green'}}">{{item.real_amount}}元</text>
+            <t-badge wx:if="{{item.paid_amount && item.paid_amount !==item.real_amount}}" count="付{{item.paid_amount}}" offset="{{ [-12, -6] }}" shape="bubble">
+              <text class="real-amount">{{item.real_amount}}元</text>
+            </t-badge>
             <text class="total">累计{{item.accumulate}}</text>
           </view>
         </view>
         <view data-item="{{item}}">
-          <bill-details products="{{item.products}}" payRecords="{{item.pay_records}}"/>
+          <bill-details products="{{item.products}}" payRecords="{{item.pay_records}}" />
         </view>
       </t-collapse-panel>
     </t-collapse>

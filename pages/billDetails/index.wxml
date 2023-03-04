@@ -19,7 +19,7 @@
   <t-dialog visible="{{deleteVisible}}" content="删除账单后无法恢复,请确定是否删除?" confirm-btn="{{ { content: '删除', variant: 'base', theme: 'danger' } }}" cancel-btn="取消" bind:confirm="submitDelete" bind:cancel="closeDelete" />
 
   <t-popup visible="{{visible}}" placement="bottom" bind:visible-change="onVisibleChange">
-    <record id="record" wx:if="{{isShowRecord}}" bind:closeBill="closeBill" bind:refreshBill="refreshBill" />
+    <record id="record" isEdit="{{true}}" wx:if="{{isShowRecord}}" bind:closeBill="closeBill" bind:refreshBill="refreshBill" />
   </t-popup>
 </view>
 <repay-dialog type="single" maxValue="{{maxRepay}}" visible="{{repayVisible}}" bind:cancel="closeRepay" bind:confirm="submitRepay" />

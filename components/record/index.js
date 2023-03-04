@@ -11,7 +11,9 @@ Component({
   /**
    * Component properties
    */
-  properties: {},
+  properties: {
+    isEdit: Boolean
+  },
 
   /**
    * Component initial data
@@ -49,6 +51,10 @@ Component({
    */
   methods: {
     changeRecordType(e) {
+      if (this.properties.isEdit) return wx.showToast({
+        title: '已创建的账单不再支持修改订单状态',
+        icon: 'none'
+      })
       const item = e.currentTarget.dataset.item
       this.setData({
         recordType: item.value

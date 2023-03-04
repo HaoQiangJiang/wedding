@@ -7,6 +7,7 @@
     "t-icon": "tdesign-miniprogram/icon/icon",
     "t-empty": "tdesign-miniprogram/empty/empty",
     "t-collapse": "tdesign-miniprogram/collapse/collapse",
+    "t-badge": "tdesign-miniprogram/badge/badge",
     "t-collapse-panel": "tdesign-miniprogram/collapse-panel/collapse-panel"
   }
 }

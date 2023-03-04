@@ -13,6 +13,7 @@ Page({
     client: '',
     list: [],
     totalPrice: 0,
+    totalPaid:0, // 所有已付
     noMore: false,
     startTime: dayjs().subtract(1, 'month').format('YYYY-MM-DD'),
     endTime: formatTime(new Date(), 'YYYY-MM-DD'),
@@ -72,16 +73,19 @@ Page({
     } = await queryAllBill(params)
     let result = data.data.list
     let totalPrice = 0
+    let totalPaid = 0
     const resultReverse = JSON.parse(JSON.stringify(result)).reverse()
     const resultLegnth = result.length - 1
     resultReverse.forEach((item, index) => {
       totalPrice = new Decimal(item.real_amount).add(totalPrice).toNumber()
+      totalPaid = new Decimal(item.paid_amount).add(totalPaid).toNumber()
       const noReverseIndex = resultLegnth - index
       result[noReverseIndex].accumulate = totalPrice
     })
     this.setData({
       list: result,
-      totalPrice
+      totalPrice,
+      totalPaid
     })
     wx.hideLoading()
   },

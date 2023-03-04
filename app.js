@@ -1,24 +1,53 @@
 import updateManager from './common/updateManager';
-
+let interstitialAd = null
+import {
+  login
+} from './utils/login'
 App({
   onLaunch: function () {
+
     this.onShareAppMessage()
     wx.getSystemInfo({
       success: function (res) {
-            if (res.platform === 'ios') {
+        if (res.platform === 'ios') {
           // iOS 系统
         } else if (res.platform === 'android') {
           // Android 使用 dark
           wx.setBackgroundTextStyle({
             textStyle: 'dark'
           })
-        } 
+        }
       }
     })
   },
   onShow: function () {
-
+    this.showLogin()
     updateManager();
+  },
+  showLogin() {
+    const retryLogin = async () => {
+      const result = await login(this.backLoginPage)
+      if (result) {
+        this.init()
+      }
+    }
+    wx.getStorage({
+      key: 'token',
+      success: (res) => {
+        if (!res.data) {
+          // 没有 token 登录
+          retryLogin()
+        }
+      },
+      fail: () => {
+        retryLogin()
+      }
+    })
+  },
+  backLoginPage() {
+    wx.redirectTo({
+      url: '/pages/login/index',
+    })
   },
   onShareAppMessage() {
     wx.onAppRoute(() => {
