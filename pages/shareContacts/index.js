@@ -32,7 +32,7 @@ Page({
       cid,
       startTime,
       endTime
-    } = params
+    } = params || this.data
     const {
       data
     } = await getShareBill(uid, cid, startTime, endTime)
@@ -45,9 +45,15 @@ Page({
       data.data.list[noReverseIndex].accumulate = totalPrice
     })
 
-    wx.setNavigationBarTitle({
-      title: data.data.user.name + '的账单'
-    })
+    const {
+      list
+    } = data.data
+    if (list.length > 0) {
+      wx.setNavigationBarTitle({
+        title: list[0]?.client.name + '的账单'
+      })
+    }
+
     // 首页全部替换数据
     this.setData({
       list: data.data.list,
@@ -91,7 +97,10 @@ Page({
   /**
    * Page event handler function--Called when user drop down
    */
-  onPullDownRefresh() {},
+  onPullDownRefresh() {
+    this.init()
+    wx.stopPullDownRefresh()
+  },
 
   /**
    * Called when page reach bottom

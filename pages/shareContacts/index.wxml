@@ -22,8 +22,8 @@
 <t-empty wx:else description="暂无未付账单" />
 
 <view class="pay">
-  <text class="title">{{user.tagline ||"这是我的收款码，欢迎扫码支付"}} </text>
-  <t-image class="image" show-menu-by-longpress="{{true}}" mode="heightFix" src="https://weixin.linktmd.com/{{user.qr_code}}" />
+  <text wx:if="{{user.tagline}}" class="title">{{user.tagline }} </text>
+  <t-image wx:if="{{user.qr_code}}" class="image" show-menu-by-longpress="{{true}}" mode="heightFix" src="https://weixin.linktmd.com/{{user.qr_code}}" />
 </view>
 <wxs module="fn">
   var total = 0
