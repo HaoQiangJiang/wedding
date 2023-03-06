@@ -3,6 +3,11 @@ const {
   queryBillAmountAndCount,
   queryAllCustomer
 } = require('../../api/index')
+
+import {
+  checkLogin
+} from '../../utils/login'
+
 Page({
   data: {
     visible: false,
@@ -21,6 +26,7 @@ Page({
    */
 
   async init() {
+    await checkLogin()
     wx.showLoading({
       title: '加载中',
     })

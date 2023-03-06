@@ -1,6 +1,9 @@
 const {
   getShareBillDetails
 } = require('../../api/index')
+const {
+  checkLogin
+} = require('../../utils/login')
 Page({
 
   /**
@@ -13,7 +16,8 @@ Page({
   /**
    * Lifecycle function--Called when page load
    */
-  onLoad(options) {
+  async onLoad(options) {
+    await checkLogin()
     this.init(options.id)
   },
 

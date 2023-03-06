@@ -2,6 +2,34 @@ const {
   wxLogin,
   getUserInfo
 } = require('../api/index')
+
+function backLoginPage() {
+  wx.redirectTo({
+    url: '/pages/login/index',
+  })
+}
+export function checkLogin() {
+  return new Promise(resolve => {
+    const retryLogin = async () => {
+      const result = await login(backLoginPage)
+      resolve(result)
+    }
+    wx.getStorage({
+      key: 'token',
+      success: (res) => {
+        if (!res.data) {
+          // 没有 token 登录
+          retryLogin()
+        }
+        resolve(true)
+      },
+      fail: () => {
+        retryLogin()
+      }
+    })
+  })
+
+}
 export function login(failCallback) {
   return new Promise(resolve => {
     wx.showLoading({

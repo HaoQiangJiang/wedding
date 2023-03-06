@@ -1,11 +1,6 @@
 import updateManager from './common/updateManager';
-let interstitialAd = null
-import {
-  login
-} from './utils/login'
 App({
   onLaunch: function () {
-
     this.onShareAppMessage()
     wx.getSystemInfo({
       success: function (res) {
@@ -21,34 +16,9 @@ App({
     })
   },
   onShow: function () {
-    this.showLogin()
     updateManager();
   },
-  showLogin() {
-    const retryLogin = async () => {
-      const result = await login(this.backLoginPage)
-      if (result) {
-        this.init()
-      }
-    }
-    wx.getStorage({
-      key: 'token',
-      success: (res) => {
-        if (!res.data) {
-          // 没有 token 登录
-          retryLogin()
-        }
-      },
-      fail: () => {
-        retryLogin()
-      }
-    })
-  },
-  backLoginPage() {
-    wx.redirectTo({
-      url: '/pages/login/index',
-    })
-  },
+
   onShareAppMessage() {
     wx.onAppRoute(() => {
       const pages = getCurrentPages() //获取加载的页面

@@ -1,6 +1,9 @@
 const {
   getShareBill,
 } = require('../../api/index')
+const {
+  checkLogin
+} = require('../../utils/login')
 const Decimal = require('decimal.js');
 Page({
   data: {
@@ -15,7 +18,8 @@ Page({
     activeValues: []
   },
 
-  onLoad(options) {
+  async onLoad(options) {
+    await checkLogin()
     this.init(options)
   },
   handleChange(e) {
