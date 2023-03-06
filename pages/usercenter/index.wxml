@@ -1,29 +1,3 @@
-<view class="user-center">
-  <view class="top">
-    <t-user-center-card userInfo="{{userInfo}}" />
-    <view class="statistics">
-      <view class="item">
-        <text>{{createDay}}</text>
-        <text class="label">记账天数</text>
-      </view>
-      <view class="item">
-        <text>{{count}}</text>
-        <text class="label">记账笔数</text>
-      </view>
-    </view>
-  </view>
-  <t-cell-group class="content" theme="card">
-    <t-cell title="我的客户" hover arrow data-key="/pages/customer/index?mode=manage" capture-bind:tap="navigate" />
-    <t-cell title="我的商品" hover arrow data-key="/pages/goods/index" capture-bind:tap="navigate" />
-    <t-cell title="账单回收站" hover arrow data-key="/pages/recycle/index" capture-bind:tap="navigate" />
-  </t-cell-group>
-  <t-cell-group class="content" theme="card">
-    <t-cell title="收款码" hover arrow data-key="payConfig" capture-bind:tap="navigatePay" />
-    <t-cell title="订阅账单" hover arrow data-key="/pages/contactConfig/index" capture-bind:tap="navigate" />
-    <t-cell title="授权通知" hover arrow data-key="share" capture-bind:tap="acceptNotice" />
-  </t-cell-group>
-  <t-cell-group class="content" theme="card">
-    <t-cell title="退出" arrow hover bindtap="logoutFn" />
-  </t-cell-group>
-</view>
-<t-dialog id="t-dialog" />
+<!--pages/usercenter/index.wxml-->
+<text>pages/usercenter/index.wxml</text>
+<text capture-bind:tap="logout">退出登录</text>

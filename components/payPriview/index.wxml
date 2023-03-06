@@ -1,4 +1,0 @@
-<view class="pay">
-  <text class="title">这是我的收款码,快扫码付款吧</text>
-  <t-image src="{{payImage}}" mode="aspectFill" width="500rpx" height="678rpx" aria-label="收款码" />
-</view>

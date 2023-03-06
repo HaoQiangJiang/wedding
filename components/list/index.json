@@ -1,7 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "bill-item": "/components/billItem/index",
-    "t-dialog": "tdesign-miniprogram/dialog/dialog"
-  }
-}

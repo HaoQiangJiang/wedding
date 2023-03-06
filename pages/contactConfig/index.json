@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "订阅账单配置",
-  "usingComponents": {
-    "t-input": "tdesign-miniprogram/input/input"
-  }
-}

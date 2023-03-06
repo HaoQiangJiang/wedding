@@ -1,70 +1,73 @@
-import Dialog from 'tdesign-miniprogram/dialog/index';
-
-const { logout } = require('../../utils/login');
-const { diffTime } = require('../../utils/util');
-const { getUserInfo } = require('../../api/index');
-
+// pages/usercenter/index.js
 Page({
+
+  /**
+   * Page initial data
+   */
   data: {
-    userInfo: {},
-    createDay: 0,
-    count: 0,
+
   },
+
+  logout() {
+    wx.setStorageSync('token', '')
+    wx.setStorageSync('userInfo', {})
+    wx.navigateTo({
+      url: '/pages/login/index',
+    })
+  },
+  /**
+   * Lifecycle function--Called when page load
+   */
+  onLoad(options) {
+
+  },
+
+  /**
+   * Lifecycle function--Called when page is initially rendered
+   */
+  onReady() {
+
+  },
+
+  /**
+   * Lifecycle function--Called when page show
+   */
   onShow() {
     this.getTabBar().init();
-    this.updateUserInfo();
   },
-  async updateUserInfo() {
-    const resInfo = await getUserInfo();
-    if (resInfo.data.code === 200) {
-      const userInfo = resInfo.data.data;
-      // 将获取的用户信息保存
-      wx.setStorageSync('userInfo', userInfo);
-      this.setData({
-        userInfo: {
-          avatarUrl: userInfo.avatar_url,
-          nickName: userInfo.name,
-          phoneNumber: '',
-        },
-        count: userInfo.count,
-        createDay: diffTime(userInfo.created_at),
-      });
-    }
-  },
-  acceptNotice() {
-    wx.requestSubscribeMessage({
-      tmplIds: ['JHT5ozDk1RGZcgkW8QmJV0zAJJfN8ubWNxMpDwqiXyw'],
-      success: (res) => {
-        console.log(res);
-      },
-      fail: (error) => {
-        console.log(error);
-      },
-    });
-  },
-  logoutFn() {
-    const dialogConfig = {
-      context: this,
-      title: '退出登录',
-      content: '确定退出登录吗?',
-      confirmBtn: '确定',
-      cancelBtn: '取消',
-    };
 
-    Dialog.confirm(dialogConfig)
-      .then(() => logout())
-      .catch(() => console.log('点击了取消'))
-      .finally(() => Dialog.close());
+  /**
+   * Lifecycle function--Called when page hide
+   */
+  onHide() {
+
   },
-  navigate(e) {
-    const url = e.currentTarget.dataset.key;
-    wx.navigateTo({
-      url,
-    });
+
+  /**
+   * Lifecycle function--Called when page unload
+   */
+  onUnload() {
+
   },
-  navigatePay() {
-    wx.navigateTo({
-      url: '/pages/payConfig/index',
-    });
+
+  /**
+   * Page event handler function--Called when user drop down
+   */
+  onPullDownRefresh() {
+
   },
-});
+
+  /**
+   * Called when page reach bottom
+   */
+  onReachBottom() {
+
+  },
+
+  /**
+   * Called when user click on the top right corner to share
+   */
+  onShareAppMessage() {
+
+  }
+})

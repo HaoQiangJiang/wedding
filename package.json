@@ -15,8 +15,6 @@
     "*.{js,ts,css,less}": "prettier --write"
   },
   "dependencies": {
-    "cnchar": "^3.2.2",
-    "decimal.js": "^10.4.3",
     "tdesign-miniprogram": "^1.0.0-rc.2"
   },
   "devDependencies": {

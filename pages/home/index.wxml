@@ -1,38 +1,15 @@
-<view class="home-summary">
-  <view class="item">
-    <text class="price">￥{{todayBillAmount}}</text>
-    <text>今日销售额</text>
-  </view>
-  <view class="item">
-    <text class="price"> {{todayBillCount}}</text>
-    <text>今日账单数</text>
+<view class="chat-container">
+  <scroll-view class="chat-box" scroll-y="true" scroll-into-view="{{scrollIntoView}}" scroll-with-animation="{{true}}">
+    <view class="chat-item {{item.isMe ? 'right' : 'left'}}" id="chat-{{index}}" wx:for="{{chatList}}" wx:key="index">
+      <image class="avatar" src="{{item.isMe ? meAvatar : aiAvatar}}"></image>
+      <view class="content-box">
+        <view class="content">{{item.content}}</view>
+      </view>
+    </view>
+  </scroll-view>
+  <!-- 输入框 -->
+  <view class="input-box">
+    <t-input class="input" placeholder-style="color:#fff" cursor-spacing="20" borderless placeholder="请输入消息" value="{{inputValue}}" bind:change="onInput" bind:enter="onSend" />
+    <button class="send-btn" bindtap="onSend">发送</button>
   </view>
 </view>
-
-<view class="content">
-  <t-cell-group wx:if="{{allCustomer.length>0}}">
-    <t-cell wx:for="{{allCustomer}}" data-item="{{item}}" bind:click="onSelect" aria-role="button" hover size="large">
-      <text slot="title">{{item.name}}</text>
-      <text slot="description">已付:{{item.paid_count}}单 未付:{{item.unpaid_count}}单 退货:{{item.return_count}}单 </text>
-      <text slot="note" class="note">合计:{{item.total}}元</text>
-    </t-cell>
-  </t-cell-group>
-  <t-empty wx:else description="暂无数据, 去个人中心创建客户吧!" />
-</view>
-
-
-<t-popup visible="{{visible}}" placement="bottom" bind:visible-change="onVisibleChange">
-  <record id="record" wx:if="{{isShowRecord}}" bind:closeBill="closeBill" bind:refreshBill="onPullDownRefresh" />
-</t-popup>
-<t-fab style="right:20rpx;bottom: 250rpx;" icon="edit-1" bind:click="addBill" text="记一笔" />
-<wxs module="fn">
-  module.exports = {
-    calcTotal: function (arr) {
-      var total = 0
-      arr.forEach(function (item) {
-        total += item.real_amount
-      });
-      return total
-    }
-  }
-</wxs>

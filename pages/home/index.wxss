@@ -1,48 +1,106 @@
 Page {
-  background-color: #fff;
+  --td-input-default-text-color: #fff
+}
+
+.chat-container {
+  height: 100%;
+  padding: 10px;
+  background-color: #1e1e1e;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.chat-box {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 50rpx;
+}
+
+.chat-item {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.avatar {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+
+.right {
+  justify-content: flex-start;
+  flex-direction: row-reverse;
+}
+
+.left .avatar {
+  margin-right: 10px;
+}
+
+.right .avatar {
+  margin-left: 10px;
+}
+
+.content-box {
+  max-width: 60%;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #3a3a3a;
 }
 
 .content {
-  display: flex;
-  flex-direction: column;
-  padding: 20rpx 20rpx 200rpx 20rpx;
-}
-
-.fab {
-  bottom: 100rpx;
-}
-
-.home-summary {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  width: 100%;
-  background-color: var(--primary--);
-}
-
-.home-summary .item {
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  font-size: 20rpx;
   color: #fff;
-  font-weight: 400;
-  margin-bottom: 10rpx;
+  font-size: 16px;
+  overflow: hidden;
+  white-space: pre-wrap;
 }
 
-.home-summary .item .price {
-  font-size: 42rpx;
-  font-weight: 500;
-  margin-bottom: 4rpx;
+.input-box {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  padding-bottom: 40rpx;
 }
 
-.home-summary .item .label {
-  opacity: 0.7;
+.input {
+  flex: 1;
+  height: 20rpx;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background-color: #3a3a3a !important;
+  /* color: #fff !important; */
+  font-size: 16px;
+  resize: none;
 }
 
-.content .note {
-  color: var(--primary--);
+.send-btn {
+  margin-left: 10px;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  background-color: #4d4d4d;
+  color: #fff;
+  font-size: 16px;
+}
+
+.send-btn:active {
+  background-color: #3a3a3a;
+}
+
+/* 输入框和发送按钮固定底部 */
+.input-box {
+  margin-top: auto;
+}
+
+/* 聊天内容过多出现滚动条 */
+.chat-box::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background-color: #1e1e1e;
+}
+
+.chat-box::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background-color: #4d4d4d;
 }

@@ -1,13 +1,6 @@
 {
-  "enablePullDownRefresh": true,
-  "navigationBarTitleText": "灵犀记账",
-  "onReachBottomDistance": 50,
+  "enablePullDownRefresh": false,
   "usingComponents": {
-    "t-fab": "tdesign-miniprogram/fab/fab",
-    "t-popup": "tdesign-miniprogram/popup/popup",
-    "record": "/components/record/index",
-    "t-empty": "tdesign-miniprogram/empty/empty",
-    "t-cell-group": "tdesign-miniprogram/cell-group/cell-group",
-    "t-cell": "tdesign-miniprogram/cell/cell"
+    "t-input": "tdesign-miniprogram/input/input"
   }
 }
