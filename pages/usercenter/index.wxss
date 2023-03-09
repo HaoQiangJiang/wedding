@@ -1,1 +1,31 @@
-/* pages/usercenter/index.wxss */
+Page {}
+
+.top {
+  background-color: var(--primary--);
+  padding: 120rpx 20rpx 20rpx 20rpx;
+  color: #fff;
+
+}
+
+.statistics {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 40rpx 0rpx 20rpx 0;
+  margin-bottom: 20rpx;
+}
+
+.statistics .item {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10rpx;
+  font-size: 30rpx;
+}
+
+.statistics .item .label {
+  opacity: 0.7;
+}

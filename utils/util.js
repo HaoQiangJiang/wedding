@@ -1,27 +1,11 @@
-var avatarUrl = 'https://example.com/avatar.png';
-
 module.exports = {
-  formatTime: function (date) {
-    var year = date.getFullYear()
-    var month = date.getMonth() + 1
-    var day = date.getDate()
-    var hour = date.getHours()
-    var minute = date.getMinutes()
-    var second = date.getSeconds()
-
-    return [year, month, day].map(this.formatNumber).join('/') + ' ' + [hour, minute, second].map(this.formatNumber).join(':')
-  },
-
-  formatNumber: function (n) {
-    n = n.toString()
-    return n[1] ? n : '0' + n
-  },
-
-  generateMsg: function (type, content) {
-    return {
-      type: type,
-      avatar: avatarUrl,
-      content: content,
-    };
-  },
+  generateUUID() {
+    let d = new Date().getTime();
+    let uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+      let r = (d + Math.random() * 16) % 16 | 0;
+      d = Math.floor(d / 16);
+      return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+    });
+    return uuid;
+  }
 };

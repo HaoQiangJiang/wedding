@@ -1,9 +1,9 @@
 <view class="login">
   <image src='../../assets/loginBanner.svg' class="image" data-keys="clear" />
-  <text class="title">灵犀记账</text>
+  <text class="title">灵犀AI</text>
   <view class="slogan-container">
-    <text class="slogan">记下理想</text>
-    <text class="slogan">温暖生活</text>
+    <text class="slogan">灵犀 AI</text>
+    <text class="slogan">让创造更简单</text>
   </view>
 
   <view class="login-wechat">

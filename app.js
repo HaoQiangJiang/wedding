@@ -1,4 +1,10 @@
 import updateManager from './common/updateManager';
+const {
+  checkLogin
+} = require('./utils/login')
+const {
+  share
+} = require('./api/index')
 App({
   onLaunch: function () {
     this.onShareAppMessage()
@@ -15,8 +21,14 @@ App({
       }
     })
   },
-  onShow: function () {
+  onShow: function (options) {
+    console.log(options)
+    const {
+      invite_code
+    } = options.query
+    console.log(invite_code)
     updateManager();
+    checkLogin(invite_code)
   },
 
   onShareAppMessage() {
@@ -29,9 +41,11 @@ App({
       if (!data.isOverShare) {
         data.isOverShare = true
         view.onShareAppMessage = () => { //重写分享配置
+          // 调用分享接口
+          share()
           return {
-            title: '记下理想, 温暖生活——灵犀记账助手',
-            path: "/pages/home/index", //若无path 默认跳转分享页
+            title: '灵犀 AI',
+            path: '/pages/home/index?invite_code=' + '1212', //若无path 默认跳转分享页
             imageUrl: 'https://weixin.linktmd.com/public/Share.png' //若无imageUrl 截图当前页面
           }
         }

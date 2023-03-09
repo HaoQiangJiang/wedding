@@ -1,50 +1,48 @@
 Page({
   data: {
-    meAvatar: 'https://www.linktmd.com/static/link_official/images/platform/Twitter.png',
-    aiAvatar: 'https://www.linktmd.com/static/link_official/images/platform/reddit.png',
-    chatList: [],
-    inputValue: '',
-    scrollIntoView: '',
+    list: [{
+      label: 'chatGPT 聊天',
+      image: 'https://www.linktmd.com/static/link_official/images/testimonial/tx3.png',
+      value: 'chatGPT',
+      url: '/pages/chat/index'
+    }, {
+      label: '解梦',
+      image: 'https://www.linktmd.com/static/link_official/images/testimonial/tx3.png',
+      value: 'dram',
+      url: '/pages/dram/index'
+    }, {
+      label: '朋友圈文案',
+      image: 'https://www.linktmd.com/static/link_official/images/testimonial/tx3.png',
+      value: 'copywriting',
+      url: '/pages/copywriting/index'
+    }, {
+      label: '广告语生成',
+      image: 'https://www.linktmd.com/static/link_official/images/testimonial/tx3.png',
+      value: 'ad',
+      url: '/pages/ad/index'
+    }, {
+      label: '男友道歉专用',
+      image: 'https://www.linktmd.com/static/link_official/images/testimonial/tx3.png',
+      value: 'apologize',
+      url: '/pages/apologize/index'
+    }, {
+      label: '诗词生成',
+      image: 'https://ai.linktmd.com/static/poetry_cover.png',
+      value: 'poetry',
+      url: '/pages/poetry/index'
+    }]
   },
-  onInput(e) {
-    const {
-      value
-    } = e.detail;
-    this.setData({
-      inputValue: value,
-    });
+  open(e) {
+    const url = e.currentTarget.dataset.url
+    wx.navigateTo({
+      url: url,
+    })
   },
-  onFocus(e) {
-    if (this.data.chatList.length) {
-      this.setData({
-        scrollIntoView: `chat-${this.data.chatList.length - 1}`,
-      });
-    }
+  onShow() {
+    this.getTabBar().init()
   },
-  onSend() {
-    const {
-      chatList,
-      inputValue
-    } = this.data;
-    if (!inputValue) {
-      return;
-    }
-    const newChatList = chatList.concat([{
-        avatar: 'https://xxx.com/avatar2.png',
-        content: inputValue,
-        isMe: true,
-      },
-      {
-        avatar: 'https://xxx.com/avatar1.png',
-        content: '收到',
-        isMe: false,
-      },
-    ]);
-    console.log(`chat-${newChatList.length - 1}`)
-    this.setData({
-      chatList: newChatList,
-      inputValue: '',
-      scrollIntoView: `chat-${newChatList.length - 1}`,
-    });
-  },
+  onShareAppMessage() {
+
+  }
+
 });

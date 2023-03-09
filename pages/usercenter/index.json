@@ -1,3 +1,11 @@
 {
-  "usingComponents": {}
+  "navigationStyle": "custom",
+  "disableScroll": true,
+  "usingComponents": {
+    "t-user-center-card": "./components/user-center-card/index",
+    "t-avatar": "tdesign-miniprogram/avatar/avatar",
+    "t-button": "tdesign-miniprogram/button/button",
+    "t-cell": "tdesign-miniprogram/cell/cell",
+    "t-dialog": "tdesign-miniprogram/dialog/dialog"
+  }
 }

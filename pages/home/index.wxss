@@ -1,106 +1,16 @@
 Page {
-  --td-input-default-text-color: #fff
-}
-
-.chat-container {
+  overflow: auto;
   height: 100%;
-  padding: 10px;
-  background-color: #1e1e1e;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
 }
 
-.chat-box {
-  flex: 1;
-  overflow-y: auto;
-  margin-bottom: 50rpx;
+.block {
+  padding-bottom: 100rpx;
 }
 
-.chat-item {
-  display: flex;
-  margin-bottom: 10px;
+.blank {
+  height: 200rpx;
 }
 
-.avatar {
-  width: 60rpx;
-  height: 60rpx;
-}
-
-
-.right {
-  justify-content: flex-start;
-  flex-direction: row-reverse;
-}
-
-.left .avatar {
-  margin-right: 10px;
-}
-
-.right .avatar {
-  margin-left: 10px;
-}
-
-.content-box {
-  max-width: 60%;
-  padding: 10px;
-  border-radius: 10px;
-  background-color: #3a3a3a;
-}
-
-.content {
-  color: #fff;
-  font-size: 16px;
-  overflow: hidden;
-  white-space: pre-wrap;
-}
-
-.input-box {
-  display: flex;
-  align-items: center;
-  margin-top: 20px;
-  padding-bottom: 40rpx;
-}
-
-.input {
-  flex: 1;
-  height: 20rpx;
-  padding: 10px;
-  border-radius: 10px;
-  border: none;
-  background-color: #3a3a3a !important;
-  /* color: #fff !important; */
-  font-size: 16px;
-  resize: none;
-}
-
-.send-btn {
-  margin-left: 10px;
-  height: 40px;
-  border-radius: 10px;
-  border: none;
-  background-color: #4d4d4d;
-  color: #fff;
-  font-size: 16px;
-}
-
-.send-btn:active {
-  background-color: #3a3a3a;
-}
-
-/* 输入框和发送按钮固定底部 */
-.input-box {
-  margin-top: auto;
-}
-
-/* 聊天内容过多出现滚动条 */
-.chat-box::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-  background-color: #1e1e1e;
-}
-
-.chat-box::-webkit-scrollbar-thumb {
-  border-radius: 3px;
-  background-color: #4d4d4d;
+.label {
+  margin-top: 12rpx;
 }

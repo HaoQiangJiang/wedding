@@ -1,6 +1,8 @@
 {
-  "enablePullDownRefresh": false,
+  "navigationBarTitleText": "灵犀 AI",
   "usingComponents": {
-    "t-input": "tdesign-miniprogram/input/input"
+    "t-grid": "tdesign-miniprogram/grid/grid",
+    "t-image": "tdesign-miniprogram/image/image",
+    "t-grid-item": "tdesign-miniprogram/grid-item/grid-item"
   }
 }

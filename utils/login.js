@@ -8,10 +8,10 @@ function backLoginPage() {
     url: '/pages/login/index',
   })
 }
-export function checkLogin() {
+export function checkLogin(invite_code) {
   return new Promise(resolve => {
     const retryLogin = async () => {
-      const result = await login(backLoginPage)
+      const result = await login(invite_code, backLoginPage)
       resolve(result)
     }
     wx.getStorage({
@@ -30,7 +30,7 @@ export function checkLogin() {
   })
 
 }
-export function login(failCallback) {
+export function login(invite_code, failCallback) {
   return new Promise(resolve => {
     wx.showLoading({
       title: '正在登录...',
@@ -44,6 +44,7 @@ export function login(failCallback) {
               encryptedData
             } = userInfo
             const data = await wxLogin({
+              invite_code,
               iv,
               encryptedData,
               code: res.code
@@ -59,25 +60,25 @@ export function login(failCallback) {
                 resolve(true)
               } else {
                 console.log('获取 userInfo 失败')
-                failCallback()
+                failCallback && failCallback()
                 resolve(false)
               }
             } else {
               console.log('获取微信 code 失败')
-              failCallback()
+              failCallback && failCallback()
               resolve(false)
             }
           },
           fail: (error) => {
             console.log(error)
-            failCallback()
+            failCallback && failCallback()
             resolve(false)
           }
         })
       },
       fail: (error) => {
         console.log(error)
-        failCallback()
+        failCallback && failCallback()
         resolve(false)
       }
     })
