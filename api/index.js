@@ -101,6 +101,15 @@ export async function chat(data) {
     data
   })
 }
+
+
+export async function chatToImage(data) {
+  return await request({
+    url: baseUrl + '/ai/genImg',
+    method: 'post',
+    data
+  })
+}
 // 获取 ai 内容
 export async function getAiData(url, data) {
   return await request({

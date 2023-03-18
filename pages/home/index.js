@@ -2,38 +2,32 @@ Page({
   data: {
     list: [{
       label: 'chatGPT 聊天',
-      image: 'https://www.linktmd.com/static/link_official/images/testimonial/tx3.png',
+      desc: '让人工智能解答你的困惑吧~',
       value: 'chatGPT',
       url: '/pages/chat/index'
     }, {
-      label: '解梦',
-      image: 'https://www.linktmd.com/static/link_official/images/testimonial/tx3.png',
-      value: 'dram',
-      url: '/pages/dram/index'
+      label: 'Ai图片',
+      desc: '聊天方式生成图片',
+      value: 'painting',
+      url: '/pages/chatToImage/index'
     }, {
-      label: '朋友圈文案',
-      image: 'https://www.linktmd.com/static/link_official/images/testimonial/tx3.png',
-      value: 'copywriting',
-      url: '/pages/copywriting/index'
+      label: 'Ai插画',
+      desc: '预选风格生成图片',
+      value: 'painting',
+      url: '/pages/painting/index'
     }, {
-      label: '广告语生成',
-      image: 'https://www.linktmd.com/static/link_official/images/testimonial/tx3.png',
-      value: 'ad',
-      url: '/pages/ad/index'
-    }, {
-      label: '男友道歉专用',
-      image: 'https://www.linktmd.com/static/link_official/images/testimonial/tx3.png',
-      value: 'apologize',
-      url: '/pages/apologize/index'
-    }, {
-      label: '诗词生成',
-      image: 'https://ai.linktmd.com/static/poetry_cover.png',
+      label: 'Ai诗词',
+      desc: '文字生成图片、图片生成图片',
       value: 'poetry',
       url: '/pages/poetry/index'
-    }]
+    }, ]
   },
   open(e) {
     const url = e.currentTarget.dataset.url
+    if (url === '/pages/paint/index') return wx.showToast({
+      title: '开发中,尽请期待',
+      icon: 'none'
+    })
     wx.navigateTo({
       url: url,
     })

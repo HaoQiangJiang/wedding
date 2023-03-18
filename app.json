@@ -2,23 +2,24 @@
   "pages": [
     "pages/home/index",
     "pages/chat/index",
+    "pages/chatToImage/index",
     "pages/login/index",
     "pages/usercenter/index",
-    "pages/dram/index",
-    "pages/dram/outcome/index",
-    "pages/ad/index",
-    "pages/ad/outcome/index",
-    "pages/apologize/index",
-    "pages/apologize/outcome/index",
+    "pages/editUserInfo/index",
+    "pages/painting/index",
+    "pages/painting/outcome/index",
     "pages/poetry/index",
     "pages/poetry/outcome/index",
-    "pages/copywriting/index",
-    "pages/copywriting/outcome/index",
+    "pages/poetry/outcome/edit/index",
     "pages/share/index",
-    "pages/poetry/outcome/edit/index"
+    "pages/painting/example/index"
   ],
   "tabBar": {
     "custom": true,
+    "color": "#fff",
+    "selectedColor": "#6E7480",
+    "borderStyle": "black",
+    "backgroundColor": "#282e41",
     "list": [
       {
         "pagePath": "pages/home/index",
@@ -35,11 +36,10 @@
   "usingComponents": {},
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#5560f7",
-    "navigationBarTitleText": "",
+    "navigationBarBackgroundColor": "#0B0B14",
+    "navigationBarTitleText": "灵犀 AI",
     "navigationBarTextStyle": "white",
-    "backgroundColor": "#f8f8f8",
-    "backgroundColorTop": "#f8f8f8"
+    "backgroundColor": "#0B0B14"
   },
   "sitemapLocation": "sitemap.json",
   "permission": {

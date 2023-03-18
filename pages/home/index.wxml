@@ -1,7 +1,6 @@
-<t-grid class="block" column="{{2}}" hover="{{true}}">
-  <t-grid-item wx:for="{{list}}" wx:key="value" data-url="{{item.url}}" capture-bind:tap="open">
-    <t-image src="{{item.image}}" mode="aspectFill" shape="round" width="150" height="200" />
-    <text class="label" slot="text">{{item.label}}</text>
-  </t-grid-item>
-</t-grid>
-<view class="blank"/>
+<view class="container">
+  <scroll-view class="column">
+    <home-box wx:for="{{list}}" wx:key="value" item="{{item}}" data-url="{{item.url}}" capture-bind:tap="open" />
+  </scroll-view>
+  <view class="blank" />
+</view>

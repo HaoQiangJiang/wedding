@@ -1,10 +1,32 @@
-Page {}
+Page {
+  --td-button-default-text-active-bg-color: transparent;
+  --td-cell-bg-color: transparent;
+}
+
+.native-bar {
+  width: 100%;
+  text-align: center;
+  margin-top: 100rpx;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 24px;
+  color: #fff;
+}
 
 .top {
-  background-color: var(--primary--);
-  padding: 120rpx 20rpx 20rpx 20rpx;
+  padding: 60rpx 20rpx 20rpx 20rpx;
   color: #fff;
+}
 
+.bg {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+  height: 640px;
 }
 
 .statistics {
@@ -23,9 +45,83 @@ Page {}
   align-items: center;
   flex-direction: column;
   gap: 10rpx;
-  font-size: 30rpx;
+  font-size: 18px;
 }
 
 .statistics .item .label {
-  opacity: 0.7;
+  font-size: 14px;
+}
+
+.share-btn {
+  width: 100%;
+  margin: 0;
+  padding: 0 !important;
+  font-weight: normal !important;
+  display: flex;
+  justify-content: flex-start !important;
+  font-size: 16px !important;
+  height: 48rpx !important;
+  background: transparent !important;
+}
+
+.share-btn:active {
+  background-color: transparent !important;
+}
+
+.activity {
+  width: 343px;
+  height: 82px;
+  background: linear-gradient(90deg, #622FF3 1.5%, #325DF6 100%);
+  border-radius: 16px;
+  margin: auto;
+  display: flex;
+  /* align-items: center; */
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.activity .left {
+  display: flex;
+  /* align-items: center; */
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.activity .text {
+  width: 80px;
+  height: 17px;
+}
+
+.activity .tip {
+  font-weight: 400;
+  font-size: 16px;
+  color: #F2F2F2;
+}
+
+.activity .btn {
+  margin: 0;
+  width: 82px;
+  height: 24px;
+  background: #FFFFFF !important;
+  border-radius: 99px;
+  margin-top: 14px;
+  color: #335DF7;
+  line-height: 24px;
+}
+
+.content {
+  width: 100%;
+  height: 515px;
+  position: absolute;
+  bottom: 20px;
+  background: rgba(51, 58, 82, 0.6);
+  backdrop-filter: blur(15px);
+  border-radius: 14px 14px 0px 0px;
+  padding: 4px 28px;
+  box-sizing: border-box;
+}
+
+.t-cell__title-text,
+.t-button--text {
+  font-size: 14px !important;
 }

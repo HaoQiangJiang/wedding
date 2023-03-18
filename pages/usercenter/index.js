@@ -1,10 +1,3 @@
-import Dialog from 'tdesign-miniprogram/dialog/index';
-const {
-  checkIn
-} = require('../../api/index')
-const {
-  logout
-} = require('../../utils/login');
 const {
   getUserInfo
 } = require('../../api/index');
@@ -14,6 +7,7 @@ Page({
     userInfo: {},
     score: 0,
     invite_count: 0,
+    share_count: 0,
   },
   onShow() {
     this.getTabBar().init();
@@ -32,7 +26,8 @@ Page({
           phoneNumber: '',
         },
         score: userInfo.score,
-        invite_count: userInfo.invite_count
+        invite_count: userInfo.invite_count,
+        share_count: userInfo.share_count
       });
     }
   },
@@ -53,28 +48,31 @@ Page({
       menus: ['shareAppMessage', 'shareTimeline']
     })
   },
-  async onCheckIn() {
-    const {
-      data
-    } = await checkIn()
+  openAD() {
     wx.showToast({
-      title: data.msg,
-      icon: "none"
+      title: '广告开发中...',
+      icon: 'none'
     })
   },
   logoutFn() {
-    const dialogConfig = {
-      context: this,
+    wx.showModal({
       title: '退出登录',
-      content: '确定退出登录吗?',
-      confirmBtn: '确定',
-      cancelBtn: '取消',
-    };
+      content: '确定退出登录吗',
+      complete: (res) => {
+        if (res.confirm) {
+          wx.setStorageSync('token', '')
+          wx.setStorageSync('userInfo', {})
+          wx.navigateTo({
+            url: '/pages/login/index',
+          })
+        }
+      }
+    })
 
-    Dialog.confirm(dialogConfig)
-      .then(() => logout())
-      .catch(() => console.log('点击了取消'))
-      .finally(() => Dialog.close());
+    // Dialog.confirm(dialogConfig)
+    //   .then(() => logout())
+    //   .catch(() => console.log('点击了取消'))
+    //   .finally(() => Dialog.close());
   },
   navigate(e) {
     const url = e.currentTarget.dataset.key;
@@ -87,4 +85,5 @@ Page({
       url: '/pages/payConfig/index',
     });
   },
+  onShareAppMessage() {}
 });

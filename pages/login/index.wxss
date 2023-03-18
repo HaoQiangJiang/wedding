@@ -7,7 +7,7 @@ Page {
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  background-color: #f8f8f8;
+  margin-top: 100px;
 }
 
 .image {
@@ -33,6 +33,7 @@ Page {
   position: relative;
   top: 150rpx;
   font-size: 60rpx;
+  color: #fff;
 }
 
 .login-wechat {

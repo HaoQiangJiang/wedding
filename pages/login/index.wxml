@@ -1,5 +1,4 @@
 <view class="login">
-  <image src='../../assets/loginBanner.svg' class="image" data-keys="clear" />
   <text class="title">灵犀AI</text>
   <view class="slogan-container">
     <text class="slogan">灵犀 AI</text>

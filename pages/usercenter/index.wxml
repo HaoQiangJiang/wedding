@@ -1,4 +1,8 @@
 <view class="user-center">
+  <view class="native-bar">
+    <text class="title">个人中心</text>
+  </view>
+  <image class="bg" src="../../assets/personBg.png" />
   <view class="top">
     <t-user-center-card userInfo="{{userInfo}}" />
     <view class="statistics">
@@ -8,14 +12,26 @@
       </view>
       <view class="item">
         <text>{{invite_count}}</text>
-        <text class="label">邀请人数</text>
+        <text class="label">邀请用户</text>
+      </view>
+      <view class="item">
+        <text>{{share_count}}</text>
+        <text class="label">分享次数</text>
       </view>
     </view>
   </view>
-  <t-cell-group class="content" theme="card">
-    <t-cell title="签到" arrow hover bindtap="onCheckIn" />
-    <t-cell title="分享小程序" hover arrow data-key="/pages/share/index" capture-bind:tap="navigate" />
-    <t-cell title="退出" arrow hover bindtap="logoutFn" />
-  </t-cell-group>
+  <view class="activity">
+    <view class="left">
+      <image class="text" src="../../assets/activity.png" />
+      <text class="tip">邀请领积分</text>
+    </view>
+    <button class="btn" open-type="share">去邀请</button>
+  </view>
+  <view class="content">
+    <t-cell title="看广告增加积分" bordered="{{false}}" arrow capture-bind:tap="openAD" />
+    <t-cell arrow bordered="{{false}}">
+      <t-button class="share-btn" size="small" slot="title" variant="text" open-type="share">分享小程序增加积分</t-button>
+    </t-cell>
+    <t-cell title="退出登录" bordered="{{false}}" arrow bindtap="logoutFn" />
+  </view>
 </view>
-<t-dialog id="t-dialog" />

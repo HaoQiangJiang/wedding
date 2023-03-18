@@ -5,6 +5,7 @@ const {
 const {
   share
 } = require('./api/index')
+let userId = ''
 App({
   onLaunch: function () {
     this.onShareAppMessage()
@@ -29,6 +30,12 @@ App({
     console.log(invite_code)
     updateManager();
     checkLogin(invite_code)
+    wx.getStorage({
+      key: 'userInfo',
+      success: (userInfo) => {
+        userId = userInfo.data.id
+      }
+    })
   },
 
   onShareAppMessage() {
@@ -45,7 +52,7 @@ App({
           share()
           return {
             title: '灵犀 AI',
-            path: '/pages/home/index?invite_code=' + '1212', //若无path 默认跳转分享页
+            path: '/pages/home/index?invite_code=' + userId, //若无path 默认跳转分享页
             imageUrl: 'https://weixin.linktmd.com/public/Share.png' //若无imageUrl 截图当前页面
           }
         }

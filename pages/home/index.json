@@ -3,6 +3,7 @@
   "usingComponents": {
     "t-grid": "tdesign-miniprogram/grid/grid",
     "t-image": "tdesign-miniprogram/image/image",
-    "t-grid-item": "tdesign-miniprogram/grid-item/grid-item"
+    "t-grid-item": "tdesign-miniprogram/grid-item/grid-item",
+    "home-box": "../../components/homeBox/index"
   }
 }
