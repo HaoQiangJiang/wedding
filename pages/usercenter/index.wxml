@@ -22,7 +22,7 @@
   </view>
   <view class="activity">
     <view class="left">
-      <image class="text" src="../../assets/activity.png" />
+      <text class="tip">限时活动</text>
       <text class="tip">邀请领积分</text>
     </view>
     <button class="btn" open-type="share">去邀请</button>

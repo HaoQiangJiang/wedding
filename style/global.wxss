@@ -13,6 +13,7 @@ page {
   --td-tab-item-active-color: #fff;
   --td-tab-track-color: #fff;
   --td-tab-item-color: #6E7480;
+  --td-divider-color: #35383c;
   --td-font-gray-3: #5D5D60;
   --td-font-gray-1: #fff;
   --primary--: #355BF6;
@@ -42,6 +43,12 @@ button {
 
 .t-dialog__body-text {
   color: #fff;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .column {

@@ -96,18 +96,33 @@ export async function testChat(data) {
 // chatgpt 聊天接口
 export async function chat(data) {
   return await request({
-    url: baseUrl + '/ai/chat',
+    url: baseUrl + '/ai/chat/' + data.id,
     method: 'post',
-    data
+    data: data.params
+  })
+}
+// 创建房间
+export async function createChatRoom(type) {
+  return await request({
+    url: baseUrl + '/ai/createChatRecord?type=' + type,
+    method: 'get',
+  })
+}
+
+// 查看所有聊天记录
+export async function getChatRecod(type) {
+  return await request({
+    url: baseUrl + '/ai/findAllChatRecord?type=' + type,
+    method: 'post',
   })
 }
 
 
 export async function chatToImage(data) {
   return await request({
-    url: baseUrl + '/ai/genImg',
+    url: baseUrl + '/ai/genImg/' + data.id,
     method: 'post',
-    data
+    data: data.params
   })
 }
 // 获取 ai 内容

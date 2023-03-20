@@ -16,7 +16,19 @@ module.exports = {
     const currentTime = dayjs()
     // 计算时间差，单位为小时
     const diffHours = currentTime.diff(targetTime, 'hour')
+    console.log(diffHours)
     // 判断时间差是否大于等于24小时
     return diffHours >= 24
-  }
+  },
+  urlTobase64(imgPath) {
+    //读取图片的base64文件内容
+    return new Promise(resolve => {
+      wx.getFileSystemManager().readFile({
+        filePath: imgPath, //选择图片返回的相对路径
+        encoding: 'base64', //编码格式
+        success: res => resolve('data:image/png;base64,' + res.data) //成功的回调
+      })
+    })
+
+  },
 };

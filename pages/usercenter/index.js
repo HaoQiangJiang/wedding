@@ -20,11 +20,7 @@ Page({
       // 将获取的用户信息保存
       wx.setStorageSync('userInfo', userInfo);
       this.setData({
-        userInfo: {
-          avatarUrl: userInfo.avatar_url,
-          nickName: userInfo.name,
-          phoneNumber: '',
-        },
+        userInfo,
         score: userInfo.score,
         invite_count: userInfo.invite_count,
         share_count: userInfo.share_count
@@ -68,11 +64,6 @@ Page({
         }
       }
     })
-
-    // Dialog.confirm(dialogConfig)
-    //   .then(() => logout())
-    //   .catch(() => console.log('点击了取消'))
-    //   .finally(() => Dialog.close());
   },
   navigate(e) {
     const url = e.currentTarget.dataset.key;

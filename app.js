@@ -51,9 +51,9 @@ App({
           // 调用分享接口
           share()
           return {
-            title: '灵犀 AI',
+            title: '探索未知领域，开启未来之旅。',
             path: '/pages/home/index?invite_code=' + userId, //若无path 默认跳转分享页
-            imageUrl: 'https://weixin.linktmd.com/public/Share.png' //若无imageUrl 截图当前页面
+            imageUrl: 'https://weixin.linktmd.com/public/ai_share.png' //若无imageUrl 截图当前页面
           }
         }
       }

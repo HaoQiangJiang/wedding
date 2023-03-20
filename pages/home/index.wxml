@@ -1,6 +1,6 @@
 <view class="container">
   <scroll-view class="column">
-    <home-box wx:for="{{list}}" wx:key="value" item="{{item}}" data-url="{{item.url}}" capture-bind:tap="open" />
+    <home-box wx:for="{{list}}" wx:key="value" item="{{item}}" data-url="{{item.url}}" catchtap="open" />
   </scroll-view>
   <view class="blank" />
 </view>

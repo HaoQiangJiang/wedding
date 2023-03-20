@@ -69,8 +69,9 @@ Page {
 }
 
 .activity {
-  width: 343px;
+  width: 80%;
   height: 82px;
+  left: 10%;
   background: linear-gradient(90deg, #622FF3 1.5%, #325DF6 100%);
   border-radius: 16px;
   margin: auto;
@@ -111,9 +112,9 @@ Page {
 
 .content {
   width: 100%;
-  height: 515px;
+  height: 1000rpx;
   position: absolute;
-  bottom: 20px;
+  bottom: 40rpx;
   background: rgba(51, 58, 82, 0.6);
   backdrop-filter: blur(15px);
   border-radius: 14px 14px 0px 0px;

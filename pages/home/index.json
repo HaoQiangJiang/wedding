@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "灵犀 AI",
+  "navigationBarTitleText": "AIBB",
   "usingComponents": {
     "t-grid": "tdesign-miniprogram/grid/grid",
     "t-image": "tdesign-miniprogram/image/image",

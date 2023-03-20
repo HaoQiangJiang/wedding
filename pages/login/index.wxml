@@ -1,7 +1,7 @@
 <view class="login">
-  <text class="title">灵犀AI</text>
+  <text class="title">AIBB</text>
   <view class="slogan-container">
-    <text class="slogan">灵犀 AI</text>
+    <text class="slogan">AIBB</text>
     <text class="slogan">让创造更简单</text>
   </view>
 
