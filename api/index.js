@@ -63,10 +63,16 @@ export async function wxLogin(params) {
 
 // 获取用户信息
 export async function getUserInfo() {
-  return await request({
+  const data = await request({
     url: baseUrl + '/user/profile',
     method: 'get',
   })
+  if (data.data.code === 200) {
+    const userInfo = data.data.data;
+    // 将获取的用户信息保存
+    wx.setStorageSync('userInfo', userInfo);
+  }
+  return data
 }
 
 // 更新用户信息
@@ -102,17 +108,26 @@ export async function chat(data) {
   })
 }
 // 创建房间
-export async function createChatRoom(type) {
+export async function createChatRoom(data) {
   return await request({
-    url: baseUrl + '/ai/createChatRecord?type=' + type,
-    method: 'get',
+    url: baseUrl + '/ai/createRoom',
+    method: 'post',
+    data
+  })
+}
+// 更新房间信息
+export async function updateRoom(rid, data) {
+  return await request({
+    url: baseUrl + '/ai/updateRoom/' + rid,
+    method: 'put',
+    data,
   })
 }
 
 // 查看所有聊天记录
 export async function getChatRecod(type) {
   return await request({
-    url: baseUrl + '/ai/findAllChatRecord?type=' + type,
+    url: baseUrl + '/ai/findAllRoom?type=' + type,
     method: 'post',
   })
 }
@@ -149,11 +164,16 @@ export async function share() {
   })
 }
 
-
 export async function collectPoetry(data) {
   return await request({
     url: baseUrl + '/poem/create',
     method: 'post',
     data
+  })
+}
+export async function reduceScore(score) {
+  return await request({
+    url: baseUrl + '/user/simpleDecrease?score=' + score,
+    method: 'get',
   })
 }

@@ -54,9 +54,6 @@ export function login(invite_code, failCallback) {
               const resInfo = await getUserInfo()
               if (resInfo.data.code === 200) {
                 wx.hideLoading()
-                const userInfo = resInfo.data.data
-                // 将获取的用户信息保存
-                wx.setStorageSync('userInfo', userInfo)
                 resolve(true)
               } else {
                 console.log('获取 userInfo 失败')

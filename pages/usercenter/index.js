@@ -1,13 +1,23 @@
 const {
+  isMoreThan24Hours
+} = require('../../utils/util');
+const {
+  checkIn,
   getUserInfo
 } = require('../../api/index');
 
 Page({
   data: {
-    userInfo: {},
+    userCardConfig: {
+      name: '',
+      avatar: '',
+      isSign: false,
+    },
+    defaultAvatarUrl: 'https://cdn-we-retail.ym.tencent.com/miniapp/usercenter/icon-user-center-avatar@2x.png',
+    id: '',
     score: 0,
     invite_count: 0,
-    share_count: 0,
+    share_count: 0
   },
   onShow() {
     this.getTabBar().init();
@@ -18,39 +28,40 @@ Page({
     if (resInfo.data.code === 200) {
       const userInfo = resInfo.data.data;
       // 将获取的用户信息保存
-      wx.setStorageSync('userInfo', userInfo);
       this.setData({
-        userInfo,
+        userCardConfig: {
+          name: userInfo.name,
+          avatar: userInfo.avatar_url,
+          enabledSign: isMoreThan24Hours(userInfo.sign_time)
+        },
+        id: userInfo.id,
         score: userInfo.score,
         invite_count: userInfo.invite_count,
         share_count: userInfo.share_count
       });
     }
   },
-  acceptNotice() {
-    wx.requestSubscribeMessage({
-      tmplIds: ['JHT5ozDk1RGZcgkW8QmJV0zAJJfN8ubWNxMpDwqiXyw'],
-      success: (res) => {
-        console.log(res);
-      },
-      fail: (error) => {
-        console.log(error);
-      },
-    });
-  },
   share() {
+    wx.vibrateShort()
     wx.showShareMenu({
       withShareTicket: true,
       menus: ['shareAppMessage', 'shareTimeline']
     })
   },
   openAD() {
+    wx.vibrateShort()
     wx.showToast({
       title: '广告开发中...',
       icon: 'none'
     })
   },
+  copyId() {
+    wx.setClipboardData({
+      data: this.data.id,
+    })
+  },
   logoutFn() {
+    wx.vibrateShort()
     wx.showModal({
       title: '退出登录',
       content: '确定退出登录吗',
@@ -65,16 +76,28 @@ Page({
       }
     })
   },
-  navigate(e) {
-    const url = e.currentTarget.dataset.key;
+  gotoUserEditPage() {
     wx.navigateTo({
-      url,
-    });
+      url: '/pages/editUserInfo/index',
+    })
   },
-  navigatePay() {
-    wx.navigateTo({
-      url: '/pages/payConfig/index',
-    });
+  async onCheckIn() {
+    wx.vibrateShort()
+    const {
+      data
+    } = await checkIn()
+    wx.showToast({
+      title: data.code === 200 ? '签到成功' : data.msg,
+      icon: "none"
+    })
+    this.setData({
+      userCardConfig: {
+        ...this.properties.userCardConfig,
+        enabledSign: false
+      }
+    })
+    // 刷新个人信息
+    getUserInfo()
   },
   onShareAppMessage() {}
 });

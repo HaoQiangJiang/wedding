@@ -11,7 +11,6 @@
     "pages/poetry/index",
     "pages/poetry/outcome/index",
     "pages/poetry/outcome/edit/index",
-    "pages/share/index",
     "pages/painting/example/index"
   ],
   "tabBar": {
@@ -32,7 +31,7 @@
     ]
   },
   "lazyCodeLoading": "requiredComponents",
-  "enablePullDownRefresh": false,
+  "enablePullDownRefresh": true,
   "usingComponents": {},
   "window": {
     "backgroundTextStyle": "light",

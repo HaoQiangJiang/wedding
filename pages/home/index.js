@@ -2,7 +2,7 @@ Page({
   data: {
     list: [{
       label: 'ChatGPT 聊天',
-      desc: '让人工智能解答你的困惑吧~',
+      desc: '让人工智能解答你的困惑吧',
       value: 'chatGPT',
       url: '/pages/chat/index'
     }, {
@@ -20,7 +20,23 @@ Page({
       desc: '用古人的方式表达你的想法',
       value: 'poetry',
       url: '/pages/poetry/index'
-    }, ]
+    }, ],
+    bakList: [],
+    isShowVideo: true, // 是否显示视频
+    opacity: 1,
+    searchKey: '',
+  },
+  onLoad() {
+    this.setData({
+      bakList: JSON.parse(JSON.stringify(this.data.list))
+    })
+  },
+  onChangeSearchKey(e) {
+    const list = this.data.bakList.filter(item => item.label.toLowerCase().includes(e.detail.value.toLowerCase()))
+    this.setData({
+      searchKey: e.detail.value,
+      list
+    })
   },
   open(e) {
     wx.vibrateShort(); // 使手机震动15ms
@@ -29,9 +45,22 @@ Page({
       url: url,
     })
   },
+  onScroll(e) {
+    console.log(e)
+  },
   onShow() {
     this.getTabBar().init()
   },
-  onShareAppMessage() {}
-
+  onShareAppMessage() {},
+  onPageScroll(e) {
+    if (this.data.isShowVideo && e.scrollTop > 100) {
+      this.setData({
+        isShowVideo: false
+      })
+    } else if (!this.data.isShowVideo && e.scrollTop <= 100) {
+      this.setData({
+        isShowVideo: true
+      })
+    }
+  },
 });
