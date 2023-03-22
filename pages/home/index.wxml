@@ -1,7 +1,7 @@
 <view class="container">
-  <video class="video {{isShowVideo?'':'hidden'}}" autoplay loop muted enable-progress-gesture="{{false}}" src="https://weixin.linktmd.com/public/cube.mp4" controls="{{false}}" />
-  <view class="input-sticky">
-    <t-input borderless class="input" placeholder-style="color:#6E7480;font-size:28rpx;" placeholder="输入关键词搜索" value="{{searchKey}}" bind:change="onChangeSearchKey">
+  <video class="video {{isShowVideo?'':'hidden'}}" autoplay loop muted object-fit="cover" enable-progress-gesture="{{false}}" src="https://weixin.linktmd.com/public/cube.mp4" controls="{{false}}" />
+  <view class="input-sticky {{isShowVideo?'':'add-background'}}" >
+    <t-input borderless class=" input" placeholder-style="color:#6E7480;font-size:28rpx;" placeholder="输入关键词搜索" value="{{searchKey}}" bind:change="onChangeSearchKey">
       <image class="search-icon" slot="suffix-icon" src="../../assets/search.svg" />
     </t-input>
   </view>

@@ -40,7 +40,7 @@ export function urlTobase64(imgPath) {
 export function lookAdModal() {
   wx.showModal({
     title: '积分不足',
-    content: '积分不足,是否观看广告增加积分',
+    content: '积分不足, 分享邀请用户打开均可领积分',
     complete: (res) => {
       if (res.cancel) {}
 

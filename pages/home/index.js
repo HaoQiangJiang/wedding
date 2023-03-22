@@ -30,6 +30,7 @@ Page({
     this.setData({
       bakList: JSON.parse(JSON.stringify(this.data.list))
     })
+
   },
   onChangeSearchKey(e) {
     const list = this.data.bakList.filter(item => item.label.toLowerCase().includes(e.detail.value.toLowerCase()))

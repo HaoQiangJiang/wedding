@@ -1,11 +1,6 @@
 <view class="login">
-  <text class="title">AIBB</text>
-  <view class="slogan-container">
-    <text class="slogan">AIBB</text>
-    <text class="slogan">让创造更简单</text>
-  </view>
-
-  <view class="login-wechat">
-    <t-button theme="primary" block capture-bind:tap="getUserInfo">微信登录</t-button>
-  </view>
+  <video class="video" autoplay loop muted object-fit="cover" enable-progress-gesture="{{false}}" src="https://weixin.linktmd.com/public/cube.mp4" controls="{{false}}" />
+  <image class="image" src="../../assets/AIBB.svg" />
+  <text class="slogan">探索未知领域 开启未来之旅</text>
+  <button class="login-wechat" capture-bind:tap="getUserInfo">开始BB</button>
 </view>

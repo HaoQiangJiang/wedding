@@ -16,11 +16,10 @@ Page {
 .video {
   width: 100%;
   position: sticky;
-  top: 0;
   left: 0;
+  object-fit: cover;
   transition: 0.5s ease;
   opacity: 1;
-  z-index: 1;
   mix-blend-mode: lighten;
 }
 
@@ -34,7 +33,7 @@ Page {
 
 .input-sticky {
   position: sticky;
-  top: 0;
+  top: 0rpx;
   width: 100%;
   padding: 32rpx;
   box-sizing: border-box;
@@ -42,9 +41,13 @@ Page {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 10;
+  margin-top: -70rpx;
+}
+
+.add-background {
   background: rgba(12, 12, 23, 0.8);
   backdrop-filter: blur(18px);
-  z-index: 11;
 }
 
 .input {
