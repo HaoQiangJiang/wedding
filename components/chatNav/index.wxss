@@ -1,0 +1,38 @@
+.native-bar {
+  width: 100%;
+  text-align: center;
+  margin-top: 110rpx;
+  justify-content: center;
+  margin-bottom: 16rpx;
+}
+
+.native-icon {
+  position: absolute;
+  left: 0;
+}
+
+.back {
+  width: 50rpx;
+  height: 48rpx;
+  padding-left: 18rpx;
+}
+
+
+.history {
+  width: 50rpx;
+  height: 30rpx;
+  padding-left: 34rpx;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 34rpx;
+  line-height: 24px;
+  color: #fff;
+}

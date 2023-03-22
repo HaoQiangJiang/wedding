@@ -1,0 +1,24 @@
+.edit-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.open-type {
+  background: #1c2337 !important;
+  padding: 16px !important;
+  border-bottom: 1px solid #3e45948c;
+  border-radius: 0 !important;
+}
+
+
+.t-button__content {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 400;
+}
+
+.input {
+  border: none !important;
+}

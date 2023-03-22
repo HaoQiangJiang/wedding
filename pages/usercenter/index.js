@@ -97,7 +97,7 @@ Page({
       }
     })
     // 刷新个人信息
-    getUserInfo()
+    this.updateUserInfo()
   },
   onShareAppMessage() {}
 });

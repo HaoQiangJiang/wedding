@@ -1,0 +1,15 @@
+{
+  "enablePullDownRefresh": false,
+  "navigationBarTitleText": "AI 绘画",
+  "disableScroll": true,
+  "usingComponents": {
+    "t-textarea": "tdesign-miniprogram/textarea/textarea",
+    "t-button": "tdesign-miniprogram/button/button",
+    "t-image": "tdesign-miniprogram/image/image",
+    "t-swiper": "tdesign-miniprogram/swiper/swiper",
+    "t-tabs": "tdesign-miniprogram/tabs/tabs",
+    "t-tab-panel": "tdesign-miniprogram/tab-panel/tab-panel",
+    "loading": "../../components/loading/index",
+    "t-upload": "tdesign-miniprogram/upload/upload"
+  }
+}

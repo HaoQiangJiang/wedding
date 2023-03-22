@@ -1,6 +1,6 @@
 <view class="user-center">
   <view class="native-bar">
-    <text class="title">个人中心</text>
+    <text class="title">我的</text>
   </view>
   <image class="bg" src="../../assets/personBg.png" />
   <view class="top">

@@ -1,0 +1,8 @@
+<view class="edit-info">
+  <t-button t-class="open-type" style="height: 108rpx;" open-type="chooseAvatar" variant="text" block size="large" bindchooseavatar="changeAvatar">
+    <text>头像</text>
+    <t-avatar image="{{userInfo.avatar_url}}" size="70rpx" />
+  </t-button>
+
+  <t-input borderless label="昵称" type="nickname" value="{{userInfo.name}}" align="right" bind:change="changeName" />
+</view>

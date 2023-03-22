@@ -135,7 +135,6 @@ Page {
 }
 
 .activity .btn {
-  width: 164rpx;
   height: 32px;
   display: flex;
   align-items: center;

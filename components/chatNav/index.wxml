@@ -1,0 +1,7 @@
+<view class="native-bar row">
+  <view class="row native-icon">
+    <image src="../../assets/back.svg" class="back" capture-bind:tap="back" />
+    <image src="../../assets/history.svg" class="back history" capture-bind:tap="onOpen" />
+  </view>
+  <text class="title">{{title}}</text>
+</view>
