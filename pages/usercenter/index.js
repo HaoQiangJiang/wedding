@@ -69,7 +69,7 @@ Page({
         if (res.confirm) {
           wx.setStorageSync('token', '')
           wx.setStorageSync('userInfo', {})
-          wx.navigateTo({
+          wx.redirectTo({
             url: '/pages/login/index',
           })
         }
