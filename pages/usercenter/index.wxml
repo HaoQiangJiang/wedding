@@ -38,7 +38,7 @@
     </view>
     <button class="btn" open-type="share">
       <text>去分享</text>
-      <image class="btn-icon" src="../../assets/right.svg" />
+      <t-icon class="btn-icon" name="chevron-right" />
     </button>
   </view>
   <view class="content">

@@ -4,6 +4,7 @@
   "usingComponents": {
     "t-avatar": "tdesign-miniprogram/avatar/avatar",
     "t-button": "tdesign-miniprogram/button/button",
+    "t-icon": "tdesign-miniprogram/icon/icon",
     "t-cell": "tdesign-miniprogram/cell/cell"
   }
 }

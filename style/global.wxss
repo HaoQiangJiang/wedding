@@ -11,6 +11,7 @@ page {
   --td-radius-default: 16px;
   --td-textarea-text-color: #fff;
   --td-tab-item-active-color: #fff;
+  --td-button-default-text-active-bg-color: transparent;
   --td-tab-track-color: #fff;
   --td-tab-item-color: #6E7480;
   --td-divider-color: #35383c;
@@ -45,6 +46,17 @@ button {
 button:active {
   color: #fff;
   transform: scale(0.95);
+}
+
+textarea {
+  width: 100%;
+  background: #1B2239;
+  border: 1rpx solid #4B4B4D;
+  border-radius: 16px;
+  padding: 16rpx 24rpx;
+  box-sizing: border-box;
+  color: #fff;
+  font-size: 34rpx;
 }
 
 .t-dialog__body-text {
