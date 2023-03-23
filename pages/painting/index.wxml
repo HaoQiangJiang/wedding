@@ -5,7 +5,7 @@
   </text>
   <image class="icon" src="../../assets/selectRight.svg" />
 </view>
-<t-swiper t-class="swiper" height="240" current="{{current}}" autoplay="{{false}}" duration="{{500}}" list="{{fn.getImageList(list)}}" navigation="{{ { type: 'dots-bar',showControls:true } }}" image-props="{{imageProps}}" bind:click="openAiExample" bind:change="changeExample" />
+<t-swiper t-class="swiper" height="240" current="{{current}}" autoplay="{{false}}" duration="{{500}}" list="{{fn.getImageList(list)}}" navigation="{{ { type: 'fraction',showControls:true } }}" image-props="{{imageProps}}" bind:click="openAiExample" bind:change="changeExample" />
 <view class="bottom">
   <t-tabs defaultValue="{{selectType}}" bind:change="onTabsChange" t-class="custom-tabs">
     <t-tab-panel label="文生图" value="text">

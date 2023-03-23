@@ -107,7 +107,7 @@ Page({
         params
       })
       if (data.code === 401) {
-        // 积分不足,提示看广告
+        //B币不足,提示看广告
         this.setData({
           loading: false
         })

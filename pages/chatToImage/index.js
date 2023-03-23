@@ -106,11 +106,21 @@ Page({
         }
       })
       if (data.code === 401) {
-        // 积分不足,提示看广告
+        // B币不足,提示看广告
         this.setData({
           loading: false
         })
         return lookAdModal()
+      } else if (data.code === 400) {
+        if (data.data === 'error, status code: 400, message: Your request was rejected as a result of our safety system. Your prompt may contain text that is not allowed by our safety system.') {
+          this.setData({
+            loading: false
+          })
+          return wx.showToast({
+            title: '您的问题可能包含违规词汇, 换个问题吧',
+            icon: 'none'
+          })
+        }
       } else {
         chatResult = {
           role: 'assistant',

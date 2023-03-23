@@ -58,7 +58,7 @@ Page({
       })
       if (data.code === 10001) {
         wx.showModal({
-          title: '积分不足',
+          title: 'B币不足',
           content: data.data,
           complete: (res) => {
             if (res.cancel) {}

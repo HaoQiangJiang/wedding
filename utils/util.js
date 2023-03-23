@@ -39,8 +39,8 @@ export function urlTobase64(imgPath) {
 
 export function lookAdModal() {
   wx.showModal({
-    title: '积分不足',
-    content: '积分不足, 分享邀请用户打开均可领积分',
+    title: 'B币不足',
+    content: 'B币不足, 分享邀请用户打开均可领B币',
     complete: (res) => {
       if (res.cancel) {}
 
@@ -53,7 +53,7 @@ export async function checkSource() {
     data
   } = await getUserInfo()
   if (data.data.score <= 0) {
-    // 没要积分了,
+    // 没有B币了,
     lookAdModal()
     return false
   }

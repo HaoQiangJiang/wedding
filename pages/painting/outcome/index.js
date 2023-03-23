@@ -20,7 +20,6 @@ Page({
     const {
       image
     } = e.currentTarget.dataset
-    console.log(e)
     wx.previewImage({
       urls: [image],
     })

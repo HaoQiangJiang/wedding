@@ -23,11 +23,9 @@ App({
     })
   },
   onShow: function (options) {
-    console.log(options)
     const {
       invite_code
     } = options.query
-    console.log(invite_code)
     updateManager();
     checkLogin(invite_code)
     wx.getStorage({

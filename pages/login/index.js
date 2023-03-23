@@ -29,7 +29,7 @@ Page({
 
   },
   async getUserInfo() {
-    const res = await login(this.loginFail,'')
+    const res = await login('', this.loginFail)
     if (res) {
       wx.switchTab({
         url: '/pages/home/index',
