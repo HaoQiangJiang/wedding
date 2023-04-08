@@ -29,8 +29,16 @@ Page({
   onLoad() {
     this.setData({
       bakList: JSON.parse(JSON.stringify(this.data.list))
-    })
-
+    });
+  },
+  adLoad() {
+    console.log('视频广告加载成功')
+  },
+  adError(err) {
+    console.log('视频广告加载失败', err)
+  },
+  adClose() {
+    console.log('视频广告关闭')
   },
   onChangeSearchKey(e) {
     const list = this.data.bakList.filter(item => item.label.toLowerCase().includes(e.detail.value.toLowerCase()))

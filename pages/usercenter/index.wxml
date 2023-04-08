@@ -63,5 +63,8 @@
       </view>
       <image class="arrow" src="../../assets/right.svg" />
     </t-button>
+    <view class="adContainer">
+      <ad unit-id="adunit-8f00ad861aea1915" ad-intervals="30" bindload="adLoad" binderror="adError" bindclose="adClose"></ad>
+    </view>
   </view>
 </view>

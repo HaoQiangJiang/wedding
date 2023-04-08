@@ -38,23 +38,14 @@ export function urlTobase64(imgPath) {
 }
 
 export function lookAdModal() {
-  wx.showModal({
-    title: 'B币不足',
-    content: 'B币不足, 分享邀请用户打开均可领B币',
-    complete: (res) => {
-      if (res.cancel) {}
-
-      if (res.confirm) {}
-    }
-  })
+  
 }
+
 export async function checkSource() {
   const {
     data
   } = await getUserInfo()
   if (data.data.score <= 0) {
-    // 没有B币了,
-    lookAdModal()
     return false
   }
   return true

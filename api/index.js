@@ -1,5 +1,6 @@
 /** 获取个人中心信息 */
 const baseUrl = 'https://ai.linktmd.com/api'
+// const baseUrl = 'http://localhost'
 var reqTime = 0; //记录请求次数
 const header = {
   "content-type": "application/json",
@@ -160,6 +161,13 @@ export async function checkIn() {
 export async function share() {
   return await request({
     url: baseUrl + '/user/share',
+    method: 'post',
+  })
+}
+
+export async function watchAd() {
+  return await request({
+    url: baseUrl + '/user/watchAd',
     method: 'post',
   })
 }

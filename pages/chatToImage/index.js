@@ -1,11 +1,16 @@
 const {
   chatToImage,
   createChatRoom,
-  updateRoom
+  updateRoom,
+  watchAd
 } = require('../../api/index')
 const {
   lookAdModal
-} = require('../../utils/util')
+} = require('../../utils/util');
+// 在页面中定义插屏广告
+let interstitialAd = null;
+// 广告
+let videoAd = null;
 Page({
   data: {
     defaultChat: {
@@ -39,7 +44,60 @@ Page({
           meAvatar: userInfo.data.avatar_url
         })
       }
-    })
+    });
+    // 在页面onLoad回调事件中创建激励视频广告实例
+    if (wx.createRewardedVideoAd) {
+      videoAd = wx.createRewardedVideoAd({
+        adUnitId: 'adunit-65a1e975a45a224d'
+      })
+      videoAd.onLoad(() => {
+        console.log("广告加载成功")
+      })
+      videoAd.onError((err) => {
+        console.log("广告加载失败", err);
+      })
+      videoAd.onClose((res) => {
+        console.log("广告关闭", res)
+        // 用户点击了【关闭广告】按钮
+        if (res && res.isEnded) {
+          // 正常播放结束，可以下发游戏奖励
+          wx.showToast({
+            title: '奖励已到账',
+            icon: 'success'
+          });
+          watchAd();
+        } else {
+          // 播放中途退出，不下发游戏奖励
+          wx.showToast({
+            title: '广告异常关闭，无法获取积分奖励',
+            icon: 'error'
+          })
+        }
+      })
+    };
+    // 在页面onLoad回调事件中创建插屏广告实例
+    if (wx.createInterstitialAd) {
+      interstitialAd = wx.createInterstitialAd({
+        adUnitId: 'adunit-48b2e163e612023f'
+      })
+      interstitialAd.onLoad(() => {
+        console.log("插屏广告加载成功")
+      })
+      interstitialAd.onError((err) => {
+        console.log("插屏广告加载失败")
+      })
+      interstitialAd.onClose(() => {
+        console.log("插屏广告被关闭")
+      })
+    }
+  },
+  onShow() {
+    // 在适合的场景显示插屏广告
+    if (interstitialAd) {
+      interstitialAd.show().catch((err) => {
+        console.log(err)
+      })
+    };
   },
   toViewBottomFun() {
     // 设置屏幕自动滚动到最后一条消息处
@@ -104,13 +162,67 @@ Page({
         params: {
           "prompt": inputValue
         }
-      })
-      if (data.code === 401) {
+      });
+      console.log(data);
+      if (data.code === 10001) {
+        chatResult = 'AIBB小主,你的B币已经不足,分享邀请用户或观看广告奖励均可领B币'
+        //B币不足,提示看广告
+        this.setData({
+          loading: false
+        });
+        return wx.showModal({
+          title: 'B币账户超支',
+          content: 'AIBB小主,你的B币已经不足,分享邀请用户或观看广告奖励均可领B币',
+          complete: (res) => {
+            if (res.confirm) {
+              wx.vibrateShort()
+              // 用户触发广告后，显示激励视频广告
+              if (videoAd) {
+                videoAd.show().catch(() => {
+                  // 失败重试
+                  videoAd.load()
+                    .then(() => videoAd.show())
+                    .catch(err => {
+                      console.log('激励视频 广告显示失败');
+                      wx.showToast({
+                        title: '今日广告奖励已经全部用完,可明日再来',
+                        icon: 'success'
+                      })
+                    })
+                })
+              }
+            }
+          }
+        });
+      }else if (data.code === 401) {
         // B币不足,提示看广告
         this.setData({
           loading: false
         })
-        return lookAdModal()
+        return wx.showModal({
+          title: 'B币账户超支',
+          content: 'AIBB小主,你的B币已经不足,分享邀请用户或观看广告奖励均可领B币',
+          complete: (res) => {
+            if (res.confirm) {
+              wx.vibrateShort()
+              // 用户触发广告后，显示激励视频广告
+              if (videoAd) {
+                videoAd.show().catch(() => {
+                  // 失败重试
+                  videoAd.load()
+                    .then(() => videoAd.show())
+                    .catch(err => {
+                      console.log('激励视频 广告显示失败');
+                      wx.showToast({
+                        title: '今日广告奖励已经全部用完,可明日再来',
+                        icon: 'success'
+                      })
+                    })
+                })
+              }
+            }
+          }
+        });
       } else if (data.code === 400) {
         if (data.data === 'error, status code: 400, message: Your request was rejected as a result of our safety system. Your prompt may contain text that is not allowed by our safety system.') {
           this.setData({
@@ -130,7 +242,7 @@ Page({
     } catch (err) {
       chatResult = {
         role: 'assistant',
-        content: '当前使用人数较多,请稍后再试...'
+        content: '这个问题我好像思考的有点费劲,呜呜呜呜...'
       }
     }
     this.data.chatList.push(chatResult)

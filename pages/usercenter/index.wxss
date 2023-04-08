@@ -3,6 +3,10 @@ Page {
   --td-cell-bg-color: transparent;
 }
 
+.adContainer {
+  width: 100%;
+}
+
 .native-bar {
   width: 100%;
   text-align: center;

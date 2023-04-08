@@ -17,6 +17,7 @@
         </view>
       </view>
     </view>
+    <!-- <video unit-id="adunit-c6b6ffb296b23cd3"></video> -->
   </scroll-view>
   <view wx:if="{{loading}}" class="loading">
     <t-loading theme="spinner" size="30rpx" class="wrapper" />
