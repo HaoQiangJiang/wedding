@@ -1,7 +1,7 @@
 Page({
   data: {
     list: [{
-      label: 'ChatGPT 聊天',
+      label: 'AI问答',
       desc: '让人工智能解答你的困惑吧',
       value: 'chatGPT',
       url: '/pages/chat/index'

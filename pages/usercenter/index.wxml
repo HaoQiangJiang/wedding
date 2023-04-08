@@ -56,6 +56,13 @@
       </view>
       <image class="arrow" src="../../assets/right.svg" />
     </t-button>
+    <t-button class="share-btn" size="small" slot="title" variant="text" capture-bind:tap="oepnWechatGroup">
+      <view class="row">
+        <image class="icon" src="../../assets/wechat.svg" />
+        <text class="label">交流群</text>
+      </view>
+      <image class="arrow" src="../../assets/right.svg" />
+    </t-button>
     <t-button class="share-btn" size="small" slot="title" variant="text" capture-bind:tap="logoutFn">
       <view class="row">
         <image class="icon" src="../../assets/logout.svg" />

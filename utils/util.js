@@ -50,3 +50,11 @@ export async function checkSource() {
   }
   return true
 }
+
+export function removeChatGPT(str) {
+  const regexChatGPT = /ChatGPT/ig;
+  const regexOpenAI = /OpenAI/ig;
+  const replacedStr = str.replace(regexChatGPT, "AIBB");
+  const result = replacedStr.replace(regexOpenAI, "AIBB")
+  return result
+}

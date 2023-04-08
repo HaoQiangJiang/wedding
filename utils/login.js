@@ -28,13 +28,18 @@ export function checkLogin(invite_code) {
       }
     })
   })
-
 }
 export function login(invite_code, failCallback) {
+
   return new Promise(resolve => {
     wx.showLoading({
       title: '正在登录...',
     })
+    const loginFail = () => {
+      wx.hideLoading()
+      failCallback && failCallback()
+      resolve(false)
+    }
     wx.login({
       success: (res) => {
         wx.getUserInfo({
@@ -57,26 +62,22 @@ export function login(invite_code, failCallback) {
                 resolve(true)
               } else {
                 console.log('获取 userInfo 失败')
-                failCallback && failCallback()
-                resolve(false)
+                loginFail()
               }
             } else {
               console.log('获取微信 code 失败')
-              failCallback && failCallback()
-              resolve(false)
+              loginFail()
             }
           },
           fail: (error) => {
-            console.log(error)
-            failCallback && failCallback()
-            resolve(false)
+            console.log('获取用户信息失败')
+            loginFail()
           }
         })
       },
       fail: (error) => {
-        console.log(error)
-        failCallback && failCallback()
-        resolve(false)
+        console.log('wx login 失败')
+        loginFail()
       }
     })
   })

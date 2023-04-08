@@ -116,6 +116,12 @@ Page({
       data: this.data.id,
     })
   },
+  oepnWechatGroup() {
+    // 打开微信交流群
+    wx.navigateTo({
+      url: '/pages/wechatGroup/index',
+    })
+  },
   logoutFn() {
     wx.vibrateShort()
     wx.showModal({

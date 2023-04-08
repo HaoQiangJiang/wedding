@@ -23,6 +23,10 @@ Page {
   mix-blend-mode: lighten;
 }
 
+.video:active {
+  transform: scale(0.95);
+}
+
 .video.hidden {
   opacity: 0;
 }

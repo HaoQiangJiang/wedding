@@ -6,11 +6,9 @@ const {
 } = require('../../api/index')
 const {
   generateUUID,
-} = require('../../utils/util');
-// 广告
-let videoAd = null;
-// 在页面中定义插屏广告
-let interstitialAd = null;
+  lookAdModal,
+  removeChatGPT
+} = require('../../utils/util')
 Page({
   data: {
     defaultChat: {
@@ -219,7 +217,7 @@ Page({
         });
       } else {
         const messageText = data.data.choices[0].message.content.trimStart()
-        chatResult = messageText
+        chatResult = removeChatGPT(messageText)
       }
     } catch (err) {
       chatResult = '这个问题我好像思考的有点费劲,呜呜呜呜...'

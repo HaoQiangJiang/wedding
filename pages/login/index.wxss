@@ -43,4 +43,9 @@ Page {}
   width: 100%;
   mix-blend-mode: lighten;
   margin-top: 76rpx;
+  transition: 0.3s ease;
+}
+
+.video:active {
+  transform: scale(0.95);
 }

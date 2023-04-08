@@ -11,7 +11,8 @@
     "pages/poetry/index",
     "pages/poetry/outcome/index",
     "pages/poetry/outcome/edit/index",
-    "pages/painting/example/index"
+    "pages/painting/example/index",
+    "pages/wechatGroup/index"
   ],
   "tabBar": {
     "custom": true,
