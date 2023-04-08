@@ -1,0 +1,13 @@
+<view class="poetry">
+  <text class="title">简单描述</text>
+  <textarea auto-focus disable-default-padding="{{true}}" show-confirm-bar="{{false}}" maxlength="-1" class="external-class" placeholder="春天到了，生成描写玉兰花的诗词，需要出现春天，花开等关键词" value="{{content}}" bindinput="onInput" />
+  <text class="title">诗词类型</text>
+  <t-radio-group t-class="horizontal-box" value="{{tag}}" bind:change="onChangeTag">
+    <view wx:for="{{tagMap}}" wx:key="index" class="card {{tag == item ? 'card--active' : ''}}">
+      <t-icon wx:if="{{tag == item}}" name="check" t-class="card__icon" />
+      <t-radio value="{{item}}" label="{{item}}" icon="none" borderless />
+    </view>
+  </t-radio-group>
+  <button class="submit" capture-bind:tap="start">开始制作</button>
+</view>
+<loading loading="{{loading}}" />

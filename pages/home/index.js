@@ -8,7 +8,7 @@ Page({
     }, {
       label: 'Ai图片',
       desc: '用聊天的方式生成图片',
-      value: 'painting',
+      value: 'aiImage',
       url: '/pages/chatToImage/index'
     }, {
       label: 'Ai插画',

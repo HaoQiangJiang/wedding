@@ -1,0 +1,18 @@
+Page {}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20rpx;
+  padding: 24rpx;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.t-image {
+  width: 100%;
+  height: 48%;
+  margin-bottom: 20rpx;
+}

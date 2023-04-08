@@ -1,45 +1,60 @@
-// pages/login/index.js
+// pages/editUserInfo/index.js
 const {
-  login,
-} = require('../../utils/login.js')
+  updateUserInfo
+} = require('../../api/index')
+const {
+  urlTobase64
+} = require('../../utils/util')
 Page({
 
   /**
    * Page initial data
    */
   data: {
-
+    userInfo: {},
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad(options) {
-    // 获取 userInfo, 如果存在则直接跳到首页
     wx.getStorage({
       key: 'userInfo',
       success: (userInfo) => {
-        if (userInfo.data.id) {
-          wx.switchTab({
-            url: '/pages/home/index',
-          })
-        }
+        console.log(userInfo)
+        this.setData({
+          userInfo: userInfo.data
+        })
       }
     })
-
   },
-  async getUserInfo() {
-    const res = await login('', this.loginFail)
-    if (res) {
-      wx.switchTab({
-        url: '/pages/home/index',
-      })
-    }
-  },
-  loginFail() {
-    wx.showToast({
-      title: '登录失败,请重试',
+  changeName(e) {
+    this.setData({
+      test: JSON.stringify(e.detail)
     })
+    this.updateInfo('name', e.detail.value)
+  },
+  async changeAvatar(e) {
+    const image = await urlTobase64(e.detail.avatarUrl)
+    this.updateInfo('avatar_url', image)
+  },
+  async updateInfo(key, value) {
+    // 更新 userInfo 数据
+    const newData = {
+      [key]: value
+    }
+    const newUserInfo = {
+      ...this.data.userInfo,
+      ...newData
+    }
+
+    // 将数据保存到接口
+    await updateUserInfo(newData)
+    this.setData({
+      userInfo: newUserInfo
+    })
+    // 替换本地缓存
+    wx.setStorageSync('userInfo', newUserInfo)
   },
   /**
    * Lifecycle function--Called when page is initially rendered

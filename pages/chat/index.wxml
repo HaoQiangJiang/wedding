@@ -1,0 +1,32 @@
+<view class="chat-container" style="transition: {{duration||0.25}}s;">
+  <chat-nav title="AI问答" bind:open="openHistory" />
+  <scroll-view id="chat" class="chat-box" scroll-y="true" scrollTop="{{scrollTop}}" scroll-with-animation="{{true}}">
+    <view class="chat-item left">
+      <image class="avatar" src="{{defaultChat.role =='user' ? meAvatar : aiAvatar}}">
+      </image>
+      <view class="content-box">
+        <text class="content" selectable="{{true}}" user-select="{{true}}">{{defaultChat.content}}</text>
+      </view>
+    </view>
+    <view class="chat-item {{item.role == 'user' ? 'right' : 'left'}}" id="chat-{{index}}" wx:for="{{chatList}}" wx:key="index">
+      <image class="avatar" src="{{item.role =='user' ? meAvatar : aiAvatar}}"></image>
+      <view class="content-box {{item.role === 'user'&&'me'}}">
+        <text class="content" data-content="{{item.content}}" capture-bind:longpress="copy" id="{{item.id}}" selectable="{{true}}" user-select="{{true}}">{{item.content}}</text>
+      </view>
+    </view>
+  </scroll-view>
+  <view wx:if="{{loading}}" class="loading">
+    <t-loading theme="spinner" size="30rpx" class="wrapper" />
+    <text>AI正在思考中...</text>
+  </view>
+
+  <!-- 输入框 -->
+  <view class="input-box">
+    <textarea class="input" maxlength="-1" placeholder="好的问题比答案更有价值" bordered adjust-position="{{false}}" placeholderStyle="font-size:30rpx" disable-default-padding show-confirm-bar="{{false}}" value="{{inputValue}}" confirm-type="send" bindfocus="onFocus" auto-height bindinput="onInput" bindconfirm="onSend" bindkeyboardheightchange="keyboardheightchange" />
+    <image class="send-icon" src="../../assets/send.svg" catchtap="onSend" />
+  </view>
+  <view style="margin-top:{{topHeight}}px;"></view>
+</view>
+<t-popup visible="{{visible}}" bind:visible-change="onVisibleChange" placement="left">
+  <history slot="content" bind:new="newChat" bind:select="select" type="text" />
+</t-popup>

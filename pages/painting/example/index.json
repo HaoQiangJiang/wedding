@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "me-waterfall": "me-waterfall/waterfall/index",
+    "me-waterfall-item": "me-waterfall/waterfall-item/index"
+  }
+}

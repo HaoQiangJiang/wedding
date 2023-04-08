@@ -1,45 +1,35 @@
-// pages/login/index.js
-const {
-  login,
-} = require('../../utils/login.js')
+// pages/painting/example/index.js
 Page({
 
   /**
    * Page initial data
    */
   data: {
-
+    list: []
   },
 
   /**
    * Lifecycle function--Called when page load
    */
-  onLoad(options) {
-    // 获取 userInfo, 如果存在则直接跳到首页
-    wx.getStorage({
-      key: 'userInfo',
-      success: (userInfo) => {
-        if (userInfo.data.id) {
-          wx.switchTab({
-            url: '/pages/home/index',
-          })
-        }
-      }
-    })
-
-  },
-  async getUserInfo() {
-    const res = await login('', this.loginFail)
-    if (res) {
-      wx.switchTab({
-        url: '/pages/home/index',
+  onLoad() {
+    const eventChannel = this.getOpenerEventChannel()
+    eventChannel.on('acceptData', (data) => {
+      this.setData({
+        list: data.data
       })
-    }
-  },
-  loginFail() {
-    wx.showToast({
-      title: '登录失败,请重试',
     })
+  },
+
+  open(e) {
+    wx.vibrateShort()
+    const item = e.currentTarget.dataset.item
+    const index = e.currentTarget.dataset.index
+    const eventChannel = this.getOpenerEventChannel()
+    eventChannel.emit('selectExample', {
+      data: item,
+      index
+    })
+    wx.navigateBack()
   },
   /**
    * Lifecycle function--Called when page is initially rendered
