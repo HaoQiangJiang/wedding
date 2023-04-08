@@ -57,7 +57,7 @@ Page {
 }
 
 .image-prompt {
-  height: 240rpx;
+  height: 280rpx;
 }
 
 .custom-tabs {

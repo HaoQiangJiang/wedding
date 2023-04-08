@@ -9,6 +9,8 @@ const {
   lookAdModal,
   removeChatGPT
 } = require('../../utils/util')
+let videoAd = null,
+  interstitialAd = null
 Page({
   data: {
     defaultChat: {
@@ -81,6 +83,7 @@ Page({
       })
       interstitialAd.onLoad(() => {
         console.log("插屏广告加载成功")
+        interstitialAd.show()
       })
       interstitialAd.onError((err) => {
         console.log("插屏广告加载失败")
@@ -90,13 +93,19 @@ Page({
       })
     }
   },
-  onShow() {
-    // 在适合的场景显示插屏广告
+  onUnload() {
+    if(videoAd){
+      videoAd.offLoad()
+      videoAd.offError()
+      videoAd.offClose()
+      videoAd = null
+    }
     if (interstitialAd) {
-      interstitialAd.show().catch((err) => {
-        console.log(err)
-      })
-    };
+      interstitialAd.offLoad()
+      interstitialAd.offError()
+      interstitialAd.offClose()
+      interstitialAd = null
+    }
   },
   toViewBottomFun() {
     // 设置屏幕自动滚动到最后一条消息处

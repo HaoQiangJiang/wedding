@@ -65,6 +65,7 @@ Page({
         }
       })
     };
+
     // 在页面onLoad回调事件中创建插屏广告实例
     if (wx.createInterstitialAd) {
       interstitialAd = wx.createInterstitialAd({
@@ -72,6 +73,7 @@ Page({
       })
       interstitialAd.onLoad(() => {
         console.log("插屏广告加载成功")
+        interstitialAd.show()
       })
       interstitialAd.onError((err) => {
         console.log("插屏广告加载失败")
@@ -81,13 +83,19 @@ Page({
       })
     }
   },
-  onShow() {
-    // 在适合的场景显示插屏广告
+  onUnload() {
+    if(videoAd){
+      videoAd.offLoad()
+      videoAd.offError()
+      videoAd.offClose()
+      videoAd = null
+    }
     if (interstitialAd) {
-      interstitialAd.show().catch((err) => {
-        console.log(err)
-      })
-    };
+      interstitialAd.offLoad()
+      interstitialAd.offError()
+      interstitialAd.offClose()
+      interstitialAd = null
+    }
   },
   onInput(e) {
     const {
@@ -158,6 +166,7 @@ Page({
       return wx.showModal({
         title: 'B币账户超支',
         content: 'AIBB小主,你的B币已经不足,分享邀请用户或观看广告奖励均可领B币',
+
         complete: (res) => {
           if (res.confirm) {
             wx.vibrateShort()
@@ -273,7 +282,7 @@ Page({
             })
           }
           // 生成完成
-          reduceScore(1) // 减一B币
+          reduceScore(4) // 减一B币
           const images = data.output.data[0].map(item => {
             if (selectType === 'text') {
               item = item.replace(/[\r\n]/g, "")

@@ -56,6 +56,7 @@ Page({
         adUnitId: 'adunit-48b2e163e612023f'
       })
       interstitialAd.onLoad(() => {
+        interstitialAd.show()
         console.log("插屏广告加载成功")
       })
       interstitialAd.onError((err) => {
@@ -66,13 +67,19 @@ Page({
       })
     }
   },
-  onShow() {
-    // 在适合的场景显示插屏广告
+  onUnload() {
+    if(videoAd){
+      videoAd.offLoad()
+      videoAd.offError()
+      videoAd.offClose()
+      videoAd = null
+    }
     if (interstitialAd) {
-      interstitialAd.show().catch((err) => {
-        console.log(err)
-      })
-    };
+      interstitialAd.offLoad()
+      interstitialAd.offError()
+      interstitialAd.offClose()
+      interstitialAd = null
+    }
   },
   onInput(e) {
     const {

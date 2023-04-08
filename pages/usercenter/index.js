@@ -34,9 +34,8 @@ Page({
     this.updateUserInfo();
   },
   onLoad() {
-    if (videoAd) videoAd = null;
     // 在页面onLoad回调事件中创建激励视频广告实例
-    if (wx.createRewardedVideoAd) {
+    if (wx.createRewardedVideoAd && !videoAd) { // tabbar 页,不会走 unload,因此这里不再创建
       videoAd = wx.createRewardedVideoAd({
         adUnitId: 'adunit-65a1e975a45a224d'
       })
@@ -46,7 +45,7 @@ Page({
       videoAd.onError((err) => {
         console.log("广告加载失败", err);
       })
-      videoAd.onClose((res) => {
+      videoAd.onClose(async (res) => {
         console.log("广告关闭", res)
         // 用户点击了【关闭广告】按钮
         if (res && res.isEnded) {
@@ -55,7 +54,7 @@ Page({
             title: '奖励已到账',
             icon: 'success'
           });
-          watchAd();
+          await watchAd();
           // 刷新个人信息
           this.updateUserInfo();
         } else {
@@ -68,6 +67,7 @@ Page({
       })
     }
   },
+
   async updateUserInfo() {
     const resInfo = await getUserInfo();
     if (resInfo.data.code === 200) {
@@ -99,6 +99,7 @@ Page({
     if (videoAd) {
       videoAd.show().catch(() => {
         // 失败重试
+        console.log('12121212')
         videoAd.load()
           .then(() => videoAd.show())
           .catch(err => {

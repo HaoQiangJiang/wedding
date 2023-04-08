@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "me-waterfall": "^1.1.2",
-    "tdesign-miniprogram": "^1.1.0"
+    "tdesign-miniprogram": "^1.1.1"
   },
   "devDependencies": {
     "eslint": "^6.8.0",

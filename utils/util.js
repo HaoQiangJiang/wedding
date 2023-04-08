@@ -38,7 +38,7 @@ export function urlTobase64(imgPath) {
 }
 
 export function lookAdModal() {
-  
+
 }
 
 export async function checkSource() {
