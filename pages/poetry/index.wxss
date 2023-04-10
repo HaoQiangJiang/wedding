@@ -1,6 +1,6 @@
 Page {
   padding: 24rpx;
-  --td-radio-bg-color: transparent
+  --td-radio-bg-color: #1c2337;
 }
 
 .poetry {
