@@ -1,0 +1,17 @@
+<view class="container-6">
+  <view class="top-6">
+    <text class="bottom-6-title bottom-6-location">恭候光临</text>
+    <text class="bottom-6-subtitle bottom-6-location">WEDDING INVITATION</text>
+
+    <text class="info-6 bottom-6-location">日期：{{info.date}}</text>
+    <text class="info-6 bottom-6-location">农历：{{info.nongLi}}</text>
+    <text class="info-6 bottom-6-location">位置：{{info.location}}</text>
+  </view>
+
+  <view class="bottom-6">
+    <map id="myMap" class="bottom-6-map" latitude="{{info.latitude}}" longitude="{{info.longitude}}" polyline="{{polyline}}" show-location markers="{{marker}}"></map>
+  </view>
+
+  <view class="navigation" bindtap="onChooseLocation">导航</view>
+  <text class="bottom-end">—— BE HAPPY ——</text>
+</view>

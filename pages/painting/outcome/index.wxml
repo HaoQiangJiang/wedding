@@ -1,4 +1,0 @@
-<scroll-view class="container" scroll-y="true" scroll-with-animation="{{true}}">
-  <t-image t-class="image" wx:for="{{outcome}}" shape="round"  error="图片地址已失效"show-menu-by-longpress="true" src="{{item}}" mode="aspectHeight"
-  data-image="{{item}}" catchtap="previewImage" />
-</scroll-view>

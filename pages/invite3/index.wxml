@@ -1,0 +1,22 @@
+<view class="container">
+  <view class="main-content">
+    <image class="center-image" src="https://h5cdn.hunbei.com/editorMini/2025-4-3-djMBhKHKjNCWEKnPwahTcNN8Pd8yfbH6?imageMogr2/auto-orient/rotate/0/crop/!3734x2730a181a0/quality/70|imageMogr2/thumbnail/772x564%3E/format/webp" mode="widthFix" />
+    <view class="info-3">
+      <view class="hr-3">见你的路上，</view>
+      <view class="hr-3">阳光温热，云朵可爱，</view>
+      <view class="hr-3">想必晚风吹来，也是甜的。</view>
+    </view>
+    <image class="center-image center-image1 " src="https://h5cdn.hunbei.com/editorTempCustomPic/2025-4-11-mtBxGQ4CbcCDz3PfE8WEwfztCywjDaJp.jpeg" mode="widthFix" />
+  </view>
+
+  <!-- <view class="top-bottom-container">
+    <image class="top-bottom-image" src="../../assets/invite3-center-xi.svg" mode="widthFix" />
+    <view class="top-bottom-right">
+      <text class="top-bottom-title">余生渺渺</text>
+      <text class="top-bottom-title">只想牵你手</text>
+      <text class="top-bottom-title">从天光乍晓到暮雪白头</text>
+    </view>
+  </view> -->
+
+
+</view>

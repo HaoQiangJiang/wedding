@@ -1,0 +1,21 @@
+<view class="invite-9">
+  <text class="top-text-9">with you</text>
+  <image class="top-9-image" mode="widthFix" src="../../assets/invite9-top.svg" />
+  <image class="invite-9-bg" src="https://qnm.hunliji.com/Fl_dtw8pdfZsr-vBN9eoWxH60b-g?imageView2/2/format/webp/w/1284/q/90" mode="widthFix" />
+  <view class="container-9">
+    <text class="wedding-en">WEDDING</text>
+    <text class="wedding-zh">婚礼</text>
+    <text class="love-8">Love</text>
+    <view class="container-9-image-container">
+      <image class="image-9-1" mode="widthFix" src="https://qnm.hunliji.com/FqGPKAv5q4PRGjWx8ukTP4Q5vvYD?imageView2/2/format/webp/w/1284/q/90" />
+      <image class="image-9-2" mode="widthFix" src="https://qnm.hunliji.com/FoWzJKtQdWzxN6xPHOTCGtVTPI7W?imageView2/2/format/webp/w/1284/q/90" />
+    </view>
+    <view class="container-9-bottom">
+      <text>-</text>
+      <text>我想陪你看遍世间美景</text>
+      <text>然后告诉你</text>
+      <text>它们都不及你万分之一</text>
+    </view>
+    <image class="bottom-9-image" mode="widthFix" src="../../assets/invite9-bottom.svg" />
+  </view>
+</view>

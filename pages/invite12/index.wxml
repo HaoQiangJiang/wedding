@@ -1,0 +1,11 @@
+<view class="invite-12">
+  <image class="top-12-image" mode="widthFix" src="https://qnm.hunliji.com/FnjuJooVaXIg4LEzPbfiwXX2ys9o?imageView2/2/format/webp/w/1284/q/90" />
+  <text class="top-love-text">You are the apple in my eyes</text>
+  <view class="center-12">
+    <text class="center-12-text">Our love story</text>
+    <text class="center-12-zh">月升东海 / 蜀豫同皎</text>
+  </view>
+
+  <image class="bottom-12-image" mode="widthFix" src="https://qnm.hunliji.com/Fi5JDmWfpjIUeg9wQM2kvCHZjd8z?imageView2/2/format/webp/w/1284/q/90" />
+
+</view>

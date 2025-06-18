@@ -1,0 +1,42 @@
+.invite-13 {
+  position: relative;
+  width: 100%;
+  height: 900rpx;
+  color: #8c5656;
+
+}
+
+
+.invite-13-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.invite-13-left {
+  display: flex;
+  flex-direction: column;
+  font-size: 26rpx;
+  font-family: FZLTKHJW1;
+  left: 30rpx;
+  top: 180rpx;
+  width: 50%;
+  line-height: 200%;
+}
+
+.invite-13-right {
+  width: 50%;
+  right: 30rpx;
+  top: 160rpx;
+
+}
+
+.invite-13-image {
+  width: 100%;
+  border-radius: 50% 50% 0 0 / 25% 25% 0 0;
+}
+
+.invite-13-bottom-image {
+  width: 95%;
+  left: 50%;
+  transform: translate(-50%, 200rpx);
+}

@@ -1,5 +1,0 @@
-<!--components/loading/index.wxml-->
-<view class="loading" wx:if="{{loading}}">
-  <text class="tip">{{tip||'合成中'}}</text>
-  <text class="tip desc" wx:if="{{desc}}">{{desc}}</text>
-</view>

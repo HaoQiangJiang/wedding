@@ -1,0 +1,30 @@
+<view class="invite-11">
+  <view class="top-11">
+    <text>春来夏往，秋收冬藏</text>
+    <text>我们来日方长</text>
+    <text>长日欣喜，四季与你</text>
+    <text>朝暮与年岁并往，然后与你行至天光</text>
+  </view>
+  <view class="top-11-bottom">
+    <text>We got married</text>
+    <text>we will love eachother forever</text>
+  </view>
+  <view class="center-11-left">
+    <text>I WILL</text>
+    <text>LOVE YOU</text>
+    <text>FOREVER</text>
+  </view>
+
+  <view class="center-11-left-bottom">
+    <text>你是</text>
+    <text>独一无二的玫瑰</text>
+  </view>
+  <view class="center-11-left-bottom center-11-left-bottom-en">
+    <text>Endless Love </text>
+  </view>
+  <image class="cente-11-image" mode="widthFix" src="	https://h5cdn.hunbei.com/editorTempCustomPic/2025-4-11-eYbznzEB2np6eyFsN2Tfh5ZjDEBjGNtN.jpeg" />
+  <view class="cente-11-bottom">
+    <text>Precious things are very few in this world. </text>
+    <text>That is the reason there is just one you. </text>
+  </view>
+</view>

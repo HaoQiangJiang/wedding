@@ -1,0 +1,31 @@
+<!-- pages/friends/friends.wxml -->
+<scroll-view class="container" scroll-y>
+  <view class="friend-list">
+    <block wx:for="{{friends}}" wx:key="id">
+      <view class="friend-item {{selectedFriend && selectedFriend.id === item.id ? 'selected' : ''}}" data-userid="{{item.id}}" bindtap="selectUser">
+        {{item.name}}
+      </view>
+    </block>
+  </view>
+  <t-divider />
+  <view class="custom {{selectedFriend?'disabled':''}}">
+    <text class="tip">自定义邀请文案</text>
+    <t-input class="custom-item" layout="vertical" label="姓名" placeholder="请输入姓名" bindchange="onInputName" />
+    <t-textarea label=" 欢迎语" t-class="custom-item" placeholder="请输入欢迎语" disableDefaultPadding="{{true}}" bindchange="onInputWelcome" />
+    <view class="custom-item">
+      <text>请选择城市</text>
+      <t-radio-group default-value="0" borderless class="location-select" bindchange="onChangeLocation">
+        <t-radio wx:for="{{locations}}" block="{{false}}" label="{{item}}" value="{{item}}" />
+      </t-radio-group>
+    </view>
+  </view>
+  <view class="bottom-admin">
+    <view wx:if="{{selectedFriend}}">
+      <text>已选：{{selectedFriend.name}}</text>
+    </view>
+    <view wx:elif="{{custom.name}}">
+      <text>已输入：{{custom.name}}</text>
+    </view>
+    <button class="bottom-admin-btn" open-type="share" bindtap="onShareAppMessage">分享给好友</button>
+  </view>
+</scroll-view>

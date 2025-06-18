@@ -1,7 +1,0 @@
-{
-  "disableScroll": true,
-  "navigationStyle": "custom",
-  "usingComponents": {
-    "t-button": "tdesign-miniprogram/button/button"
-  }
-}

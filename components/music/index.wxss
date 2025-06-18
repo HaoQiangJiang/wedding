@@ -1,0 +1,23 @@
+
+.music-play,
+.music-stop {
+  width: 80rpx;
+  position: fixed;
+  right: 30rpx;
+  top: 200rpx;
+
+}
+
+.music-play {
+  animation: MusicElement_index_player__sjxdT 3s linear infinite;
+}
+
+@keyframes MusicElement_index_player__sjxdT {
+  0% {
+    transform: rotate(0deg)
+  }
+
+  to {
+    transform: rotate(1turn)
+  }
+}

@@ -1,0 +1,2 @@
+<image wx:if="{{isPlay}}" class="music-play" bind:tap="toggleMusic" mode="widthFix" src="https://qnm.hunliji.com/o_1bi67lq091qtt1gfs60cpadqjj7.png" />
+<image wx:else="" class="music-stop" bind:tap="toggleMusic" mode="widthFix" src="	https://qnm.hunliji.com/o_1bi67m2q63tilg81vh1q3v10g6c.png" />

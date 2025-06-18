@@ -1,0 +1,14 @@
+<music />
+<scroll-view class="map-container" scroll-y enhanced paging-enabled>
+  <poster info="{{info}}" />
+  <invite8 />
+  <invite9 />
+  <invite10 />
+  <invite11 />
+  <invite12 />
+  <invite13 />
+  <invite3 />
+  <invite5 />
+  <invite6 info="{{info}}" />
+  <invite7 info="{{info}}" />
+</scroll-view>

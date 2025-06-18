@@ -15,8 +15,10 @@
     "*.{js,ts,css,less}": "prettier --write"
   },
   "dependencies": {
+    "highlight.js": "^11.11.1",
+    "lottie-miniprogram": "^1.0.12",
     "me-waterfall": "^1.1.2",
-    "tdesign-miniprogram": "^1.1.1"
+    "tdesign-miniprogram": "^1.8.8"
   },
   "devDependencies": {
     "eslint": "^6.8.0",

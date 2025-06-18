@@ -1,0 +1,25 @@
+<!-- pages/index/index.wxml -->
+<music />
+<view class="container">
+  <text class="typing-text">
+    <text>{{ currentText }}</text>
+  </text>
+  <image class="code-image" mode="widthFix" src="https://h5cdn.hunbei.com/editorCustomPic/2024-9-9-pT8pt6aSs7ShG8dPkXtRAZAMCQzzrwSB.png?imageMogr2/auto-orient/thumbnail/1267x2142%3E" />
+
+
+  <!-- 按钮 -->
+  <view class="end-animate start-button" wx:if="{{ showButton }}" bindtap="onButtonClick">
+    开启幸福
+  </view>
+  <text class="end-animate bottom-count-down" wx:if="{{ showButton && countdown<=5 }}"> {{countdown}}秒后开启幸福...</text>
+
+  <view style="opacity: 0; z-index: -1; pointer-events: none;">
+    <image src="https://h5cdn.hunbei.com/editorCustomPic/2019-05-07_5cd0ebcb7c7cb.gif?imageMogr2/auto-orient/crop/!367x601a0a0/quality/90" />
+    <image src="https://h5cdn.hunbei.com/editorTempCustomPic/2025-4-11-5a8EMQGHNxkmKk3RakSbkCXnjMZPbheX.jpeg" />
+    <image src="https://h5cdn.hunbei.com/editorCustomPic/2024-9-4-yiBtKwEScfDa8m6kpWwwCyHXKfk2P2Tp" />
+    <image src="https://h5cdn.hunbei.com/editorCustomPic/2024-9-4-4XnfrK64J2zRt7HsXwF43ffPppkHRrCz" />
+    <image src="https://h5cdn.hunbei.com/editorTempCustomPic/2025-4-11-EN7SMn7i6wQxfhkN6XYtjpQ58hGcncBC.jpeg" />
+    <image src="https://h5cdn.hunbei.com/editorMini/2025-4-3-zQmpTKizPQWipEF7yK5RRWfyHY6xEb6K?imageMogr2/auto-orient/rotate/0/crop/!2644x4096a43a0/quality/70|imageMogr2/thumbnail/597x924%3E/format/webp" />
+  </view>
+
+</view>

@@ -1,0 +1,38 @@
+<view class="container-poster">
+  <image class="flower-image" src="https://h5cdn.hunbei.com/editorCustomPic/2019-05-07_5cd0ebcb7c7cb.gif?imageMogr2/auto-orient/crop/!367x601a0a0/quality/90" mode="heightFix" />
+  <view class="top">
+    <image class="image" src="https://h5cdn.hunbei.com/editorTempCustomPic/2025-4-11-5a8EMQGHNxkmKk3RakSbkCXnjMZPbheX.jpeg" mode="heightFix" />
+    <view class="top-right">
+      <text class="top-right-title">我们结婚啦</text>
+      <text class="top-right-subtitle">We are married</text>
+      <image class="top-image" src="https://h5cdn.hunbei.com/editorCustomPic/2024-9-4-yiBtKwEScfDa8m6kpWwwCyHXKfk2P2Tp" mode="widthFix" />
+      <text class="top-right-info">女主角：{{info.woman}} 男主角：{{info.man}}</text>
+      <text class="top-right-info">中国/爱情/喜剧</text>
+      <text class="top-right-info">上映日期：{{info.date}}</text>
+      <text class="top-right-info">{{info.location}}</text>
+      <view class="bottom-btn">
+        <view class="btn">
+          <image class="icon" src="../../assets/love.svg" mode="widthFix" />
+          <text>恭喜</text>
+        </view>
+        <view class="btn">
+          <image class="icon" src="../../assets/collect.svg" mode="widthFix" />
+          <text>祝福</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <image class="cente-image" src="https://h5cdn.hunbei.com/editorCustomPic/2024-9-4-4XnfrK64J2zRt7HsXwF43ffPppkHRrCz" mode="widthFix" />
+  <view class="bottom">
+    <text>诚邀生命中不同阶段重要的你们</text>
+    <text>参加这场以婚礼为名的聚会</text>
+  </view>
+
+  <view class="bottom-image">
+    <image class="image" src="https://h5cdn.hunbei.com/editorTempCustomPic/2025-4-11-EN7SMn7i6wQxfhkN6XYtjpQ58hGcncBC.jpeg" mode="aspectFill" style="width: 320rpx;" />
+    <image class="image" mode="aspectFill" style="width: 320rpx;" src="https://h5cdn.hunbei.com/editorMini/2025-4-3-zQmpTKizPQWipEF7yK5RRWfyHY6xEb6K?imageMogr2/auto-orient/rotate/0/crop/!2644x4096a43a0/quality/70|imageMogr2/thumbnail/597x924%3E/format/webp" />
+
+  </view>
+
+  <text class="bottom-text">- WELCOME TO OUR WEDDING -</text>
+</view>

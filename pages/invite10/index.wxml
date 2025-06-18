@@ -1,0 +1,14 @@
+<view class="invite-10">
+  <view class="top-10">
+    <text class="top-10-top-line">|</text>
+    <text>LOVE</text>
+    <text>IN</text>
+    <text>YOUR EYES</text>
+    <text class="top-10-bottom-line">|</text>
+  </view>
+  <text class="top-10-text top-10-left-text">Your kiss still burns on my lips</text>
+  <image class="invite-10-image" mode="widthFix" src="https://qnm.hunliji.com/FhlIV7abZPTpr1696wLsWbLdCVB8?imageView2/2/format/webp/w/1284/q/90" />
+  <text class="top-10-text top-10-right-text">Everyday of mine is so beautiful</text>
+  <image class="invite-10-bottom-image" mode="widthFix" src="../../assets/invite10-bottom.svg" />
+
+</view>

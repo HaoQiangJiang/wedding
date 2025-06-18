@@ -1,45 +1,33 @@
 {
   "pages": [
-    "pages/home/index",
-    "pages/chat/index",
-    "pages/chatToImage/index",
-    "pages/login/index",
-    "pages/usercenter/index",
-    "pages/editUserInfo/index",
-    "pages/painting/index",
-    "pages/painting/outcome/index",
-    "pages/poetry/index",
-    "pages/poetry/outcome/index",
-    "pages/poetry/outcome/edit/index",
-    "pages/painting/example/index",
-    "pages/wechatGroup/index"
+    "pages/code/index",
+    "pages/admin/index",
+    "pages/map/index",
+    "pages/photo/index"
   ],
-  "tabBar": {
-    "custom": true,
-    "color": "#fff",
-    "selectedColor": "#6E7480",
-    "borderStyle": "black",
-    "backgroundColor": "#282e41",
-    "list": [
-      {
-        "pagePath": "pages/home/index",
-        "text": "首页"
-      },
-      {
-        "pagePath": "pages/usercenter/index",
-        "text": "我的"
-      }
-    ]
+  "requiredBackgroundModes": [
+    "audio"
+  ],
+  "rendererOptions": {
+    "skyline": {
+      "defaultDisplayBlock": true,
+      "disableABTest": true,
+      "sdkVersionBegin": "3.0.0",
+      "sdkVersionEnd": "15.255.255"
+    }
   },
+  "style": "v2",
   "lazyCodeLoading": "requiredComponents",
   "enablePullDownRefresh": true,
+  "componentFramework": "glass-easel",
+  "renderer": "skyline",
   "usingComponents": {},
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#0B0B14",
-    "navigationBarTitleText": "AIBB",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "肖亚&陈本拯婚礼",
     "navigationBarTextStyle": "white",
-    "backgroundColor": "#0B0B14"
+    "backgroundColor": "#fff"
   },
   "sitemapLocation": "sitemap.json",
   "permission": {

@@ -1,6 +1,0 @@
-<view class="login">
-  <video class="video" autoplay loop muted object-fit="cover" enable-progress-gesture="{{false}}" src="https://weixin.linktmd.com/public/cube.mp4" controls="{{false}}" />
-  <image class="image" src="../../assets/AIBB.svg" />
-  <text class="slogan">探索未知领域 开启未来之旅</text>
-  <button class="login-wechat" capture-bind:tap="getUserInfo">开始BB</button>
-</view>

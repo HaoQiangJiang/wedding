@@ -1,0 +1,44 @@
+.invite-12 {
+  position: relative;
+  width: 100%;
+  height: 1230rpx;
+  background: url("https://qnm.hunliji.com/FuJvdfruhWbSyuQ1932e4aAivrpG?imageView2/2/format/webp/w/1284/q/90");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  color: #8c5656;
+
+}
+
+.top-12-image {
+  width: 100%;
+}
+
+.top-love-text {
+  font-size: 22rpx;
+  letter-spacing: 16rpx;
+  font-family: ClassicoBold;
+  padding: 10rpx;
+  text-align: center;
+}
+
+.center-12 {
+  width: 100%;
+  text-align: center;
+  padding: 80rpx 0;
+}
+
+.center-12-text {
+  color: var(--en-color);
+  font-size: 40rpx;
+  font-family: AndreaBilarosaRegular;
+  margin-bottom: 10rpx;
+}
+
+.center-12-zh {
+  font-size: 40rpx;
+}
+
+.bottom-12-image {
+  width: 100%;
+
+}

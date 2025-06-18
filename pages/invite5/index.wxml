@@ -1,0 +1,13 @@
+<view class="container-5">
+  <view class="top-5">
+    <image class="top-5-left-image" mode="widthFix" src="https://h5cdn.hunbei.com/editorTempCustomPic/2025-4-11-mAKsQdepjpY6eQWtR4YSfcmHfrxXrsib.jpeg" />
+    <image class="bottom-marry-me-bg" mode="widthFix" src="https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1743582950982/Fv9FgPQjV2ythyoGiwSU_ZpbeiAP.png" />
+    <image class="bottom-marry-me-bg marry-flower" mode="widthFix" src="https://qnm.hunliji.com/Fs_gukxLE0pY-7POnCCCdQlvbpra" />
+  </view>
+  <view class="bottom-5">
+    <text class="text1">除去所有浪漫和冗长的情话</text>
+    <text class="text3">爱情更是一段长久的陪伴</text>
+    <text class="text4">长到四季穿过兼葭</text>
+    <text class="text5">长到青丝抽离成白发</text>
+  </view>
+</view>

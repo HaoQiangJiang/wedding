@@ -1,0 +1,18 @@
+<view class="invite-13">
+  <view class="invite-13-container">
+    <view class="invite-13-left">
+      <text>我希望每天一睁开眼</text>
+      <text>阳光洒满窗前</text>
+      <text>花香飘满每个角落</text>
+      <text>/</text>
+      <view style="margin-top: 30rpx;">
+        <text>你</text>
+        <text>就在我身旁</text>
+      </view>
+    </view>
+    <view class="invite-13-right">
+      <image class="invite-13-image" mode="widthFix" src="https://qnm.hunliji.com/FvxAtMNdn2un6Rio89RbtSMz-aBq?imageView2/2/format/webp/w/1284/q/90" />
+    </view>
+  </view>
+  <image class="invite-13-bottom-image" mode="widthFix" src="../../assets/invite13-bottom.svg" />
+</view>

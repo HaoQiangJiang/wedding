@@ -1,11 +1,11 @@
 {
-  "navigationBarTitleText": "AIBB",
+  "enablePullDownRefresh": false,
+  "navigationBarTitleText": "Xiao & Chen",
   "usingComponents": {
-    "t-grid": "tdesign-miniprogram/grid/grid",
     "t-image": "tdesign-miniprogram/image/image",
-    "t-input": "tdesign-miniprogram/input/input",
-    "t-grid-item": "tdesign-miniprogram/grid-item/grid-item",
-    "t-sticky": "tdesign-miniprogram/sticky/sticky",
-    "home-box": "../../components/homeBox/index"
+    "t-swiper": "tdesign-miniprogram/swiper/swiper",
+    "time-line": "./timeLine/index",
+    "console-line": "./consoleLine/index",
+    "code-line": "./code/index"
   }
 }

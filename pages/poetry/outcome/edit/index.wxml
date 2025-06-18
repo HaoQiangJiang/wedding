@@ -1,8 +1,0 @@
-<view class="color-container" style="--td-textarea-text-color:{{customColor}}">
-  <t-grid class="block" column="{{0}}" hover>
-    <t-grid-item wx:for="{{colorMap}}" wx:key="index" data-item="{{item}}" capture-bind:tap="selectColor">
-      <view slot="description" style="background-color:{{item}}" class="color-item"></view>
-    </t-grid-item>
-  </t-grid>
-  <t-textarea autosize focus t-class="external-class" placeholder="请输入内容, 其它的交给 AI" bordered disableDefaultPadding="{{true}}" indicator value="{{outcome}}" bind:change="onInput" />
-</view>

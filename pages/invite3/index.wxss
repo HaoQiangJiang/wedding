@@ -1,0 +1,99 @@
+/* pages/invite2/invite2.wxss */
+
+.container {
+  width: 100%;
+  height: 1400rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: url("https://qnm.hunliji.com/FuJvdfruhWbSyuQ1932e4aAivrpG?imageView2/2/format/webp/w/1284/q/90");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  position: relative;
+  overflow: hidden;
+  color: var(--primary-color);
+  box-sizing: border-box;
+  margin-top: 0rpx;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+  margin-top: 100rpx;
+}
+
+.info-3 {
+  width: 100%;
+  margin: 40rpx 0;
+  font-size: 36rpx;
+}
+
+
+.center-image {
+  width: 100%;
+}
+
+.center-image1 {}
+
+.top-image {
+  width: 44rpx;
+  position: absolute;
+  z-index: 1;
+}
+
+.top-image-left {
+  left: 60rpx;
+  top: 50rpx;
+}
+
+.top-image-right {
+  right: 60rpx;
+  top: 500rpx;
+}
+
+.top-bottom-container {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 60rpx 40rpx
+}
+
+.top-bottom-image {
+  width: 100rpx;
+}
+
+.top-bottom-right {
+  display: flex;
+  flex-direction: column;
+  text-align: end;
+}
+
+.top-bottom-title {
+  width: 100%;
+  font-size: 26rpx;
+}
+
+.bottom {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30rpx 40rpx;
+  margin-top: 60rpx;
+}
+
+.bottom-image {
+  width: 100%;
+}
+
+.bottom-svg {
+  width: 60%;
+  margin-top: 100rpx;
+}

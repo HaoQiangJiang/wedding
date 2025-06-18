@@ -1,2 +1,1 @@
-@import 'style/iconfont.wxss';
 @import 'style/global.wxss';

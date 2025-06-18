@@ -1,0 +1,8 @@
+{
+  "enablePullDownRefresh": false,
+  "navigationBarTitleText": "Xiao & Chen",
+  "usingComponents": {
+    "me-waterfall": "me-waterfall/waterfall/index",
+    "me-waterfall-item": "me-waterfall/waterfall-item/index"
+  }
+}

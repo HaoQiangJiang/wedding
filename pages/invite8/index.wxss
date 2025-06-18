@@ -1,0 +1,125 @@
+.invite-8 {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: url("https://qnm.hunliji.com/FuJvdfruhWbSyuQ1932e4aAivrpG?imageView2/2/format/webp/w/1284/q/90");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  color: #8c5656;
+}
+
+.top-text-8 {
+  position: absolute;
+  left: 30rpx;
+  top: 120rpx;
+  font-size: 50rpx;
+  font-family: fz;
+}
+
+.name-8 {
+  position: absolute;
+  top: 150rpx;
+  left: 30rpx;
+  font-size: 42rpx;
+  font-weight: bold;
+}
+
+.love-8 {
+  position: absolute;
+  top: 450rpx;
+  left: 30rpx;
+  font-size: 100rpx;
+  font-family: loveStoryFont, loveStoryFont1, loveStoryFont2;
+  color: #c1092f;
+}
+
+.story-8 {
+  position: absolute;
+  top: 690rpx;
+  left: 150rpx;
+  font-size: 80rpx;
+  font-family: loveStoryFont, loveStoryFont1, loveStoryFont2;
+  color: #c1092f;
+}
+
+.invite-8-en {
+  width: 300rpx;
+  position: absolute;
+  top: 780rpx;
+  left: 30rpx;
+  font-size: 22rpx;
+}
+
+.invite-8-zh {
+  position: absolute;
+  top: 880rpx;
+  left: 30rpx;
+  font-size: 36rpx;
+  font-family: fzfsjw;
+  letter-spacing: 15px;
+}
+
+.invite-8-image {
+  width: 450rpx;
+  position: absolute;
+  top: 280rpx;
+  right: 10rpx;
+  z-index: -1;
+}
+
+.music {
+  width: 93%;
+  border: 1px solid #8c5656;
+  position: absolute;
+  top: 1000rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
+  transform: translateX(-50%);
+  left: 50%;
+  border-radius: 20rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.music-title {
+  color: rgb(119 82 98);
+  font-size: 30rpx;
+  line-height: 200%;
+}
+
+.music-name {
+  color: rgb(74 62 64 / 73%);
+  font-size: 24rpx;
+}
+
+.music-image-container {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: row;
+}
+
+
+.music-dounce {
+  width: 50rpx;
+  margin-right: 20rpx;
+}
+
+.music-image {
+  width: 100rpx;
+}
+
+.bottom-8 {
+  position: absolute;
+  top: 1200rpx;
+  left: 40rpx;
+  display: flex;
+  flex-direction: column;
+  font-size: 30rpx;
+  line-height: 200%;
+  text-align: center;
+}
+
+.bottom-8-next {
+  margin-top: 20rpx;
+}

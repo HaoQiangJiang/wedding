@@ -1,6 +1,0 @@
-<view class="tab-bar {{active===1?'hideen-background':''}}">
-  <view class="custom-tab-bar-wrapper {{active===index?'selected':''}} " wx:for="{{list}}" wx:for-item="item" wx:for-index="index" wx:key="index" data-index="{{index}}" capture-bind:tap="onChange">
-    <image src="../assets/{{item.icon}}{{active===index?'':'_line'}}.svg" class="icon" />
-    <view class="text">{{ item.text }}</view>
-  </view>
-</view>

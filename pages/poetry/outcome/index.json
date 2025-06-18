@@ -1,9 +1,0 @@
-{
-  "navigationBarTitleText": "AI 诗词",
-  "usingComponents": {
-    "t-icon": "tdesign-miniprogram/icon/icon",
-    "t-button": "tdesign-miniprogram/button/button",
-    "t-image": "tdesign-miniprogram/image/image",
-    "t-upload": "tdesign-miniprogram/upload/upload"
-  }
-}

@@ -185,3 +185,31 @@ export async function reduceScore(score) {
     method: 'get',
   })
 }
+
+// 点击广告统计
+export async function addAdStatistics(type) {
+  return await request({
+    url: baseUrl + `/advertise/create/${type}`,
+    method: 'get',
+  })
+}
+
+// 获取广告统计列表
+export async function getAdStatistics() {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = today.getMonth() + 1; // getMonth() 返回的月份从 0 开始，所以需要加 1
+  const day = today.getDate();
+  return await request({
+    url: baseUrl + `/advertise/getStatistics?year=${year}&month=${month}&day=${day}`,
+    method: 'get',
+  })
+}
+
+// 提现
+export async function withDraw() {
+  return await request({
+    url: baseUrl + `/withdraw/apply`,
+    method: 'post',
+  })
+}

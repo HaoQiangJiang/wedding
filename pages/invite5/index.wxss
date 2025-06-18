@@ -1,0 +1,63 @@
+/* pages/invite2/invite2.wxss */
+
+.container-5 {
+  width: 100%;
+  height: 1200rpx;
+  display: flex;
+  flex-direction: column;
+  background: url("https://qnm.hunliji.com/FuJvdfruhWbSyuQ1932e4aAivrpG?imageView2/2/format/webp/w/1284/q/90");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  position: relative;
+  overflow: hidden;
+  color: var(--primary-color);
+  box-sizing: border-box;
+}
+
+.top-5 {
+  height: 550rpx;
+  margin-top: 230rpx;
+}
+
+.top-image-5 {
+  width: 100%;
+  margin: 100rpx 30rpx;
+}
+
+.top-5-left-image {
+  position: absolute;
+  width: 100%;
+  top: 0rpx;
+  left: 0;
+}
+
+.top-5-right-image {
+  height: 600rpx;
+  position: absolute;
+  top: 400rpx;
+  right: 0;
+}
+
+.bottom-marry-me-bg {
+  width: 300rpx;
+  position: absolute;
+  top: -150rpx;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.marry-flower {
+  width: 70rpx;
+  left: 300rpx;
+  top: -190rpx;
+}
+
+.bottom-5 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 250%;
+  font-size: 36rpx;
+}

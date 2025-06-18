@@ -1,5 +1,0 @@
-<view class="box" style="background-image:url(https://weixin.linktmd.com/public/{{item.value}}.svg);">
-  <text class="title">{{item.label}}</text>
-  <text class="desc">{{item.desc}}</text>
-  <button class="btn" catchtap="open" data-url="{{item.url}}">立即开始</button>
-</view>

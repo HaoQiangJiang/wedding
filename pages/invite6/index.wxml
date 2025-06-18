@@ -1,0 +1,36 @@
+<view class="container-6">
+  <image class="bg-6" src="https://h5cdn.hunbei.com/editorMini/2025-4-8-7f3cWSTDxeNSiKJkjG2NKtaNHynQnx5A?imageMogr2/auto-orient/rotate/0/crop/!2644x4096a10a0/quality/70|imageMogr2/thumbnail/597x924%3E/format/webp" mode="aspectFill" />
+  <view class="calendar-container">
+    <view class="calendar-header">
+      <view class="calendar-header-left">
+        <text class="selected-month">{{month}}</text>
+        <text class="month">/{{selectedDay}}</text>
+      </view>
+      <text class="year">- {{year}} -</text>
+    </view>
+    <view class="weekdays">
+      <text class="weekday" wx:for="{{weekdays}}" wx:key="{{index}}">{{item}}</text>
+    </view>
+    <view class="calendar-grid">
+      <block wx:for="{{days}}" wx:key="{{index}}">
+        <view class="day" wx:if="{{item != 0}}" data-date="{{item}}">
+          <view class="day-text">{{item}}</view>
+          <image class="date-love" wx:if="{{item == selectedDay}}" src="../../assets/dateLove.svg" mode="widthFix" />
+        </view>
+        <view class="empty-day" wx:if="{{item == 0}}"></view>
+      </block>
+    </view>
+  </view>
+
+  <view class="bottom-6">
+    <text class="text1">你说最好的人在身边 此刻我也这么想</text>
+    <text class="text2">我们希望</text>
+    <text class="text3">借用这场不算盛大但却足够用心的仪式</text>
+    <text class="text4">来记录这一场关于爱的新启程</text>
+    <text class="text5">感谢您来见证与分享</text>
+    <text class="text5">我们此刻莫大的幸福与喜悦</text>
+    <text class="text5">婚礼短暂 情谊长存</text>
+    <text class="text5">愿您春祺夏安 秋绥冬禧</text>
+  </view>
+
+</view>

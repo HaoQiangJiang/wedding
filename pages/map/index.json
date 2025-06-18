@@ -1,0 +1,17 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "music": "../../components/music/index",
+    "poster": "../poster/index",
+    "invite3": "../invite3/index",
+    "invite5": "../invite5/index",
+    "invite6": "../invite6/index",
+    "invite7": "../invite7/index",
+    "invite8": "../invite8/index",
+    "invite9": "../invite9/index",
+    "invite10": "../invite10/index",
+    "invite11": "../invite11/index",
+    "invite12": "../invite12/index",
+    "invite13": "../invite13/index"
+  }
+}

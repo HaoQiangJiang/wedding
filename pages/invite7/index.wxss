@@ -1,0 +1,67 @@
+.container-6 {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: url("https://qnm.hunliji.com/FuJvdfruhWbSyuQ1932e4aAivrpG?imageView2/2/format/webp/w/1284/q/90");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  position: relative;
+  overflow: hidden;
+  color: var(--primary-color);
+  box-sizing: border-box;
+  padding: 100rpx 40rpx !important;
+}
+
+.top-6 {
+  width: 100%;
+  height: 450rpx;
+}
+
+.bottom-6-title {
+  font-size: 70rpx;
+}
+
+.bottom-6-subtitle {
+  font-size: 40rpx;
+  margin-bottom: 80rpx;
+}
+
+.bottom-6 {}
+
+.bottom-6-map {
+  width: 100%;
+  height: 300px;
+  border-radius: 12rpx;
+}
+
+.bottom-6-location {
+  width: 100%;
+  text-align: center;
+}
+
+.bottom-end {
+  width: 100%;
+  text-align: center;
+  font-size: 46rpx;
+  bottom: 150rpx;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.navigation {
+  position: absolute;
+  width: 450rpx;
+  bottom: 300rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 24rpx 48rpx;
+  border-radius: 16rpx;
+  opacity: 0.95;
+  text-align: center;
+  box-shadow: 0rpx 2rpx rgba(0, 0, 0, 0.06);
+}

@@ -1,0 +1,28 @@
+
+<view class="invite-8">
+  <text class="top-text-8">好久不见，婚礼见</text>
+  <text class="love-8">Love</text>
+  <text class="story-8">Story</text>
+  <text class="invite-8-en">You're invited to join us in celebrating our marriage.</text>
+  <text class="invite-8-zh">诚挚邀请</text>
+  <image class="invite-8-image" src="https://h5cdn.hunbei.com/editorTempCustomPic/2025-4-11-htk66AHyMcFCEsAJ8Cx5BwQtSzGbskWs.jpeg" mode="widthFix" />
+
+  <view class="music">
+    <view>
+      <text class="music-title">Everybody Knows I Love You</text>
+      <text class="music-name">Xiao/Chen</text>
+    </view>
+    <view class="music-image-container">
+      <image class="music-dounce" src="https://qnm.hunliji.com/FjV8wzkfZACQs3bfoj0u6fYDt7py?imageView2/2/format/webp/w/1284/q/90/q/90/q/90/q/90/q/90/q/90/q/90/q/90/q/90/q/90/q/90/q/90/q/90/q/90/q/90/q/90/q/90/q/90/q/90/q/90/q/90/q/90/q/90/q/90/q/90/q/90/q/90/q/90/q/90/q/90/q/90/q/90/q/90/q/90/q/90/q/90/q/90/q/90/q/90" mode="widthFix" />
+      <image class="music-image" src="https://h5cdn.hunbei.com/editorTempCustomPic/2025-4-11-bYdQ3fdHJ4dQ7YJtZJdSW57rs4Hb5NXa.jpeg" mode="widthFix" />
+    </view>
+  </view>
+  <view class="bottom-8">
+
+    <text>人生的幸福时刻，少不了家人和朋友的陪伴。</text>
+    <text>这一次，不是日常的相聚，</text>
+    <text>而是属于我们的重要时刻。</text>
+    <text class="bottom-8-next">希望你能来，为我们送上最真诚的祝福，</text>
+    <text>一起吃好喝好聊好，把这一天变成最温暖的回忆!</text>
+  </view>
+</view>
