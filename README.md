@@ -37,6 +37,10 @@
 ## 帮助
 - 如果不懂技术可有偿帮替换图片、文案、申请小程序、部署等一条龙服务
 ---
+## 在线体验
+微信搜索：X&C STORY
+
+<img width="354" height="319" alt="企业微信20250714-151337@2x" src="https://github.com/user-attachments/assets/9e86f8e1-c04a-49fd-bc17-c8facd22f05f" />
 
 ## 页面预览：
 <img width="383" height="824" alt="Clipboard_Screenshot_1752474998" src="https://github.com/user-attachments/assets/100a89e8-9897-4d6b-bf26-12de0ea167a7" />
